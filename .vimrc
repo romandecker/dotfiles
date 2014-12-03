@@ -115,6 +115,7 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 "Always display status bar (vim-airline)
 set laststatus=2
+let g:airline#extensions#whitespace#checks = [ 'indent' ]
 
 
 let g:syntastic_javascript_chjeckers = ['jshint']
