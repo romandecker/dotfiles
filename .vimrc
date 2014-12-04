@@ -16,10 +16,8 @@ Plugin 'groenewege/vim-less'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'elzr/vim-json'
-
 Plugin 'mattn/emmet-vim'
 Plugin 'lervag/vim-latex'
-
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
@@ -28,6 +26,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'editorconfig/editorconfig-vim'
 
 " End of plugin section
 call vundle#end()            " required by Vundle

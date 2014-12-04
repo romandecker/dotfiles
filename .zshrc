@@ -112,3 +112,5 @@ PROMPT="%B%n@%m|%3~ %#%b "
 RPS1='$(git_prompt_string)'
 
 alias tmux="TERM=screen-256color-bce tmux"
+
+export PATH=$PATH:~/bin
