@@ -11,6 +11,12 @@ Plugin 'vim-scripts/genutils'
 
 Plugin 'kien/ctrlp.vim'
 Plugin 'camelcasemotion'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'groenewege/vim-less'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'elzr/vim-json'
+
 Plugin 'mattn/emmet-vim'
 Plugin 'lervag/vim-latex'
 
@@ -21,14 +27,17 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/syntastic'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+let g:solarized_termcolors=256
 colorscheme solarized
 
 set number
+syntax on
 set sw=4
 set ts=4
 set tw=80
@@ -45,9 +54,6 @@ set smarttab
 
 set sc
 
-nmap <C-l> gt
-nmap <C-h> gT
-nmap <C-t> :tabnew<CR>
 
 if has("gui_running")
    " Remove Toolbar
@@ -90,11 +96,17 @@ nmap k gk
 nmap 0 g0
 nmap $ g$
 
+"Move faster by pressing shift
 nmap <S-j> 4j
 nmap <S-k> 4k
 
+"Move faster by presing shift (visual line mode)
 xmap <S-j> 4j
 xmap <S-k> 4k
+
+set nowrap
+set linebreak
+set nolist
 
 nmap gq :bw<CR>
 nmap <C-s> :w<CR>
@@ -108,6 +120,20 @@ let maplocalleader = "\\"
 nmap <leader><CR> :nohlsearch<CR>
 nmap <leader>s :w<CR>
 
+
+"better tab-completion
+set wildmode=longest,list,full
+set wildmenu
+
+
+"Enable emmet only for html-ish files
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.jade set filetype=jade
+
+au BufNewFile,BufRead *.less set filetype=less
+
 let g:ctrlp_custom_ignore = '\v[\/](.git|.hg|.svn|node_modules|bower_components)$'
 
 "press gp to reselect pasted text
@@ -117,5 +143,14 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 set laststatus=2
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
 
+" allow spaces after tabs
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+
 
 let g:syntastic_javascript_chjeckers = ['jshint']
+
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
