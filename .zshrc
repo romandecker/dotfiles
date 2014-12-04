@@ -113,4 +113,5 @@ RPS1='$(git_prompt_string)'
 
 alias tmux="TERM=screen-256color-bce tmux"
 
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/.tmuxifier/bin
+export EDITOR=vim
