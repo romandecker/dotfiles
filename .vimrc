@@ -1,7 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
+" Beginning of plugin section
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -29,15 +29,17 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'altercation/vim-colors-solarized'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" End of plugin section
+call vundle#end()            " required by Vundle
+filetype plugin indent on    " required by Vundle
 
+" Colorscheme
 let g:solarized_termcolors=256
 colorscheme solarized
 
-set number
 syntax on
+
+set number
 set sw=4
 set ts=4
 set tw=80
@@ -48,17 +50,43 @@ set showmatch
 set hlsearch
 set incsearch
 set ignorecase
+set smartcase
+
+set nowrap
+set linebreak
+set nolist
 
 set expandtab
 set smarttab
 
-set sc
+"keep backup files in central directory (dirs have to exist)
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
 
+"enable persistent undo (directory has to exist)
+set undofile
+set undodir=~/.vim/undo
+set undolevels=1000
+set undoreload=10000
+
+" No error bells
+set noeb vb t_vb=
+
+"better tab-completion
+set wildmode=longest,list,full
+set wildmenu
+
+"Always display status bar (vim-airline)
+set laststatus=2
 
 if has("gui_running")
    " Remove Toolbar
    set guioptions-=T
 endif
+
+let mapleader = ";"
+let maplocalleader = "\\"
 
 " Tab related stuff
 nnoremap th  :tabfirst<CR>
@@ -76,20 +104,6 @@ nnoremap td  :tabclose<CR>
 map N Nzz
 map n nzz
 
-"keep backup files in central directory (dirs have to exist)
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
-
-"enable persistent undo
-set undofile
-set undodir=~/.vim/undo
-set undolevels=1000
-set undoreload=10000
-
-" No error bells
-set noeb vb t_vb=
-
 "Movement in wrapped lines
 nmap j gj
 nmap k gk
@@ -104,10 +118,6 @@ nmap <S-k> 4k
 xmap <S-j> 4j
 xmap <S-k> 4k
 
-set nowrap
-set linebreak
-set nolist
-
 nmap gq :bw<CR>
 nmap <C-s> :w<CR>
 
@@ -115,15 +125,13 @@ nmap w ,w
 nmap b ,b
 nmap e ,e
 
-let mapleader = ";"
-let maplocalleader = "\\"
 nmap <leader><CR> :nohlsearch<CR>
 nmap <leader>s :w<CR>
 
-
-"better tab-completion
-set wildmode=longest,list,full
-set wildmenu
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
 
 
 "Enable emmet only for html-ish files
@@ -139,18 +147,12 @@ let g:ctrlp_custom_ignore = '\v[\/](.git|.hg|.svn|node_modules|bower_components)
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
-"Always display status bar (vim-airline)
-set laststatus=2
+
+"check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
 
 " allow spaces after tabs
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
-
-let g:syntastic_javascript_chjeckers = ['jshint']
-
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+let g:syntastic_javascript_checkers = ['jshint']
 
