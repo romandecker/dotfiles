@@ -34,6 +34,7 @@ filetype plugin indent on    " required by Vundle
 
 " Colorscheme
 let g:solarized_termcolors=256
+set background=light
 colorscheme solarized
 
 syntax on
@@ -82,6 +83,10 @@ set laststatus=2
 if has("gui_running")
    " Remove Toolbar
    set guioptions-=T
+endif
+
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
 endif
 
 let mapleader = ";"

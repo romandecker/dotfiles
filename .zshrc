@@ -114,4 +114,13 @@ RPS1='$(git_prompt_string)'
 alias tmux="TERM=screen-256color-bce tmux"
 
 export PATH=$PATH:~/bin:~/.tmuxifier/bin
+eval "$(tmuxifier init -)"
+
 export EDITOR=vim
+
+source ~/.nvm/nvm.sh
+
+bindkey '^R' history-incremental-search-backward
+bindkey '\e.' insert-last-word
+
+export TMUXIFIER_TMUX_OPTS=-2
