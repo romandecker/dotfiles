@@ -27,6 +27,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'marijnh/tern_for_vim'
 
 " End of plugin section
 call vundle#end()            " required by Vundle
