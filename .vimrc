@@ -76,6 +76,7 @@ set noeb vb t_vb=
 "better tab-completion
 set wildmode=longest,list,full
 set wildmenu
+set hidden
 
 "Always display status bar (vim-airline)
 set laststatus=2
@@ -92,16 +93,12 @@ endif
 let mapleader = ";"
 let maplocalleader = "\\"
 
-" Tab related stuff
-nnoremap th  :tabfirst<CR>
-nnoremap tk  :tabnext<CR>
-nnoremap tj  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+" buffer related stuff
+nnoremap tk  :bn<CR>
+nnoremap tj  :bp<CR>
+nnoremap tq  :bw<CR>
 
+nnoremap tt  :tabedit<Space>
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -157,6 +154,9 @@ let g:airline#extensions#whitespace#checks = [ 'indent' ]
 
 " allow spaces after tabs
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+
+"display buffers
+let g:airline#extensions#tabline#enabled = 1
 
 let g:syntastic_javascript_checkers = ['jshint']
 
