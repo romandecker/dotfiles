@@ -32,8 +32,8 @@ var REQUIRED_DIRECTORIES = [
     "bin"
 ];
 
-var CHECK = "\u2713";
-var CROSS = "\u2717";
+var CHECK = "\u2713".green;
+var CROSS = "\u2717".red;
 
 var home;
 
@@ -88,20 +88,21 @@ osenv.homeAsync().then( function(h) {
                 var linked = fs.readlinkSync( installed );
                 
                 if( linked === repo ) {
-                    console.log( file, "is already linked to this repo".green,
+                    console.log( file.magenta,
+                                 "is already linked to this repo",
                                  CHECK );
                 } else {
-                    console.log( file,
-                                 "exists and is not linked to this repo".red,
+                    console.log( file.magenta,
+                                 "exists and is not linked to this repo",
                                  "(" + linked + ")", CROSS );
-                    console.log( " * If you wish to install", file, "as well," +
-                                 " please remove it manually" );
+                    console.log( " * If you wish to install", file.magenta,
+                                 "as well, please remove it manually first" );
                 }
             } else {
-                console.log( file, "is not a symlink".red, CROSS );
+                console.log( file.magenta, "is not a symlink", CROSS );
             }
         } else {
-            console.log( file, "does not exist".yellow );
+            console.log( file.magenta, "does not exist", CROSS );
             toInstall.push( file );
         }
         
@@ -115,7 +116,7 @@ osenv.homeAsync().then( function(h) {
     }
 
     return new BPromise( function(resolve, reject) {
-        confirm( toInstall.length + " dotfiles will be installed." +
+        confirm( toInstall.length + " dotfiles will be linked. " +
                    "Do you want to continue?", function(ok) {
             if( ok ) {
                 resolve( toInstall );
@@ -128,8 +129,12 @@ osenv.homeAsync().then( function(h) {
 } ).then( function( toInstall ) {
 
     return BPromise.all( toInstall.map( function(file) {
-        console.log( "Installing link to", file, "..." );
-        return fs.symlinkAsync( repoFiles[file], installedFiles[file] );
+        console.log( "Installing link to", file.magenta, "..." );
+        return fs.symlinkAsync(
+            repoFiles[file], installedFiles[file] ).then( function() {
+                console.log( CHECK );
+            } );
+            
     } ) );
 
 } ).then( function() {
@@ -138,15 +143,15 @@ osenv.homeAsync().then( function(h) {
     return BPromise.all( REQUIRED_DIRECTORIES.map( function(name) {
         var dir = requiredDirs[name];
         return fs.mkdirsAsync( dir ).then( function() {
-            console.log( " *", name, CHECK );
+            console.log( " *", name.magenta, CHECK );
         } );
     } ) );
 } ).then( function() {
     var gitPrompt = path.join( requiredDirs.bin, "zsh-git-prompt" );
     if( fs.existsSync(gitPrompt) ) {
-        console.log( "git-prompt-zsh".black, "exists".green, CHECK );
+        console.log( "git-prompt-zsh".magenta, "exists", CHECK );
     } else {
-        console.log( "git-prompt-zsh".black,
+        console.log( "git-prompt-zsh".magenta,
                      "doesn't exist, cloning...".yellow );
 
         return execAndPipe( "git",
@@ -158,9 +163,9 @@ osenv.homeAsync().then( function(h) {
 } ).then( function() {
     var tmuxifier = path.join( home, ".tmuxifier" );
     if( fs.existsSync(tmuxifier) ) {
-        console.log( ".tmuxifier".black, "exists".green, CHECK );
+        console.log( ".tmuxifier".magenta, "exists", CHECK );
     } else {
-        console.log( ".tmuxifier".black, "doesn't exist, cloning...".yellow );
+        console.log( ".tmuxifier".magenta, "doesn't exist, cloning...".yellow );
 
         return execAndPipe( "git",
             ["clone",
@@ -170,9 +175,22 @@ osenv.homeAsync().then( function(h) {
     }
 
 } ).then( function() {
-    console.log( "Done!" );
+    console.log( "Done!".green.bold );
+    console.log();
+    console.log( "What happened?".bold );
+    console.log( "* .zshrc is installed" );
+    console.log( "* .vimrc is installed" );
+    console.log( "* .tmux.conf is installed" );
+    console.log( "* tmuxifier is installed (in ~/.tmuxifier) and sourced" );
+    console.log( "* ~/bin exists" );
+    console.log( " * it contains git-prompt-zsh, which is sourced by .zshrc" );
+    console.log();
+    console.log( "What to do now?".bold );
+    console.log( "* Make sure zsh is your default shell" );
+    console.log( "* Open a new terminal or source ~/.zshrc" );
+    console.log( "* Run :PluginInstall from inside vim" );
 } ).catch( function(err) {
-    console.error( "Installation cancelled:".red );
+    console.error( "Installation cancelled:".red.bold );
     console.error( err );
 } );
 
