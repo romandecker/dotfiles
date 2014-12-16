@@ -1,0 +1,26 @@
+{
+  "name": "install",
+  "version": "1.0.0",
+  "description": "Install dotfiles to system",
+  "main": "install.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeX3/dotfiles"
+  },
+  "author": "Roman Decker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeX3/dotfiles/issues"
+  },
+  "homepage": "https://github.com/DeX3/dotfiles",
+  "dependencies": {
+    "bluebird": "^2.3.11",
+    "colors": "^1.0.3",
+    "confirm-simple": "^1.0.3",
+    "fs-extra": "^0.13.0",
+    "osenv": "^0.1.0"
+  }
+}
