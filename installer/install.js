@@ -50,12 +50,12 @@ function execAndPipe( cmd, args, options ) {
         process.stderr.write( data );
     } );
 
-    return new Promise( function(resolve, reject) {
+    return new BPromise( function(resolve, reject) {
             process.on( "exit", function(code) {
                 if( code === 0 ) {
                     resolve();
                 } else {
-                    reject( "Couldn't clone zsh-git-prompt repo" );
+                    reject( "Failed to run", cmd, args.join(" ") );
                 }
             } );
     } );
@@ -172,6 +172,22 @@ osenv.homeAsync().then( function(h) {
              "https://github.com/jimeh/tmuxifier.git",
              ".tmuxifier"],
              { cwd: home } );
+    }
+} ).then( function() {
+
+    var tern = path.join( home, ".vim/bundle/tern_for_vim" );
+    if( fs.existsSync(tern) ) {
+        console.log( "tern_for_vim".magenta,
+                     "exists, making sure it's up to date..." );
+        return execAndPipe( "npm",
+                            ["install"],
+                            { cwd: tern } ).then( function() {
+            console.log( "tern_for_vim".magenta, "is up to date", CHECK );
+        } );
+    } else {
+        console.log( "tern_for_vim".magenta,
+                     "doesn't exist, please run this script again after doing" +
+                     ":PluginInstall".bold + " from inside vim" );
     }
 
 } ).then( function() {
