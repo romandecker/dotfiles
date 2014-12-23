@@ -94,6 +94,8 @@ endif
 let mapleader = ";"
 let maplocalleader = "\\"
 
+set pastetoggle=<F2>
+
 " buffer related stuff
 nnoremap tk  :bn<CR>
 nnoremap tj  :bp<CR>
