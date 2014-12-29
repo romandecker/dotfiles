@@ -28,6 +28,7 @@ Plugin 'xolox/vim-notes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'tpope/vim-surround'
 
 " End of plugin section
 call vundle#end()            " required by Vundle
@@ -128,6 +129,7 @@ nmap <C-s> :w<CR>
 nmap w ,w
 nmap b ,b
 nmap e ,e
+nmap ss :w<CR>
 
 nmap <leader><CR> :nohlsearch<CR>
 nmap <leader>s :w<CR>
@@ -146,7 +148,7 @@ au BufNewFile,BufRead *.jade set filetype=jade
 
 au BufNewFile,BufRead *.less set filetype=less
 
-let g:ctrlp_custom_ignore = '\v[\/](.git|.hg|.svn|node_modules|bower_components)$'
+let g:ctrlp_custom_ignore = '\v[\/](.git|.hg|.svn|node_modules|bower_components|doc|docs|test\/reports)$'
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -162,4 +164,3 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#tabline#enabled = 1
 
 let g:syntastic_javascript_checkers = ['jshint']
-
