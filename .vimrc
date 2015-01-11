@@ -29,6 +29,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'tpope/vim-surround'
+Plugin 'rhysd/committia.vim'
 
 " End of plugin section
 call vundle#end()            " required by Vundle
@@ -101,8 +102,6 @@ set pastetoggle=<F2>
 nnoremap tk  :bn<CR>
 nnoremap tj  :bp<CR>
 nnoremap tq  :bw<CR>
-
-nnoremap tt  :tabedit<Space>
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.

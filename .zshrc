@@ -1,6 +1,5 @@
 # Set up the prompt
 
-#autoload -Uz promptinit
 
 setopt histignorealldups sharehistory
 
@@ -8,6 +7,8 @@ setopt histignorealldups sharehistory
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+
+autoload -U zcalc
 
 # Use modern completion system
 autoload -Uz compinit
