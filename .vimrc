@@ -41,8 +41,8 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 let g:solarized_termcolors=256
-set background=light
 colorscheme solarized
+set background=dark
 
 syntax on
 
@@ -151,7 +151,6 @@ let g:ctrlp_custom_ignore = '\v[\/](.git|.hg|.svn|node_modules|bower_components|
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-
 
 "check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
