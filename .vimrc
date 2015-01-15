@@ -168,3 +168,5 @@ let g:syntastic_javascript_checkers = ['jshint']
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
 
+"don't conceal quotes in json files
+let g:vim_json_syntax_conceal=0
