@@ -35,6 +35,7 @@ Plugin 'rhysd/committia.vim'
 call vundle#end()            " required by Vundle
 filetype plugin indent on    " required by Vundle
 
+set background=dark
 " Colorscheme
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
@@ -42,7 +43,6 @@ endif
 
 let g:solarized_termcolors=256
 colorscheme solarized
-set background=dark
 
 syntax on
 
@@ -84,6 +84,8 @@ set noeb vb t_vb=
 set wildmode=longest,list,full
 set wildmenu
 set hidden
+
+set scrolloff=5
 
 "Always display status bar (vim-airline)
 set laststatus=2
@@ -162,3 +164,7 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#tabline#enabled = 1
 
 let g:syntastic_javascript_checkers = ['jshint']
+
+"disable folding for vim-markdown (to prevent everything being folded on open)
+let g:vim_markdown_folding_disabled=1
+
