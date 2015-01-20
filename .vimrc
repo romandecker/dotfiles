@@ -42,6 +42,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 let g:solarized_termcolors=256
+set background=dark
 colorscheme solarized
 
 syntax on
@@ -162,6 +163,9 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 "display buffers
 let g:airline#extensions#tabline#enabled = 1
+
+" html checker doesn't know html5...
+let g:syntastic_html_checkers = []
 
 let g:syntastic_javascript_checkers = ['jshint']
 
