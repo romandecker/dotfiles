@@ -35,14 +35,12 @@ Plugin 'rhysd/committia.vim'
 call vundle#end()            " required by Vundle
 filetype plugin indent on    " required by Vundle
 
-set background=dark
 " Colorscheme
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
 let g:solarized_termcolors=256
-set background=dark
 colorscheme solarized
 
 syntax on
@@ -116,14 +114,6 @@ nmap j gj
 nmap k gk
 nmap 0 g0
 nmap $ g$
-
-"Move faster by pressing shift
-nmap <S-j> 4j
-nmap <S-k> 4k
-
-"Move faster by presing shift (visual line mode)
-xmap <S-j> 4j
-xmap <S-k> 4k
 
 nmap gq :bw<CR>
 nmap <C-s> :w<CR>
