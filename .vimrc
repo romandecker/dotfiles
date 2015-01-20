@@ -46,10 +46,10 @@ colorscheme solarized
 syntax on
 
 set number
-set sw=4
-set ts=4
-set tw=80
-set cc=80
+set shiftwidth=4
+set tabstop=4
+set colorcolumn=80
+set textwidth=0
 
 set autoindent
 set showmatch
