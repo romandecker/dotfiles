@@ -13,7 +13,9 @@ var FILES = [
     ".zshrc",
     ".vimrc",
     ".vim/ftplugin",
-    ".tmux.conf"
+    ".tmux.conf",
+    ".tmuxifier/layouts/development.window.sh",
+    ".tmuxifier/templates/session.sh"
 ];
 
 var repoFiles = {};
@@ -21,6 +23,14 @@ var repoFiles = {};
 FILES.forEach( function(file) {
     repoFiles[file] = path.resolve( path.join( __dirname, "..", file) );
 } );
+
+repoFiles[".tmuxifier/layouts/development.window.sh"] = path.join(
+    __dirname,
+    "..",
+    ".tmuxifier",
+    "layouts",
+    "development.window.sh"
+);
 
 var installedFiles = {};
 
@@ -50,12 +60,12 @@ function execAndPipe( cmd, args, options ) {
         process.stderr.write( data );
     } );
 
-    return new BPromise( function(resolve, reject) {
+    return new Promise( function(resolve, reject) {
             process.on( "exit", function(code) {
                 if( code === 0 ) {
                     resolve();
                 } else {
-                    reject( "Failed to run", cmd, args.join(" ") );
+                    reject( "Couldn't clone zsh-git-prompt repo" );
                 }
             } );
     } );
@@ -73,6 +83,44 @@ osenv.homeAsync().then( function(h) {
     REQUIRED_DIRECTORIES.forEach( function(dir) {
         requiredDirs[dir] = path.join( home, dir );
     } );
+
+} ).then( function() {
+    var gitPrompt = path.join( requiredDirs.bin, "zsh-git-prompt" );
+    if( fs.existsSync(gitPrompt) ) {
+        console.log( "git-prompt-zsh".magenta, "exists", CHECK );
+    } else {
+        console.log( "git-prompt-zsh".magenta,
+                     "doesn't exist, cloning...".yellow );
+
+        return execAndPipe( "git",
+                ["clone",
+                "https://github.com/olivierverdier/zsh-git-prompt.git"],
+                { cwd: requiredDirs.bin } );
+        
+    }
+} ).then( function() {
+    var tmuxifier = path.join( home, ".tmuxifier" );
+    if( fs.existsSync(tmuxifier) ) {
+        console.log( ".tmuxifier".magenta, "exists", CHECK );
+    } else {
+        console.log( ".tmuxifier".magenta, "doesn't exist, cloning...".yellow );
+
+        return execAndPipe( "git",
+                            ["clone",
+                             "https://github.com/jimeh/tmuxifier.git",
+                             ".tmuxifier"],
+                             { cwd: home } ).then( function() {
+            
+            console.log( "Removing session layout template file " + 
+                         "(it's replaced with a custom template)" );
+            return fs.unlinkSync( path.join(home,
+                                 ".tmuxifier",
+                                 "templates",
+                                 "session.sh"
+            ) );
+                                                  
+        } );
+    }
 
 } ).then( function() {
 
@@ -146,50 +194,6 @@ osenv.homeAsync().then( function(h) {
             console.log( " *", name.magenta, CHECK );
         } );
     } ) );
-} ).then( function() {
-    var gitPrompt = path.join( requiredDirs.bin, "zsh-git-prompt" );
-    if( fs.existsSync(gitPrompt) ) {
-        console.log( "git-prompt-zsh".magenta, "exists", CHECK );
-    } else {
-        console.log( "git-prompt-zsh".magenta,
-                     "doesn't exist, cloning...".yellow );
-
-        return execAndPipe( "git",
-                ["clone",
-                "https://github.com/olivierverdier/zsh-git-prompt.git"],
-                { cwd: requiredDirs.bin } );
-        
-    }
-} ).then( function() {
-    var tmuxifier = path.join( home, ".tmuxifier" );
-    if( fs.existsSync(tmuxifier) ) {
-        console.log( ".tmuxifier".magenta, "exists", CHECK );
-    } else {
-        console.log( ".tmuxifier".magenta, "doesn't exist, cloning...".yellow );
-
-        return execAndPipe( "git",
-            ["clone",
-             "https://github.com/jimeh/tmuxifier.git",
-             ".tmuxifier"],
-             { cwd: home } );
-    }
-} ).then( function() {
-
-    var tern = path.join( home, ".vim/bundle/tern_for_vim" );
-    if( fs.existsSync(tern) ) {
-        console.log( "tern_for_vim".magenta,
-                     "exists, making sure it's up to date..." );
-        return execAndPipe( "npm",
-                            ["install"],
-                            { cwd: tern } ).then( function() {
-            console.log( "tern_for_vim".magenta, "is up to date", CHECK );
-        } );
-    } else {
-        console.log( "tern_for_vim".magenta,
-                     "doesn't exist, please run this script again after doing" +
-                     ":PluginInstall".bold + " from inside vim" );
-    }
-
 } ).then( function() {
     console.log( "Done!".green.bold );
     console.log();
