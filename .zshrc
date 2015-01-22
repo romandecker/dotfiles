@@ -123,5 +123,9 @@ source ~/.nvm/nvm.sh
 
 bindkey '^R' history-incremental-search-backward
 bindkey '\e.' insert-last-word
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+bindkey '^[b' backward-word
+bindkey '^[f' forward-word
 
 export TMUXIFIER_TMUX_OPTS=-2

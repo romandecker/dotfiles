@@ -177,10 +177,9 @@ osenv.homeAsync().then( function(h) {
 } ).then( function( toInstall ) {
 
     return BPromise.all( toInstall.map( function(file) {
-        console.log( "Installing link to", file.magenta, "..." );
         return fs.symlinkAsync(
             repoFiles[file], installedFiles[file] ).then( function() {
-                console.log( CHECK );
+                console.log( "Installing link to", file.magenta, "...", CHECK );
             } );
             
     } ) );
