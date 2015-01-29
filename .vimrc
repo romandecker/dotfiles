@@ -135,7 +135,12 @@ vmap <Leader>a: :Tabularize /:\zs<CR>
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 au BufNewFile,BufRead *.ejs set filetype=html
-au BufNewFile,BufRead *.jade set filetype=jade
+au BufNewFile,BufRead *.jade call SetJadeOptions()
+
+function SetJadeOptions()
+    set filetype=jade
+    setlocal indentkeys-=*<Return>
+endfunction
 
 au BufNewFile,BufRead *.less set filetype=less
 
@@ -163,3 +168,6 @@ let g:vim_markdown_folding_disabled=1
 
 "don't conceal quotes in json files
 let g:vim_json_syntax_conceal=0
+
+
+let g:EditorConfig_verbos = 1
