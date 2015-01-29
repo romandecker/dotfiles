@@ -29,6 +29,9 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'tpope/vim-surround'
 Plugin 'rhysd/committia.vim'
+Plugin 'gcmt/wildfire.vim'
+Plugin 'svermeulen/vim-repeat'
+Plugin 'svermeulen/vim-easyclip'
 
 " End of plugin section
 call vundle#end()            " required by Vundle
