@@ -157,6 +157,8 @@ let g:ctrlp_custom_ignore = '\v[\/](.git|.hg|.svn|node_modules|bower_components|
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
+nmap <S-m> v$hm
+
 "check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
 
@@ -177,5 +179,8 @@ let g:vim_markdown_folding_disabled=1
 "don't conceal quotes in json files
 let g:vim_json_syntax_conceal=0
 
-
 let g:EditorConfig_verbos = 1
+
+if filereadable( ".vimrc.local" )
+    source .vimrc.local
+endif
