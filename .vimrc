@@ -32,6 +32,7 @@ Plugin 'rhysd/committia.vim'
 Plugin 'gcmt/wildfire.vim'
 Plugin 'svermeulen/vim-repeat'
 Plugin 'svermeulen/vim-easyclip'
+Plugin 'jonathanfilip/vim-lucius'
 
 " End of plugin section
 call vundle#end()            " required by Vundle
@@ -42,8 +43,9 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-let g:solarized_termcolors=256
-colorscheme solarized
+set background=light
+colorscheme lucius
+LuciusWhite
 
 syntax on
 
