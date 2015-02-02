@@ -140,7 +140,7 @@ autocmd FileType html,css EmmetInstall
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.jade call SetJadeOptions()
 
-function SetJadeOptions()
+function! SetJadeOptions()
     set filetype=jade
     setlocal indentkeys-=*<Return>
 endfunction
