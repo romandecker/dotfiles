@@ -34,6 +34,7 @@ Plugin 'svermeulen/vim-repeat'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'matchit.zip'
 
 " End of plugin section
 call vundle#end()            " required by Vundle
@@ -45,6 +46,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 set background=light
+let g:lucius_use_underline = 0
 colorscheme lucius
 LuciusWhite
 
