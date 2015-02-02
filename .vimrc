@@ -33,6 +33,7 @@ Plugin 'gcmt/wildfire.vim'
 Plugin 'svermeulen/vim-repeat'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'jonathanfilip/vim-lucius'
+Plugin 'Lokaltog/vim-easymotion'
 
 " End of plugin section
 call vundle#end()            " required by Vundle
