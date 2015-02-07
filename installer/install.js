@@ -146,9 +146,9 @@ osenv.homeAsync().then( function(h) {
             console.log( "Removing session layout template file " +
                          "(it's replaced with a custom template)" );
             return fs.unlinkSync( path.join(home,
-                                 ".tmuxifier",
-                                 "templates",
-                                 "session.sh"
+                                  ".tmuxifier",
+                                  "templates",
+                                  "session.sh"
             ) );
 
         } );
