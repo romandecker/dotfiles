@@ -67,6 +67,8 @@ function exec( cmd, args, options ) {
 
     var process = childProcess.spawn( cmd, args, options );
 
+    options = options || {};
+
     if( options.pipe ) {
         process.stdout.on( "data", function(data) {
             process.stdout.write( data );

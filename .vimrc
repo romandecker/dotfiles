@@ -30,7 +30,7 @@ Plug 'svermeulen/vim-easyclip'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'matchit.zip'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 
 call plug#end()
 
