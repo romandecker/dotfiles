@@ -21,6 +21,7 @@
     "colors": "^1.0.3",
     "confirm-simple": "^1.0.3",
     "fs-extra": "^0.13.0",
-    "osenv": "^0.1.0"
+    "osenv": "^0.1.0",
+    "request": "^2.53.0"
   }
 }

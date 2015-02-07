@@ -6,11 +6,16 @@ var fs = BPromise.promisifyAll( require("fs-extra") );
 var path = require( "path" );
 var childProcess = require( "child_process" );
 var confirm = require( "confirm-simple" );
+var request = require( "request" );
 require( "colors" );
+
+var PLUG_URL = "https://raw.githubusercontent.com/" +
+               "junegunn/vim-plug/master/plug.vim"
 
 // all relative to $HOME
 var FILES = [
     ".zshrc",
+    { "dotgitignore": ".gitignore" },
     ".vimrc",
     ".vim/ftplugin",
     ".tmux.conf",
@@ -21,7 +26,15 @@ var FILES = [
 var repoFiles = {};
 
 FILES.forEach( function(file) {
-    repoFiles[file] = path.resolve( path.join( __dirname, "..", file) );
+
+    var repoName, fsName;
+    if( typeof file === "object" ) {
+        repoName = Object.keys( file )[0];
+        fsName = file[repoName];
+    } else {
+        repoName = fsName = file;
+    }
+    repoFiles[fsName] = path.resolve( path.join( __dirname, "..", repoName) );
 } );
 
 repoFiles[".tmuxifier/layouts/development.window.sh"] = path.join(
@@ -38,7 +51,8 @@ var installedFiles = {};
 var REQUIRED_DIRECTORIES = [
     ".vim/undo",
     ".vim/backup",
-    ".vim/backup",
+    ".vim/tmp",
+    ".vim/autoload",
     "bin"
 ];
 
@@ -49,25 +63,31 @@ var home;
 
 var requiredDirs = {};
 
-function execAndPipe( cmd, args, options ) {
+function exec( cmd, args, options ) {
 
     var process = childProcess.spawn( cmd, args, options );
 
-    process.stdout.on( "data", function(data) {
-        process.stdout.write( data );
-    } );
-    process.stderr.on( "data", function(data) {
-        process.stderr.write( data );
-    } );
+    if( options.pipe ) {
+        process.stdout.on( "data", function(data) {
+            process.stdout.write( data );
+        } );
+        process.stderr.on( "data", function(data) {
+            process.stderr.write( data );
+        } );
+    }
 
-    return new Promise( function(resolve, reject) {
-            process.on( "exit", function(code) {
-                if( code === 0 ) {
-                    resolve();
-                } else {
-                    reject( "Couldn't clone zsh-git-prompt repo" );
-                }
-            } );
+    return new BPromise( function(resolve, reject) {
+        process.on( "error", reject );
+        process.stdout.on( "error", reject );
+        process.stderr.on( "error", reject );
+
+        process.on( "exit", function(code) {
+            if( code === 0 ) {
+                resolve();
+            } else {
+                reject( cmd + " exited with code " + code );
+            }
+        } );
     } );
 }
 
@@ -77,6 +97,9 @@ osenv.homeAsync().then( function(h) {
     home = h;
 
     FILES.forEach( function(file) {
+        if( typeof file === "object" ) {
+            file = file[ Object.keys(file)[0] ];
+        }
         installedFiles[file] = path.join( home, file );
     } );
 
@@ -85,6 +108,15 @@ osenv.homeAsync().then( function(h) {
     } );
 
 } ).then( function() {
+    console.log( "Making sure all required directories exist..." );
+
+    return BPromise.all( REQUIRED_DIRECTORIES.map( function(name) {
+        var dir = requiredDirs[name];
+        return fs.mkdirsAsync( dir ).then( function() {
+            console.log( " *", name.magenta, CHECK );
+        } );
+    } ) );
+} ).then( function() {
     var gitPrompt = path.join( requiredDirs.bin, "zsh-git-prompt" );
     if( fs.existsSync(gitPrompt) ) {
         console.log( "git-prompt-zsh".magenta, "exists", CHECK );
@@ -92,11 +124,11 @@ osenv.homeAsync().then( function(h) {
         console.log( "git-prompt-zsh".magenta,
                      "doesn't exist, cloning...".yellow );
 
-        return execAndPipe( "git",
+        return exec( "git",
                 ["clone",
                 "https://github.com/olivierverdier/zsh-git-prompt.git"],
-                { cwd: requiredDirs.bin } );
-        
+                { cwd: requiredDirs.bin, pipe: true } );
+
     }
 } ).then( function() {
     var tmuxifier = path.join( home, ".tmuxifier" );
@@ -105,20 +137,20 @@ osenv.homeAsync().then( function(h) {
     } else {
         console.log( ".tmuxifier".magenta, "doesn't exist, cloning...".yellow );
 
-        return execAndPipe( "git",
+        return exec( "git",
                             ["clone",
                              "https://github.com/jimeh/tmuxifier.git",
                              ".tmuxifier"],
-                             { cwd: home } ).then( function() {
-            
-            console.log( "Removing session layout template file " + 
+                             { cwd: home, pipe: true } ).then( function() {
+
+            console.log( "Removing session layout template file " +
                          "(it's replaced with a custom template)" );
             return fs.unlinkSync( path.join(home,
                                  ".tmuxifier",
                                  "templates",
                                  "session.sh"
             ) );
-                                                  
+
         } );
     }
 
@@ -127,6 +159,10 @@ osenv.homeAsync().then( function(h) {
     var toInstall = [];
     FILES.forEach( function(file) {
 
+        if( typeof file === "object" ) {
+            file = file[ Object.keys(file)[0] ];
+        }
+
         var installed = installedFiles[file];
         var repo = repoFiles[file];
 
@@ -134,7 +170,7 @@ osenv.homeAsync().then( function(h) {
             var stats = fs.lstatSync( installed );
             if( stats.isSymbolicLink() ) {
                 var linked = fs.readlinkSync( installed );
-                
+
                 if( linked === repo ) {
                     console.log( file.magenta,
                                  "is already linked to this repo",
@@ -153,12 +189,12 @@ osenv.homeAsync().then( function(h) {
             console.log( file.magenta, "does not exist", CROSS );
             toInstall.push( file );
         }
-        
+
     } );
 
     return toInstall;
 } ).then( function( toInstall ) {
-    
+
     if( toInstall.length === 0 ) {
         return toInstall;
     }
@@ -181,18 +217,39 @@ osenv.homeAsync().then( function(h) {
             repoFiles[file], installedFiles[file] ).then( function() {
                 console.log( "Installing link to", file.magenta, "...", CHECK );
             } );
-            
+
     } ) );
+} ).then( function() {
+
+    var plug = path.join( home, ".vim/autoload/plug.vim" );
+
+    if( fs.existsSync(plug) ) {
+        console.log( "plug".magenta, "exists", CHECK );
+    } else {
+        console.log( "plug".magenta, "doesn't exist, downloading...".yellow );
+
+        var autoload = path.dirname(plug);
+        return fs.mkdirsAsync( autoload ).then( function() {
+
+            var plugFile = fs.createWriteStream( plug );
+
+            request( PLUG_URL ).pipe( plugFile );
+        } );
+    }
 
 } ).then( function() {
-    console.log( "Making sure all required directories exist..." );
 
-    return BPromise.all( REQUIRED_DIRECTORIES.map( function(name) {
-        var dir = requiredDirs[name];
-        return fs.mkdirsAsync( dir ).then( function() {
-            console.log( " *", name.magenta, CHECK );
-        } );
-    } ) );
+    console.log( "Making sure git knows about global .gitignore..." );
+
+    return exec(
+        "git",
+        ["config", "--global",
+         "core.excludesfile", "~/.gitignore"],
+        { pipe: true }
+    ).then( function() {
+        console.log( "Configured", ".gitignore".magenta, CHECK );
+    } );
+
 } ).then( function() {
     console.log( "Done!".green.bold );
     console.log();
@@ -207,7 +264,7 @@ osenv.homeAsync().then( function(h) {
     console.log( "What to do now?".bold );
     console.log( "* Make sure zsh is your default shell" );
     console.log( "* Open a new terminal or source ~/.zshrc" );
-    console.log( "* Run :PluginInstall from inside vim" );
+    console.log( "* Run :PlugInstall from inside vim" );
 } ).catch( function(err) {
     console.error( "Installation cancelled:".red.bold );
     console.error( err );

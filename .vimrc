@@ -1,44 +1,38 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" Beginning of plugin section
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/Vundle.vim'
+Plug 'vim-scripts/genutils'
 
-Plugin 'vim-scripts/genutils'
+Plug 'kien/ctrlp.vim'
+Plug 'camelcasemotion'
+Plug 'digitaltoad/vim-jade'
+Plug 'groenewege/vim-less'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'elzr/vim-json'
+Plug 'mattn/emmet-vim'
+Plug 'lervag/vim-latex'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'bling/vim-airline'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/syntastic'
+Plug 'xolox/vim-misc'
+Plug 'altercation/vim-colors-solarized'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'marijnh/tern_for_vim'
+Plug 'tpope/vim-surround'
+Plug 'rhysd/committia.vim'
+Plug 'gcmt/wildfire.vim'
+Plug 'svermeulen/vim-repeat'
+Plug 'svermeulen/vim-easyclip'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'matchit.zip'
+Plug 'bronson/vim-trailing-whitespace'
 
-Plugin 'kien/ctrlp.vim'
-Plugin 'camelcasemotion'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'groenewege/vim-less'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'elzr/vim-json'
-Plugin 'mattn/emmet-vim'
-Plugin 'lervag/vim-latex'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'bling/vim-airline'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'scrooloose/syntastic'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'tpope/vim-surround'
-Plugin 'rhysd/committia.vim'
-Plugin 'gcmt/wildfire.vim'
-Plugin 'svermeulen/vim-repeat'
-Plugin 'svermeulen/vim-easyclip'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'matchit.zip'
-
-" End of plugin section
-call vundle#end()            " required by Vundle
-filetype plugin indent on    " required by Vundle
+call plug#end()
 
 " Colorscheme
 if $COLORTERM == 'gnome-terminal'
@@ -152,7 +146,13 @@ endfunction
 
 au BufNewFile,BufRead *.less set filetype=less
 
-let g:ctrlp_custom_ignore = '\v[\/](.git|.hg|.svn|node_modules|bower_components|doc|docs|test\/reports)$'
+let g:ctrlp_custom_ignore = '\v[\/](.git|
+                                   \.hg|
+                                   \.svn|
+                                   \node_modules|
+                                   \bower_components|
+                                   \doc|
+                                   \docs)$'
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -181,6 +181,12 @@ let g:vim_json_syntax_conceal=0
 
 let g:EditorConfig_verbos = 1
 
+" If ~/.vimrc.local exists, source it to support host-local configs
+if filereadable( $HOME.'/.vimrc.local' )
+    source ~/.vimrc.local
+endif
+
+" If .vimrc.local exists in current directory, to support project-local configs
 if filereadable( ".vimrc.local" )
     source .vimrc.local
 endif
