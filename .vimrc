@@ -31,6 +31,7 @@ Plug 'jonathanfilip/vim-lucius'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'kana/vim-submode'
 
 call plug#end()
 
@@ -116,7 +117,6 @@ nmap k gk
 nmap 0 g0
 nmap $ g$
 
-nmap gq :bw<CR>
 nmap <C-s> :w<CR>
 
 nmap w ,w
@@ -127,11 +127,34 @@ nmap ss :w<CR>
 nmap <leader><CR> :nohlsearch<CR>
 nmap <leader>s :w<CR>
 
+
+" window-stuff with leader w
+nmap <leader>ws :split<CR>
+nmap <leader>w<S-s> :vsplit<CR>
+nmap <leader>wq <C-w>q
+
+call submode#enter_with('vresize', 'n', '', '<leader>w/', ':resize -1<CR>')
+call submode#enter_with('vresize', 'n', '', '<leader>w*', ':resize +1<CR>')
+call submode#leave_with('vresize', 'n', '', '<Esc>')
+call submode#map('vresize', 'n', '', '/', ':resize -1<CR>' )
+call submode#map('vresize', 'n', '', '*', ':resize +1<CR>')
+
+call submode#enter_with('resize', 'n', '', '<leader>w-', ':vertical-resize -1<CR>')
+call submode#enter_with('resize', 'n', '', '<leader>w+', ':vertical-resize +1<CR>')
+call submode#leave_with('resize', 'n', '', '<Esc>')
+call submode#map('resize', 'n', '', '-', ':vertical-resize -1<CR>' )
+call submode#map('resize', 'n', '', '+', ':vertical-resize +1<CR>')
+
+" alignment stuff with leader a
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
+"press gp to reselect pasted text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+nmap <S-m> v$hm
 
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
@@ -153,11 +176,6 @@ let g:ctrlp_custom_ignore = '\v[\/](.git|
                                    \bower_components|
                                    \doc|
                                    \docs)$'
-
-"press gp to reselect pasted text
-nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-
-nmap <S-m> v$hm
 
 "check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
