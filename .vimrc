@@ -91,6 +91,9 @@ set scrolloff=5
 "Always display status bar (vim-airline)
 set laststatus=2
 
+"Always use the system register
+set clipboard=unnamed
+
 if has("gui_running")
    " Remove Toolbar
    set guioptions-=T
@@ -156,6 +159,8 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 nmap <S-m> v$hm
 
+nmap gu :call UnWrap()<CR>
+
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
@@ -168,6 +173,15 @@ function! SetJadeOptions()
 endfunction
 
 au BufNewFile,BufRead *.less set filetype=less
+
+" Unwraps a block of code
+function! UnWrap()
+    let cursor = getpos( "." )
+    :normal $<%
+    :normal $%dd
+    call setpos( ".", cursor )
+    :normal dd
+endfunction
 
 let g:ctrlp_custom_ignore = '\v[\/](.git|
                                    \.hg|
