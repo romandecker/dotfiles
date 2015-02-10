@@ -94,6 +94,9 @@ set laststatus=2
 "Always use the system register
 set clipboard=unnamed
 
+" Allow backspace to delete previously entered characters
+set backspace=indent,eol,start
+
 if has("gui_running")
    " Remove Toolbar
    set guioptions-=T
@@ -105,7 +108,7 @@ let maplocalleader = "\\"
 set pastetoggle=<F2>
 
 " buffer related stuff
-nnoremap tk  :bn<CR>
+nnoremap tn  :enew<CR>
 nnoremap tj  :bp<CR>
 nnoremap tq  :bw<CR>
 
@@ -149,17 +152,16 @@ call submode#map('resize', 'n', '', '-', ':vertical-resize -1<CR>' )
 call submode#map('resize', 'n', '', '+', ':vertical-resize +1<CR>')
 
 " alignment stuff with leader a
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>ta= :Tabularize /=\zs<CR>
+nmap <Leader>ta: :Tabularize /:\zs<CR>
+vmap <Leader>ta\| :Tabularize /\|<CR>
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 nmap <S-m> v$hm
 
-nmap gu :call UnWrap()<CR>
+nmap <Leader>tu :call UnWrap()<CR>
 
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
