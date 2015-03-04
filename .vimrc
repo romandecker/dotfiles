@@ -32,6 +32,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'kana/vim-submode'
+Plug 'takac/vim-hardtime'
 
 call plug#end()
 
@@ -102,7 +103,7 @@ if has("gui_running")
    set guioptions-=T
 endif
 
-let mapleader = ";"
+let mapleader = " "
 let maplocalleader = "\\"
 
 set pastetoggle=<F2>
@@ -132,7 +133,6 @@ nmap ss :w<CR>
 
 nmap <leader><CR> :nohlsearch<CR>
 nmap <leader>s :w<CR>
-
 
 " window-stuff with leader w
 nmap <leader>ws :split<CR>
@@ -164,6 +164,8 @@ nmap <Leader>tu :call UnWrap()<CR>
 " map M to work just like D used to work without easyclip
 nmap <S-m> v$hm
 
+nmap <F3> :HardTimeToggle<CR>
+
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
@@ -185,6 +187,26 @@ function! UnWrap()
     call setpos( ".", cursor )
     :normal dd
 endfunction
+
+" Enable relative numbers for currently focused window
+set number
+if has('autocmd')
+augroup vimrc_linenumbering
+    autocmd!
+    autocmd WinLeave *
+                \ if &number |
+                \   set norelativenumber |
+                \ endif
+    autocmd BufWinEnter *
+                \ if &number |
+                \   set relativenumber |
+                \ endif
+    autocmd VimEnter *
+                \ if &number |
+                \   set relativenumber |
+                \ endif
+augroup END
+endif
 
 let g:ctrlp_custom_ignore = '\v[\/](.git|
                                    \.hg|
@@ -215,6 +237,12 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_json_syntax_conceal=0
 
 let g:EditorConfig_verbose = 1
+
+let g:hardtime_showmsg = 1
+
+autocmd VimEnter,BufNewFile,BufReadPost * silent! :HardTimeOn
+
+
 
 " If ~/.vimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.vimrc.local' )

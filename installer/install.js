@@ -253,6 +253,15 @@ osenv.homeAsync().then( function(h) {
     } );
 
 } ).then( function() {
+
+    console.log( "Updating vim plugins..." );
+
+    return exec(
+        "vim",
+         ["+PlugInstall", "+qall"]
+    );
+    
+} ).then( function() {
     console.log( "Done!".green.bold );
     console.log();
     console.log( "What happened?".bold );
@@ -266,7 +275,6 @@ osenv.homeAsync().then( function(h) {
     console.log( "What to do now?".bold );
     console.log( "* Make sure zsh is your default shell" );
     console.log( "* Open a new terminal or source ~/.zshrc" );
-    console.log( "* Run :PlugInstall from inside vim" );
 } ).catch( function(err) {
     console.error( "Installation cancelled:".red.bold );
     console.error( err );
