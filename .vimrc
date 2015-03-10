@@ -33,6 +33,7 @@ Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'kana/vim-submode'
 Plug 'takac/vim-hardtime'
+Plug 'lervag/vim-latex'
 
 call plug#end()
 
@@ -41,10 +42,10 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-set background=light
+set background=dark
 let g:lucius_use_underline = 0
 colorscheme lucius
-LuciusWhite
+LuciusBlack
 
 syntax on
 
@@ -111,6 +112,7 @@ set pastetoggle=<F2>
 " buffer related stuff
 nnoremap tn  :enew<CR>
 nnoremap tj  :bp<CR>
+nnoremap tk  :bn<CR>
 nnoremap tq  :bw<CR>
 
 " Search mappings: These will make it so that going to the next one in a
