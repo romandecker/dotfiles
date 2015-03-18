@@ -34,6 +34,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'kana/vim-submode'
 Plug 'takac/vim-hardtime'
 Plug 'lervag/vim-latex'
+Plug 'sjl/gundo.vim'
 
 call plug#end()
 
@@ -167,6 +168,7 @@ nmap <Leader>tu :call UnWrap()<CR>
 nmap <S-m> v$hm
 
 nmap <F3> :HardTimeToggle<CR>
+nmap <S-u> :GundoToggle<CR>
 
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
