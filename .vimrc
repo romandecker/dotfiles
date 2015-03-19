@@ -32,7 +32,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'kana/vim-submode'
-Plug 'takac/vim-hardtime'
 Plug 'lervag/vim-latex'
 Plug 'sjl/gundo.vim'
 
@@ -241,11 +240,6 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_json_syntax_conceal=0
 
 let g:EditorConfig_verbose = 1
-
-let g:hardtime_showmsg = 1
-
-autocmd VimEnter,BufNewFile,BufReadPost * silent! :HardTimeOn
-
 
 
 " If ~/.vimrc.local exists, source it to support host-local configs
