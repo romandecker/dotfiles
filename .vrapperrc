@@ -1,0 +1,6 @@
+
+nmap ss :w<CR>
+
+nnoremap tj  :bp<CR>
+nnoremap tk  :bn<CR>
+nnoremap tq  :bw<CR>

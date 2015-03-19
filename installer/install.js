@@ -10,13 +10,14 @@ var request = require( "request" );
 require( "colors" );
 
 var PLUG_URL = "https://raw.githubusercontent.com/" +
-               "junegunn/vim-plug/master/plug.vim"
+               "junegunn/vim-plug/master/plug.vim";
 
 // all relative to $HOME
 var FILES = [
     ".zshrc",
     { "dotgitignore": ".gitignore" },
     ".vimrc",
+    ".vrapperrc",
     ".vim/ftplugin",
     ".tmux.conf",
     ".tmuxifier/layouts/development.window.sh",
