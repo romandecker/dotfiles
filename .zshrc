@@ -130,3 +130,5 @@ bindkey '^[b' backward-word # mac
 bindkey '^[f' forward-word  # mac
 
 export TMUXIFIER_TMUX_OPTS=-2
+
+alias project='tmuxifier s'

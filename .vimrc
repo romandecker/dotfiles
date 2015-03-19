@@ -34,6 +34,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'kana/vim-submode'
 Plug 'lervag/vim-latex'
 Plug 'sjl/gundo.vim'
+Plug 'chreekat/vim-paren-crosshairs'
 
 call plug#end()
 
@@ -166,7 +167,6 @@ nmap <Leader>tu :call UnWrap()<CR>
 " map M to work just like D used to work without easyclip
 nmap <S-m> v$hm
 
-nmap <F3> :HardTimeToggle<CR>
 nmap <S-u> :GundoToggle<CR>
 
 "Enable emmet only for html-ish files
