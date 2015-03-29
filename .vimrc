@@ -35,6 +35,7 @@ Plug 'kana/vim-submode'
 Plug 'lervag/vim-latex'
 Plug 'sjl/gundo.vim'
 Plug 'chreekat/vim-paren-crosshairs'
+Plug 'danro/rename.vim'
 
 call plug#end()
 
