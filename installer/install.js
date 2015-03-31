@@ -158,6 +158,20 @@ osenv.homeAsync().then( function(h) {
     }
 
 } ).then( function() {
+    var tpm = path.join( home, ".tmux", "plugins", "tpm" );
+    if( fs.existsSync(tpm) ) {
+        console.log( ".tmux/plugins/tpm".magenta, "exists", CHECK );
+    } else {
+        console.log( ".tmux/plugins/tpm".magenta, "doesn't exist, cloning...".yellow );
+
+        return exec( "git",
+                     ["clone",
+                      "https://github.com/tmux-plugins/tpm",
+                      tpm],
+                     { cwd: home, pipe: true } );
+    }
+
+} ).then( function() {
 
     var toInstall = [];
     FILES.forEach( function(file) {
@@ -253,15 +267,6 @@ osenv.homeAsync().then( function(h) {
         console.log( "Configured", ".gitignore".magenta, CHECK );
     } );
 
-} ).then( function() {
-
-    console.log( "Updating vim plugins..." );
-
-    return exec(
-        "vim",
-         ["+PlugInstall", "+qall"]
-    );
-    
 } ).then( function() {
     console.log( "Done!".green.bold );
     console.log();
