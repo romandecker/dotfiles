@@ -36,6 +36,8 @@ Plug 'lervag/vim-latex'
 Plug 'sjl/gundo.vim'
 Plug 'chreekat/vim-paren-crosshairs'
 Plug 'danro/rename.vim'
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
 
 call plug#end()
 
@@ -217,8 +219,7 @@ let g:ctrlp_custom_ignore = '\v[\/](.git|
                                    \.svn|
                                    \node_modules|
                                    \bower_components|
-                                   \doc|
-                                   \docs)$'
+                                   \.session.vim)$'
 
 "check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
