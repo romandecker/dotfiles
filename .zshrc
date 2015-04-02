@@ -131,4 +131,6 @@ bindkey '^[f' forward-word  # mac
 
 export TMUXIFIER_TMUX_OPTS=-2
 
+alias 'new-project'='tmuxifier ns'
+alias 'edit-project'='tmuxifier es'
 alias project='tmuxifier s'
