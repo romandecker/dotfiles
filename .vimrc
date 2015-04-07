@@ -38,6 +38,7 @@ Plug 'chreekat/vim-paren-crosshairs'
 Plug 'danro/rename.vim'
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -145,27 +146,30 @@ nmap <leader>ws :split<CR>
 nmap <leader>w<S-s> :vsplit<CR>
 nmap <leader>wq <C-w>q
 
-call submode#enter_with('vresize', 'n', '', '<leader>w/', ':resize -1<CR>')
-call submode#enter_with('vresize', 'n', '', '<leader>w*', ':resize +1<CR>')
+call submode#enter_with('vresize', 'n', '', '<leader>wj', ':resize -1<CR>')
+call submode#enter_with('vresize', 'n', '', '<leader>wk', ':resize +1<CR>')
 call submode#leave_with('vresize', 'n', '', '<Esc>')
-call submode#map('vresize', 'n', '', '/', ':resize -1<CR>' )
-call submode#map('vresize', 'n', '', '*', ':resize +1<CR>')
+call submode#map('vresize', 'n', '', 'j', ':resize -1<CR>' )
+call submode#map('vresize', 'n', '', 'k', ':resize +1<CR>')
 
-call submode#enter_with('resize', 'n', '', '<leader>w-', ':vertical-resize -1<CR>')
-call submode#enter_with('resize', 'n', '', '<leader>w+', ':vertical-resize +1<CR>')
+call submode#enter_with('resize', 'n', '', '<leader>wh', ':vertical resize -1<CR>')
+call submode#enter_with('resize', 'n', '', '<leader>wl', ':vertical resize +1<CR>')
 call submode#leave_with('resize', 'n', '', '<Esc>')
-call submode#map('resize', 'n', '', '-', ':vertical-resize -1<CR>' )
-call submode#map('resize', 'n', '', '+', ':vertical-resize +1<CR>')
+call submode#map('resize', 'n', '', 'h', ':vertical resize -1<CR>' )
+call submode#map('resize', 'n', '', 'l', ':vertical resize +1<CR>')
 
+" Source-code manipulation with leader s
 " alignment stuff with leader a
-nmap <Leader>ta= :Tabularize /=\zs<CR>
-nmap <Leader>ta: :Tabularize /:\zs<CR>
-vmap <Leader>ta\| :Tabularize /\|<CR>
+nmap <Leader>sa= :Tabularize /=\zs<CR>
+nmap <Leader>sa: :Tabularize /:\zs<CR>
+vmap <Leader>sa\| :Tabularize /\|<CR>
+
+nmap <Leader>su :call UnWrap()<CR>
+nmap <Leader>scc gcc
+vmap <Leader>sc gc
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-
-nmap <Leader>tu :call UnWrap()<CR>
 
 " map M to work just like D used to work without easyclip
 nmap <S-m> v$hm
@@ -176,12 +180,7 @@ nmap <S-u> :GundoToggle<CR>
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 au BufNewFile,BufRead *.ejs set filetype=html
-au BufNewFile,BufRead *.jade call SetJadeOptions()
-
-function! SetJadeOptions()
-    set filetype=jade
-    setlocal indentkeys-=*<Return>
-endfunction
+au BufNewFile,BufRead *.jade set filetype=jade
 
 au BufNewFile,BufRead *.less set filetype=less
 
