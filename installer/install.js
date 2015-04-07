@@ -20,6 +20,7 @@ var FILES = [
     ".vrapperrc",
     ".vim/ftplugin",
     ".tmux.conf",
+    ".tmux.conf.macosx",
     ".tmuxifier/layouts/development.window.sh",
     ".tmuxifier/templates/session.sh"
 ];
