@@ -30,7 +30,7 @@ Plug 'svermeulen/vim-easyclip'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'matchit.zip'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
 Plug 'kana/vim-submode'
 Plug 'lervag/vim-latex'
 Plug 'sjl/gundo.vim'
@@ -99,7 +99,7 @@ set scrolloff=5
 set laststatus=2
 
 "Always use the system register
-set clipboard=unnamed
+set clipboard=unnamed,unnamedplus
 
 " Allow backspace to delete previously entered characters
 set backspace=indent,eol,start
@@ -231,6 +231,9 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 "display buffers
 let g:airline#extensions#tabline#enabled = 1
 
+"use powerline fonts
+let g:airline_powerline_fonts = 1
+
 " html checker doesn't know html5...
 let g:syntastic_html_checkers = []
 
@@ -243,6 +246,9 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_json_syntax_conceal=0
 
 let g:EditorConfig_verbose = 1
+
+" share easyclip yanks between sessions
+let g:EasyClipShareYanks = 1
 
 
 " If ~/.vimrc.local exists, source it to support host-local configs

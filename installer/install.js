@@ -14,7 +14,6 @@ var PLUG_URL = "https://raw.githubusercontent.com/" +
 
 // all relative to $HOME
 var FILES = [
-    ".zshrc",
     { "dotgitignore": ".gitignore" },
     ".vimrc",
     ".vrapperrc",
@@ -22,7 +21,15 @@ var FILES = [
     ".tmux.conf",
     ".tmux.conf.macosx",
     ".tmuxifier/layouts/development.window.sh",
-    ".tmuxifier/templates/session.sh"
+    ".tmuxifier/templates/session.sh",
+    ".oh-my-zsh/custom/aliases.zsh",
+    ".oh-my-zsh/custom/bindings.zsh",
+    ".oh-my-zsh/custom/env.zsh",
+    ".oh-my-zsh/custom/functions.zsh",
+    ".oh-my-zsh/custom/history.zsh",
+    ".oh-my-zsh/custom/path.zsh",
+    ".oh-my-zsh/custom/prompt.zsh",
+    ".oh-my-zsh/custom/tmuxifier.zsh",
 ];
 
 var repoFiles = {};
@@ -55,11 +62,12 @@ var REQUIRED_DIRECTORIES = [
     ".vim/backup",
     ".vim/tmp",
     ".vim/autoload",
-    "bin"
+    ".dotfiles"
 ];
 
 var CHECK = "\u2713".green;
 var CROSS = "\u2717".red;
+var WARN = "\u26a0".yellow;
 
 var home;
 
@@ -67,38 +75,65 @@ var requiredDirs = {};
 
 function exec( cmd, args, options ) {
 
-    var process = childProcess.spawn( cmd, args, options );
+    var child = childProcess.spawn( cmd, args, options );
 
     options = options || {};
 
     if( options.pipe ) {
-        process.stdout.on( "data", function(data) {
+        child.stdout.on( "data", function(data) {
             process.stdout.write( data );
         } );
-        process.stderr.on( "data", function(data) {
+        child.stderr.on( "data", function(data) {
             process.stderr.write( data );
         } );
     }
 
     return new BPromise( function(resolve, reject) {
-        process.on( "error", reject );
-        process.stdout.on( "error", reject );
-        process.stderr.on( "error", reject );
+        child.on( "error", reject );
+        child.stdout.on( "error", reject );
+        child.stderr.on( "error", reject );
 
-        process.on( "exit", function(code) {
+        child.on( "exit", function(code) {
             if( code === 0 ) {
                 resolve();
             } else {
-                reject( cmd + " exited with code " + code );
+                reject( cmd + " " + args.join( " " ) +
+                        " exited with code " + code );
             }
         } );
     } );
+}
+
+function clone( name, repo, to ) {
+
+  if( fs.existsSync(to) ) {
+    console.log( name.magenta, "exists", CHECK );
+    return BPromise.resolve( false );
+  } else {
+    console.log( name.magenta, "doesn't exist, cloning...".yellow );
+
+    return exec(
+      "git",
+      ["clone",
+       repo,
+       "~/.tmuxifier"],
+      { cwd: home, pipe: true }
+    ).return( true );
+  }
 }
 
 console.log( "Checking current system state..." );
 osenv.homeAsync().then( function(h) {
 
     home = h;
+
+    if( __dirname.indexOf(home) !== 0 ) {
+        console.log( "Checking repo location...", CROSS );
+        console.log( "Please clone this repo to ~/.dotfiles!" );
+        throw new Error( "Repository not in the correct location!" );
+    } else {
+        console.log( "Checking repo location...", CHECK );
+    }
 
     FILES.forEach( function(file) {
         if( typeof file === "object" ) {
@@ -110,7 +145,6 @@ osenv.homeAsync().then( function(h) {
     REQUIRED_DIRECTORIES.forEach( function(dir) {
         requiredDirs[dir] = path.join( home, dir );
     } );
-
 } ).then( function() {
     console.log( "Making sure all required directories exist..." );
 
@@ -121,56 +155,46 @@ osenv.homeAsync().then( function(h) {
         } );
     } ) );
 } ).then( function() {
-    var gitPrompt = path.join( requiredDirs.bin, "zsh-git-prompt" );
-    if( fs.existsSync(gitPrompt) ) {
-        console.log( "git-prompt-zsh".magenta, "exists", CHECK );
-    } else {
-        console.log( "git-prompt-zsh".magenta,
-                     "doesn't exist, cloning...".yellow );
 
-        return exec( "git",
-                ["clone",
-                "https://github.com/olivierverdier/zsh-git-prompt.git"],
-                { cwd: requiredDirs.bin, pipe: true } );
+    var ohMyZshPath = path.join( home, ".oh-my-zsh" );
 
-    }
-} ).then( function() {
-    var tmuxifier = path.join( home, ".tmuxifier" );
-    if( fs.existsSync(tmuxifier) ) {
-        console.log( ".tmuxifier".magenta, "exists", CHECK );
-    } else {
-        console.log( ".tmuxifier".magenta, "doesn't exist, cloning...".yellow );
-
-        return exec( "git",
-                            ["clone",
-                             "https://github.com/jimeh/tmuxifier.git",
-                             ".tmuxifier"],
-                             { cwd: home, pipe: true } ).then( function() {
-
-            console.log( "Removing session layout template file " +
-                         "(it's replaced with a custom template)" );
-            return fs.unlinkSync( path.join(home,
-                                  ".tmuxifier",
-                                  "templates",
-                                  "session.sh"
-            ) );
-
-        } );
-    }
+    return clone(
+      ".oh-my-zsh",
+      "git@github.com:robbyrussell/oh-my-zsh.git",
+      ohMyZshPath
+    );
 
 } ).then( function() {
-    var tpm = path.join( home, ".tmux", "plugins", "tpm" );
-    if( fs.existsSync(tpm) ) {
-        console.log( ".tmux/plugins/tpm".magenta, "exists", CHECK );
-    } else {
-        console.log( ".tmux/plugins/tpm".magenta, "doesn't exist, cloning...".yellow );
+    var tmuxifierPath = path.join( home, ".tmuxifier" );
 
-        return exec( "git",
-                     ["clone",
-                      "https://github.com/tmux-plugins/tpm",
-                      tpm],
-                     { cwd: home, pipe: true } );
-    }
+    return clone(
+      ".tmuxifier",
+      "git@github.com:jimeh/tmuxifier.git",
+      tmuxifierPath
+    ).then( function( cloned ) {
+
+      if( cloned ) {
+        console.log( " * removing tmuxifier's session template" );
+
+        return fs.unlinkSync(
+          path.join(
+            home,
+            ".tmuxifier",
+            "templates",
+            "session.sh"
+          )
+        );
+      }
+    } );
+
+} ).then( function() {
+    var tpmPath = path.join( home, ".tmux", "plugins", "tpm" );
+
+    return clone(
+      ".tmux/plugins/tpm",
+      "git@github.com:tmux-plugins/tpm",
+      tpmPath
+    );
 
 } ).then( function() {
 
@@ -201,7 +225,7 @@ osenv.homeAsync().then( function(h) {
                                  "as well, please remove it manually first" );
                 }
             } else {
-                console.log( file.magenta, "is not a symlink", CROSS );
+                console.log( file.magenta, "is not a symlink", WARN );
             }
         } else {
             console.log( file.magenta, "does not exist", CROSS );
@@ -272,11 +296,12 @@ osenv.homeAsync().then( function(h) {
     console.log( "Done!".green.bold );
     console.log();
     console.log( "What happened?".bold );
-    console.log( "* .zshrc is installed" );
+    console.log( "* .oh-my-zsh is installed" );
+    console.log( " * put custom zsh-configs in ~/.oh-my-zsh/custom/" );
     console.log( "* .vimrc is installed" );
     console.log( "* .tmux.conf is installed" );
     console.log( "* tmuxifier is installed (in ~/.tmuxifier) and sourced" );
-    console.log( "* ~/bin exists" );
+    console.log( "* ~/.dotfiles exists" );
     console.log( " * it contains git-prompt-zsh, which is sourced by .zshrc" );
     console.log();
     console.log( "What to do now?".bold );
