@@ -12,6 +12,10 @@ require( "colors" );
 var PLUG_URL = "https://raw.githubusercontent.com/" +
                "junegunn/vim-plug/master/plug.vim";
 
+var OH_MY_ZSH_URL = "git@github.com:robbyrussell/oh-my-zsh.git";
+var TMUXIFIER_URL = "git@github.com:jimeh/tmuxifier.git";
+var TPM_URL = "git@github.com:tmux-plugins/tpm";
+
 // all relative to $HOME
 var FILES = [
     { "dotgitignore": ".gitignore" },
@@ -73,35 +77,248 @@ var home;
 
 var requiredDirs = {};
 
-function exec( cmd, args, options ) {
+console.log( "Checking current system state..." );
+osenv.homeAsync().then( function(h) {
 
-    var child = childProcess.spawn( cmd, args, options );
+  home = h;
 
-    options = options || {};
+  if( __dirname.indexOf(home) !== 0 ) {
+    console.log( "Checking repo location...", CROSS );
+    console.log( "Please clone this repo to ~/.dotfiles!" );
+    throw new Error( "Repository not in the correct location!" );
+  } else {
+    console.log( "Checking repo location...", CHECK );
+  }
 
-    if( options.pipe ) {
-        child.stdout.on( "data", function(data) {
-            process.stdout.write( data );
-        } );
-        child.stderr.on( "data", function(data) {
-            process.stderr.write( data );
-        } );
+  FILES.forEach( function(file) {
+    if( typeof file === "object" ) {
+      file = file[ Object.keys(file)[0] ];
+    }
+    installedFiles[file] = path.join( home, file );
+  } );
+
+  REQUIRED_DIRECTORIES.forEach( function(dir) {
+    requiredDirs[dir] = path.join( home, dir );
+  } );
+} ).then( function() {
+  console.log( "Making sure all required directories exist..." );
+
+  return BPromise.all( REQUIRED_DIRECTORIES.map( function(name) {
+      var dir = requiredDirs[name];
+      return fs.mkdirsAsync( dir ).then( function() {
+          console.log( " *", name.magenta, CHECK );
+      } );
+  } ) );
+} ).then( function() {
+
+  var ohMyZshPath = path.join( home, ".oh-my-zsh" );
+
+  return clone(
+    ".oh-my-zsh",
+    OH_MY_ZSH_URL,
+    ohMyZshPath
+  );
+
+} ).then( function() {
+  var tmuxifierPath = path.join( home, ".tmuxifier" );
+
+  return clone(
+    ".tmuxifier",
+    TMUXIFIER_URL,
+    tmuxifierPath
+  ).then( function( cloned ) {
+
+    if( cloned ) {
+      console.log( " * removing tmuxifier's session template" );
+
+      return fs.unlinkSync(
+        path.join(
+          home,
+          ".tmuxifier",
+          "templates",
+          "session.sh"
+        )
+      );
+    }
+  } );
+
+} ).then( function() {
+  var tpmPath = path.join( home, ".tmux", "plugins", "tpm" );
+
+  return clone(
+    ".tmux/plugins/tpm",
+    TPM_URL,
+    tpmPath
+  );
+
+} ).then( function() {
+
+  var toInstall = [];
+  FILES.forEach( function(file) {
+
+    if( typeof file === "object" ) {
+      file = file[ Object.keys(file)[0] ];
     }
 
-    return new BPromise( function(resolve, reject) {
-        child.on( "error", reject );
-        child.stdout.on( "error", reject );
-        child.stderr.on( "error", reject );
+    var installed = installedFiles[file];
+    var repo = repoFiles[file];
 
-        child.on( "exit", function(code) {
-            if( code === 0 ) {
-                resolve();
-            } else {
-                reject( cmd + " " + args.join( " " ) +
-                        " exited with code " + code );
-            }
-        } );
+    if( fs.existsSync(installed) ) {
+      var stats = fs.lstatSync( installed );
+      if( stats.isSymbolicLink() ) {
+        var linked = fs.readlinkSync( installed );
+
+        if( linked === repo ) {
+          console.log( file.magenta,
+                       "is already linked to this repo",
+                       CHECK );
+        } else {
+          console.log( file.magenta,
+                       "exists and is not linked to this repo",
+                       "(" + linked + ")", CROSS );
+          console.log( " * If you wish to install", file.magenta,
+                       "as well, please remove it manually first" );
+        }
+      } else {
+        console.log( file.magenta, "is not a symlink", WARN );
+      }
+    } else {
+      console.log( file.magenta, "does not exist", CROSS );
+      toInstall.push( file );
+    }
+
+  } );
+
+  return toInstall;
+} ).then( function( toInstall ) {
+
+  if( toInstall.length === 0 ) {
+    return toInstall;
+  }
+
+  return new BPromise( function(resolve, reject) {
+    confirm( toInstall.length + " dotfiles will be linked. " +
+             "Do you want to continue?", function(ok) {
+      if( ok ) {
+        resolve( toInstall );
+      } else {
+        reject( "Installation cancelled by user" );
+      }
     } );
+  } );
+
+} ).then( function( toInstall ) {
+
+  return BPromise.all( toInstall.map( function(file) {
+    return fs.symlinkAsync(
+      repoFiles[file], installedFiles[file] ).then( function() {
+        console.log( "Installing link to", file.magenta, "...", CHECK );
+      } );
+  } ) );
+} ).then( function() {
+
+  var plug = path.join( home, ".vim/autoload/plug.vim" );
+
+  if( fs.existsSync(plug) ) {
+    console.log( "plug".magenta, "exists", CHECK );
+  } else {
+    console.log( "plug".magenta, "doesn't exist, downloading...".yellow );
+
+    var autoload = path.dirname(plug);
+    return fs.mkdirsAsync( autoload ).then( function() {
+
+      var plugFile = fs.createWriteStream( plug );
+
+      request( PLUG_URL ).pipe( plugFile );
+    } );
+  }
+
+} ).then( function() {
+
+  console.log( "Making sure git knows about global .gitignore..." );
+
+  return exec(
+    "git",
+    ["config", "--global",
+     "core.excludesfile", "~/.gitignore"],
+    { pipe: true }
+  ).then( function() {
+    console.log( "Configured", ".gitignore".magenta, CHECK );
+  } );
+
+} ).then( function() {
+
+  console.log( "Cleaning up unused plugins..." );
+
+  return BPromise.delay( 1000 ).then( function() {
+    return exec(
+      "vim",
+      ["-c", "PlugClean!", "-c", "qall"],
+      { stdio: "inherit" }
+    );
+  } );
+
+} ).then( function() {
+
+  console.log( "Updating plugins..." );
+
+  return BPromise.delay( 1000 ).then( function() {
+    return exec(
+      "vim",
+      ["-c", "PlugInstall", "-c", "qall"],
+      { stdio: "inherit" }
+    );
+  } );
+
+} ).then( function() {
+  console.log( "Done!".green.bold );
+  console.log();
+  console.log( "What happened?".bold );
+  console.log( "* ~/.oh-my-zsh is installed" );
+  console.log( " * put custom zsh-configs in ~/.oh-my-zsh/custom/" );
+  console.log( "* ~/.vimrc is installed" );
+  console.log( "* ~/.tmux.conf is installed" );
+  console.log( "* ~/.tmuxifier is installed and sourced" );
+  console.log();
+  console.log( "What to do now?".bold );
+  console.log( "* Make sure zsh is your default shell" );
+  console.log( "* Open a new terminal or source ~/.zshrc" );
+} ).catch( function(err) {
+  console.error( "Installation cancelled:".red.bold );
+  console.error( err );
+} );
+
+function exec( cmd, args, options ) {
+
+  var child = childProcess.spawn( cmd, args, options );
+
+  options = options || {};
+
+  if( options.pipe ) {
+    child.stdout.on( "data", function(data) {
+      process.stdout.write( data );
+    } );
+    child.stderr.on( "data", function(data) {
+      process.stderr.write( data );
+    } );
+  }
+
+  return new BPromise( function(resolve, reject) {
+    child.on( "error", reject );
+    if( options.stdio !== "inherit" ) {
+      child.stdout.on( "error", reject );
+      child.stderr.on( "error", reject );
+    }
+
+    child.on( "exit", function(code) {
+      if( code === 0 ) {
+        resolve();
+      } else {
+        reject( cmd + " " + args.join( " " ) +
+                " exited with code " + code );
+      }
+    } );
+  } );
 }
 
 function clone( name, repo, to ) {
@@ -121,194 +338,4 @@ function clone( name, repo, to ) {
     ).return( true );
   }
 }
-
-console.log( "Checking current system state..." );
-osenv.homeAsync().then( function(h) {
-
-    home = h;
-
-    if( __dirname.indexOf(home) !== 0 ) {
-        console.log( "Checking repo location...", CROSS );
-        console.log( "Please clone this repo to ~/.dotfiles!" );
-        throw new Error( "Repository not in the correct location!" );
-    } else {
-        console.log( "Checking repo location...", CHECK );
-    }
-
-    FILES.forEach( function(file) {
-        if( typeof file === "object" ) {
-            file = file[ Object.keys(file)[0] ];
-        }
-        installedFiles[file] = path.join( home, file );
-    } );
-
-    REQUIRED_DIRECTORIES.forEach( function(dir) {
-        requiredDirs[dir] = path.join( home, dir );
-    } );
-} ).then( function() {
-    console.log( "Making sure all required directories exist..." );
-
-    return BPromise.all( REQUIRED_DIRECTORIES.map( function(name) {
-        var dir = requiredDirs[name];
-        return fs.mkdirsAsync( dir ).then( function() {
-            console.log( " *", name.magenta, CHECK );
-        } );
-    } ) );
-} ).then( function() {
-
-    var ohMyZshPath = path.join( home, ".oh-my-zsh" );
-
-    return clone(
-      ".oh-my-zsh",
-      "git@github.com:robbyrussell/oh-my-zsh.git",
-      ohMyZshPath
-    );
-
-} ).then( function() {
-    var tmuxifierPath = path.join( home, ".tmuxifier" );
-
-    return clone(
-      ".tmuxifier",
-      "git@github.com:jimeh/tmuxifier.git",
-      tmuxifierPath
-    ).then( function( cloned ) {
-
-      if( cloned ) {
-        console.log( " * removing tmuxifier's session template" );
-
-        return fs.unlinkSync(
-          path.join(
-            home,
-            ".tmuxifier",
-            "templates",
-            "session.sh"
-          )
-        );
-      }
-    } );
-
-} ).then( function() {
-    var tpmPath = path.join( home, ".tmux", "plugins", "tpm" );
-
-    return clone(
-      ".tmux/plugins/tpm",
-      "git@github.com:tmux-plugins/tpm",
-      tpmPath
-    );
-
-} ).then( function() {
-
-    var toInstall = [];
-    FILES.forEach( function(file) {
-
-        if( typeof file === "object" ) {
-            file = file[ Object.keys(file)[0] ];
-        }
-
-        var installed = installedFiles[file];
-        var repo = repoFiles[file];
-
-        if( fs.existsSync(installed) ) {
-            var stats = fs.lstatSync( installed );
-            if( stats.isSymbolicLink() ) {
-                var linked = fs.readlinkSync( installed );
-
-                if( linked === repo ) {
-                    console.log( file.magenta,
-                                 "is already linked to this repo",
-                                 CHECK );
-                } else {
-                    console.log( file.magenta,
-                                 "exists and is not linked to this repo",
-                                 "(" + linked + ")", CROSS );
-                    console.log( " * If you wish to install", file.magenta,
-                                 "as well, please remove it manually first" );
-                }
-            } else {
-                console.log( file.magenta, "is not a symlink", WARN );
-            }
-        } else {
-            console.log( file.magenta, "does not exist", CROSS );
-            toInstall.push( file );
-        }
-
-    } );
-
-    return toInstall;
-} ).then( function( toInstall ) {
-
-    if( toInstall.length === 0 ) {
-        return toInstall;
-    }
-
-    return new BPromise( function(resolve, reject) {
-        confirm( toInstall.length + " dotfiles will be linked. " +
-                   "Do you want to continue?", function(ok) {
-            if( ok ) {
-                resolve( toInstall );
-            } else {
-                reject( "Installation cancelled by user" );
-            }
-        } );
-    } );
-
-} ).then( function( toInstall ) {
-
-    return BPromise.all( toInstall.map( function(file) {
-        return fs.symlinkAsync(
-            repoFiles[file], installedFiles[file] ).then( function() {
-                console.log( "Installing link to", file.magenta, "...", CHECK );
-            } );
-
-    } ) );
-} ).then( function() {
-
-    var plug = path.join( home, ".vim/autoload/plug.vim" );
-
-    if( fs.existsSync(plug) ) {
-        console.log( "plug".magenta, "exists", CHECK );
-    } else {
-        console.log( "plug".magenta, "doesn't exist, downloading...".yellow );
-
-        var autoload = path.dirname(plug);
-        return fs.mkdirsAsync( autoload ).then( function() {
-
-            var plugFile = fs.createWriteStream( plug );
-
-            request( PLUG_URL ).pipe( plugFile );
-        } );
-    }
-
-} ).then( function() {
-
-    console.log( "Making sure git knows about global .gitignore..." );
-
-    return exec(
-        "git",
-        ["config", "--global",
-         "core.excludesfile", "~/.gitignore"],
-        { pipe: true }
-    ).then( function() {
-        console.log( "Configured", ".gitignore".magenta, CHECK );
-    } );
-
-} ).then( function() {
-    console.log( "Done!".green.bold );
-    console.log();
-    console.log( "What happened?".bold );
-    console.log( "* .oh-my-zsh is installed" );
-    console.log( " * put custom zsh-configs in ~/.oh-my-zsh/custom/" );
-    console.log( "* .vimrc is installed" );
-    console.log( "* .tmux.conf is installed" );
-    console.log( "* tmuxifier is installed (in ~/.tmuxifier) and sourced" );
-    console.log( "* ~/.dotfiles exists" );
-    console.log( " * it contains git-prompt-zsh, which is sourced by .zshrc" );
-    console.log();
-    console.log( "What to do now?".bold );
-    console.log( "* Make sure zsh is your default shell" );
-    console.log( "* Open a new terminal or source ~/.zshrc" );
-} ).catch( function(err) {
-    console.error( "Installation cancelled:".red.bold );
-    console.error( err );
-} );
 

@@ -4,24 +4,23 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-scripts/genutils'
+Plug 'xolox/vim-misc'
 
 Plug 'kien/ctrlp.vim'
 Plug 'camelcasemotion'
-Plug 'digitaltoad/vim-jade'
-Plug 'groenewege/vim-less'
+Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'elzr/vim-json'
-Plug 'mattn/emmet-vim'
+Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'xml'] }
 Plug 'lervag/vim-latex'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bling/vim-airline'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/syntastic'
-Plug 'xolox/vim-misc'
 Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'marijnh/tern_for_vim'
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'tpope/vim-surround'
 Plug 'rhysd/committia.vim'
 Plug 'gcmt/wildfire.vim'
@@ -32,7 +31,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
 Plug 'kana/vim-submode'
-Plug 'lervag/vim-latex'
 Plug 'sjl/gundo.vim'
 Plug 'chreekat/vim-paren-crosshairs'
 Plug 'danro/rename.vim'
@@ -178,7 +176,7 @@ nmap <S-u> :GundoToggle<CR>
 
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,xml EmmetInstall
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.jade set filetype=jade
 
