@@ -333,7 +333,7 @@ function clone( name, repo, to ) {
       "git",
       ["clone",
        repo,
-       "~/.tmuxifier"],
+       to],
       { cwd: home, pipe: true }
     ).return( true );
   }
