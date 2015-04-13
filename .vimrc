@@ -39,6 +39,8 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'tpope/vim-commentary'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'tpope/vim-dispatch'   " needed for omnisharp
 
 call plug#end()
 
