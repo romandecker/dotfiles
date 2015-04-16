@@ -1,6 +1,7 @@
 "use strict";
 
 var BPromise = require( "bluebird" );
+var os = require( "os" );
 var osenv = BPromise.promisifyAll( require( "osenv" ) );
 var fs = BPromise.promisifyAll( require("fs-extra") );
 var path = require( "path" );
@@ -14,12 +15,17 @@ var PLUG_URL = "https://raw.githubusercontent.com/" +
 
 var OH_MY_ZSH_URL = "git@github.com:robbyrussell/oh-my-zsh.git";
 var TMUXIFIER_URL = "git@github.com:jimeh/tmuxifier.git";
-var TPM_URL = "git@github.com:tmux-plugins/tpm";
+var TPM_URL = "git@github.com:tmux-plugins/tpm.git";
+var POWERLINE_FONTS_URL = "git@github.com:powerline/fonts.git";
+
+var FONTS_DIR_DARWIN = "Library/Fonts";
+var FONTS_DIR_LINUX = ".fonts";
 
 // all relative to $HOME
 var FILES = [
     { "dotgitignore": ".gitignore" },
     ".vimrc",
+    ".zshrc",
     ".vrapperrc",
     ".vim/ftplugin",
     ".tmux.conf",
@@ -248,6 +254,40 @@ osenv.homeAsync().then( function(h) {
 
 } ).then( function() {
 
+  var fontsDir;
+  if( os.platform() === "darwin" ) {
+    fontsDir = FONTS_DIR_DARWIN;
+  } else {
+    // linux
+    
+    fontsDir = FONTS_DIR_LINUX;
+  }
+
+  var sampleFile = path.join( home, fontsDir, "ter-powerline-x12b.pcf.gz" );
+
+  if( fs.existsSync(sampleFile) ) {
+    console.log( "Checking fonts...", CHECK );
+    return;
+  } else {
+    console.log( "Checking fonts... installing" );
+  }
+
+  var cloneDir = path.join( os.tmpdir(), "fonts-" + new Date().getTime() );
+  return clone(
+    "Temporary font repo",
+    POWERLINE_FONTS_URL,
+    cloneDir
+  ).then( function() {
+    return exec(
+      path.join( cloneDir, "install.sh" ),
+      [],
+      { stdio: "inherit" }
+    );
+  } );
+
+
+} ).then( function() {
+
   console.log( "Cleaning up unused plugins..." );
 
   return BPromise.delay( 1000 ).then( function() {
@@ -274,6 +314,7 @@ osenv.homeAsync().then( function(h) {
   console.log( "Done!".green.bold );
   console.log();
   console.log( "What happened?".bold );
+  console.log( "* ~/.zshrc is installed" );
   console.log( "* ~/.oh-my-zsh is installed" );
   console.log( " * put custom zsh-configs in ~/.oh-my-zsh/custom/" );
   console.log( "* ~/.vimrc is installed" );
@@ -282,6 +323,7 @@ osenv.homeAsync().then( function(h) {
   console.log();
   console.log( "What to do now?".bold );
   console.log( "* Make sure zsh is your default shell" );
+  console.log( "* Make sure your terminal uses one of the patched fonts" );
   console.log( "* Open a new terminal or source ~/.zshrc" );
 } ).catch( function(err) {
   console.error( "Installation cancelled:".red.bold );
