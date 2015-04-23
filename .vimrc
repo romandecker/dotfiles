@@ -95,6 +95,8 @@ set wildmenu
 set hidden
 
 set scrolloff=5
+set sidescrolloff=10
+set sidescroll=1
 
 "Always display status bar (vim-airline)
 set laststatus=2
@@ -213,6 +215,12 @@ augroup vimrc_linenumbering
                 \ endif
 augroup END
 endif
+
+" Automatically set nopaste when exiting insert mode
+autocmd InsertLeave * set nopaste
+
+" Automatically resize splits when window is resized
+autocmd VimResized * exe "normal! \<c-w>="
 
 let g:ctrlp_custom_ignore = '\v[\/](.git|
                                    \.hg|
