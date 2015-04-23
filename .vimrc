@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+set nocompatible              " be improved, required
 filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
@@ -12,7 +12,7 @@ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
 Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'xml'] }
+Plug 'mattn/emmet-vim'
 Plug 'lervag/vim-latex'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bling/vim-airline'
