@@ -13,7 +13,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'mattn/emmet-vim'
-Plug 'lervag/vim-latex'
+Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bling/vim-airline'
 Plug 'terryma/vim-multiple-cursors'
@@ -39,6 +39,7 @@ Plug 'dhruvasagar/vim-prosession'
 Plug 'tpope/vim-commentary'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'tpope/vim-dispatch'   " needed for omnisharp
+Plug 'ekalinin/Dockerfile.vim'
 
 call plug#end()
 
