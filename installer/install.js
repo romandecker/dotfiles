@@ -28,6 +28,7 @@ var FILES = [
     ".zshrc",
     ".vrapperrc",
     ".vim/ftplugin",
+    ".vim/UltiSnips/tex.snippets",
     ".tmux.conf",
     ".tmux.conf.macosx",
     ".tmuxifier/layouts/development.window.sh",
