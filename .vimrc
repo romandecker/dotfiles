@@ -274,6 +274,7 @@ let g:EditorConfig_verbose = 1
 " share easyclip yanks between sessions
 let g:EasyClipShareYanks = 1
 
+let g:vimtex_fold_enabled = 0
 
 " If ~/.vimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.vimrc.local' )
