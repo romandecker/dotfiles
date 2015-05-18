@@ -2,7 +2,7 @@
 
 let &makeprg='docker run --rm -i
 \ -v $PWD:/data theromanempire/latex
-\ /bin/sh -c "bibtex %:r && pdflatex --synctex=1 % && pdflatex --synctex=1 %"'
+\ latexmk %'
 
 nmap <F9> :Make<CR>
 

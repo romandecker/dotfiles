@@ -1,0 +1,9 @@
+snippet section "section + label" b
+\section{$1}\label{sec:`!p
+
+label = re.sub( r'[^a-zA-Z -]', '', t[1] )
+label = re.sub( r'[ \t]', '-', label )
+
+snip.rv = label.lower()
+`}
+endsnippet
