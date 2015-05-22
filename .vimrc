@@ -133,7 +133,7 @@ nnoremap t<S-q>  :bufdo bd<CR>
 map N Nzz
 map n nzz
 
-"Movement in wrapped lines
+" Movement in wrapped lines
 nmap j gj
 nmap k gk
 nmap 0 g0
@@ -141,10 +141,14 @@ nmap $ g$
 
 nmap <C-s> :w<CR>
 
+" enable camelcasemotion
 nmap w ,w
 nmap b ,b
 nmap e ,e
 nmap ss :w<CR>
+
+" m is used by easyclip use gm to create marks instead
+nnoremap gm m
 
 nmap <leader><CR> :nohlsearch<CR>
 nmap <leader>s :w<CR>
