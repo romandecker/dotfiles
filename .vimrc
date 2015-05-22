@@ -276,6 +276,8 @@ let g:EasyClipShareYanks = 1
 
 let g:vimtex_fold_enabled = 0
 
+command! -nargs=+ Silent execute 'silent <args>' | redraw!
+
 " If ~/.vimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.vimrc.local' )
     source ~/.vimrc.local
