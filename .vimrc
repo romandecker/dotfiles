@@ -43,6 +43,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'   " some predefined snippets
 Plug 'ervandew/supertab'    " Make YCM + UltiSnip work together
 Plug 'wellle/targets.vim'   " Add additional text-objects
+Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 
@@ -289,6 +290,8 @@ let g:EditorConfig_verbose = 1
 let g:EasyClipShareYanks = 1
 
 let g:vimtex_fold_enabled = 0
+
+let g:rainbow#blacklist = [117]
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
 
