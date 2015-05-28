@@ -222,7 +222,6 @@ osenv.homeAsync().then( function(h) {
 
   console.log( "Cleaning up unused plugins..." );
 
-  /*
   return BPromise.delay( 1000 ).then( function() {
     return exec(
       "vim",
@@ -230,13 +229,11 @@ osenv.homeAsync().then( function(h) {
       { stdio: "inherit" }
     );
   } );
-  */
 
 } ).then( function() {
 
   console.log( "Updating plugins..." );
 
-  /*
   return BPromise.delay( 1000 ).then( function() {
     return exec(
       "vim",
@@ -244,7 +241,6 @@ osenv.homeAsync().then( function(h) {
       { stdio: "inherit" }
     );
   } );
-  */
 } ).then( function() {
 
   console.log( "Linking additional vim-plugin-specific files..." );

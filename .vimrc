@@ -42,6 +42,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'   " some predefined snippets
 Plug 'ervandew/supertab'    " Make YCM + UltiSnip work together
+Plug 'wellle/targets.vim'   " Add additional text-objects
 
 call plug#end()
 
@@ -156,6 +157,16 @@ nmap <leader>s :w<CR>
 nmap <leader>ws :split<CR>
 nmap <leader>w<S-s> :vsplit<CR>
 nmap <leader>wq <C-w>q
+
+" vim-sneak's mappings get overwritten by vim-easyclip, so re-instate them
+nmap s <Plug>Sneak_s
+nmap S <Plug>Sneak_S
+
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':resize -1<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':resize +1<CR>')
