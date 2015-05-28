@@ -23,11 +23,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'tpope/vim-surround'
 Plug 'rhysd/committia.vim'
-Plug 'gcmt/wildfire.vim'
 Plug 'svermeulen/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
 Plug 'jonathanfilip/vim-lucius'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
 Plug 'kana/vim-submode'

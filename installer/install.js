@@ -10,6 +10,10 @@ var confirm = require( "confirm-simple" );
 var request = require( "request" );
 require( "colors" );
 
+var CHECK = "\u2713".green;
+var CROSS = "\u2717".red;
+var WARN = "\u26a0".yellow;
+
 var PLUG_URL = "https://raw.githubusercontent.com/" +
                "junegunn/vim-plug/master/plug.vim";
 
@@ -22,13 +26,22 @@ var FONTS_DIR_DARWIN = "Library/Fonts";
 var FONTS_DIR_LINUX = ".fonts";
 
 // all relative to $HOME
+var REQUIRED_DIRECTORIES = [
+    ".vim/undo",
+    ".vim/backup",
+    ".vim/tmp",
+    ".vim/autoload",
+    ".vim/UltiSnips",
+    ".dotfiles"
+];
+
+// all relative to $HOME
 var FILES = [
     { "dotgitignore": ".gitignore" },
     ".vimrc",
     ".zshrc",
     ".vrapperrc",
     ".vim/ftplugin",
-    ".vim/UltiSnips/tex.snippets",
     ".tmux.conf",
     ".tmux.conf.macosx",
     ".tmuxifier/layouts/development.window.sh",
@@ -40,45 +53,13 @@ var FILES = [
     ".oh-my-zsh/custom/history.zsh",
     ".oh-my-zsh/custom/path.zsh",
     ".oh-my-zsh/custom/prompt.zsh",
-    ".oh-my-zsh/custom/tmuxifier.zsh",
+    ".oh-my-zsh/custom/tmuxifier.zsh"
 ];
 
-var repoFiles = {};
-
-FILES.forEach( function(file) {
-
-    var repoName, fsName;
-    if( typeof file === "object" ) {
-        repoName = Object.keys( file )[0];
-        fsName = file[repoName];
-    } else {
-        repoName = fsName = file;
-    }
-    repoFiles[fsName] = path.resolve( path.join( __dirname, "..", repoName) );
-} );
-
-repoFiles[".tmuxifier/layouts/development.window.sh"] = path.join(
-    __dirname,
-    "..",
-    ".tmuxifier",
-    "layouts",
-    "development.window.sh"
-);
-
-var installedFiles = {};
-
-// all relative to $HOME
-var REQUIRED_DIRECTORIES = [
-    ".vim/undo",
-    ".vim/backup",
-    ".vim/tmp",
-    ".vim/autoload",
-    ".dotfiles"
+// files that will be linked after plugin installation
+var VIM_PLUGIN_FILES = [
+    ".vim/UltiSnips/tex.snippets"
 ];
-
-var CHECK = "\u2713".green;
-var CROSS = "\u2717".red;
-var WARN = "\u26a0".yellow;
 
 var home;
 
@@ -96,13 +77,6 @@ osenv.homeAsync().then( function(h) {
   } else {
     console.log( "Checking repo location...", CHECK );
   }
-
-  FILES.forEach( function(file) {
-    if( typeof file === "object" ) {
-      file = file[ Object.keys(file)[0] ];
-    }
-    installedFiles[file] = path.join( home, file );
-  } );
 
   REQUIRED_DIRECTORIES.forEach( function(dir) {
     requiredDirs[dir] = path.join( home, dir );
@@ -158,46 +132,9 @@ osenv.homeAsync().then( function(h) {
     tpmPath
   );
 
-} ).then( function() {
-
-  var toInstall = [];
-  FILES.forEach( function(file) {
-
-    if( typeof file === "object" ) {
-      file = file[ Object.keys(file)[0] ];
-    }
-
-    var installed = installedFiles[file];
-    var repo = repoFiles[file];
-
-    if( fs.existsSync(installed) ) {
-      var stats = fs.lstatSync( installed );
-      if( stats.isSymbolicLink() ) {
-        var linked = fs.readlinkSync( installed );
-
-        if( linked === repo ) {
-          console.log( file.magenta,
-                       "is already linked to this repo",
-                       CHECK );
-        } else {
-          console.log( file.magenta,
-                       "exists and is not linked to this repo",
-                       "(" + linked + ")", CROSS );
-          console.log( " * If you wish to install", file.magenta,
-                       "as well, please remove it manually first" );
-        }
-      } else {
-        console.log( file.magenta, "is not a symlink", WARN );
-      }
-    } else {
-      console.log( file.magenta, "does not exist", CROSS );
-      toInstall.push( file );
-    }
-
-  } );
-
-  return toInstall;
-} ).then( function( toInstall ) {
+} ).then(
+  buildFilesToInstall.bind( null, FILES )
+).then( function( toInstall ) {
 
   if( toInstall.length === 0 ) {
     return toInstall;
@@ -214,15 +151,9 @@ osenv.homeAsync().then( function(h) {
     } );
   } );
 
-} ).then( function( toInstall ) {
-
-  return BPromise.all( toInstall.map( function(file) {
-    return fs.symlinkAsync(
-      repoFiles[file], installedFiles[file] ).then( function() {
-        console.log( "Installing link to", file.magenta, "...", CHECK );
-      } );
-  } ) );
-} ).then( function() {
+} ).then(
+  installFiles
+).then( function() {
 
   var plug = path.join( home, ".vim/autoload/plug.vim" );
 
@@ -291,6 +222,7 @@ osenv.homeAsync().then( function(h) {
 
   console.log( "Cleaning up unused plugins..." );
 
+  /*
   return BPromise.delay( 1000 ).then( function() {
     return exec(
       "vim",
@@ -298,11 +230,13 @@ osenv.homeAsync().then( function(h) {
       { stdio: "inherit" }
     );
   } );
+  */
 
 } ).then( function() {
 
   console.log( "Updating plugins..." );
 
+  /*
   return BPromise.delay( 1000 ).then( function() {
     return exec(
       "vim",
@@ -310,6 +244,17 @@ osenv.homeAsync().then( function(h) {
       { stdio: "inherit" }
     );
   } );
+  */
+} ).then( function() {
+
+  console.log( "Linking additional vim-plugin-specific files..." );
+  var toInstall = buildFilesToInstall( VIM_PLUGIN_FILES );
+
+  if( toInstall.length > 0 ) {
+    console.log( "Linking " + toInstall.length + " additional files..." );
+
+    return installFiles( toInstall );
+  }
 
 } ).then( function() {
   console.log( "Done!".green.bold );
@@ -382,3 +327,115 @@ function clone( name, repo, to ) {
   }
 }
 
+/*
+ * Takes in an array of relative paths/objects that each point to a file in this
+ * repository and builds a dictionary that has a key for each of the entries.
+ * The value for the key will be the fully qualified path to that file within
+ * this repo.
+ */
+function buildRepoFiles( sourceArray ) {
+
+  var repoFiles = {};
+  sourceArray.forEach( function(file) {
+
+    var repoName, fsName;
+    if( typeof file === "object" ) {
+      repoName = Object.keys( file )[0];
+      fsName = file[repoName];
+    } else {
+      repoName = fsName = file;
+    }
+    repoFiles[fsName] = path.resolve( path.join( __dirname, "..", repoName) );
+  } );
+
+  return repoFiles;
+}
+
+/*
+ * Takes in an array of relative paths/objects that each point to a file in this
+ * repository and builds a dictionary that has a key for each of the entries.
+ * The value for the key will be the fully qualified path to where that file
+ * SHOULD reside after installation.
+ */
+function buildInstalledFiles( sourceArray, home ) {
+  var installedFiles = {};
+
+  sourceArray.forEach( function(file) {
+    if( typeof file === "object" ) {
+      file = file[ Object.keys(file)[0] ];
+    }
+    installedFiles[file] = path.join( home, file );
+  } );
+
+  return installedFiles;
+}
+
+/*
+ * Takes in an array of relative paths/objects that each point to a file in this
+ * repository and builds an array consisting of an entry
+ *
+ *  {
+ *     src: "/absolute/path/to/repo.file",
+ *     dest: "/absolute/installation/path.file"
+ *  }
+ *
+ *  for each name. Additionally, an overview will be printed.
+ */
+function buildFilesToInstall( names ) {
+  
+  var repoFiles = buildRepoFiles( names );
+  var installedFiles = buildInstalledFiles( names, home );
+
+  var toInstall = [];
+  names.forEach( function(file) {
+
+    var name = file;
+    if( typeof file === "object" ) {
+      name = Object.keys(file)[0];
+      file = file[name];
+    }
+
+    var installed = installedFiles[file];
+    var repo = repoFiles[file];
+
+    if( fs.existsSync(installed) ) {
+      var stats = fs.lstatSync( installed );
+      if( stats.isSymbolicLink() ) {
+        var linked = fs.readlinkSync( installed );
+
+        if( linked === repo ) {
+          console.log( name.magenta,
+                       "is already linked to this repo",
+                       CHECK );
+        } else {
+          console.log( name.magenta,
+                       "exists and is not linked to this repo", CROSS );
+          console.log( " * It currently points to " + linked.blue );
+          console.log( " * If you wish to install", name.magenta,
+                       "as well, please remove it manually first" );
+        }
+      } else {
+        console.log( name.magenta, "is not a symlink", WARN );
+      }
+    } else {
+      console.log( name.magenta, "does not exist", CROSS );
+      toInstall.push( {
+        name: file,
+        src: repoFiles[file],
+        dest: installedFiles[file]
+      } );
+    }
+
+  } );
+
+  return toInstall;
+}
+
+function installFiles( toInstall ) {
+
+  return BPromise.all( toInstall.map( function(file) {
+    return fs.symlinkAsync( file.src, file.dest ).then( function() {
+      console.log( "Installing link to", file.name.magenta, "...", CHECK );
+    } );
+  } ) );
+}
