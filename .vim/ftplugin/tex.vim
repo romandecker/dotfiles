@@ -6,6 +6,4 @@ let &makeprg='docker run --rm -i
 
 nmap <F9> :Make<CR>
 
-setlocal spell spelllang=en_us
-
 set textwidth=80 " to enable auto-linebreaks

@@ -1,3 +1,4 @@
+
 set nocompatible              " be improved, required
 filetype off                  " required
 
@@ -79,6 +80,8 @@ set nolist
 
 set expandtab
 set smarttab
+
+set modeline
 
 "keep backup files in central directory (dirs have to exist)
 set backup
@@ -290,6 +293,8 @@ let g:EditorConfig_verbose = 1
 let g:EasyClipShareYanks = 1
 
 let g:vimtex_fold_enabled = 0
+let g:tex_flavor = 'latex'
+let g:vimtex_indent_enabled = 0
 
 let g:rainbow#blacklist = [117]
 
