@@ -106,6 +106,8 @@ set scrolloff=5
 set sidescrolloff=10
 set sidescroll=1
 
+set mouse=a
+
 "Always display status bar (vim-airline)
 set laststatus=2
 
