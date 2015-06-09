@@ -45,6 +45,8 @@ Plug 'honza/vim-snippets'   " some predefined snippets
 Plug 'ervandew/supertab'    " Make YCM + UltiSnip work together
 Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'kana/vim-textobj-user' " needed by vim-textobj-xmlattr
+Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax)
 
 call plug#end()
 
