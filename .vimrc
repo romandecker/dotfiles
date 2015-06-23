@@ -49,6 +49,7 @@ Plug 'kana/vim-textobj-user' " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax)
 Plug 'scrooloose/nerdtree'
 Plug 'rking/ag.vim'
+Plug 'DeX3/vim-smartresize'
 
 call plug#end()
 
@@ -181,17 +182,19 @@ nmap F <Plug>Sneak_F
 nmap t <Plug>Sneak_t
 nmap T <Plug>Sneak_T
 
-call submode#enter_with('vresize', 'n', '', '<leader>wj', ':resize -1<CR>')
-call submode#enter_with('vresize', 'n', '', '<leader>wk', ':resize +1<CR>')
-call submode#leave_with('vresize', 'n', '', '<Esc>')
-call submode#map('vresize', 'n', '', 'j', ':resize -1<CR>' )
-call submode#map('vresize', 'n', '', 'k', ':resize +1<CR>')
+imap <C-h> <Del>
 
-call submode#enter_with('resize', 'n', '', '<leader>wh', ':vertical resize -1<CR>')
-call submode#enter_with('resize', 'n', '', '<leader>wl', ':vertical resize +1<CR>')
+call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
+call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
+call submode#leave_with('vresize', 'n', '', '<Esc>')
+call submode#map('vresize', 'n', '', 'j', ':SmartResizeJ<CR>' )
+call submode#map('vresize', 'n', '', 'k', ':SmartResizeK<CR>')
+
+call submode#enter_with('resize', 'n', '', '<leader>wh', ':SmartResizeH<CR>')
+call submode#enter_with('resize', 'n', '', '<leader>wl', ':SmartResizeL<CR>')
 call submode#leave_with('resize', 'n', '', '<Esc>')
-call submode#map('resize', 'n', '', 'h', ':vertical resize -1<CR>' )
-call submode#map('resize', 'n', '', 'l', ':vertical resize +1<CR>')
+call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
+call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
 
 " Source-code manipulation with leader s
 " alignment stuff with leader a
