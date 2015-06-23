@@ -266,6 +266,8 @@ osenv.homeAsync().then( function(h) {
   console.log( "What to do now?".bold );
   console.log( "* Make sure zsh is your default shell" );
   console.log( "* Make sure your terminal uses one of the patched fonts" );
+  console.log( "* If you're on a Mac, make sure you have " +
+                  "reattach-to-user-namespace installed!" );
   console.log( "* Open a new terminal or source ~/.zshrc" );
 } ).catch( function(err) {
   console.error( "Installation cancelled:".red.bold );
