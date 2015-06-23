@@ -47,6 +47,8 @@ Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kana/vim-textobj-user' " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax)
+Plug 'scrooloose/nerdtree'
+Plug 'rking/ag.vim'
 
 call plug#end()
 
@@ -165,6 +167,9 @@ nmap <leader>s :w<CR>
 nmap <leader>ws :split<CR>
 nmap <leader>w<S-s> :vsplit<CR>
 nmap <leader>wq <C-w>q
+
+" Toggle NERDTree with leader w t
+nmap <leader>wt :NERDTreeToggle<CR>
 
 " vim-sneak's mappings get overwritten by vim-easyclip, so re-instate them
 nmap s <Plug>Sneak_s
