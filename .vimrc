@@ -10,7 +10,6 @@ Plug 'xolox/vim-misc'
 Plug 'kien/ctrlp.vim'
 Plug 'camelcasemotion'
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'mattn/emmet-vim'
@@ -19,11 +18,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'bling/vim-airline'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/syntastic'
-Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'tpope/vim-surround'
-Plug 'rhysd/committia.vim'
 Plug 'svermeulen/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
 Plug 'jonathanfilip/vim-lucius'
@@ -44,12 +41,13 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'   " some predefined snippets
 Plug 'ervandew/supertab'    " Make YCM + UltiSnip work together
 Plug 'wellle/targets.vim'   " Add additional text-objects
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kana/vim-textobj-user' " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax)
 Plug 'scrooloose/nerdtree'
 Plug 'rking/ag.vim'
 Plug 'DeX3/vim-smartresize'
+Plug 'dyng/ctrlsf.vim'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -182,6 +180,8 @@ nmap F <Plug>Sneak_F
 nmap t <Plug>Sneak_t
 nmap T <Plug>Sneak_T
 
+nmap g/ <Plug>CtrlSFPrompt
+
 imap <C-h> <Del>
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
@@ -194,13 +194,7 @@ call submode#enter_with('resize', 'n', '', '<leader>wh', ':SmartResizeH<CR>')
 call submode#enter_with('resize', 'n', '', '<leader>wl', ':SmartResizeL<CR>')
 call submode#leave_with('resize', 'n', '', '<Esc>')
 call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
-call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
-
-" Source-code manipulation with leader s
-" alignment stuff with leader a
-nmap <Leader>sa= :Tabularize /=\zs<CR>
-nmap <Leader>sa: :Tabularize /:\zs<CR>
-vmap <Leader>sa\| :Tabularize /\|<CR>
+call submode#map('resize', 'n', '', 'l', ':vertical resize +1<CR>')
 
 nmap <Leader>su :call UnWrap()<CR>
 nmap <Leader>scc gcc
@@ -308,7 +302,9 @@ let g:vimtex_fold_enabled = 0
 let g:tex_flavor = 'latex'
 let g:vimtex_indent_enabled = 0
 
-let g:rainbow#blacklist = [117]
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_indent = 2
+let g:ctrlsf_default_root = 'cwd'
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
 
