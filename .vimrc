@@ -182,7 +182,7 @@ nmap T <Plug>Sneak_T
 
 nmap g/ <Plug>CtrlSFPrompt
 
-imap <C-h> <Del>
+imap <C-l> <Del>
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
