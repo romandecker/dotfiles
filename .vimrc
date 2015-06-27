@@ -251,12 +251,18 @@ autocmd InsertLeave * set nopaste
 " Automatically resize splits when window is resized
 autocmd VimResized * exe "normal! \<c-w>="
 
-let g:ctrlp_custom_ignore = '\v[\/](.git|
-                                   \.hg|
-                                   \.svn|
-                                   \node_modules|
-                                   \bower_components|
-                                   \.session.vim)$'
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+
+    let g:ctrlp_custom_ignore = '\v[\/](.git|
+                                       \.hg|
+                                       \.svn|
+                                       \node_modules|
+                                       \bower_components|
+                                       \.session.vim)$'
+endif
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
