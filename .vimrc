@@ -48,6 +48,8 @@ Plug 'rking/ag.vim'
 Plug 'DeX3/vim-smartresize'
 Plug 'dyng/ctrlsf.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/ScrollColors'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
@@ -57,9 +59,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 set background=dark
-let g:lucius_use_underline = 0
-colorscheme lucius
-LuciusBlack
+colorscheme lizard256
 
 syntax on
 
