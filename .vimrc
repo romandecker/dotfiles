@@ -39,7 +39,6 @@ Plug 'tpope/vim-dispatch'   " needed for omnisharp
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'   " some predefined snippets
-Plug 'ervandew/supertab'    " Make YCM + UltiSnip work together
 Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'kana/vim-textobj-user' " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax)
@@ -291,7 +290,7 @@ let g:airline_powerline_fonts = 1
 " html checker doesn't know html5...
 let g:syntastic_html_checkers = []
 
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
@@ -311,6 +310,9 @@ let g:vimtex_indent_enabled = 0
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_indent = 2
 let g:ctrlsf_default_root = 'cwd'
+
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<C-b>'
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
 
