@@ -3,6 +3,7 @@ snippet section "section + label" b
 
 label = re.sub( r'[^a-zA-Z -]', '', t[1] )
 label = re.sub( r'[ \t]', '-', label )
+label = re.sub( r'-+', '-', label )
 
 snip.rv = label.lower()
 `}
@@ -13,6 +14,7 @@ snippet subsection "subsection + label" b
 
 label = re.sub( r'[^a-zA-Z -]', '', t[1] )
 label = re.sub( r'[ \t]', '-', label )
+label = re.sub( r'-+', '-', label )
 
 snip.rv = label.lower()
 `}
@@ -23,6 +25,7 @@ snippet subsubsection "subsubsection + label" b
 
 label = re.sub( r'[^a-zA-Z -]', '', t[1] )
 label = re.sub( r'[ \t]', '-', label )
+label = re.sub( r'-+', '-', label )
 
 snip.rv = label.lower()
 `}
