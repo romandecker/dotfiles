@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/genutils'
 Plug 'xolox/vim-misc'
 
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'camelcasemotion'
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
@@ -49,6 +49,9 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/ScrollColors'
 Plug 'flazz/vim-colorschemes'
+Plug 'ntpeters/vim-airline-colornum'
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-signify'
 
 call plug#end()
 
@@ -58,7 +61,8 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 set background=dark
-colorscheme lizard256
+let g:rehash256=1
+colorscheme molokai
 
 syntax on
 
@@ -158,7 +162,12 @@ nmap ss :w<CR>
 " m is used by easyclip use gm to create marks instead
 nnoremap gm m
 
-nmap <leader><CR> :nohlsearch<CR>
+" use ENTER to insert lines below in normal mode
+nnoremap <CR> :
+
+" use Esc in normal mode to clear search highlights
+nnoremap <silent> <esc> :noh<return><esc>
+
 nmap <leader>s :w<CR>
 
 " window-stuff with leader w
@@ -196,6 +205,8 @@ call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
 call submode#map('resize', 'n', '', 'l', ':vertical resize +1<CR>')
 
 nmap <Leader>su :call UnWrap()<CR>
+
+" comment/uncomment lines
 nmap <Leader>scc gcc
 vmap <Leader>sc gc
 
