@@ -322,7 +322,7 @@ let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_indent = 2
 let g:ctrlsf_default_root = 'cwd'
 
-let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-b>'
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
