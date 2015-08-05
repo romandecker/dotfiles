@@ -325,6 +325,10 @@ let g:ctrlsf_default_root = 'cwd'
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-b>'
 
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_input_description = 0
+let g:jsdoc_input_return_description = 0
+
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
 
 " If ~/.vimrc.local exists, source it to support host-local configs
