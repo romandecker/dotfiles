@@ -51,7 +51,7 @@ Plug 'vim-scripts/ScrollColors'
 Plug 'flazz/vim-colorschemes'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-signify'
+Plug 'heavenshell/vim-jsdoc'
 
 call plug#end()
 
