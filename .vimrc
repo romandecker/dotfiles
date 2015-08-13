@@ -52,6 +52,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'majutsushi/tagbar'
 Plug 'heavenshell/vim-jsdoc'
+Plug 'romainl/Apprentice'
 
 call plug#end()
 
@@ -61,8 +62,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 set background=dark
-let g:rehash256=1
-colorscheme molokai
+colorscheme apprentice
 
 syntax on
 
@@ -321,6 +321,10 @@ let g:vimtex_indent_enabled = 0
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_indent = 2
 let g:ctrlsf_default_root = 'cwd'
+let g:ctrlsf_mapping = {
+    \ "next": "n",
+    \ "prev": "N",
+    \ }
 
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-b>'
