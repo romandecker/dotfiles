@@ -53,6 +53,7 @@ Plug 'ntpeters/vim-airline-colornum'
 Plug 'majutsushi/tagbar'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'romainl/Apprentice'
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
