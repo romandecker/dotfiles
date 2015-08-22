@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-scripts/genutils'
 Plug 'xolox/vim-misc'
-
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'camelcasemotion'
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
@@ -54,6 +53,7 @@ Plug 'majutsushi/tagbar'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'romainl/Apprentice'
 Plug 'pangloss/vim-javascript'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 
