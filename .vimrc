@@ -135,11 +135,15 @@ let maplocalleader = "\\"
 set pastetoggle=<F2>
 
 " buffer related stuff
-nnoremap tn  :enew<CR>
-nnoremap tj  :bp<CR>
-nnoremap tk  :bn<CR>
-nnoremap tq  :bw<CR>
-nnoremap t<S-q>  :bufdo bd<CR>
+nnoremap bn  :enew<CR>
+nnoremap bj  :bp<CR>
+nnoremap bk  :bn<CR>
+nnoremap bq  :bd<CR>
+nnoremap b<S-q>  :bufdo bd<CR>
+
+nnoremap tn :tabnew<CR>
+nnoremap tj :tabp<CR>
+nnoremap tk :tabn<CR>
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -295,6 +299,8 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 "display buffers
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 "use powerline fonts
 let g:airline_powerline_fonts = 1
