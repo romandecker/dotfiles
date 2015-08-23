@@ -135,11 +135,11 @@ let maplocalleader = "\\"
 set pastetoggle=<F2>
 
 " buffer related stuff
-nnoremap bn  :enew<CR>
-nnoremap bj  :bp<CR>
-nnoremap bk  :bn<CR>
-nnoremap bq  :bd<CR>
-nnoremap b<S-q>  :bufdo bd<CR>
+nnoremap <leader>n  :enew<CR>
+nnoremap <leader>j  :bp<CR>
+nnoremap <leader>k  :bn<CR>
+nnoremap <leader>q  :bd<CR>
+nnoremap <leader><S-q>  :bufdo bd<CR>
 
 nnoremap tn :tabnew<CR>
 nnoremap tj :tabp<CR>
@@ -162,7 +162,7 @@ nmap <C-s> :w<CR>
 nmap w ,w
 nmap b ,b
 nmap e ,e
-nmap ss :w<CR>
+nmap <leader>s :w<CR>
 
 " m is used by easyclip use gm to create marks instead
 nnoremap gm m
