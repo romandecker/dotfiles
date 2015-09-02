@@ -54,6 +54,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'romainl/Apprentice'
 Plug 'pangloss/vim-javascript'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'geekjuice/vim-mocha'
 
 call plug#end()
 
@@ -162,7 +163,6 @@ nmap <C-s> :w<CR>
 nmap w ,w
 nmap b ,b
 nmap e ,e
-nmap <leader>s :w<CR>
 
 " m is used by easyclip use gm to create marks instead
 nnoremap gm m
@@ -209,11 +209,11 @@ call submode#leave_with('resize', 'n', '', '<Esc>')
 call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
 call submode#map('resize', 'n', '', 'l', ':vertical resize +1<CR>')
 
-nmap <Leader>su :call UnWrap()<CR>
+nmap <Leader>tu :call UnWrap()<CR>
 
 " comment/uncomment lines
-nmap <Leader>scc gcc
-vmap <Leader>sc gc
+nmap <Leader>tcc gcc
+vmap <Leader>tc gc
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -309,6 +309,10 @@ let g:airline_powerline_fonts = 1
 let g:syntastic_html_checkers = []
 
 let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_always_populate_loc_list = 1
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
