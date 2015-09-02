@@ -54,7 +54,6 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'romainl/Apprentice'
 Plug 'pangloss/vim-javascript'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'geekjuice/vim-mocha'
 
 call plug#end()
 
