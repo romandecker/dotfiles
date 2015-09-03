@@ -54,6 +54,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'romainl/Apprentice'
 Plug 'pangloss/vim-javascript'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 
 call plug#end()
 
@@ -138,7 +139,7 @@ set pastetoggle=<F2>
 nnoremap <leader>n  :enew<CR>
 nnoremap <leader>j  :bp<CR>
 nnoremap <leader>k  :bn<CR>
-nnoremap <leader>q  :bd<CR>
+nnoremap <leader>q  :Bdelete<CR>    " use command from moll/vim-bbye
 nnoremap <leader><S-q>  :bufdo bd<CR>
 
 nnoremap tn :tabnew<CR>
