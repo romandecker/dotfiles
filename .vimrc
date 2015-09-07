@@ -55,6 +55,7 @@ Plug 'romainl/Apprentice'
 Plug 'pangloss/vim-javascript'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
+Plug 'brauner/vimtux'
 
 call plug#end()
 
@@ -223,6 +224,9 @@ nmap <S-m> v$hm
 
 nmap <S-u> :GundoToggle<CR>
 
+nmap <Leader><Leader> :call ExecuteKeys( 'Up Enter' )<CR>
+
+
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
@@ -345,6 +349,16 @@ let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
+
+" set up vimtux' variables so that target always points to first pane of first
+" window of open session
+if $TMUX != ''
+  let g:vimtux = {}
+  let session = system( "tmux display-message -p '#S'" )
+  let g:vimtux['session'] = strpart( session, 0, len(session) - 1 )
+  let g:vimtux['window'] = '0'
+  let g:vimtux['pane'] = '0'
+endif
 
 " If ~/.vimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.vimrc.local' )
