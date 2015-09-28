@@ -57,6 +57,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 Plug 'brauner/vimtux'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -209,7 +210,7 @@ call submode#enter_with('resize', 'n', '', '<leader>wh', ':SmartResizeH<CR>')
 call submode#enter_with('resize', 'n', '', '<leader>wl', ':SmartResizeL<CR>')
 call submode#leave_with('resize', 'n', '', '<Esc>')
 call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
-call submode#map('resize', 'n', '', 'l', ':vertical resize +1<CR>')
+call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
 
 nmap <Leader>tu :call UnWrap()<CR>
 
