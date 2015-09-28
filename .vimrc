@@ -216,6 +216,9 @@ nmap <Leader>tu :call UnWrap()<CR>
 nmap <Leader>tcc gcc
 vmap <Leader>tc gc
 
+" Use C-p to duplicate a block of code in visual mode
+vmap <C-p> y`>p
+
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
