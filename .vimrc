@@ -39,6 +39,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'   " some predefined snippets
 Plug 'wellle/targets.vim'   " Add additional text-objects
+Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'kana/vim-textobj-user' " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax)
 Plug 'scrooloose/nerdtree'
