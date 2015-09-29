@@ -170,11 +170,13 @@ nmap e ,e
 " m is used by easyclip use gm to create marks instead
 nnoremap gm m
 
-" use ENTER to insert lines below in normal mode
-nnoremap <CR> :
+" Clear highlighting on escape in normal mode
+nnoremap <esc> :noh<return><esc>
+" needed so that vim still understands escape sequences
+nnoremap <esc>^[ <esc>^[
 
-" use Esc in normal mode to clear search highlights
-nnoremap <silent> <esc> :noh<return><esc>
+" use ENTER to enter command mode directly
+nnoremap <CR> :
 
 nmap <leader>s :w<CR>
 
