@@ -57,6 +57,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 Plug 'brauner/vimtux'
+Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-fugitive'
 
 call plug#end()
@@ -332,6 +333,7 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_json_syntax_conceal=0
 
 let g:EditorConfig_verbose = 1
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " share easyclip yanks between sessions
 let g:EasyClipShareYanks = 1
