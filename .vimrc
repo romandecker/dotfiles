@@ -222,7 +222,7 @@ nmap <Leader>tcc gcc
 vmap <Leader>tc gc
 
 " Use C-p to duplicate a block of code in visual mode
-vmap <C-p> y`>p
+vmap <Leader>db y`>p
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -234,6 +234,8 @@ nmap <S-u> :GundoToggle<CR>
 
 nmap <Leader><Leader> :call ExecuteKeys( 'Up Enter' )<CR>
 
+" duplicate the above block with <leader>db
+nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
