@@ -239,8 +239,8 @@ nmap <Leader><Leader> :call ExecuteKeys( 'Up Enter' )<CR>
 " duplicate the above block with <leader>db
 nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
 
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
@@ -249,6 +249,9 @@ au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.jade set filetype=jade
 
 au BufNewFile,BufRead *.less set filetype=less
+
+au BufNewFile,BufRead *.tex setlocal spell
+au BufNewFile,BufRead *.md setlocal spell
 
 " Unwraps a block of code
 function! UnWrap()
@@ -362,9 +365,15 @@ let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
 
+" rules for jumping over closing stuff when there's whitespace present
 call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
 call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
 call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
+
+" rule for wrapping a line in a block (sadly not dot-repeatable)
+call lexima#add_rule( { 'char': '<CR>',
+                    \   'at': '{\%#}\S\+',
+                    \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
 
