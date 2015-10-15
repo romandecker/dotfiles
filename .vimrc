@@ -46,7 +46,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'rking/ag.vim'
 Plug 'DeX3/vim-smartresize'
 Plug 'dyng/ctrlsf.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/ScrollColors'
 Plug 'flazz/vim-colorschemes'
 Plug 'ntpeters/vim-airline-colornum'
@@ -59,6 +58,9 @@ Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 Plug 'brauner/vimtux'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-fugitive'
+Plug 'cohama/lexima.vim'
+Plug 'vim-utils/vim-husk'
+Plug 'terryma/vim-smooth-scroll'
 
 call plug#end()
 
@@ -237,6 +239,9 @@ nmap <Leader><Leader> :call ExecuteKeys( 'Up Enter' )<CR>
 " duplicate the above block with <leader>db
 nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
@@ -352,12 +357,13 @@ let g:ctrlsf_mapping = {
     \ "prev": "N",
     \ }
 
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<C-b>'
-
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
+
+call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
+call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
+call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
 
