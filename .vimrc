@@ -328,6 +328,7 @@ let g:airline_powerline_fonts = 1
 let g:syntastic_html_checkers = []
 
 let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_haskell_checkers = ['hlint']
 
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
