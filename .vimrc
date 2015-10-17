@@ -229,9 +229,6 @@ vmap <Leader>db y`>p
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
-" map M to work just like D used to work without easyclip
-nmap <S-m> v$hm
-
 nmap <S-u> :GundoToggle<CR>
 
 nmap <Leader><Leader> :call ExecuteKeys( 'Up Enter' )<CR>
@@ -336,6 +333,7 @@ let g:syntastic_haskell_checkers = ['hlint']
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
