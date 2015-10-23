@@ -3,8 +3,9 @@ autoload -U colors && colors # Enable colors in prompt
  
 # Modify the colors and symbols in these variables as desired.
 GIT_PROMPT_SYMBOL="%{$fg[blue]%}±"
-GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
-GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
+# GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
+GIT_PROMPT_PREFIX=""
+GIT_PROMPT_SUFFIX="%{$reset_color%}"
 GIT_PROMPT_AHEAD="%{$fg[red]%}ANUM%{$reset_color%}"
 GIT_PROMPT_BEHIND="%{$fg[cyan]%}BNUM%{$reset_color%}"
 GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}⚡︎%{$reset_color%}"
@@ -61,9 +62,19 @@ git_prompt_string() {
   local git_where="$(parse_git_branch)"
   [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
 }
+
+
  
-PROMPT="%B%n@%m|%3~ %#%b "
+# %B -> bold
+# %n -> $USERNAME
+# %m -> hostname up to first '.'
+# %M -> %~ path, with home shortened to ~, use a count to only show so many
+# %# -> '#' if root '!' otherwise
+# %(x.true-text.false-text)
+ROOT_INDICATOR="%(!.%{$fg[red]%}%n%{$reset_color%}@.)"
+PROMPT_ARROW="%{$fg[yellow]%}%(!.#.λ)%{$reset_color%}"
+
+PROMPT="%b$ROOT_INDICATOR%3~$PROMPT_ARROW%b "
 
 # Set the right-hand prompt
 RPS1='$(git_prompt_string)'
-

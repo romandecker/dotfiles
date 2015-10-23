@@ -333,7 +333,6 @@ let g:syntastic_haskell_checkers = ['hlint']
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
