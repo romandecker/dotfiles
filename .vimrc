@@ -1,83 +1,103 @@
+" vim: set foldmethod=marker foldlevel=0:
 
-set nocompatible              " be improved, required
-filetype off                  " required
-
+" Plugins {{{
+" ===========
 call plug#begin('~/.vim/plugged')
 
+" Libraries
 Plug 'vim-scripts/genutils'
 Plug 'xolox/vim-misc'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'camelcasemotion'
-Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'mattn/emmet-vim'
-Plug 'lervag/vimtex'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'bling/vim-airline'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/syntastic'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
-Plug 'tpope/vim-surround'
 Plug 'svermeulen/vim-repeat'
-Plug 'svermeulen/vim-easyclip'
-Plug 'justinmk/vim-sneak'
-Plug 'matchit.zip'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
 Plug 'kana/vim-submode'
-Plug 'sjl/gundo.vim'
-Plug 'chreekat/vim-paren-crosshairs'
-Plug 'danro/rename.vim'
-Plug 'tpope/vim-obsession'
-Plug 'dhruvasagar/vim-prosession'
-Plug 'tpope/vim-commentary'
-Plug 'OmniSharp/omnisharp-vim'
 Plug 'tpope/vim-dispatch'   " needed for omnisharp
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'   " some predefined snippets
 Plug 'wellle/targets.vim'   " Add additional text-objects
+
+" Motions
+Plug 'camelcasemotion'
+Plug 'justinmk/vim-sneak'
 Plug 'glts/vim-textobj-comment' " A comment text-object
-Plug 'kana/vim-textobj-user' " needed by vim-textobj-xmlattr
-Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax)
-Plug 'scrooloose/nerdtree'
-Plug 'rking/ag.vim'
-Plug 'DeX3/vim-smartresize'
-Plug 'DeX3/vim-argformat'
-Plug 'dyng/ctrlsf.vim'
-Plug 'vim-scripts/ScrollColors'
-Plug 'flazz/vim-colorschemes'
-Plug 'ntpeters/vim-airline-colornum'
-Plug 'majutsushi/tagbar'
+Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
+Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
+Plug 'matchit.zip' " More uses for %
+
+" Language-specific
+Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
+Plug 'lervag/vimtex'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'mattn/emmet-vim'
+Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'heavenshell/vim-jsdoc'
-Plug 'romainl/Apprentice'
 Plug 'pangloss/vim-javascript'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'moll/vim-bbye'    " close buffers without messing up window layout
-Plug 'brauner/vimtux'
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim'
-Plug 'tpope/vim-fugitive'
+
+" File management
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'danro/rename.vim'
+Plug 'rking/ag.vim'
+Plug 'dyng/ctrlsf.vim'
+
+" editing/formatting
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'svermeulen/vim-easyclip'
+Plug 'tpope/vim-commentary'
+Plug 'DeX3/vim-argformat'
 Plug 'cohama/lexima.vim'
-Plug 'vim-utils/vim-husk'
+Plug 'dhruvasagar/vim-table-mode'
+
+" Visual
+Plug 'DeX3/vim-smartresize'
+Plug 'bling/vim-airline'
+Plug 'ntpeters/vim-airline-colornum'
+Plug 'chreekat/vim-paren-crosshairs'
 Plug 'terryma/vim-smooth-scroll'
 
-call plug#end()
+" Colors
+Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
+Plug 'romainl/Apprentice'
+Plug 'vim-scripts/ScrollColors'
 
-" Colorscheme
+" Integration
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'brauner/vimtux'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession' " required for vim-prosession
+Plug 'dhruvasagar/vim-prosession'
+Plug 'vim-utils/vim-husk'
+
+" Misc
+Plug 'scrooloose/syntastic'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
+Plug 'sjl/gundo.vim'    " the undo-tree
+Plug 'SirVer/ultisnips'
+Plug 'moll/vim-bbye'    " close buffers without messing up window layout
+
+call plug#end()
+" }}}
+
+" Colors {{{
+" ==========
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
 set background=dark
 colorscheme apprentice
+" }}}
+
+" Basic settings {{{
+" ==================
 
 syntax on
 
 set encoding=utf8
 set number
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set colorcolumn=80
 set textwidth=0
 
@@ -131,15 +151,22 @@ set clipboard=unnamed,unnamedplus
 " Allow backspace to delete previously entered characters
 set backspace=indent,eol,start
 
-if has("gui_running")
-   " Remove Toolbar
-   set guioptions-=T
-endif
+" }}}
+
+" Mappings {{{
+" ============
 
 let mapleader = " "
 let maplocalleader = "\\"
 
 set pastetoggle=<F2>
+"
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+map N Nzz
+map n nzz
+
+
 
 " buffer related stuff
 nnoremap <leader>n  :enew<CR>
@@ -152,17 +179,15 @@ nnoremap tn :tabnew<CR>
 nnoremap tj :tabp<CR>
 nnoremap tk :tabn<CR>
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-map N Nzz
-map n nzz
-
 " Movement in wrapped lines
 nmap j gj
 nmap k gk
 nmap 0 g0
 nmap $ g$
 
+" save with leader s
+nmap <leader>s :w<CR>
+" save with C-s (when forwarding is enabled in terminal, or in gui)
 nmap <C-s> :w<CR>
 
 " enable camelcasemotion
@@ -180,8 +205,6 @@ nnoremap <esc>^[ <esc>^[
 
 " use ENTER to enter command mode directly
 nnoremap <CR> :
-
-nmap <leader>s :w<CR>
 
 " window-stuff with leader w
 nmap <leader>ws :split<CR>
@@ -203,28 +226,7 @@ nmap T <Plug>Sneak_T
 
 nmap g/ <Plug>CtrlSFPrompt
 
-imap <C-l> <Del>
-
-call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
-call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
-call submode#leave_with('vresize', 'n', '', '<Esc>')
-call submode#map('vresize', 'n', '', 'j', ':SmartResizeJ<CR>' )
-call submode#map('vresize', 'n', '', 'k', ':SmartResizeK<CR>')
-
-call submode#enter_with('resize', 'n', '', '<leader>wh', ':SmartResizeH<CR>')
-call submode#enter_with('resize', 'n', '', '<leader>wl', ':SmartResizeL<CR>')
-call submode#leave_with('resize', 'n', '', '<Esc>')
-call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
-call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
-
-nmap <Leader>tu :call UnWrap()<CR>
-
-" comment/uncomment lines
-nmap <Leader>tcc gcc
-vmap <Leader>tc gc
-
-" Use C-p to duplicate a block of code in visual mode
-vmap <Leader>db y`>p
+nmap <Leader>fu :call UnWrap()<CR>
 
 "press gp to reselect pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -246,64 +248,35 @@ nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
 
+" comment/uncomment lines
+nmap <Leader>fcc gcc
+vmap <Leader>fc gc
+
+imap <C-l> <Del>
+
+
+" Use C-p to duplicate a block of code in visual mode
+vmap <Leader>db y`>p
+
+
+call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
+call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
+call submode#leave_with('vresize', 'n', '', '<Esc>')
+call submode#map('vresize', 'n', '', 'j', ':SmartResizeJ<CR>' )
+call submode#map('vresize', 'n', '', 'k', ':SmartResizeK<CR>')
+
+call submode#enter_with('resize', 'n', '', '<leader>wh', ':SmartResizeH<CR>')
+call submode#enter_with('resize', 'n', '', '<leader>wl', ':SmartResizeL<CR>')
+call submode#leave_with('resize', 'n', '', '<Esc>')
+call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
+call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
+" }}}
+
+" Plugin-specific {{{
+
 "Enable emmet only for html-ish files
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
-au BufNewFile,BufRead *.ejs set filetype=html
-au BufNewFile,BufRead *.jade set filetype=jade
-
-au BufNewFile,BufRead *.less set filetype=less
-
-au BufNewFile,BufRead *.tex setlocal spell
-au BufNewFile,BufRead *.md setlocal spell
-
-" Unwraps a block of code
-function! UnWrap()
-    let cursor = getpos( "." )
-    :normal $<%
-    :normal $%dd
-    call setpos( ".", cursor )
-    :normal dd
-endfunction
-
-" Enable relative numbers for currently focused window
-set number
-if has('autocmd')
-augroup vimrc_linenumbering
-    autocmd!
-    autocmd WinLeave *
-                \ if &number |
-                \   set norelativenumber |
-                \ endif
-    autocmd BufWinEnter *
-                \ if &number |
-                \   set relativenumber |
-                \ endif
-    autocmd VimEnter *
-                \ if &number |
-                \   set relativenumber |
-                \ endif
-augroup END
-endif
-
-" Automatically set nopaste when exiting insert mode
-autocmd InsertLeave * set nopaste
-
-" Automatically resize splits when window is resized
-autocmd VimResized * exe "normal! \<c-w>="
-
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-
-    let g:ctrlp_custom_ignore = '\v[\/](.git|
-                                       \.hg|
-                                       \.svn|
-                                       \node_modules|
-                                       \bower_components|
-                                       \.session.vim)$'
-endif
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
@@ -381,7 +354,66 @@ call lexima#add_rule( { 'char': '<CR>',
                     \   'at': '{\%#}\S\+',
                     \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
 
+" }}}
+
+" autocmd {{{
+autocmd BufNewFile,BufRead *.ejs set filetype=html
+autocmd BufNewFile,BufRead *.jade set filetype=jade
+
+autocmd BufNewFile,BufRead *.less set filetype=less
+
+autocmd BufNewFile,BufRead *.tex setlocal spell
+autocmd BufNewFile,BufRead *.md setlocal spell
+
+" Automatically set nopaste when exiting insert mode
+autocmd InsertLeave * set nopaste
+
+" Automatically resize splits when window is resized
+autocmd VimResized * exe "normal! \<c-w>="
+
+" Set ctrlp method depending on whether ag is available or not
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+    let g:ctrlp_custom_ignore = '\v[\/](.git|
+                                       \.hg|
+                                       \.svn|
+                                       \node_modules|
+                                       \bower_components|
+                                       \.session.vim)$'
+endif
+
+
+" }}}
+
+" misc {{{
+" ========
+
+" Unwraps a block of code
+function! UnWrap()
+    let cursor = getpos( "." )
+    :normal $<%
+    :normal $%dd
+    call setpos( ".", cursor )
+    :normal dd
+endfunction
+
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
+" }}}
+
+" GUI-specific {{{
+" ================
+
+if has("gui_running")
+   " Remove Toolbar
+   set guioptions-=T
+endif
+
+" }}}
+
+" tmux-specific {{{
+" =================
 
 " set up vimtux' variables so that target always points to first pane of first
 " window of open session
@@ -393,6 +425,9 @@ if $TMUX != ''
   let g:vimtux['pane'] = '0'
 endif
 
+" }}}
+
+" source {{{
 " If ~/.vimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.vimrc.local' )
     source ~/.vimrc.local
@@ -402,3 +437,4 @@ endif
 if filereadable( ".vimrc.local" )
     source .vimrc.local
 endif
+" }}}
