@@ -22,7 +22,6 @@ Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'tpope/vim-surround'
 Plug 'svermeulen/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
-Plug 'jonathanfilip/vim-lucius'
 Plug 'justinmk/vim-sneak'
 Plug 'matchit.zip'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
@@ -45,6 +44,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix, ax
 Plug 'scrooloose/nerdtree'
 Plug 'rking/ag.vim'
 Plug 'DeX3/vim-smartresize'
+Plug 'DeX3/vim-argformat'
 Plug 'dyng/ctrlsf.vim'
 Plug 'vim-scripts/ScrollColors'
 Plug 'flazz/vim-colorschemes'
@@ -233,6 +233,13 @@ nmap <S-u> :GundoToggle<CR>
 
 nmap <Leader><Leader> :call ExecuteKeys( 'Up Enter' )<CR>
 
+" I keep pressing this accidentally way to often...
+nmap q: <Nop>
+
+nmap <Leader>fc :ArgFormatConcise<CR>
+nmap <Leader>fm :ArgFormatMultiline<CR>
+nmap <Leader>fp :ArgFormatOnPar<CR>
+
 " duplicate the above block with <leader>db
 nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 
@@ -361,6 +368,8 @@ let g:ctrlsf_mapping = {
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
+
+let g:argformat_spaces_around_arglist = 1
 
 " rules for jumping over closing stuff when there's whitespace present
 call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
