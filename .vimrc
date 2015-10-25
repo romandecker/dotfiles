@@ -248,12 +248,7 @@ nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
 
-" comment/uncomment lines
-nmap <Leader>fcc gcc
-vmap <Leader>fc gc
-
 imap <C-l> <Del>
-
 
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
