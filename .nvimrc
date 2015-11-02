@@ -2,7 +2,7 @@
 
 " Plugins {{{
 " ===========
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 
 " Libraries
 Plug 'vim-scripts/genutils'
@@ -45,7 +45,7 @@ Plug 'tpope/vim-surround'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 Plug 'dhruvasagar/vim-table-mode'
 
 " Visual
@@ -67,11 +67,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession' " required for vim-prosession
 Plug 'dhruvasagar/vim-prosession'
 Plug 'vim-utils/vim-husk'
+Plug 'Shougo/deoplete.nvim'
 
 " Misc
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
@@ -248,7 +248,12 @@ nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
 
+" comment/uncomment lines
+nmap <Leader>fcc gcc
+vmap <Leader>fc gc
+
 imap <C-l> <Del>
+
 
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
@@ -273,12 +278,7 @@ call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
 
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:deoplete#enable_at_startup = 1
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -339,8 +339,16 @@ let g:jsdoc_input_return_description = 0
 
 let g:argformat_spaces_around_arglist = 1
 
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<C-BS>'
+" rules for jumping over closing stuff when there's whitespace present
+call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
+call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
+call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
+
+" rule for wrapping a line in a block (sadly not dot-repeatable)
+call lexima#add_rule( { 'char': '<CR>',
+                    \   'at': '{\%#}\S\+',
+                    \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
+
 " }}}
 
 " autocmd {{{
@@ -415,13 +423,13 @@ endif
 " }}}
 
 " source {{{
-" If ~/.vimrc.local exists, source it to support host-local configs
-if filereadable( $HOME.'/.vimrc.local' )
+" If ~/.nvimrc.local exists, source it to support host-local configs
+if filereadable( $HOME.'/.nvimrc.local' )
     source ~/.vimrc.local
 endif
 
-" If .vimrc.local exists in current directory, to support project-local configs
-if filereadable( ".vimrc.local" )
+" If .nvimrc.local exists in current directory, to support project-local configs
+if filereadable( ".nvimrc.local" )
     source .vimrc.local
 endif
 " }}}

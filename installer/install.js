@@ -31,7 +31,6 @@ var REQUIRED_DIRECTORIES = [
     ".vim/backup",
     ".vim/tmp",
     ".vim/autoload",
-    ".vim/UltiSnips",
     ".dotfiles"
 ];
 
@@ -39,6 +38,7 @@ var REQUIRED_DIRECTORIES = [
 var FILES = [
     { "dotgitignore": ".gitignore" },
     ".vimrc",
+    ".nvimrc",
     ".zshrc",
     ".vrapperrc",
     ".vim/ftplugin",
@@ -56,9 +56,9 @@ var FILES = [
     ".oh-my-zsh/custom/tmuxifier.zsh"
 ];
 
-// files that will be linked after plugin installation
+// files/directories that will be linked after plugin installation
 var VIM_PLUGIN_FILES = [
-    ".vim/UltiSnips/tex.snippets"
+    ".vim/UltiSnips"
 ];
 
 var home;
