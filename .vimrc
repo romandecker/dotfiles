@@ -75,6 +75,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
+Plug 'xolox/vim-notes'
 
 call plug#end()
 " }}}
@@ -249,6 +250,13 @@ noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
 
 imap <C-l> <Del>
+
+" Easier to type umlauts, make sure to set M-u and M-s accordingly in
+" .vimrc.local
+" e.g. set <M-u>=u
+" generate the u by pressing <C-v> and then <M-u>! 
+imap <M-u> <C-k>:
+imap <M-s> <C-k>ss
 
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
