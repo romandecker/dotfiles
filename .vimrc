@@ -349,6 +349,7 @@ let g:argformat_spaces_around_arglist = 1
 
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-BS>'
+
 " }}}
 
 " autocmd {{{
@@ -359,6 +360,9 @@ autocmd BufNewFile,BufRead *.less set filetype=less
 
 autocmd BufNewFile,BufRead *.tex setlocal spell
 autocmd BufNewFile,BufRead *.md setlocal spell
+
+autocmd FileType notes setlocal textwidth=120
+autocmd FileType notes setlocal colorcolumn=0
 
 " Automatically set nopaste when exiting insert mode
 autocmd InsertLeave * set nopaste
