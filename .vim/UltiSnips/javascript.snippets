@@ -1,1 +1,11 @@
 extends c-style-basics
+
+snippet jshglobal "JSHint global definition rule"
+/* global ${1:${VISUAL}}: true */
+endsnippet
+
+snippet ptry "Promise.try( ... )"
+Promise.try( function() \{
+  ${1:${VISUAL}}
+\} );
+endsnippet

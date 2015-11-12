@@ -254,7 +254,7 @@ imap <C-l> <Del>
 " Easier to type umlauts, make sure to set M-u and M-s accordingly in
 " .vimrc.local
 " e.g. set <M-u>=u
-" generate the u by pressing <C-v> and then <M-u>! 
+" generate the u by pressing <C-v> and then <M-u>!
 imap <M-u> <C-k>:
 imap <M-s> <C-k>ss
 
@@ -348,8 +348,7 @@ let g:jsdoc_input_return_description = 0
 let g:argformat_spaces_around_arglist = 1
 
 let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<C-BS>'
-
+let g:AutoPairsShortcutBackInsert = '<C-b>'
 " }}}
 
 " autocmd {{{

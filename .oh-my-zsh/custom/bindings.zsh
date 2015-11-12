@@ -6,8 +6,9 @@ bindkey '^E' end-of-line
 bindkey '^[b' backward-word # mac
 bindkey '^[f' forward-word  # mac
 
+bindkey -a v begin-selection
+
 if [ `uname` = "Darwin" ]; then
 	bindkey    "^[[3~"          delete-char
 	bindkey    "^[3;5~"         delete-char
 fi
-
