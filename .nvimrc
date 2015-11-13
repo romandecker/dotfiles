@@ -42,7 +42,7 @@ Plug 'dyng/ctrlsf.vim'
 " editing/formatting
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
-Plug 'svermeulen/vim-easyclip'
+" Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
 Plug 'cohama/lexima.vim'
@@ -70,7 +70,7 @@ Plug 'vim-utils/vim-husk'
 Plug 'Shougo/deoplete.nvim'
 
 " Misc
-Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
@@ -195,7 +195,16 @@ nmap w ,w
 nmap b ,b
 nmap e ,e
 
-" m is used by easyclip use gm to create marks instead
+" Redirect all delete-operations to black-hole
+" Use 'm' ("move") for all cut-operations
+nnoremap d "_d
+nnoremap m d
+nnoremap mm dd
+
+vnoremap d "_d
+vnoremap m d
+
+" Use gm for marks instead of normal m
 nnoremap gm m
 
 " Clear highlighting on escape in normal mode
@@ -299,15 +308,12 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 "use powerline fonts
 let g:airline_powerline_fonts = 1
 
-" html checker doesn't know html5...
-let g:syntastic_html_checkers = []
+let g:neomake_javascript_jshint_maker = {
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+    \ }
+let g:neomake_javascript_enabled_makers = ['jshint']
 
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-let g:syntastic_haskell_checkers = ['hlint']
-
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
-let g:syntastic_always_populate_loc_list = 1
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
@@ -352,6 +358,8 @@ call lexima#add_rule( { 'char': '<CR>',
 " }}}
 
 " autocmd {{{
+:autocmd BufWrite * :Neomake
+
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 autocmd BufNewFile,BufRead *.jade set filetype=jade
 
