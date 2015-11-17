@@ -53,7 +53,6 @@ Plug 'DeX3/vim-smartresize'
 Plug 'bling/vim-airline'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'chreekat/vim-paren-crosshairs'
-Plug 'terryma/vim-smooth-scroll'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
@@ -245,9 +244,6 @@ nmap <Leader>fp :ArgFormatOnPar<CR>
 
 " duplicate the above block with <leader>db
 nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
-
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
 
 imap <C-l> <Del>
 
