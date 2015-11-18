@@ -67,11 +67,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession' " required for vim-prosession
 Plug 'dhruvasagar/vim-prosession'
 Plug 'vim-utils/vim-husk'
-Plug 'Shougo/deoplete.nvim'
 
 " Misc
 Plug 'benekastah/neomake'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
@@ -287,7 +287,11 @@ call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
 
-let g:deoplete#enable_at_startup = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" make YCM compatible with UltiSnips 
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -433,11 +437,11 @@ endif
 " source {{{
 " If ~/.nvimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.nvimrc.local' )
-    source ~/.vimrc.local
+    source ~/.nvimrc.local
 endif
 
 " If .nvimrc.local exists in current directory, to support project-local configs
 if filereadable( ".nvimrc.local" )
-    source .vimrc.local
+    source .nvimrc.local
 endif
 " }}}

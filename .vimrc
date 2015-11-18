@@ -71,7 +71,7 @@ Plug 'vim-utils/vim-husk'
 " Misc
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --omnisharp-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
@@ -280,10 +280,9 @@ autocmd FileType html,css,xml EmmetInstall
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" make YCM compatible with UltiSnips (using supertab)
+" make YCM compatible with UltiSnips 
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
