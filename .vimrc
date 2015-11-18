@@ -75,6 +75,7 @@ Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 Plug 'xolox/vim-notes'
+Plug 'haya14busa/incsearch.vim'
 
 call plug#end()
 " }}}
@@ -257,6 +258,8 @@ imap <M-s> <C-k>ss
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
 
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
