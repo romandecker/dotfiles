@@ -47,6 +47,7 @@ Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
