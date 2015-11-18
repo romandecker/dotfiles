@@ -204,9 +204,6 @@ nnoremap <esc> :noh<return><esc>
 " needed so that vim still understands escape sequences
 nnoremap <esc>^[ <esc>^[
 
-" use ENTER to enter command mode directly
-nnoremap <CR> :
-
 " window-stuff with leader w
 nmap <leader>ws :split<CR>
 nmap <leader>w<S-s> :vsplit<CR>
