@@ -13,9 +13,9 @@ GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}●%{$reset_color%}"
 GIT_PROMPT_STAGED="%{$fg_bold[green]%}●%{$reset_color%}"
 
 # # Show Git branch/tag, or name-rev if on detached head
-# parse_git_branch() {
-#   (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
-# }
+parse_git_branch() {
+  (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
+}
 
 # # Show different symbols as appropriate for various Git repository states
 parse_git_state() {
