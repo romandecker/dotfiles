@@ -45,7 +45,7 @@ Plug 'tpope/vim-surround'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
 
@@ -423,12 +423,20 @@ endif
 
 " source {{{
 " If ~/.vimrc.local exists, source it to support host-local configs
+if filereadable( $HOME.'/.vimrc.abbreviations' )
+  source ~/.vimrc.abbreviations
+endif
+
+if filereadable( '.vimrc.abbreviations' )
+  source .vimrc.abbreviations
+endif
+
 if filereadable( $HOME.'/.vimrc.local' )
-    source ~/.vimrc.local
+  source ~/.vimrc.local
 endif
 
 " If .vimrc.local exists in current directory, to support project-local configs
 if filereadable( ".vimrc.local" )
-    source .vimrc.local
+  source .vimrc.local
 endif
 " }}}
