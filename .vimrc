@@ -31,6 +31,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim'
+Plug 'kchmck/vim-coffee-script'
 
 " File management
 Plug 'ctrlpvim/ctrlp.vim'
@@ -280,7 +281,7 @@ autocmd FileType html,css,xml EmmetInstall
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" make YCM compatible with UltiSnips 
+" make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
