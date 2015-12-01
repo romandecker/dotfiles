@@ -38,6 +38,7 @@ var REQUIRED_DIRECTORIES = [
 var FILES = [
     { "dotgitignore": ".gitignore" },
     ".vimrc",
+    ".vimrc.abbreviations",
     ".nvimrc",
     ".zshrc",
     ".vrapperrc",
