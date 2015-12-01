@@ -20,6 +20,7 @@ Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
 Plug 'matchit.zip' " More uses for %
+Plug 'ironhouzi/vim-stim' " Better *
 
 " Language-specific
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
@@ -47,9 +48,9 @@ Plug 'tpope/vim-surround'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
-" Plug 'jiangmiao/auto-pairs'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'zef/vim-cycle'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
@@ -69,6 +70,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession' " required for vim-prosession
 Plug 'dhruvasagar/vim-prosession'
 Plug 'vim-utils/vim-husk'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch' " Some unix commands as vim commands
 
 " Misc
 Plug 'scrooloose/syntastic'
