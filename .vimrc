@@ -11,6 +11,7 @@ Plug 'svermeulen/vim-repeat'
 Plug 'kana/vim-submode'
 Plug 'tpope/vim-dispatch'   " needed for omnisharp
 Plug 'wellle/targets.vim'   " Add additional text-objects
+Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 
 " Motions
 Plug 'camelcasemotion'
