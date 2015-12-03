@@ -51,6 +51,7 @@ Plug 'DeX3/vim-argformat'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zef/vim-cycle'
+Plug 'cohama/lexima.vim'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
@@ -427,7 +428,7 @@ endif
 " }}}
 
 " source {{{
-" If ~/.vimrc.local exists, source it to support host-local configs
+" Source local abbreviation files
 if filereadable( $HOME.'/.vimrc.abbreviations' )
   source ~/.vimrc.abbreviations
 endif
@@ -436,6 +437,7 @@ if filereadable( '.vimrc.abbreviations' )
   source .vimrc.abbreviations
 endif
 
+" If ~/.vimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.vimrc.local' )
   source ~/.vimrc.local
 endif
