@@ -9,3 +9,47 @@ Promise.try( function() \{
   ${1:${VISUAL}}
 \} );
 endsnippet
+
+snippet func "function( ... ) { ... }"
+function(${1}) \{
+  ${2}
+\}
+endsnippet
+
+snippet ( "()"
+( ${1} )
+endsnippet
+
+snippet thenf ".then( function( ... ) { ... } )" !w
+then( function(${1}) {
+  ${2}
+} )${3}
+endsnippet
+
+snippet then ".then( ... )" !w
+then( ${1} )${2}
+endsnippet
+
+snippet tapf ".tap( function( ... ) { ... } )" !w
+tap( function(${1}) {
+  ${2}
+} )${3}
+endsnippet
+
+snippet tap "tap( ... )" !w
+tap( ${1} )${2}
+endsnippet
+
+snippet catchf ".catch( function( ... ) { ... } )" !w
+catch( function(${1}) {
+  ${2}
+} )${3}
+endsnippet
+
+snippet catch "catch( ... )" !w
+catch( ${1} )${2}
+endsnippet
+
+snippet log "console.log( ... );"
+console.log( ${1} );
+endsnippet
