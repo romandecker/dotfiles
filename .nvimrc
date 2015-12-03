@@ -11,6 +11,7 @@ Plug 'svermeulen/vim-repeat'
 Plug 'kana/vim-submode'
 Plug 'tpope/vim-dispatch'   " needed for omnisharp
 Plug 'wellle/targets.vim'   " Add additional text-objects
+Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 
 " Motions
 Plug 'camelcasemotion'
@@ -19,6 +20,7 @@ Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
 Plug 'matchit.zip' " More uses for %
+Plug 'ironhouzi/vim-stim' " Better *
 
 " Language-specific
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
@@ -31,6 +33,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim'
+Plug 'kchmck/vim-coffee-script'
 
 " File management
 Plug 'ctrlpvim/ctrlp.vim'
@@ -42,18 +45,18 @@ Plug 'dyng/ctrlsf.vim'
 " editing/formatting
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
-" Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
-Plug 'cohama/lexima.vim'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'zef/vim-cycle'
+Plug 'cohama/lexima.vim'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
 Plug 'bling/vim-airline'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'chreekat/vim-paren-crosshairs'
-Plug 'terryma/vim-smooth-scroll'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
@@ -67,6 +70,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession' " required for vim-prosession
 Plug 'dhruvasagar/vim-prosession'
 Plug 'vim-utils/vim-husk'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch' " Some unix commands as vim commands
 
 " Misc
 Plug 'benekastah/neomake'
@@ -75,6 +80,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
+Plug 'xolox/vim-notes'
+Plug 'haya14busa/incsearch.vim'
 
 call plug#end()
 " }}}
@@ -212,9 +219,6 @@ nnoremap <esc> :noh<return><esc>
 " needed so that vim still understands escape sequences
 nnoremap <esc>^[ <esc>^[
 
-" use ENTER to enter command mode directly
-nnoremap <CR> :
-
 " window-stuff with leader w
 nmap <leader>ws :split<CR>
 nmap <leader>w<S-s> :vsplit<CR>
@@ -254,19 +258,20 @@ nmap <Leader>fp :ArgFormatOnPar<CR>
 " duplicate the above block with <leader>db
 nnoremap <Leader>db mp?)\\|]\\|}<CR><S-v>%y`pp:nohl<CR>
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
-
-" comment/uncomment lines
-nmap <Leader>fcc gcc
-vmap <Leader>fc gc
-
 imap <C-l> <Del>
 
+" Easier to type umlauts, make sure to set M-u and M-s accordingly in
+" .vimrc.local
+" e.g. set <M-u>=u
+" generate the u by pressing <C-v> and then <M-u>!
+imap <M-u> <C-k>:
+imap <M-s> <C-k>ss
 
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
 
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
@@ -289,14 +294,14 @@ autocmd FileType html,css,xml EmmetInstall
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" make YCM compatible with UltiSnips 
+" make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsJumpForwardTrigger = "<C-f>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
 
 "check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
@@ -372,6 +377,9 @@ autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd BufNewFile,BufRead *.tex setlocal spell
 autocmd BufNewFile,BufRead *.md setlocal spell
 
+autocmd FileType notes setlocal textwidth=120
+autocmd FileType notes setlocal colorcolumn=0
+
 " Automatically set nopaste when exiting insert mode
 autocmd InsertLeave * set nopaste
 
@@ -435,13 +443,22 @@ endif
 " }}}
 
 " source {{{
+" Use vim's abbreviations file directly
+if filereadable( $HOME.'/.vimrc.abbreviations' )
+  source ~/.vimrc.abbreviations
+endif
+
+if filereadable( '.vimrc.abbreviations' )
+  source .vimrc.abbreviations
+endif
+
 " If ~/.nvimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.nvimrc.local' )
-    source ~/.nvimrc.local
+  source ~/.nvimrc.local
 endif
 
 " If .nvimrc.local exists in current directory, to support project-local configs
 if filereadable( ".nvimrc.local" )
-    source .nvimrc.local
+  source .nvimrc.local
 endif
 " }}}
