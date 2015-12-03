@@ -348,9 +348,16 @@ let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
 
 let g:argformat_spaces_around_arglist = 1
+"
+" rules for jumping over closing stuff when there's whitespace present
+call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
+call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
+call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
 
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<C-b>'
+" rule for wrapping a line in a block (sadly not dot-repeatable)
+call lexima#add_rule( { 'char': '<CR>',
+                    \   'at': '{\%#}\S\+',
+                    \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
 " }}}
 
 " autocmd {{{

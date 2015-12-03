@@ -27,39 +27,39 @@ var FONTS_DIR_LINUX = ".fonts";
 
 // all relative to $HOME
 var REQUIRED_DIRECTORIES = [
-    ".vim/undo",
-    ".vim/backup",
-    ".vim/tmp",
-    ".vim/autoload",
-    ".dotfiles"
+  ".vim/undo",
+  ".vim/backup",
+  ".vim/tmp",
+  ".vim/autoload",
+  ".dotfiles"
 ];
 
 // all relative to $HOME
 var FILES = [
-    { "dotgitignore": ".gitignore" },
-    ".vimrc",
-    ".vimrc.abbreviations",
-    ".nvimrc",
-    ".zshrc",
-    ".vrapperrc",
-    ".vim/ftplugin",
-    ".tmux.conf",
-    ".tmux.conf.macosx",
-    ".tmuxifier/layouts/development.window.sh",
-    ".tmuxifier/templates/session.sh",
-    ".oh-my-zsh/custom/aliases.zsh",
-    ".oh-my-zsh/custom/bindings.zsh",
-    ".oh-my-zsh/custom/env.zsh",
-    ".oh-my-zsh/custom/functions.zsh",
-    ".oh-my-zsh/custom/history.zsh",
-    ".oh-my-zsh/custom/path.zsh",
-    ".oh-my-zsh/custom/prompt.zsh",
-    ".oh-my-zsh/custom/tmuxifier.zsh"
+  { "dotgitignore": ".gitignore" },
+  ".vimrc",
+  ".vimrc.abbreviations",
+  ".nvimrc",
+  ".zshrc",
+  ".vrapperrc",
+  ".vim/ftplugin",
+  ".tmux.conf",
+  ".tmux.conf.macosx",
+  ".tmuxifier/layouts/development.window.sh",
+  ".tmuxifier/templates/session.sh",
+  ".oh-my-zsh/custom/aliases.zsh",
+  ".oh-my-zsh/custom/bindings.zsh",
+  ".oh-my-zsh/custom/env.zsh",
+  ".oh-my-zsh/custom/functions.zsh",
+  ".oh-my-zsh/custom/history.zsh",
+  ".oh-my-zsh/custom/path.zsh",
+  ".oh-my-zsh/custom/prompt.zsh",
+  ".oh-my-zsh/custom/tmuxifier.zsh"
 ];
 
 // files/directories that will be linked after plugin installation
 var VIM_PLUGIN_FILES = [
-    ".vim/UltiSnips"
+  ".vim/UltiSnips"
 ];
 
 var home;
@@ -86,10 +86,10 @@ osenv.homeAsync().then( function(h) {
   console.log( "Making sure all required directories exist..." );
 
   return BPromise.all( REQUIRED_DIRECTORIES.map( function(name) {
-      var dir = requiredDirs[name];
-      return fs.mkdirsAsync( dir ).then( function() {
-          console.log( " *", name.magenta, CHECK );
-      } );
+    var dir = requiredDirs[name];
+    return fs.mkdirsAsync( dir ).then( function() {
+      console.log( " *", name.magenta, CHECK );
+    } );
   } ) );
 } ).then( function() {
 

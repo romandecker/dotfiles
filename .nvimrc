@@ -60,8 +60,6 @@ Plug 'chreekat/vim-paren-crosshairs'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
-Plug 'romainl/Apprentice'
-Plug 'vim-scripts/ScrollColors'
 
 " Integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -81,7 +79,6 @@ Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 Plug 'xolox/vim-notes'
-Plug 'haya14busa/incsearch.vim'
 
 call plug#end()
 " }}}
@@ -270,9 +267,6 @@ imap <M-s> <C-k>ss
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
 call submode#leave_with('vresize', 'n', '', '<Esc>')
@@ -299,9 +293,10 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<Tab>"
 let g:UltiSnipsJumpForwardTrigger = "<C-f>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
+let g:UltiSnipsSnippetDirectories = ["~/.vim/UltiSnips"]
 
 "check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
