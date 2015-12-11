@@ -34,6 +34,7 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'shime/vim-livedown'
 
 " File management
 Plug 'ctrlpvim/ctrlp.vim'
