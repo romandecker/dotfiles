@@ -52,6 +52,7 @@ Plug 'DeX3/vim-argformat'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zef/vim-cycle'
+Plug 'cohama/lexima.vim'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
@@ -348,9 +349,16 @@ let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
 
 let g:argformat_spaces_around_arglist = 1
+"
+" rules for jumping over closing stuff when there's whitespace present
+call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
+call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
+call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
 
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<C-b>'
+" rule for wrapping a line in a block (sadly not dot-repeatable)
+call lexima#add_rule( { 'char': '<CR>',
+                    \   'at': '{\%#}\S\+',
+                    \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
 " }}}
 
 " autocmd {{{
@@ -428,7 +436,7 @@ endif
 " }}}
 
 " source {{{
-" If ~/.vimrc.local exists, source it to support host-local configs
+" Source local abbreviation files
 if filereadable( $HOME.'/.vimrc.abbreviations' )
   source ~/.vimrc.abbreviations
 endif
@@ -437,6 +445,7 @@ if filereadable( '.vimrc.abbreviations' )
   source .vimrc.abbreviations
 endif
 
+" If ~/.vimrc.local exists, source it to support host-local configs
 if filereadable( $HOME.'/.vimrc.local' )
   source ~/.vimrc.local
 endif
