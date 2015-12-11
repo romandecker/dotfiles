@@ -312,11 +312,8 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 "use powerline fonts
 let g:airline_powerline_fonts = 1
 
-let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-    \ }
-let g:neomake_javascript_enabled_makers = ['jshint']
+let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
+
 
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
