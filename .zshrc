@@ -75,7 +75,3 @@ if [ -f ~/.zshrc.local ]; then
     # if a local config file exists, source it
     source ~/.zshrc.local
 fi
-
-
-export NVM_DIR="/Users/romand/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
