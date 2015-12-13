@@ -181,7 +181,7 @@ map n nzz
 nnoremap <leader>n  :enew<CR>
 nnoremap <leader>j  :bp<CR>
 nnoremap <leader>k  :bn<CR>
-nnoremap <leader>q  :Bdelete<CR>    " use command from moll/vim-bbye
+nnoremap <leader>q  :Bdelete<CR>
 nnoremap <leader><S-q>  :bufdo bd<CR>
 
 nnoremap tn :tabnew<CR>
@@ -189,10 +189,10 @@ nnoremap tj :tabp<CR>
 nnoremap tk :tabn<CR>
 
 " Movement in wrapped lines
-nmap j gj
-nmap k gk
-nmap 0 g0
-nmap $ g$
+nnoremap j gj
+nnoremap k gk
+nnoremap 0 g0
+nnoremap $ g$
 
 " save with leader s
 nmap <leader>s :w<CR>

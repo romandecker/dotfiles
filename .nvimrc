@@ -173,21 +173,24 @@ map n nzz
 
 
 " buffer related stuff
-nnoremap <leader>n  :enew<CR>
-nnoremap <leader>j  :bp<CR>
-nnoremap <leader>k  :bn<CR>
-nnoremap <leader>q  :Bdelete<CR>    " use command from moll/vim-bbye
+nnoremap <leader>n  :tabnew<CR>
+nnoremap <leader>j  :tabprevious<CR>
+nnoremap <leader>k  :tabnext<CR>
+nnoremap <leader>q  :bdelete<CR>    " use command from moll/vim-bbye
 nnoremap <leader><S-q>  :bufdo bd<CR>
 
 nnoremap tn :tabnew<CR>
 nnoremap tj :tabp<CR>
 nnoremap tk :tabn<CR>
+nnoremap gn :enew<CR>
+nnoremap gj :bprevious<CR>
+nnoremap gk :bnext<CR>
 
 " Movement in wrapped lines
-nmap j gj
-nmap k gk
-nmap 0 g0
-nmap $ g$
+nnoremap j gj
+nnoremap k gk
+nnoremap 0 g0
+nnoremap $ g$
 
 " save with leader s
 nmap <leader>s :w<CR>
@@ -355,6 +358,15 @@ call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
 call lexima#add_rule( { 'char': '<CR>',
                     \   'at': '{\%#}\S\+',
                     \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
+
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtHistory(-1)':       [],
+  \ 'PrtHistory(1)':        [],
+  \ 'AcceptSelection("e")': ['<C-b>', '<2-LeftMouse>'],
+  \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+  \ 'AcceptSelection("t")': ['<CR>'],
+  \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+  \ }
 
 " }}}
 
