@@ -98,7 +98,6 @@ colorscheme apprentice
 
 syntax on
 
-set encoding=utf8
 set number
 set shiftwidth=2
 set tabstop=2
@@ -164,7 +163,13 @@ let mapleader = " "
 let maplocalleader = "\\"
 
 set pastetoggle=<F2>
-"
+
+nmap <leader>pp :source $MYVIMRC<CR>
+nmap <leader>pi :PlugInstall<CR>
+nmap <leader>pu :PlugUpdate<CR>
+nmap <leader>pc :PlugClean<CR>
+
+
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 map N Nzz
@@ -299,7 +304,6 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:UltiSnipsExpandTrigger = "<Tab>"
 let g:UltiSnipsJumpForwardTrigger = "<C-f>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
-let g:UltiSnipsSnippetDirectories = ["~/.vim/UltiSnips"]
 
 "check for correct indentation only
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
