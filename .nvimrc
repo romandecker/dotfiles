@@ -57,6 +57,8 @@ Plug 'DeX3/vim-smartresize'
 Plug 'bling/vim-airline'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'chreekat/vim-paren-crosshairs'
+Plug 'Valloric/MatchTagAlways'
+Plug 'Yggdroot/indentLine'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
