@@ -24,6 +24,7 @@ Plug 'ironhouzi/vim-stim' " Better *
 
 " Language-specific
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
+Plug 'shime/vim-livedown'
 Plug 'lervag/vimtex'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'mattn/emmet-vim'
@@ -51,6 +52,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zef/vim-cycle'
 Plug 'cohama/lexima.vim'
+Plug 'ntpeters/vim-better-whitespace'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
@@ -393,6 +395,8 @@ autocmd InsertLeave * set nopaste
 
 " Automatically resize splits when window is resized
 autocmd VimResized * exe "normal! \<c-w>="
+
+autocmd FileType javascript autocmd BufWritePre <buffer> StripWhitespace
 
 " Set ctrlp method depending on whether ag is available or not
 if executable('ag')

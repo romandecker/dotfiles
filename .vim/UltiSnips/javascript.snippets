@@ -53,3 +53,25 @@ endsnippet
 snippet log "console.log( '...' );"
 console.log( '${1}' );
 endsnippet
+
+snippet describe "describe( '...', function() { ... } )"
+describe( '${1}', function() {
+  ${2}
+} );
+endsnippet
+
+snippet it "it( 'should ...', ... )"
+it( 'should ${1}', function() {
+  ${2}
+} );
+endsnippet
+
+snippet pend "it( 'should ...' );"
+it( 'should ${1}' );
+endsnippet
+
+snippet beforeEach "beforeEach( function() { ... } )"
+beforeEach( function() {
+  ${1}
+} );
+endsnippet
