@@ -182,18 +182,15 @@ map n nzz
 
 
 " buffer related stuff
-nnoremap <leader>n  :tabnew<CR>
-nnoremap <leader>j  :tabprevious<CR>
-nnoremap <leader>k  :tabnext<CR>
-nnoremap <leader>q  :bdelete<CR>    " use command from moll/vim-bbye
+nnoremap <leader>n  :enew<CR>
+nnoremap <leader>j  :bp<CR>
+nnoremap <leader>k  :bn<CR>
+nnoremap <leader>q  :Bdelete<CR>    " use command from moll/vim-bbye
 nnoremap <leader><S-q>  :bufdo bd<CR>
 
 nnoremap tn :tabnew<CR>
 nnoremap tj :tabp<CR>
 nnoremap tk :tabn<CR>
-nnoremap gn :enew<CR>
-nnoremap gj :bprevious<CR>
-nnoremap gk :bnext<CR>
 
 " Movement in wrapped lines
 nnoremap j gj
@@ -358,19 +355,10 @@ call lexima#add_rule( { 'char': '<CR>',
                     \   'at': '{\%#}\S\+',
                     \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
 
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtHistory(-1)':       [],
-  \ 'PrtHistory(1)':        [],
-  \ 'AcceptSelection("e")': ['<C-b>', '<2-LeftMouse>'],
-  \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-  \ 'AcceptSelection("t")': ['<CR>'],
-  \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
-  \ }
-
 " }}}
 
 " autocmd {{{
-:autocmd BufWrite * :Neomake
+autocmd BufWrite * :Neomake
 
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 autocmd BufNewFile,BufRead *.jade set filetype=jade
@@ -390,6 +378,33 @@ autocmd InsertLeave * set nopaste
 autocmd VimResized * exe "normal! \<c-w>="
 
 autocmd FileType javascript autocmd BufWritePre <buffer> StripWhitespace
+
+" autocmd TabNew * :call Close_no_name_tab()
+
+function! Close_no_name_tab()
+  let l:tabstr = ''
+  redir => l:tabstr
+  silent tabs
+  redir END
+
+  let l:tabs = split( tabstr, '\n' )
+  let l:i = len(l:tabs)
+  while l:i >= 0
+    let l:n = l:tabs[l:i]
+    let l:name = l:tabs[l:i + 1]
+
+    echo l:name
+
+    if match( l:name, '\[No Name\]' ) != -1
+      echo 'need to close ' . l:n
+      execute "normal! " . l:i . "tabclose"<CR>
+    endif
+
+    let l:i -= 2
+  endwhile
+
+
+endfunction
 
 " Set ctrlp method depending on whether ag is available or not
 if executable('ag')
