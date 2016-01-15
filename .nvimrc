@@ -220,6 +220,10 @@ nnoremap mm dd
 vnoremap d "_d
 vnoremap m d
 
+" remap p in visual mode to first delete to blackhole to prevent tainting yank
+" register
+xnoremap p "_dP
+
 " Use gm for marks instead of normal m
 nnoremap gm m
 
@@ -235,16 +239,6 @@ nmap <leader>wq <C-w>q
 
 " Toggle NERDTree with leader w t
 nmap <leader>wt :NERDTreeToggle<CR>
-
-" vim-sneak's mappings get overwritten by vim-easyclip, so re-instate them
-nmap s <Plug>Sneak_s
-nmap S <Plug>Sneak_S
-
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
 
 nmap g/ <Plug>CtrlSFPrompt
 
@@ -335,9 +329,6 @@ let g:vim_json_syntax_conceal=0
 
 let g:EditorConfig_verbose = 1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-" share easyclip yanks between sessions
-let g:EasyClipShareYanks = 1
 
 let g:vimtex_fold_enabled = 0
 let g:tex_flavor = 'latex'
