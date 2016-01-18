@@ -379,33 +379,6 @@ autocmd VimResized * exe "normal! \<c-w>="
 
 autocmd FileType javascript autocmd BufWritePre <buffer> StripWhitespace
 
-" autocmd TabNew * :call Close_no_name_tab()
-
-function! Close_no_name_tab()
-  let l:tabstr = ''
-  redir => l:tabstr
-  silent tabs
-  redir END
-
-  let l:tabs = split( tabstr, '\n' )
-  let l:i = len(l:tabs)
-  while l:i >= 0
-    let l:n = l:tabs[l:i]
-    let l:name = l:tabs[l:i + 1]
-
-    echo l:name
-
-    if match( l:name, '\[No Name\]' ) != -1
-      echo 'need to close ' . l:n
-      execute "normal! " . l:i . "tabclose"<CR>
-    endif
-
-    let l:i -= 2
-  endwhile
-
-
-endfunction
-
 " Set ctrlp method depending on whether ag is available or not
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
