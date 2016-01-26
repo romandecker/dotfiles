@@ -63,7 +63,6 @@ Plug 'ntpeters/vim-airline-colornum'
 Plug 'chreekat/vim-paren-crosshairs'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Yggdroot/indentLine'
-Plug 'haya14busa/vim-operator-flashy'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
@@ -272,9 +271,6 @@ imap <M-s> <C-k>ss
 
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
-
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')

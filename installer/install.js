@@ -46,6 +46,7 @@ var FILES = [
   ".tmux.conf",
   ".tmux.conf.macosx",
   ".tmuxifier/layouts/development.window.sh",
+  ".tmuxifier/layouts/development-vertical.window.sh",
   ".tmuxifier/templates/session.sh",
   ".oh-my-zsh/custom/aliases.zsh",
   ".oh-my-zsh/custom/bindings.zsh",
