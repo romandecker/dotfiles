@@ -192,7 +192,6 @@ osenv.homeAsync().then( function(h) {
     fontsDir = FONTS_DIR_DARWIN;
   } else {
     // linux
-    
     fontsDir = FONTS_DIR_LINUX;
   }
 
@@ -381,7 +380,7 @@ function buildInstalledFiles( sourceArray, home ) {
  *  for each name. Additionally, an overview will be printed.
  */
 function buildFilesToInstall( names ) {
-  
+
   var repoFiles = buildRepoFiles( names );
   var installedFiles = buildInstalledFiles( names, home );
 
