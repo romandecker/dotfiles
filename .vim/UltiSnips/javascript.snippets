@@ -26,10 +26,8 @@ then( function(${1}) {
 } )${3}
 endsnippet
 
-snippet thena ".then( ( ... ) => { ... } )" !w
-then( (${1}) => {
-  ${2}
-} )${3}
+snippet thena ".then( ( ... ) => ... )" !w
+then( (${1}) => ${2} )${3}
 endsnippet
 
 snippet then ".then( ... )" !w
@@ -56,8 +54,12 @@ snippet catch "catch( ... )" !w
 catch( ${1} )${2}
 endsnippet
 
-snippet log "console.log( '...' );"
+snippet logs "console.log( ... );"
 console.log( '${1}' );
+endsnippet
+
+snippet log "console.log( '...' );"
+console.log( ${1} );
 endsnippet
 
 snippet info "atlas.log.info( '...' );"

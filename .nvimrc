@@ -22,6 +22,7 @@ Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
 Plug 'matchit.zip' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
+Plug 'easymotion/vim-easymotion'
 
 " Language-specific
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
@@ -346,6 +347,11 @@ let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
 
 let g:argformat_spaces_around_arglist = 1
+
+nmap <leader>fj <Plug>(easymotion-bd-jk)
+nmap <leader>fk <Plug>(easymotion-bd-jk)
+nmap <leader>fw <Plug>(easymotion-bd-w)
+nmap <leader>ff <Plug>(easymotion-bd-f)
 
 " rules for jumping over closing stuff when there's whitespace present
 call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
