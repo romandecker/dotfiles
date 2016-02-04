@@ -63,7 +63,6 @@ Plug 'bling/vim-airline'
 Plug 'ntpeters/vim-airline-colornum'
 Plug 'chreekat/vim-paren-crosshairs'
 Plug 'Valloric/MatchTagAlways'
-Plug 'Yggdroot/indentLine'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
@@ -160,6 +159,12 @@ set clipboard=unnamed,unnamedplus
 
 " Allow backspace to delete previously entered characters
 set backspace=indent,eol,start
+
+" Fold by syntax
+set foldmethod=syntax
+
+" But unfold everthing when opening a new file, so nothing is folded
+set foldlevel=99
 
 " }}}
 
@@ -347,6 +352,8 @@ let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
 
 let g:argformat_spaces_around_arglist = 1
+
+let g:EasyMotion_do_mapping = 0
 
 nmap <leader>fj <Plug>(easymotion-bd-jk)
 nmap <leader>fk <Plug>(easymotion-bd-jk)
