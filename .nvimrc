@@ -360,6 +360,9 @@ nmap <leader>fk <Plug>(easymotion-bd-jk)
 nmap <leader>fw <Plug>(easymotion-bd-w)
 nmap <leader>ff <Plug>(easymotion-bd-f)
 
+" Delete a block
+nmap dab $d%dd
+
 " rules for jumping over closing stuff when there's whitespace present
 call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
 call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
