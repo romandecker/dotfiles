@@ -5,42 +5,41 @@
 call plug#begin('~/.nvim/plugged')
 
 " Libraries
-Plug 'vim-scripts/genutils'
+" Plug 'vim-scripts/genutils'
 Plug 'xolox/vim-misc'
 Plug 'svermeulen/vim-repeat'
 Plug 'kana/vim-submode'
-Plug 'tpope/vim-dispatch'   " needed for omnisharp
 Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 Plug 'kana/vim-operator-user'
 
 " Motions
 Plug 'camelcasemotion'
-Plug 'justinmk/vim-sneak'
 Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
 Plug 'matchit.zip' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
 Plug 'easymotion/vim-easymotion'
+Plug 'jeetsukumaran/vim-indentwise'
 
 " Language-specific
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
-Plug 'shime/vim-livedown'
-Plug 'lervag/vimtex'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'mattn/emmet-vim'
+Plug 'shime/vim-livedown', { 'for': 'mkd' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'htm', 'xml'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'heavenshell/vim-jsdoc'
-Plug 'pangloss/vim-javascript'
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim'
-Plug 'kchmck/vim-coffee-script'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'IN3D/vim-raml', { 'for': 'raml' }
 
 " File management
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'danro/rename.vim'
 Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
@@ -55,7 +54,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zef/vim-cycle'
 Plug 'cohama/lexima.vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'habamax/vim-skipit'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
@@ -66,6 +64,7 @@ Plug 'Valloric/MatchTagAlways'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
+Plug 'AlessandroYorba/Sierra'
 
 " Integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -96,7 +95,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 set background=dark
-colorscheme apprentice
+colorscheme sierra
 " }}}
 
 " Basic settings {{{
@@ -161,7 +160,7 @@ set clipboard=unnamed,unnamedplus
 set backspace=indent,eol,start
 
 " Fold by syntax
-set foldmethod=syntax
+set foldmethod=indent
 
 " But unfold everthing when opening a new file, so nothing is folded
 set foldlevel=99
@@ -332,7 +331,6 @@ let g:vim_markdown_folding_disabled=1
 "don't conceal quotes in json files
 let g:vim_json_syntax_conceal=0
 
-let g:EditorConfig_verbose = 1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 let g:vimtex_fold_enabled = 0
