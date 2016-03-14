@@ -24,8 +24,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'jeetsukumaran/vim-indentwise'
 
 " Language-specific
-Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
-Plug 'shime/vim-livedown', { 'for': 'mkd' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'shime/vim-livedown', { 'for': 'markdown' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'htm', 'xml'] }
