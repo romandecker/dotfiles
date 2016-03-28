@@ -237,7 +237,7 @@ osenv.homeAsync().then( function(h) {
 
   return BPromise.delay( 1000 ).then( function() {
     return exec(
-      "vim",
+      "nvim",
       ["-c", "PlugInstall", "-c", "PlugUpdate", "-c", "qall"],
       { stdio: "inherit" }
     );
