@@ -51,7 +51,6 @@ Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'zef/vim-cycle'
 Plug 'cohama/lexima.vim'
 Plug 'ntpeters/vim-better-whitespace'
 
