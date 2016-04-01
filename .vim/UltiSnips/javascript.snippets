@@ -1,5 +1,12 @@
 extends c-style-basics
 
+global !p
+def dashCase(name):
+		s1 = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
+		return re.sub('([a-z0-9])([A-Z])', r'\1-\2', s1).lower()
+endglobal
+
+
 snippet jshglobal "JSHint global definition rule"
 /* global ${1:${VISUAL}}: true */
 endsnippet
@@ -74,7 +81,7 @@ snippet info "atlas.log.info( '...' );"
 atlas.log.info( '${1}' );
 endsnippet
 
-snippet describe "describe( '...', function() { ... } )"
+snippet describe "describe( '...', function() { ... } );"
 describe( '${1}', function() {
   ${2}
 } );
@@ -96,8 +103,23 @@ beforeEach( function() {
 } );
 endsnippet
 
+snippet context "context( '...', function() { ... } )"
+context( '${1}', function() {
+  ${2}
+} );
+endsnippet
+
 snippet varreq "var ... = require( '...' );"
 var ${1} = require( '${2:$1}' );
+endsnippet
+
+snippet var "var ... = require( '...' );"
+var ${1} = require( '`!p
+if t[1] == 'Promise':
+	snip.rv = 'bluebird'
+else:
+	snip.rv = dashCase( t[1] )
+`' );
 endsnippet
 
 snippet global "/* global -... */"
