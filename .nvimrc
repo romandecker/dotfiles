@@ -51,7 +51,6 @@ Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'zef/vim-cycle'
 Plug 'cohama/lexima.vim'
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -75,6 +74,7 @@ Plug 'dhruvasagar/vim-prosession'
 Plug 'vim-utils/vim-husk'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch' " Some unix commands as vim commands
+Plug 'kopischke/vim-fetch' " open files with line numbers like file.c:22
 
 " Misc
 Plug 'benekastah/neomake'
