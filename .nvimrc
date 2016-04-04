@@ -22,6 +22,7 @@ Plug 'matchit.zip' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
 Plug 'easymotion/vim-easymotion'
 Plug 'jeetsukumaran/vim-indentwise'
+Plug 'bronson/vim-visual-star-search'
 
 " Language-specific
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
@@ -52,6 +53,7 @@ Plug 'DeX3/vim-argformat'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'cohama/lexima.vim'
+Plug 'mjbrownie/swapit'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Visual
@@ -175,10 +177,10 @@ let maplocalleader = "\\"
 
 set pastetoggle=<F2>
 
-nmap <leader>pp :source $MYVIMRC<CR>
-nmap <leader>pi :PlugInstall<CR>
-nmap <leader>pu :PlugUpdate<CR>
-nmap <leader>pc :PlugClean<CR>
+nmap <leader>vpp :source $MYVIMRC<CR>
+nmap <leader>vpi :PlugInstall<CR>
+nmap <leader>vpu :PlugUpdate<CR>
+nmap <leader>vpc :PlugClean<CR>
 
 
 " Search mappings: These will make it so that going to the next one in a
@@ -276,6 +278,9 @@ imap <M-s> <C-k>ss
 
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
+
+" Leader-p instead of =p for indented paste
+nmap <Leader>p =p
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
