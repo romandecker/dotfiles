@@ -282,6 +282,16 @@ vmap <Leader>db y`>p
 " Leader-p instead of =p for indented paste
 nmap <Leader>p =p
 
+nnoremap <Tab> %
+
+" navigate jumplist
+nnoremap [j <C-o>
+nnoremap ]j <C-i>
+
+" navigate changelist
+nnoremap [c g;
+nnoremap ]c g,
+
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
 call submode#leave_with('vresize', 'n', '', '<Esc>')
