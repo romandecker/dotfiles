@@ -381,6 +381,8 @@ call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
 call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
 call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
 
+" call lexima#add_rule( { 'char': ';', 'at': '\%#\.*)$', 'input_after': ';', 'leave': ')' } )
+
 " rule for wrapping a line in a block (sadly not dot-repeatable)
 call lexima#add_rule( { 'char': '<CR>',
                     \   'at': '{\%#}\S\+',
@@ -394,13 +396,10 @@ autocmd BufWrite * :Neomake
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 autocmd BufNewFile,BufRead *.jade set filetype=jade
 
-autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd FileType less set filetype=less
 
-autocmd BufNewFile,BufRead *.tex setlocal spell
-autocmd BufNewFile,BufRead *.md setlocal spell
-
-autocmd FileType notes setlocal textwidth=120
-autocmd FileType notes setlocal colorcolumn=0
+autocmd FileType markdown,tex,gitcommit setlocal spell
+autocmd FileType notes setlocal textwidth=120 colorcolumn=0
 
 " Automatically set nopaste when exiting insert mode
 autocmd InsertLeave * set nopaste
