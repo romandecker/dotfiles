@@ -31,8 +31,8 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'htm', 'xml'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
