@@ -54,10 +54,10 @@ Plug 'chreekat/vim-paren-crosshairs'
 " Integration
 Plug 'tpope/vim-obsession' " required for vim-prosession
 Plug 'dhruvasagar/vim-prosession'
-Plug 'vim-utils/vim-husk'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch' " Some unix commands as vim commands
 Plug 'kopischke/vim-fetch' " open files with line numbers like file.c:22
+Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 
 call plug#end()
 " }}}
