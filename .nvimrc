@@ -144,6 +144,7 @@ set noeb vb t_vb=
 "better tab-completion
 set wildmode=longest,list,full
 set wildmenu
+
 set hidden
 
 set scrolloff=5
