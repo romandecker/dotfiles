@@ -8,7 +8,6 @@ call plug#begin('~/.nvim/plugged')
 " Libraries
 " Plug 'vim-scripts/genutils'
 Plug 'svermeulen/vim-repeat'
-Plug 'kana/vim-submode'
 Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 Plug 'kana/vim-operator-user'
@@ -25,17 +24,12 @@ Plug 'jeetsukumaran/vim-indentwise'
 Plug 'bronson/vim-visual-star-search'
 
 " Language-specific
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
-Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 
 " File management
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'danro/rename.vim'
-Plug 'dyng/ctrlsf.vim'
 
 " editing/formatting
 Plug 'terryma/vim-multiple-cursors'
@@ -47,7 +41,6 @@ Plug 'mjbrownie/swapit'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Visual
-Plug 'DeX3/vim-smartresize'
 Plug 'bling/vim-airline'
 Plug 'chreekat/vim-paren-crosshairs'
 
@@ -212,18 +205,6 @@ nnoremap ]j <C-i>
 " navigate changelist
 nnoremap [c g;
 nnoremap ]c g,
-
-call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
-call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
-call submode#leave_with('vresize', 'n', '', '<Esc>')
-call submode#map('vresize', 'n', '', 'j', ':SmartResizeJ<CR>' )
-call submode#map('vresize', 'n', '', 'k', ':SmartResizeK<CR>')
-
-call submode#enter_with('resize', 'n', '', '<leader>wh', ':SmartResizeH<CR>')
-call submode#enter_with('resize', 'n', '', '<leader>wl', ':SmartResizeL<CR>')
-call submode#leave_with('resize', 'n', '', '<Esc>')
-call submode#map('resize', 'n', '', 'h', ':SmartResizeH<CR>' )
-call submode#map('resize', 'n', '', 'l', ':SmartResizeL<CR>')
 " }}}
 
 " Plugin-specific {{{
