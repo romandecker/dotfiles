@@ -49,9 +49,7 @@ Plug 'ntpeters/vim-better-whitespace'
 " Visual
 Plug 'DeX3/vim-smartresize'
 Plug 'bling/vim-airline'
-Plug 'ntpeters/vim-airline-colornum'
 Plug 'chreekat/vim-paren-crosshairs'
-Plug 'Valloric/MatchTagAlways'
 
 " Integration
 Plug 'tpope/vim-obsession' " required for vim-prosession
