@@ -11,3 +11,5 @@ curl -fLo ~/.vimrc \
   https://raw.githubusercontent.com/DeX3/dotfiles/master/server.vimrc
 
 vim -c PlugInstall -c qall
+
+reset
