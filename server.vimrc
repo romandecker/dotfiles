@@ -83,6 +83,8 @@ set modeline
 "keep backup files in central directory (dirs have to exist)
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
+" Avoid swapfiles alltogether
+set noswapfile
 
 "enable persistent undo (directory has to exist)
 set undofile
@@ -113,6 +115,7 @@ set clipboard=unnamed,unnamedplus
 
 " Allow backspace to delete previously entered characters
 set backspace=indent,eol,start
+
 " }}}
 
 " Mappings {{{

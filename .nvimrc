@@ -131,6 +131,8 @@ set modeline
 set backup
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
+" Avoid swapfiles alltogether
+set noswapfile
 
 "enable persistent undo (directory has to exist)
 set undofile
