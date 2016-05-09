@@ -9,15 +9,18 @@ call plug#begin('~/.nvim/plugged')
 Plug 'xolox/vim-misc'
 Plug 'svermeulen/vim-repeat'
 Plug 'kana/vim-submode'
-Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 Plug 'kana/vim-operator-user'
 
 " Motions
 Plug 'camelcasemotion'
-Plug 'glts/vim-textobj-comment' " A comment text-object
+Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
-Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
+Plug 'kana/vim-textobj-function' " function text-objects for C, java, vim (f)
+Plug 'thinca/vim-textobj-function-javascript' " JS function text-object (f)
+Plug 'glts/vim-textobj-comment' " A comment text-object
+Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (x)
+Plug 'coderifous/textobj-word-column.vim' " word-based column text object (c)
 Plug 'matchit.zip' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
 Plug 'easymotion/vim-easymotion'
@@ -44,6 +47,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
+Plug 'tpope/vim-vinegar'
 
 " editing/formatting
 Plug 'terryma/vim-multiple-cursors'
@@ -52,7 +56,7 @@ Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'cohama/lexima.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'mjbrownie/swapit'
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -380,16 +384,16 @@ nmap <leader>ff <Plug>(easymotion-bd-f)
 nmap dab $d%dd
 
 " rules for jumping over closing stuff when there's whitespace present
-call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
-call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
-call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
+" call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
+" call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
+" call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
 
-" call lexima#add_rule( { 'char': ';', 'at': '\%#\.*)$', 'input_after': ';', 'leave': ')' } )
+" " call lexima#add_rule( { 'char': ';', 'at': '\%#\.*)$', 'input_after': ';', 'leave': ')' } )
 
-" rule for wrapping a line in a block (sadly not dot-repeatable)
-call lexima#add_rule( { 'char': '<CR>',
-                    \   'at': '{\%#}\S\+',
-                    \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
+" " rule for wrapping a line in a block (sadly not dot-repeatable)
+" call lexima#add_rule( { 'char': '<CR>',
+"                     \   'at': '{\%#}\S\+',
+"                     \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
 
 " }}}
 
