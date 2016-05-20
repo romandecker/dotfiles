@@ -34,8 +34,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'htm', 'xml'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -64,7 +63,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'DeX3/vim-smartresize'
 Plug 'bling/vim-airline'
 Plug 'ntpeters/vim-airline-colornum'
-Plug 'chreekat/vim-paren-crosshairs'
 Plug 'Valloric/MatchTagAlways'
 
 " Colors
@@ -383,17 +381,7 @@ nmap <leader>ff <Plug>(easymotion-bd-f)
 " Delete a block
 nmap dab $d%dd
 
-" rules for jumping over closing stuff when there's whitespace present
-" call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
-" call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
-" call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
-
-" " call lexima#add_rule( { 'char': ';', 'at': '\%#\.*)$', 'input_after': ';', 'leave': ')' } )
-
-" " rule for wrapping a line in a block (sadly not dot-repeatable)
-" call lexima#add_rule( { 'char': '<CR>',
-"                     \   'at': '{\%#}\S\+',
-"                     \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
+let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " }}}
 
