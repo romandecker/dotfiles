@@ -47,6 +47,7 @@ Plug 'danro/rename.vim'
 Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-projectionist'
 
 " editing/formatting
 Plug 'terryma/vim-multiple-cursors'
@@ -297,6 +298,9 @@ nnoremap ]j <C-i>
 nnoremap [c g;
 nnoremap ]c g,
 
+" Switch to alternate file via projectionist
+nnoremap <Leader>a :A<CR>
+
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
 call submode#leave_with('vresize', 'n', '', '<Esc>')
@@ -433,6 +437,26 @@ function! UnWrap()
 endfunction
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
+
+function! g:PulseCursorLine()
+  setlocal cursorline
+  redraw
+  sleep 75m
+
+  setlocal nocursorline
+  redraw
+  sleep 75m
+
+  setlocal cursorline
+  redraw
+  sleep 75m
+
+  setlocal nocursorline
+  redraw
+endfunction
+autocmd FocusGained * call g:PulseCursorLine()
+
+nmap gg gg:call g:PulseCursorLine()<CR>
 " }}}
 
 " GUI-specific {{{
