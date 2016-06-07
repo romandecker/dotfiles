@@ -20,7 +20,6 @@ Plug 'kana/vim-textobj-function' " function text-objects for C, java, vim (f)
 Plug 'thinca/vim-textobj-function-javascript' " JS function text-object (f)
 Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (x)
-Plug 'coderifous/textobj-word-column.vim' " word-based column text object (c)
 Plug 'matchit.zip' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
 Plug 'easymotion/vim-easymotion'
@@ -34,7 +33,8 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'htm', 'xml'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'jelera/vim-javascript-syntax'
+Plug 'DeX3/vim-js-indent'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
