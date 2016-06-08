@@ -503,4 +503,8 @@ endif
 if filereadable( ".nvimrc.local" )
   source .nvimrc.local
 endif
+
+if isdirectory( '.vim/snippets' )
+  let g:UltiSnipsSnippetDirectories = ['UltiSnips', getcwd() . '/.vim/snippets']
+endif
 " }}}
