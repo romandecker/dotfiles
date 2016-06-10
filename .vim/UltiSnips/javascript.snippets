@@ -113,12 +113,8 @@ context( '${1}', function() {
 } );
 endsnippet
 
-snippet varreq "var ... = require( '...' );"
-var ${1} = require( '${2:$1}' );
-endsnippet
-
-snippet var "var ... = require( '...' );"
-var ${1} = require( '`!p
+snippet const "const ... = require( '...' );"
+const ${1} = require( '`!p
 if t[1] == 'Promise':
 	snip.rv = 'bluebird'
 else:
