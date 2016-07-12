@@ -11,6 +11,7 @@ Plug 'svermeulen/vim-repeat'
 Plug 'kana/vim-submode'
 Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 Plug 'kana/vim-operator-user'
+Plug 'Shougo/unite.vim'         " needed by vimfiler
 
 " Motions
 Plug 'camelcasemotion'
@@ -36,17 +37,18 @@ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'jelera/vim-javascript-syntax'
 Plug 'DeX3/vim-js-indent'
 Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+" Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'IN3D/vim-raml', { 'for': 'raml' }
+Plug 'aklt/plantuml-syntax'
 
 " File management
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
-Plug 'tpope/vim-vinegar'
+Plug 'Shougo/vimfiler.vim'
 Plug 'tpope/vim-projectionist'
 
 " editing/formatting
@@ -84,7 +86,7 @@ Plug 'kopischke/vim-fetch' " open files with line numbers like file.c:22
 " Misc
 Plug 'benekastah/neomake'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
@@ -231,6 +233,11 @@ nnoremap mm dd
 
 vnoremap d "_d
 vnoremap m d
+
+nnoremap c "_c
+
+nnoremap x "_x
+nnoremap <leader>x x
 
 " remap p in visual mode to first delete to blackhole to prevent tainting yank
 " register
@@ -386,6 +393,8 @@ nmap <leader>ff <Plug>(easymotion-bd-f)
 nmap dab $d%dd
 
 let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+let g:vimfiler_as_default_explorer = 1
 
 " }}}
 

@@ -8,6 +8,7 @@ bindkey '^[f' forward-word  # mac
 
 bindkey -a v begin-selection
 bindkey -M vicmd v edit-command-line
+bindkey "^X^E" edit-command-line
 
 if [ `uname` = "Darwin" ]; then
 	bindkey    "^[[3~"          delete-char
