@@ -61,6 +61,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mjbrownie/swapit'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'tommcdo/vim-exchange'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
@@ -353,8 +354,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 
 let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
-
-
+let g:neomake_haskell_enabled_makers = ['hlint']
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
