@@ -71,7 +71,6 @@ Plug 'Valloric/MatchTagAlways'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
-Plug 'AlessandroYorba/Sierra'
 
 " Integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -102,8 +101,8 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-set background=dark
-colorscheme sierra
+set background=light
+colorscheme summerfruit256
 " }}}
 
 " Basic settings {{{
@@ -239,6 +238,11 @@ nnoremap c "_c
 
 nnoremap x "_x
 nnoremap <leader>x x
+
+" Open the file name currently under the cursor even if it does not exist (for
+" creating a new file). Must use "%:h" to properly get the file path relative
+" to the current file
+nmap <leader>gf :exe 'e ' . expand("%:h") . '/' . expand("<cfile>")<CR>
 
 " remap p in visual mode to first delete to blackhole to prevent tainting yank
 " register
