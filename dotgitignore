@@ -3,3 +3,4 @@
 .vimrc.local
 .nvimrc.local
 .projections.json
+.vscode/

@@ -37,7 +37,6 @@ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'jelera/vim-javascript-syntax'
 Plug 'DeX3/vim-js-indent'
 Plug 'elzr/vim-json', { 'for': 'json' }
-" Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'IN3D/vim-raml', { 'for': 'raml' }
@@ -71,6 +70,7 @@ Plug 'Valloric/MatchTagAlways'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
+Plug 'dracula/vim'
 
 " Integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -102,7 +102,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 set background=light
-colorscheme summerfruit256
+colorscheme solarized
 " }}}
 
 " Basic settings {{{
@@ -313,6 +313,10 @@ nnoremap ]c g,
 " Switch to alternate file via projectionist
 nnoremap <Leader>a :A<CR>
 
+" Go to the end of a block with <leader>e
+nmap <Leader>e $%
+vmap <Leader>e $%
+
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
 call submode#leave_with('vresize', 'n', '', '<Esc>')
@@ -470,6 +474,20 @@ endfunction
 autocmd FocusGained * call g:PulseCursorLine()
 
 nmap gg gg:call g:PulseCursorLine()<CR>
+
+" create non-existing directories on write
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
 " }}}
 
 " GUI-specific {{{

@@ -1,69 +1,75 @@
-" vim: set foldmethod=marker foldlevel=0:
+" vim: set foldmethod=marker
 
 " Plugins {{{
 " ===========
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 
 " Libraries
-Plug 'vim-scripts/genutils'
+" Plug 'vim-scripts/genutils'
 Plug 'xolox/vim-misc'
 Plug 'svermeulen/vim-repeat'
 Plug 'kana/vim-submode'
-Plug 'tpope/vim-dispatch'   " needed for omnisharp
-Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'michaeljsmith/vim-indent-object'   " indent text-object
+Plug 'kana/vim-operator-user'
+Plug 'Shougo/unite.vim'         " needed by vimfiler
 
 " Motions
 Plug 'camelcasemotion'
-Plug 'justinmk/vim-sneak'
-Plug 'glts/vim-textobj-comment' " A comment text-object
+Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
-Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
+Plug 'kana/vim-textobj-function' " function text-objects for C, java, vim (f)
+Plug 'thinca/vim-textobj-function-javascript' " JS function text-object (f)
+Plug 'glts/vim-textobj-comment' " A comment text-object
+Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (x)
 Plug 'matchit.zip' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
+Plug 'easymotion/vim-easymotion'
+Plug 'jeetsukumaran/vim-indentwise'
+Plug 'bronson/vim-visual-star-search'
 
 " Language-specific
-Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
-Plug 'lervag/vimtex'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'mattn/emmet-vim'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'shime/vim-livedown', { 'for': 'markdown' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'htm', 'xml'] }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'heavenshell/vim-jsdoc'
-Plug 'pangloss/vim-javascript'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'DeX3/vim-js-indent'
 Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim'
-Plug 'kchmck/vim-coffee-script'
-Plug 'shime/vim-livedown'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'IN3D/vim-raml', { 'for': 'raml' }
+Plug 'aklt/plantuml-syntax'
 
 " File management
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'danro/rename.vim'
 Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'tpope/vim-projectionist'
 
 " editing/formatting
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
-Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 Plug 'DeX3/vim-argformat'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'zef/vim-cycle'
-Plug 'cohama/lexima.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mjbrownie/swapit'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tommcdo/vim-exchange'
 
 " Visual
 Plug 'DeX3/vim-smartresize'
 Plug 'bling/vim-airline'
 Plug 'ntpeters/vim-airline-colornum'
-Plug 'chreekat/vim-paren-crosshairs'
+Plug 'Valloric/MatchTagAlways'
 
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
-Plug 'romainl/Apprentice'
-Plug 'vim-scripts/ScrollColors'
 
 " Integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -74,16 +80,16 @@ Plug 'dhruvasagar/vim-prosession'
 Plug 'vim-utils/vim-husk'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch' " Some unix commands as vim commands
+Plug 'kopischke/vim-fetch' " open files with line numbers like file.c:22
 
 " Misc
-Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 Plug 'xolox/vim-notes'
-Plug 'haya14busa/incsearch.vim'
 
 call plug#end()
 " }}}
@@ -94,8 +100,8 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-set background=dark
-colorscheme apprentice
+set background=light
+colorscheme summerfruit256
 " }}}
 
 " Basic settings {{{
@@ -103,7 +109,6 @@ colorscheme apprentice
 
 syntax on
 
-set encoding=utf8
 set number
 set shiftwidth=2
 set tabstop=2
@@ -130,6 +135,8 @@ set modeline
 set backup
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
+" Avoid swapfiles alltogether
+set noswapfile
 
 "enable persistent undo (directory has to exist)
 set undofile
@@ -143,6 +150,7 @@ set noeb vb t_vb=
 "better tab-completion
 set wildmode=longest,list,full
 set wildmenu
+
 set hidden
 
 set scrolloff=5
@@ -160,6 +168,12 @@ set clipboard=unnamed,unnamedplus
 " Allow backspace to delete previously entered characters
 set backspace=indent,eol,start
 
+" Fold by syntax
+set foldmethod=indent
+
+" But unfold everthing when opening a new file, so nothing is folded
+set foldlevel=99
+
 " }}}
 
 " Mappings {{{
@@ -169,7 +183,13 @@ let mapleader = " "
 let maplocalleader = "\\"
 
 set pastetoggle=<F2>
-"
+
+nmap <leader>vpp :source $MYVIMRC<CR>
+nmap <leader>vpi :PlugInstall<CR>
+nmap <leader>vpu :PlugUpdate<CR>
+nmap <leader>vpc :PlugClean<CR>
+
+
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 map N Nzz
@@ -181,7 +201,7 @@ map n nzz
 nnoremap <leader>n  :enew<CR>
 nnoremap <leader>j  :bp<CR>
 nnoremap <leader>k  :bn<CR>
-nnoremap <leader>q  :Bdelete<CR>
+nnoremap <leader>q  :Bdelete<CR>    " use command from moll/vim-bbye
 nnoremap <leader><S-q>  :bufdo bd<CR>
 
 nnoremap tn :tabnew<CR>
@@ -204,7 +224,30 @@ nmap w ,w
 nmap b ,b
 nmap e ,e
 
-" m is used by easyclip use gm to create marks instead
+" Redirect all delete-operations to black-hole
+" Use 'm' ("move") for all cut-operations
+nnoremap d "_d
+nnoremap m d
+nnoremap mm dd
+
+vnoremap d "_d
+vnoremap m d
+
+nnoremap c "_c
+
+nnoremap x "_x
+nnoremap <leader>x x
+
+" Open the file name currently under the cursor even if it does not exist (for
+" creating a new file). Must use "%:h" to properly get the file path relative
+" to the current file
+nmap <leader>gf :exe 'e ' . expand("%:h") . '/' . expand("<cfile>")<CR>
+
+" remap p in visual mode to first delete to blackhole to prevent tainting yank
+" register
+xnoremap p "_dP
+
+" Use gm for marks instead of normal m
 nnoremap gm m
 
 " Clear highlighting on escape in normal mode
@@ -219,16 +262,6 @@ nmap <leader>wq <C-w>q
 
 " Toggle NERDTree with leader w t
 nmap <leader>wt :NERDTreeToggle<CR>
-
-" vim-sneak's mappings get overwritten by vim-easyclip, so re-instate them
-nmap s <Plug>Sneak_s
-nmap S <Plug>Sneak_S
-
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
 
 nmap g/ <Plug>CtrlSFPrompt
 
@@ -263,8 +296,21 @@ imap <M-s> <C-k>ss
 " Use C-p to duplicate a block of code in visual mode
 vmap <Leader>db y`>p
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
+" Leader-p instead of =p for indented paste
+nmap <Leader>p =p
+
+nnoremap <Tab> %
+
+" navigate jumplist
+nnoremap [j <C-o>
+nnoremap ]j <C-i>
+
+" navigate changelist
+nnoremap [c g;
+nnoremap ]c g,
+
+" Switch to alternate file via projectionist
+nnoremap <Leader>a :A<CR>
 
 call submode#enter_with('vresize', 'n', '', '<leader>wj', ':SmartResizeJ<CR>')
 call submode#enter_with('vresize', 'n', '', '<leader>wk', ':SmartResizeK<CR>')
@@ -292,7 +338,7 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<Tab>"
 let g:UltiSnipsJumpForwardTrigger = "<C-f>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
 
@@ -310,15 +356,8 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 "use powerline fonts
 let g:airline_powerline_fonts = 1
 
-" html checker doesn't know html5...
-let g:syntastic_html_checkers = []
-
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-let g:syntastic_haskell_checkers = ['hlint']
-
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
-let g:syntastic_always_populate_loc_list = 1
+let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
+let g:neomake_haskell_enabled_makers = ['hlint']
 
 "disable folding for vim-markdown (to prevent everything being folded on open)
 let g:vim_markdown_folding_disabled=1
@@ -326,11 +365,7 @@ let g:vim_markdown_folding_disabled=1
 "don't conceal quotes in json files
 let g:vim_json_syntax_conceal=0
 
-let g:EditorConfig_verbose = 1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-" share easyclip yanks between sessions
-let g:EasyClipShareYanks = 1
 
 let g:vimtex_fold_enabled = 0
 let g:tex_flavor = 'latex'
@@ -349,35 +384,41 @@ let g:jsdoc_input_description = 0
 let g:jsdoc_input_return_description = 0
 
 let g:argformat_spaces_around_arglist = 1
-"
-" rules for jumping over closing stuff when there's whitespace present
-call lexima#add_rule( { 'char': ')', 'at': '\%#\s*)', 'leave': ')' } )
-call lexima#add_rule( { 'char': ']', 'at': '\%#\s*]', 'leave': ']' } )
-call lexima#add_rule( { 'char': '}', 'at': '\%#\s*}', 'leave': '}' } )
 
-" rule for wrapping a line in a block (sadly not dot-repeatable)
-call lexima#add_rule( { 'char': '<CR>',
-                    \   'at': '{\%#}\S\+',
-                    \   'input': '<Esc>ll"td$i<CR><Esc>O<C-r>t' } )
+let g:EasyMotion_do_mapping = 0
+
+nmap <leader>fj <Plug>(easymotion-bd-jk)
+nmap <leader>fk <Plug>(easymotion-bd-jk)
+nmap <leader>fw <Plug>(easymotion-bd-w)
+nmap <leader>ff <Plug>(easymotion-bd-f)
+
+" Delete a block
+nmap dab $d%dd
+
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+let g:vimfiler_as_default_explorer = 1
+
 " }}}
 
 " autocmd {{{
+autocmd BufWrite * :Neomake
+
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 autocmd BufNewFile,BufRead *.jade set filetype=jade
 
-autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd FileType less set filetype=less
 
-autocmd BufNewFile,BufRead *.tex setlocal spell
-autocmd BufNewFile,BufRead *.md setlocal spell
-
-autocmd FileType notes setlocal textwidth=120
-autocmd FileType notes setlocal colorcolumn=0
+autocmd FileType markdown,tex,gitcommit setlocal spell
+autocmd FileType notes setlocal textwidth=120 colorcolumn=0
 
 " Automatically set nopaste when exiting insert mode
 autocmd InsertLeave * set nopaste
 
 " Automatically resize splits when window is resized
 autocmd VimResized * exe "normal! \<c-w>="
+
+autocmd FileType javascript autocmd BufWritePre <buffer> StripWhitespace
 
 " Set ctrlp method depending on whether ag is available or not
 if executable('ag')
@@ -408,6 +449,26 @@ function! UnWrap()
 endfunction
 
 command! -nargs=+ Silent execute 'silent <args>' | redraw!
+
+function! g:PulseCursorLine()
+  setlocal cursorline
+  redraw
+  sleep 75m
+
+  setlocal nocursorline
+  redraw
+  sleep 75m
+
+  setlocal cursorline
+  redraw
+  sleep 75m
+
+  setlocal nocursorline
+  redraw
+endfunction
+autocmd FocusGained * call g:PulseCursorLine()
+
+nmap gg gg:call g:PulseCursorLine()<CR>
 " }}}
 
 " GUI-specific {{{
@@ -436,7 +497,7 @@ endif
 " }}}
 
 " source {{{
-" Source local abbreviation files
+" Use vim's abbreviations file directly
 if filereadable( $HOME.'/.vimrc.abbreviations' )
   source ~/.vimrc.abbreviations
 endif
@@ -445,13 +506,17 @@ if filereadable( '.vimrc.abbreviations' )
   source .vimrc.abbreviations
 endif
 
-" If ~/.vimrc.local exists, source it to support host-local configs
-if filereadable( $HOME.'/.vimrc.local' )
-  source ~/.vimrc.local
+" If ~/.nvimrc.local exists, source it to support host-local configs
+if filereadable( $HOME.'/.nvimrc.local' )
+  source ~/.nvimrc.local
 endif
 
-" If .vimrc.local exists in current directory, to support project-local configs
-if filereadable( ".vimrc.local" )
-  source .vimrc.local
+" If .nvimrc.local exists in current directory, to support project-local configs
+if filereadable( ".nvimrc.local" )
+  source .nvimrc.local
+endif
+
+if isdirectory( '.vim/snippets' )
+  let g:UltiSnipsSnippetDirectories = ['UltiSnips', getcwd() . '/.vim/snippets']
 endif
 " }}}
