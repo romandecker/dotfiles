@@ -18,6 +18,7 @@ Plug 'camelcasemotion'
 Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'kana/vim-textobj-function' " function text-objects for C, java, vim (f)
+Plug 'kana/vim-textobj-lastpat' " last search with /
 Plug 'thinca/vim-textobj-function-javascript' " JS function text-object (f)
 Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (x)
