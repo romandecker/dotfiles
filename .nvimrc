@@ -477,7 +477,7 @@ autocmd FocusGained * call g:PulseCursorLine()
 nmap gg gg:call g:PulseCursorLine()<CR>
 
 " create non-existing directories on write
-function s:MkNonExDir(file, buf)
+function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
