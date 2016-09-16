@@ -98,12 +98,10 @@ call plug#end()
 
 " Colors {{{
 " ==========
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
+set t_Co=256
 
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme jellybeans
 " }}}
 
 " Basic settings {{{
