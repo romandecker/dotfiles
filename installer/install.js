@@ -37,6 +37,8 @@ var REQUIRED_DIRECTORIES = [
 // all relative to $HOME
 var FILES = [
   { "dotgitignore": ".gitignore" },
+  ".spacemacs",
+  ".emacs.d/private",
   ".vimrc",
   ".vimrc.abbreviations",
   ".nvimrc",
