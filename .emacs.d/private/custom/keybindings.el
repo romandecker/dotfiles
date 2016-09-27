@@ -4,6 +4,12 @@
 (global-set-key (kbd "C-h") (kbd "SPC w h"))
 (global-set-key (kbd "C-l") (kbd "SPC w l"))
 
+(with-eval-after-load 'evil-org
+  (define-key evil-org-mode-map (kbd "<normal-state> C-j") 'evil-window-down)
+  (define-key evil-org-mode-map (kbd "<normal-state> C-k") 'evil-window-up)
+  )
+
+
 ;; multiple-cursors
 (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
 (define-key evil-visual-state-map "C-n" 'evil-mc-make-and-goto-next-match)
@@ -20,14 +26,7 @@
   (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
   )
 
-(with-eval-after-load 'evil-org
-  (define-key evil-org-mode-map (kbd "<normal-state> C-j") 'evil-window-down)
-  (define-key evil-org-mode-map (kbd "<normal-state> C-k") 'evil-window-up)
-  )
-
 (spacemacs/set-leader-keys "wq" 'delete-window)
-
-
 
 (add-hook 'term-mode-hook
           (lambda ()
