@@ -1,16 +1,28 @@
 setopt prompt_subst
 autoload -U colors && colors # Enable colors in prompt
 
+
+ANUM="ANUM"
+BNUM="BNUM"
+BLUE="%{$fg[blue]%}"
+GREEN="%{$fg[green]%}"
+RED="%{$fg[red]%}"
+CYAN="%{$fg[cyan]%}"
+YELLOW="%{$fg[yellow]%}"
+RESET="%{$reset_color%}"
+
+
+
 # Modify the colors and symbols in these variables as desired.
-GIT_PROMPT_SYMBOL="%{$fg[blue]%}±%{$reset_color%}"
-GIT_PROMPT_PREFIX="%{$fg[green]%}%{$reset_color%}"
-GIT_PROMPT_SUFFIX="%{$fg[green]%}%{$reset_color%}"
-GIT_PROMPT_AHEAD="%{$fg[red]%}ANUM%{$reset_color%}"
-GIT_PROMPT_BEHIND="%{$fg[cyan]%}BNUM%{$reset_color%}"
-GIT_PROMPT_MERGING="%{$fg_bold[red]%}⤚%{$reset_color%}"
-GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}●%{$reset_color%}"
-GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}●%{$reset_color%}"
-GIT_PROMPT_STAGED="%{$fg_bold[green]%}●%{$reset_color%}"
+GIT_PROMPT_SYMBOL="$BLUE±$RESET"
+GIT_PROMPT_PREFIX="$GREEN$RESET"
+GIT_PROMPT_SUFFIX="$GREEN$RESET"
+GIT_PROMPT_AHEAD="$RED$ANUM$RESET"
+GIT_PROMPT_BEHIND="$CYAN$BNUM$RESET"
+GIT_PROMPT_MERGING="$RED⤚$RESET"
+GIT_PROMPT_UNTRACKED="$RED●$RESET"
+GIT_PROMPT_MODIFIED="$YELLOW●$RESET"
+GIT_PROMPT_STAGED="$GREEN●$RESET"
 
 # Show Git branch/tag, or name-rev if on detached head
 parse_git_branch() {
@@ -59,7 +71,7 @@ parse_git_state() {
 # # If inside a Git repository, print its branch and state
 git_prompt_string() {
   local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
+  [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX$YELLOW${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
 }
 
 
@@ -69,8 +81,8 @@ git_prompt_string() {
 # %M -> %~ path, with home shortened to ~, use a count to only show so many
 # %# -> '#' if root '!' otherwise
 # %(x.true-text.false-text)
-ROOT_INDICATOR="%(!.%{$fg[red]%}%n%{$reset_color%}@.)"
-PROMPT_ARROW="%{$fg[yellow]%}%(!.#.λ)%{$reset_color%}"
+ROOT_INDICATOR="%(!.$RED%n$RESET@.)"
+PROMPT_ARROW="$YELLOW%(!.#.λ)$RESET"
 
 PROMPT="%b$ROOT_INDICATOR%3~$PROMPT_ARROW%b "
 
