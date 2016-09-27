@@ -84,7 +84,7 @@ git_prompt_string() {
 ROOT_INDICATOR="%(!.$RED%n$RESET@.)"
 PROMPT_ARROW="$YELLOW%(!.#.λ)$RESET"
 
-PROMPT="%b$ROOT_INDICATOR%3~$PROMPT_ARROW%b "
+PROMPT="%B$ROOT_INDICATOR%3~$PROMPT_ARROW%b "
 
 # Set the right-hand prompt
 RPS1='$(git_prompt_string)'
