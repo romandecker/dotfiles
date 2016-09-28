@@ -1,14 +1,12 @@
 ;; window movement
-(global-set-key (kbd "C-j") (kbd "SPC w j"))
-(global-set-key (kbd "C-k") (kbd "SPC w k"))
-(global-set-key (kbd "C-h") (kbd "SPC w h"))
-(global-set-key (kbd "C-l") (kbd "SPC w l"))
+(global-set-key (kbd "C-j") 'custom-zoom-sensitive-window-down)
+(global-set-key (kbd "C-k") 'custom-zoom-sensitive-window-up)
+(global-set-key (kbd "C-h") 'custom-zoom-sensitive-window-left)
+(global-set-key (kbd "C-l") 'custom-zoom-sensitive-window-right)
 
 (with-eval-after-load 'evil-org
-  (define-key evil-org-mode-map (kbd "<normal-state> C-j") 'evil-window-down)
-  (define-key evil-org-mode-map (kbd "<normal-state> C-k") 'evil-window-up)
-  )
-
+  (define-key evil-org-mode-map (kbd "<normal-state> C-j") 'custom-window-down)
+  (define-key evil-org-mode-map (kbd "<normal-state> C-k") 'evil-window-up))
 
 ;; multiple-cursors
 (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
@@ -16,8 +14,6 @@
 (define-key evil-visual-state-map "C-p" 'evil-mc-make-and-goto-prev-match)
 (define-key evil-visual-state-map "C-x" 'evil-mc-skip-and-goto-prev-match)
 
-;; stop multi-cursor mode (TODO change this as soon as I know how to specify a better keymap)
-(define-key evil-normal-state-map "S" 'evil-mc-undo-all-cursors)
 
 (with-eval-after-load 'evil
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
@@ -27,6 +23,10 @@
   )
 
 (spacemacs/set-leader-keys "wq" 'delete-window)
+(spacemacs/set-leader-keys "zz" 'zoom-window-zoom)
+
+;; stop multi-cursor mode (TODO change this as soon as I know how to specify a better keymap)
+(define-key evil-normal-state-map "S" 'evil-mc-undo-all-cursors)
 
 (add-hook 'term-mode-hook
           (lambda ()

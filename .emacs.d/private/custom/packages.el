@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst custom-packages
-  '()
+  '('zoom-window)
   "The list of Lisp packages required by the custom layer.
 
 Each entry is either:

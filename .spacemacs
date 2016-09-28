@@ -25,6 +25,8 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
+     syntax-checking
+     javascript
      ;; better-defaults
      emacs-lisp
      ;; git
@@ -35,7 +37,6 @@ values."
             shell-default-height 30
             shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
      ;; version-control
      custom
      )
@@ -46,6 +47,7 @@ values."
    dotspacemacs-additional-packages '(
                                       editorconfig
                                       evil-mc
+                                      zoom-window
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
