@@ -69,7 +69,7 @@
   (interactive)
   (custom-zoom-sensitive-window-move 'evil-window-left))
 (defun custom-zoom-sensitive-window-right ()
-  "Zoom-sensitive window-down move."
+  "Zoom-sensitive window-right move."
   (interactive)
   (custom-zoom-sensitive-window-move 'evil-window-right))
 
