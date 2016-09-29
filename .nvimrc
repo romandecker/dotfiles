@@ -214,8 +214,8 @@ nnoremap k gk
 nnoremap 0 g0
 nnoremap $ g$
 
-" save with leader s
-nmap <leader>s :w<CR>
+" save with leader f s
+nmap <leader>fs :w<CR>
 " save with C-s (when forwarding is enabled in terminal, or in gui)
 nmap <C-s> :w<CR>
 
