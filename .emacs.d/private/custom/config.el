@@ -4,7 +4,9 @@
 
 (setq
  x-select-enable-clipboard t
- js2-skip-preprocessor-directives t)
+ js2-skip-preprocessor-directives t
+ exec-path-from-shell-check-startup-files nil
+ )
 
 (setq-default
  indent-tabs-mode nil
@@ -23,6 +25,14 @@
 
 (add-hook 'js2-mode-hook
           (lambda ()
+            (js-expr-indent-offset -2)
             (setq js2-basic-offset 2)))
+
+(setq undo-tree-auto-save-history t
+      undo-tree-history-directory-alist
+      `(("." . ,(concat spacemacs-cache-directory "undo"))))
+
+(unless (file-exists-p (concat spacemacs-cache-directory "undo"))
+  (make-directory (concat spacemacs-cache-directory "undo")))
 
 ;;; config.el ends here

@@ -29,34 +29,67 @@
 
 ;;; Code:
 
-(defconst custom-packages
-  '('zoom-window)
-  "The list of Lisp packages required by the custom layer.
+(setq custom-packages
+      '(
+        company
+        zoom-window
+        ))
 
-Each entry is either:
+(defun custom/init-company ()
+  (use-package company
+    :defer t
+    :init
+    (progn
+      (setq company-idle-delay 0
+            company-minimum-prefix-length 1
+            company-require-match nil
+            company-dabbrev-ignore-case nil
+            company-dabbrev-downcase nil)
 
-1. A symbol, which is interpreted as a package to be installed, or
+      (defvar-local company-fci-mode-on-p nil)
 
-2. A list of the form (PACKAGE KEYS...), where PACKAGE is the
-    name of the package to be installed or loaded, and KEYS are
-    any number of keyword-value-pairs.
+      (defun company-turn-off-fci (&rest ignore)
+        (when (boundp 'fci-mode)
+          (setq company-fci-mode-on-p fci-mode)
+          (when fci-mode (fci-mode -1))))
 
-    The following keys are accepted:
+      (defun company-maybe-turn-on-fci (&rest ignore)
+        (when company-fci-mode-on-p (fci-mode 1)))
 
-    - :excluded (t or nil): Prevent the package from being loaded
-      if value is non-nil
+      (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+      (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+      (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))
+    :config
+    (progn
+      (spacemacs|diminish company-mode " ⓐ" " a")
 
-    - :location: Specify a custom installation location.
-      The following values are legal:
-
-      - The symbol `elpa' (default) means PACKAGE will be
-        installed using the Emacs package manager.
-
-      - The symbol `local' directs Spacemacs to load the file at
-        `./local/PACKAGE/PACKAGE.el'
-
-      - A list beginning with the symbol `recipe' is a melpa
-        recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
-
-
+      ;; key bindings
+      (defun spacemacs//company-complete-common-or-cycle-backward ()
+        "Complete common prefix or cycle backward."
+        (interactive)
+        (company-complete-common-or-cycle -1))
+      (spacemacs//auto-completion-set-RET-key-behavior 'company)
+      (spacemacs//auto-completion-set-TAB-key-behavior 'company)
+      (spacemacs//auto-completion-setup-key-sequence 'company)
+      (let ((map company-active-map))
+        (define-key map (kbd "C-/") 'company-search-candidates)
+        (define-key map (kbd "C-M-/") 'company-filter-candidates)
+        (define-key map (kbd "C-d") 'company-show-doc-buffer)
+        (define-key map (kbd "C-j") 'company-select-next)
+        (define-key map (kbd "C-k") 'company-select-previous)
+        (define-key map (kbd "C-l") 'company-complete-selection))
+      ;; Nicer looking faces
+      (custom-set-faces
+       '(company-tooltip-common
+         ((t (:inherit company-tooltip :weight bold :underline nil))))
+       '(company-tooltip-common-selection
+         ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+      ;; Transformers
+      (defun spacemacs//company-transformer-cancel (candidates)
+        "Cancel completion if prefix is in the list
+`company-mode-completion-cancel-keywords'"
+        (unless (member company-prefix company-mode-completion-cancel-keywords)
+          candidates))
+      (setq company-transformers '(spacemacs//company-transformer-cancel
+                                   company-sort-by-occurrence)))))
 ;;; packages.el ends here
