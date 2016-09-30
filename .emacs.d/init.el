@@ -11,10 +11,12 @@
  inhibit-startup-screen t
  x-select-enable-clipboard t)
 
-(tool-bar-mode -1)    ; disable the tool-bar
-(menu-bar-mode -1)    ; disable the menu-bar
-(desktop-save-mode 1) ; restore last active session
-(global-linum-mode 1) ; show line-numbers everywhere
+(tool-bar-mode -1)     ; disable the tool-bar
+(menu-bar-mode -1)     ; disable the menu-bar
+(desktop-save-mode 1)  ; restore last active session
+(global-linum-mode 1)  ; show line-numbers everywhere
+(show-paren-mode)
+(electric-pair-mode 1)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -24,13 +26,55 @@
 (require 'my-term)
 (require 'my-funcs)
 
+(defconst my-funcs/pairs '(("(" . ")") ("[" . "]") ("{" . "}")))
+
+(defun my-funcs/smart-space ()
+  (interactive)
+  (let ((before (string (char-before)))
+	(after (string (char-after))))
+    (let ((match (cdr (assoc before my-funcs/pairs))))
+	(when (equal after match)
+	    (insert " ")
+	    (backward-char))))
+  (insert " "))
+
+(defun my-funcs/smart-delete ()
+  (interactive)
+  (let ((before (string (char-before)))
+	(after (string (char-after)))
+	(before2 (string (char-before 2)))
+	(after2 (string (char-after 2))))
+    (if (and (equal before " ") (equal after " "))
+	(let ((match (cdr (assoc before2 my-funcs/pairs))))
+	  (when (equal after2 match)
+	    (message "Now!")))))
+  (electric-pair-delete-pair))
+
+
 (use-package evil
   :ensure t
   :config
+  ; (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
+  ; (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
+  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (use-package evil-surround
     :ensure t
     :config
     (global-evil-surround-mode))
+  (use-package evil-numbers
+    :ensure t
+    :config
+    (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+    (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt))
+  (use-package evil-args
+    :ensure t
+    :config
+    (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+    (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
+  (use-package evil-matchit
+    :ensure t
+    :config
+    (global-evil-matchit-mode 1))
   (use-package evil-leader
     :ensure t
     :config
@@ -69,10 +113,18 @@
 (use-package helm
   :ensure t
   :config
+  (define-key helm-map (kbd "C-j") 'helm-next-line)
+  (define-key helm-map (kbd "C-k") 'helm-previous-line)
+  (define-key helm-map (kbd "C-w") 'backward-kill-word)
+  (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action) ; complete with tab
+  (helm-mode 1)
   (use-package helm-projectile
     :ensure t
     :config
-    (helm-projectile-on)))
+    (helm-projectile-on))
+  (use-package helm-ag
+    :ensure t
+    :config))
   
 (use-package which-key
   :ensure t
@@ -96,3 +148,14 @@
   :ensure t
   :config
   (setq zoom-window-mode-line-color "darkgreen"))
+
+(use-package js3-mode
+  :ensure t
+  :config)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config)
+
+(add-hook 'js3-mode-hook #'rainbow-delimiter-mode)
+(add-hook 'lisp-mode-hook #'rainbow-delimiter-mode)
