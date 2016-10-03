@@ -11,6 +11,9 @@
  inhibit-startup-screen t
  x-select-enable-clipboard t)
 
+(set-default
+ 'truncate-lines t)
+
 (tool-bar-mode -1)     ; disable the tool-bar
 (menu-bar-mode -1)     ; disable the menu-bar
 (desktop-save-mode 1)  ; restore last active session
@@ -92,6 +95,7 @@
       "p f" 'helm-projectile-find-file-dwim
       "p d" 'helm-projectile-find-dir
       "p a" 'helm-projectile-ag
+      "w q" 'evil-window-delete
       "z"   'zoom-window-zoom
       ". e" 'my-funcs/open-dotfile
       ". r" 'my-funcs/reload-dotfile
@@ -136,6 +140,7 @@
     "SPC b"   "Buffers"
     "SPC f"   "Files"
     "SPC p"   "Projects"
+    "SPC w"   "Windows"
     "SPC ."   "Dotfiles"
     "SPC ?"   "Get help")
   (which-key-mode))
@@ -149,7 +154,7 @@
   :config
   (setq zoom-window-mode-line-color "darkgreen"))
 
-(use-package js3-mode
+(use-package js2-mode
   :ensure t
   :config)
 
@@ -157,5 +162,21 @@
   :ensure t
   :config)
 
-(add-hook 'js3-mode-hook #'rainbow-delimiter-mode)
-(add-hook 'lisp-mode-hook #'rainbow-delimiter-mode)
+(use-package editorconfig
+  :ensure t
+  :config
+  (add-hook
+   'editorconfig-custom-hooks
+   (lambda (hash)
+     (setq js-indent-level (string-to-number (gethash 'indent_size hash)))
+     (setq js-expr-indent-offset (- js-indent-level))))
+  (add-to-list 'editorconfig-indentation-alist
+	       '(js2-mode js2-basic-offset))
+  :init
+  (add-hook 'js2-mode-hook (progn
+			     (editorconfig-mode 1)
+			     (setq js-indent-level js2-basic-offset)
+			     (setq js-expr-indent-offset (- js-indent-level)))))
+
+(add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
