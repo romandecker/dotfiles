@@ -95,6 +95,7 @@
       "p f" 'helm-projectile-find-file-dwim
       "p d" 'helm-projectile-find-dir
       "p a" 'helm-projectile-ag
+      "t u" 'undo-tree-visualize
       "w q" 'evil-window-delete
       "z"   'zoom-window-zoom
       ". e" 'my-funcs/open-dotfile
@@ -140,6 +141,7 @@
     "SPC b"   "Buffers"
     "SPC f"   "Files"
     "SPC p"   "Projects"
+    "SPC t"   "Toggles"
     "SPC w"   "Windows"
     "SPC ."   "Dotfiles"
     "SPC ?"   "Get help")
@@ -161,6 +163,12 @@
 (use-package rainbow-delimiters
   :ensure t
   :config)
+
+(use-package undo-tree
+  :ensure t
+  :config
+  (setq undo-tree-auto-save-history t)
+  (global-undo-tree-mode))
 
 (use-package editorconfig
   :ensure t
