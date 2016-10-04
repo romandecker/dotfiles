@@ -29,36 +29,11 @@
 (require 'my-term)
 (require 'my-funcs)
 
-(defconst my-funcs/pairs '(("(" . ")") ("[" . "]") ("{" . "}")))
-
-(defun my-funcs/smart-space ()
-  (interactive)
-  (let ((before (string (char-before)))
-	(after (string (char-after))))
-    (let ((match (cdr (assoc before my-funcs/pairs))))
-	(when (equal after match)
-	    (insert " ")
-	    (backward-char))))
-  (insert " "))
-
-(defun my-funcs/smart-delete ()
-  (interactive)
-  (let ((before (string (char-before)))
-	(after (string (char-after)))
-	(before2 (string (char-before 2)))
-	(after2 (string (char-after 2))))
-    (if (and (equal before " ") (equal after " "))
-	(let ((match (cdr (assoc before2 my-funcs/pairs))))
-	  (when (equal after2 match)
-	    (message "Now!")))))
-  (electric-pair-delete-pair))
-
-
 (use-package evil
   :ensure t
   :config
-  ; (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
-  ; (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
+  (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
+  (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (use-package evil-surround
     :ensure t
@@ -78,6 +53,10 @@
     :ensure t
     :config
     (global-evil-matchit-mode 1))
+  (use-package evil-mc
+    :ensure t
+    :config
+    (global-evil-mc-mode 1))
   (use-package evil-leader
     :ensure t
     :config
@@ -90,6 +69,7 @@
       "b n" 'next-buffer
       "b p" 'previous-buffer
       "f f" 'helm-find-files
+      "f r" 'helm-recentf
       "f s" 'save-buffer
       "p p" 'helm-projectile-switch-project
       "p f" 'helm-projectile-find-file-dwim
@@ -97,6 +77,7 @@
       "p a" 'helm-projectile-ag
       "t u" 'undo-tree-visualize
       "w q" 'evil-window-delete
+      "w o" 'delete-other-windows
       "z"   'zoom-window-zoom
       ". e" 'my-funcs/open-dotfile
       ". r" 'my-funcs/reload-dotfile
@@ -156,6 +137,12 @@
   :config
   (setq zoom-window-mode-line-color "darkgreen"))
 
+;; default values for indentation (possibly overwritten by editorconfig)
+(setq
+ js2-basic-offset 2
+ js-indent-level 2
+ js-expr-indent-offset -2)
+
 (use-package js2-mode
   :ensure t
   :config
@@ -190,6 +177,11 @@
 			     (editorconfig-mode 1)
 			     (setq js-indent-level js2-basic-offset)
 			     (setq js-expr-indent-offset (- js-indent-level)))))
+
+; for keeping track of recent files, provides helm-recentf with data
+(use-package recentf
+  :ensure t
+  :config)
 
 (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
