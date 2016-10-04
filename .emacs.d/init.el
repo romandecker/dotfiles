@@ -9,7 +9,8 @@
 (setq
  package-enable-at-startup nil
  inhibit-startup-screen t
- x-select-enable-clipboard t)
+ x-select-enable-clipboard t
+ make-backup-files nil)
 
 (set-default
  'truncate-lines t)
@@ -30,12 +31,12 @@
 (require 'my-evil)
 (require 'my-term)
 (require 'my-helm)
+(require 'my-javascript)
+(require 'my-editorconfig)
 
 (use-package projectile
   :ensure t
   :config)
-
-
   
 (use-package which-key
   :ensure t
@@ -60,22 +61,13 @@
 (use-package zoom-window
   :ensure t
   :config
-  (setq zoom-window-mode-line-color "darkgreen"))
+  (setq zoom-window-mode-line-color "blue"))
 
 ;; default values for indentation (possibly overwritten by editorconfig)
 (setq
  js2-basic-offset 2
  js-indent-level 2
  js-expr-indent-offset -2)
-
-(use-package js2-mode
-  :ensure t
-  :config
-  (js2-mode-hide-warnings-and-errors)          ; do not show errors (use flycheck for that)
-  (setq
-   js2-skip-preprocessor-directives nil)       ; allow shebangs in js-files (for node)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'interpreter-mode-alist '("node" . js2-mode)))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -87,26 +79,10 @@
   (setq undo-tree-auto-save-history t)
   (global-undo-tree-mode))
 
-;(use-package editorconfig
-;  :ensure t
-;  :config
-;  (add-hook
-;   'editorconfig-custom-hooks
-;   (lambda (hash)
-;     (setq js-indent-level (string-to-number (gethash 'indent_size hash)))
-;     (setq js-expr-indent-offset (- js-indent-level))))
-;  (add-to-list 'editorconfig-indentation-alist
-;	       '(js2-mode js2-basic-offset))
-;  :init
-;  (add-hook 'js2-mode-hook (progn
-;			     (editorconfig-mode 1)
-;			     (setq js-indent-level js2-basic-offset)
-;			     (setq js-expr-indent-offset (- js-indent-level)))))
-
 (use-package flatui-theme
   :ensure t
   :config
-  (load-theme 'flatui))
+  (load-theme 'flatui t))
 
 ; for keeping track of recent files, provides helm-recentf with data
 (use-package recentf
@@ -126,9 +102,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("15348febfa2266c4def59a08ef2846f6032c0797f001d7b9148f30ace0d08bcf" "e5c6caa4860b1ba51dc5ad335c0c2734ea650a6098dd9652a1ab3d9aa702e185" default)))
  '(package-selected-packages
    (quote
     (flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes))))

@@ -38,6 +38,11 @@
   (interactive)
   (term-send-raw-string "\C-z"))
 
+(defun my-term-funcs/send-space ()
+  "Send space"
+  (interactive)
+  (term-send-raw-string " "))
+
 (defun my-term-funcs/toggle-term ()
   "Toggle the dedicated terminal."
   (interactive)

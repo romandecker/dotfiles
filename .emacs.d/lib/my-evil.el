@@ -4,10 +4,14 @@
 (use-package evil
   :ensure t
   :config
-  (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
+  ;(define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
   (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+  (evil-define-key 'normal emacs-lisp-mode-map
+    (kbd "; l") 'eval-last-sexp
+    (kbd "; ;") 'eval-buffer
+    (kbd "; f") 'eval-defun
+    (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (evil-define-key 'normal dired-mode-map
     (kbd "h") 'my-funcs/dired-up-directory
     (kbd "RET") 'dired-find-alternate-file
@@ -15,6 +19,7 @@
     (kbd "m") 'dired-mark
     (kbd "u") 'dired-unmark
     (kbd "U") 'dired-unmark-all-marks
+    (kbd "C") 'dired-create-directory
     (kbd "n") 'evil-search-next
     (kbd "N") 'evil-search-previous
     (kbd "q") 'kill-this-buffer)
