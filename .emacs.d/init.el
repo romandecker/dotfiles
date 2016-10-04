@@ -93,6 +93,11 @@
   :ensure t
   :config)
 
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode))
+
 (use-package elisp-slime-nav
   :ensure t
   :config
@@ -108,7 +113,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes))))
+    (company flycheck flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -4,9 +4,12 @@
 (use-package evil
   :ensure t
   :config
-  ;(define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
+  (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
   (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+  (evil-define-key 'insert company-active-map
+    (kbd "C-n") 'company-select-next
+    (kbd "C-p") 'company-select-previous)
   (evil-define-key 'normal emacs-lisp-mode-map
     (kbd "; l") 'eval-last-sexp
     (kbd "; ;") 'eval-buffer
