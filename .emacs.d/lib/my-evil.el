@@ -7,9 +7,6 @@
   (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
   (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (evil-define-key 'insert company-active-map
-    (kbd "C-n") 'company-select-next
-    (kbd "C-p") 'company-select-previous)
   (evil-define-key 'normal emacs-lisp-mode-map
     (kbd "; l") 'eval-last-sexp
     (kbd "; ;") 'eval-buffer
@@ -48,6 +45,15 @@
     :ensure t
     :config
     (global-evil-mc-mode 1))
+  (use-package evil-exchange
+    :ensure t
+    :config
+    (setq evil-exchange-key (kbd "gx"))
+    (evil-exchange-install))
+  (use-package evil-commentary
+    :ensure t
+    :config
+    (evil-commentary-mode))
   (use-package evil-leader
     :ensure t
     :config
