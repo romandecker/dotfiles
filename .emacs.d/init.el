@@ -24,93 +24,18 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(require 'use-package)
 
-(require 'my-window-funcs)
+(require 'dired-x)
+(require 'my-evil)
 (require 'my-term)
-(require 'my-funcs)
-
-(use-package evil
-  :ensure t
-  :config
-  (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
-  (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (use-package evil-surround
-    :ensure t
-    :config
-    (global-evil-surround-mode))
-  (use-package evil-numbers
-    :ensure t
-    :config
-    (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-    (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt))
-  (use-package evil-args
-    :ensure t
-    :config
-    (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-    (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
-  (use-package evil-matchit
-    :ensure t
-    :config
-    (global-evil-matchit-mode 1))
-  (use-package evil-mc
-    :ensure t
-    :config
-    (global-evil-mc-mode 1))
-  (use-package evil-leader
-    :ensure t
-    :config
-    (evil-leader/set-leader "SPC")
-    (evil-leader/set-key
-      ":" 'helm-M-x
-      "~" 'my-term-funcs/toggle-term
-      "TAB" 'my-window-funcs/switch-to-last-buffer
-      "b b" 'helm-buffers-list
-      "b n" 'next-buffer
-      "b p" 'previous-buffer
-      "f f" 'helm-find-files
-      "f r" 'helm-recentf
-      "f s" 'save-buffer
-      "p p" 'helm-projectile-switch-project
-      "p f" 'helm-projectile-find-file-dwim
-      "p d" 'helm-projectile-find-dir
-      "p a" 'helm-projectile-ag
-      "t u" 'undo-tree-visualize
-      "w q" 'evil-window-delete
-      "w o" 'delete-other-windows
-      "z"   'zoom-window-zoom
-      ". e" 'my-funcs/open-dotfile
-      ". r" 'my-funcs/reload-dotfile
-      "? k" 'describe-key
-      "? v" 'describe-variable
-      "? f" 'describe-function
-      "? m" 'describe-mode)
-    (global-set-key (kbd "C-j") 'my-window-funcs/window-down)
-    (global-set-key (kbd "C-k") 'my-window-funcs/window-up)
-    (global-set-key (kbd "C-h") 'my-window-funcs/window-left)
-    (global-set-key (kbd "C-l") 'my-window-funcs/window-right)
-    (global-evil-leader-mode))
-  (evil-mode 1)) ; evil-leader must be enabled before evil
+(require 'my-helm)
 
 (use-package projectile
   :ensure t
   :config)
 
-(use-package helm
-  :ensure t
-  :config
-  (define-key helm-map (kbd "C-j") 'helm-next-line)
-  (define-key helm-map (kbd "C-k") 'helm-previous-line)
-  (define-key helm-map (kbd "C-w") 'backward-kill-word)
-  (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action) ; complete with tab
-  (helm-mode 1)
-  (use-package helm-projectile
-    :ensure t
-    :config
-    (helm-projectile-on))
-  (use-package helm-ag
-    :ensure t
-    :config))
+
   
 (use-package which-key
   :ensure t
@@ -162,26 +87,54 @@
   (setq undo-tree-auto-save-history t)
   (global-undo-tree-mode))
 
-(use-package editorconfig
+;(use-package editorconfig
+;  :ensure t
+;  :config
+;  (add-hook
+;   'editorconfig-custom-hooks
+;   (lambda (hash)
+;     (setq js-indent-level (string-to-number (gethash 'indent_size hash)))
+;     (setq js-expr-indent-offset (- js-indent-level))))
+;  (add-to-list 'editorconfig-indentation-alist
+;	       '(js2-mode js2-basic-offset))
+;  :init
+;  (add-hook 'js2-mode-hook (progn
+;			     (editorconfig-mode 1)
+;			     (setq js-indent-level js2-basic-offset)
+;			     (setq js-expr-indent-offset (- js-indent-level)))))
+
+(use-package flatui-theme
   :ensure t
   :config
-  (add-hook
-   'editorconfig-custom-hooks
-   (lambda (hash)
-     (setq js-indent-level (string-to-number (gethash 'indent_size hash)))
-     (setq js-expr-indent-offset (- js-indent-level))))
-  (add-to-list 'editorconfig-indentation-alist
-	       '(js2-mode js2-basic-offset))
-  :init
-  (add-hook 'js2-mode-hook (progn
-			     (editorconfig-mode 1)
-			     (setq js-indent-level js2-basic-offset)
-			     (setq js-expr-indent-offset (- js-indent-level)))))
+  (load-theme 'flatui))
 
 ; for keeping track of recent files, provides helm-recentf with data
 (use-package recentf
   :ensure t
   :config)
 
+(use-package elisp-slime-nav
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode) (eldoc-mode))))
+
 (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
+(put 'dired-find-alternate-file 'disabled nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("15348febfa2266c4def59a08ef2846f6032c0797f001d7b9148f30ace0d08bcf" "e5c6caa4860b1ba51dc5ad335c0c2734ea650a6098dd9652a1ab3d9aa702e185" default)))
+ '(package-selected-packages
+   (quote
+    (flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
