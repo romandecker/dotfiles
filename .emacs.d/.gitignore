@@ -2,5 +2,6 @@
 .emacs.desktop.lock
 auto-save-list/
 elpa/
+undo/
 recentf
 **/*~

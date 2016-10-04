@@ -2,9 +2,10 @@
 
 (add-hook 'term-mode-hook
 	  (lambda ()
-	    (evil-define-key 'insert term-raw-map
+	    (evil-define-key 'normal term-raw-map
 	      (kbd "\C-j") 'evil-window-down
-	      (kbd "\C-k") 'evil-window-up
+	      (kbd "\C-k") 'evil-window-up)
+	    (evil-define-key 'insert term-raw-map
 	      (kbd "\C-j") 'evil-window-down
 	      (kbd "\C-k") 'evil-window-up
 	      (kbd "\C-a") 'my-term-funcs/send-ctrl-a
