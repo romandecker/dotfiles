@@ -34,6 +34,13 @@
 (require 'my-javascript)
 (require 'my-editorconfig)
 (require 'my-flycheck)
+(require 'my-yasnippet)
+(require 'my-company)
+
+; general-purpose string-manipulation library
+(use-package s
+  :ensure t
+  :config)
 
 (use-package projectile
   :ensure t
@@ -41,26 +48,6 @@
   (setq projectile-switch-project-action 'projectile-dired)
   (projectile-global-mode))
   
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-add-key-based-replacements
-    "SPC TAB" "Last active buffer"
-    "SPC :"   "Execute ex-command"
-    "SPC ~"   "Toggle terminal"
-    "SPC b"   "Buffers"
-    "SPC f"   "Files"
-    "SPC p"   "Projects"
-    "SPC t"   "Toggles"
-    "SPC w"   "Windows"
-    "SPC ."   "Dotfiles"
-    "SPC ?"   "Get help")
-  (which-key-mode))
-
-(use-package multi-term
-  :ensure t
-  :config)
-
 (use-package zoom-window
   :ensure t
   :config
@@ -93,22 +80,6 @@
   :ensure t
   :config)
 
-(use-package company
-  :ensure t
-  :config
-  (setq company-idle-delay 0.2
-	company-minimum-prefix-length 2)
-  (define-key company-active-map (kbd "M-n") nil)
-  (define-key company-active-map (kbd "M-p") nil)
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous)
-  (define-key company-active-map (kbd "C-w") #'backward-kill-word)
-  (global-company-mode))
-
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode 1))
 
 (use-package elisp-slime-nav
   :ensure t
@@ -125,7 +96,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet evil-commentary evil-exchange company flycheck flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes))))
+    (s yasnippet evil-commentary evil-exchange company flycheck flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

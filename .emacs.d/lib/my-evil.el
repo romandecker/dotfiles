@@ -6,12 +6,10 @@
   :config
   (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
   (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
+  (define-key evil-insert-state-map [tab] 'my-funcs/tab-indent-or-complete)
+  (define-key evil-insert-state-map (kbd "TAB") 'my-funcs/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (evil-define-key 'normal emacs-lisp-mode-map
-    (kbd "; l") 'eval-last-sexp
-    (kbd "; ;") 'eval-buffer
-    (kbd "; f") 'eval-defun
-    (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (evil-define-key 'normal dired-mode-map
     (kbd "h") 'my-funcs/dired-up-directory
     (kbd "RET") 'dired-find-alternate-file
@@ -22,6 +20,7 @@
     (kbd "C") 'dired-create-directory
     (kbd "n") 'evil-search-next
     (kbd "N") 'evil-search-previous
+    (kbd "y") 'dired-do-copy
     (kbd "q") 'kill-this-buffer)
   (use-package evil-surround
     :ensure t
@@ -65,7 +64,11 @@
       "b b" 'helm-buffers-list
       "b n" 'next-buffer
       "b p" 'previous-buffer
+      "b d" 'kill-this-buffer
       "f f" 'helm-find-files
+      "e l" 'eval-last-sexp
+      "e b" 'eval-buffer
+      "e f" 'eval-defun
       "f r" 'helm-recentf
       "f s" 'save-buffer
       "f d" 'dired-jump
@@ -79,6 +82,7 @@
       "w |" 'split-window-right
       "w -" 'split-window-below
       "z"   'zoom-window-zoom
+      ". s" 'my-funcs/open-snippet-dir
       ". e" 'my-funcs/open-dotfile
       ". r" 'my-funcs/reload-dotfile
       "? k" 'describe-key
@@ -91,5 +95,23 @@
     (global-set-key (kbd "C-l") 'my-window-funcs/window-right)
     (global-evil-leader-mode))
   (evil-mode 1)) ; evil-leader must be enabled before evil
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-add-key-based-replacements
+    "SPC TAB" "Last active buffer"
+    "SPC :"   "Execute ex-command"
+    "SPC ~"   "Toggle terminal"
+    "SPC b"   "Buffers"
+    "SPC e"   "Evaluate"
+    "SPC f"   "Files"
+    "SPC p"   "Projects"
+    "SPC t"   "Toggles"
+    "SPC w"   "Windows"
+    "SPC ."   "Dotfiles"
+    "SPC ?"   "Get help")
+  (which-key-mode))
+
 
 (provide 'my-evil)

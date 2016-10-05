@@ -1,5 +1,10 @@
 (require 'my-term-funcs)
 
+(use-package multi-term
+  :ensure t
+  :config
+  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1))))
+
 (add-hook 'term-mode-hook
 	  (lambda ()
 	    (evil-define-key 'normal term-raw-map

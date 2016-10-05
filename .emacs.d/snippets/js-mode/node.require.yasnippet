@@ -1,7 +1,5 @@
 # -*- mode: snippet -*-
-# name: function
-# key: func
+# name: node.require
+# key: req
 # --
-function(${1:}) {
-  ${2:}
-}
+const ${3:${1:$(s-lower-camel-case (file-name-nondirectory yas/text))}} = require( "${1:f}" )$2;$0

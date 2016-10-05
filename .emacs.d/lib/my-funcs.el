@@ -58,4 +58,70 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
     (dired-up-directory)
     (kill-buffer old)))
 
+(defun my-funcs/check-expansion ()
+  "checks wether or not expansion should be done"
+  (save-excursion
+    (if (looking-at "\\_>") t
+      (backward-char 1)
+      (if (looking-at "\\.") t
+    (backward-char 1)
+    (if (looking-at "->") t nil)))))
+
+(defun my-funcs/do-yas-expand ()
+  (let ((yas/fallback-behavior 'return-nil))
+    (yas/expand)))
+
+(defun my-funcs/tab-indent-or-complete ()
+  (interactive)
+  (message "checking wether or not to indent!")
+  (cond
+   ((minibufferp)
+    (minibuffer-complete))
+   (t
+    (message "indenting!")
+    (indent-for-tab-command)
+    (if (or (not yas/minor-mode)
+        (null (my-funcs/do-yas-expand)))
+    (if (my-funcs/check-expansion)
+        (progn
+          (company-manual-begin)
+          (if (null company-candidates)
+          (progn
+            (company-abort)
+            (indent-for-tab-command)))))))))
+
+(defun my-funcs/tab-complete-or-next-field ()
+  (interactive)
+  (if (or (not yas/minor-mode)
+      (null (my-funcs/do-yas-expand)))
+      (if company-candidates
+      (company-complete-selection)
+    (if (my-funcs/check-expansion)
+      (progn
+        (company-manual-begin)
+        (if (null company-candidates)
+        (progn
+          (company-abort)
+          (yas-next-field))))
+      (yas-next-field)))))
+
+(defun my-funcs/expand-snippet-or-complete-selection ()
+  (interactive)
+  (if (or (not yas/minor-mode)
+      (null (my-funcs/do-yas-expand))
+      (company-abort))
+      (company-complete-selection)))
+
+(defun my-funcs/abort-company-or-yas ()
+  (interactive)
+  (if (null company-candidates)
+      (yas-abort-snippet)
+    (company-abort)))
+
+(defun my-funcs/open-snippet-dir ()
+  (interactive)
+  (let* ((dir (file-name-as-directory (car yas-snippet-dirs)))
+	(path (concat dir (symbol-name major-mode))))
+    (dired path)))
+
 (provide 'my-funcs)
