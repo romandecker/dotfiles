@@ -4,3 +4,5 @@
 .nvimrc.local
 .projections.json
 .vscode/
+.emacs.local/
+.dir-locals.el

@@ -22,8 +22,7 @@
 	  nil))))
 
 (defun my-funcs/smart-space ()
-  "Insert a space at point, and if inside and adjacent pair,
-also insert another space to keep whitespace balanced."
+  "Insert a space at point, and if inside and adjacent pair, also insert another space to keep whitespace balanced."
   (interactive) (when (my-funcs/get-pair)
     (insert " ")
     (backward-char))
@@ -50,6 +49,7 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
       (if (my-funcs/get-pair)
  	  (electric-pair-delete-pair 1)
 	(delete-backward-char 1)))))
+
 
 (defun my-funcs/dired-up-directory ()
   "Take dired up one directory, but behave like dired-find-alternative-file (leave no orphan buffer)"

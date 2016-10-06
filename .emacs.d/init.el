@@ -80,7 +80,6 @@
   :ensure t
   :config)
 
-
 (use-package elisp-slime-nav
   :ensure t
   :config
