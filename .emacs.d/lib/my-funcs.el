@@ -70,7 +70,6 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 (defun my-funcs/do-yas-expand ()
   (let ((yas/fallback-behavior 'return-nil))
     (yas/expand)))
-
 (defun my-funcs/tab-indent-or-complete ()
   (interactive)
   (message "checking wether or not to indent!")
@@ -78,7 +77,6 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
    ((minibufferp)
     (minibuffer-complete))
    (t
-    (message "indenting!")
     (indent-for-tab-command)
     (if (or (not yas/minor-mode)
         (null (my-funcs/do-yas-expand)))

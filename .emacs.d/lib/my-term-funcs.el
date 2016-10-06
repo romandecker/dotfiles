@@ -39,7 +39,7 @@
   (term-send-raw-string "\C-z"))
 
 (defun my-term-funcs/send-space ()
-  "Send space"
+  "Send space."
   (interactive)
   (term-send-raw-string " "))
 
@@ -48,5 +48,10 @@
   (interactive)
   (multi-term-dedicated-toggle)
   (multi-term-dedicated-select))
+
+(defun my-term-funcs/send-tab ()
+  "Send tab."
+  (interactive)
+  (term-send-raw-string "\t"))
 
 (provide 'my-term-funcs)

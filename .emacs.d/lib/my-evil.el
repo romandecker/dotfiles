@@ -7,7 +7,7 @@
   (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
   (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
   (define-key evil-insert-state-map [tab] 'my-funcs/tab-indent-or-complete)
-  (define-key evil-insert-state-map (kbd "TAB") 'my-funcs/tab-indent-or-complete)
+  ; (define-key evil-insert-state-map (kbd "TAB") 'my-funcs/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (evil-define-key 'normal dired-mode-map
