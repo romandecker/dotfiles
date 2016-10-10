@@ -36,6 +36,7 @@
 (require 'my-flycheck)
 (require 'my-yasnippet)
 (require 'my-company)
+(require 'my-hydra)
 
 ; general-purpose string-manipulation library
 (use-package s

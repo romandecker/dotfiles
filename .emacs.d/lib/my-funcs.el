@@ -122,4 +122,32 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 	(path (concat dir (symbol-name major-mode))))
     (dired path)))
 
+(defun my-funcs/resize-window-down ()
+  "Resize a window downwards."
+  (interactive)
+  (if (window-in-direction 'below)
+      (enlarge-window 1)
+    (shrink-window 1)))
+
+(defun my-funcs/resize-window-up ()
+  "Resize a window upwards."
+  (interactive)
+  (if (window-in-direction 'above)
+      (enlarge-window 1)
+    (shrink-window 1)))
+
+(defun my-funcs/resize-window-left ()
+  "Resize a window leftwards."
+  (interactive)
+  (if (window-in-direction 'left)
+      (enlarge-window-horizontally 1)
+    (shrink-window-horizontally 1)))
+
+(defun my-funcs/resize-window-right ()
+  "Resize a window rightwards."
+  (interactive)
+  (if (window-in-direction 'right)
+      (enlarge-window-horizontally 1)
+    (shrink-window-horizontally 1)))
+
 (provide 'my-funcs)
