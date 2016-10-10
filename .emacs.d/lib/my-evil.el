@@ -81,6 +81,7 @@
       "w o" 'delete-other-windows
       "w |" 'split-window-right
       "w -" 'split-window-below
+      "w r" 'hydra-window-resize/body
       "z"   'zoom-window-zoom
       ". s" 'my-funcs/open-snippet-dir
       ". e" 'my-funcs/open-dotfile
