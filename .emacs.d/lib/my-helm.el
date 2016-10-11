@@ -15,6 +15,8 @@
     :config
     (use-package helm-ag
       :ensure t
-      :config)))
+      :config
+      (advice-add 'helm-ag--edit
+		  :after #'evil-mc-mode))))
 
 (provide 'my-helm)
