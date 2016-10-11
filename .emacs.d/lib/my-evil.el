@@ -43,6 +43,8 @@
   (use-package evil-mc
     :ensure t
     :config
+    (define-key evil-normal-state-map (kbd "C-n") 'my-funcs/smart-c-n)
+    (evil-define-key 'normal evil-mc-key-map (kbd "C-n") 'my-funcs/smart-c-n)
     (global-evil-mc-mode 1))
   (use-package evil-exchange
     :ensure t

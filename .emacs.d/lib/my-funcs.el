@@ -17,15 +17,15 @@
   (let ((preceding (string (preceding-char)))
 	(following (string (following-char))))
     (let ((match (cdr (assoc preceding my-funcs/pairs))))
-	(if (equal following match)
-	    match
-	  nil))))
+      (if (equal following match)
+	  match
+	nil))))
 
 (defun my-funcs/smart-space ()
   "Insert a space at point, and if inside and adjacent pair, also insert another space to keep whitespace balanced."
   (interactive) (when (my-funcs/get-pair)
-    (insert " ")
-    (backward-char))
+		  (insert " ")
+		  (backward-char))
   (insert " "))
 
 (defun my-funcs/smart-delete ()
@@ -40,14 +40,14 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 	  (let ((match (cdr (assoc before my-funcs/pairs))))
 	    (if (equal after match)
 		(progn
-		  ; between spaces and brackets -> delete both spaces first
+					; between spaces and brackets -> delete both spaces first
 		  (delete-backward-char 1)
 		  (delete-char 1))
-	      ; between spaces, but not between brackets -> normal delete
+					; between spaces, but not between brackets -> normal delete
 	      (delete-backward-char 1))))
       ;; we're not even between spaces, perform "normal" delete, optionally deleting a pair
       (if (my-funcs/get-pair)
- 	  (electric-pair-delete-pair 1)
+	  (electric-pair-delete-pair 1)
 	(delete-backward-char 1)))))
 
 
@@ -64,8 +64,8 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
     (if (looking-at "\\_>") t
       (backward-char 1)
       (if (looking-at "\\.") t
-    (backward-char 1)
-    (if (looking-at "->") t nil)))))
+	(backward-char 1)
+	(if (looking-at "->") t nil)))))
 
 (defun my-funcs/do-yas-expand ()
   (let ((yas/fallback-behavior 'return-nil))
@@ -79,35 +79,35 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
    (t
     (indent-for-tab-command)
     (if (or (not yas/minor-mode)
-        (null (my-funcs/do-yas-expand)))
-    (if (my-funcs/check-expansion)
-        (progn
-          (company-manual-begin)
-          (if (null company-candidates)
-          (progn
-            (company-abort)
-            (indent-for-tab-command)))))))))
+	    (null (my-funcs/do-yas-expand)))
+	(if (my-funcs/check-expansion)
+	    (progn
+	      (company-manual-begin)
+	      (if (null company-candidates)
+		  (progn
+		    (company-abort)
+		    (indent-for-tab-command)))))))))
 
 (defun my-funcs/tab-complete-or-next-field ()
   (interactive)
   (if (or (not yas/minor-mode)
-      (null (my-funcs/do-yas-expand)))
+	  (null (my-funcs/do-yas-expand)))
       (if company-candidates
-      (company-complete-selection)
-    (if (my-funcs/check-expansion)
-      (progn
-        (company-manual-begin)
-        (if (null company-candidates)
-        (progn
-          (company-abort)
-          (yas-next-field))))
-      (yas-next-field)))))
+	  (company-complete-selection)
+	(if (my-funcs/check-expansion)
+	    (progn
+	      (company-manual-begin)
+	      (if (null company-candidates)
+		  (progn
+		    (company-abort)
+		    (yas-next-field))))
+	  (yas-next-field)))))
 
 (defun my-funcs/expand-snippet-or-complete-selection ()
   (interactive)
   (if (or (not yas/minor-mode)
-      (null (my-funcs/do-yas-expand))
-      (company-abort))
+	  (null (my-funcs/do-yas-expand))
+	  (company-abort))
       (company-complete-selection)))
 
 (defun my-funcs/abort-company-or-yas ()
@@ -119,7 +119,7 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 (defun my-funcs/open-snippet-dir ()
   (interactive)
   (let* ((dir (file-name-as-directory (car yas-snippet-dirs)))
-	(path (concat dir (symbol-name major-mode))))
+	 (path (concat dir (symbol-name major-mode))))
     (dired path)))
 
 (defun my-funcs/resize-window-down ()
@@ -172,5 +172,41 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
       (setcdr buf-pred-entry #'my-funcs/useful-buffer-p)
     ;; `buffer-predicate' entry doesn't exist, create it
     (push '(buffer-predicate . my-funcs/useful-buffer-p) default-frame-alist)))
+
+(defun my-funcs/smart-c-n ()
+  "Better C-n in normal mode. Will select the current word if not already using multiple cursors. Else,
+keep adding cursors in multiple cursor mode."
+  (interactive)
+  (if (evil-mc-has-cursors-p)
+      (evil-mc-make-and-goto-next-match)
+    (my-funcs/mark-current-word)))
+
+(defun my-funcs/mark-current-word (&optional arg allow-extend)
+  "Put point at beginning of current word, set mark at end."
+  (interactive "p\np")
+  (setq arg (if arg arg 1))
+  (if (and allow-extend
+	   (or (and (eq last-command this-command) (mark t))
+	       (region-active-p)))
+      (set-mark
+       (save-excursion
+	 (when (< (mark) (point))
+	   (setq arg (- arg)))
+	 (goto-char (mark))
+	 (forward-word arg)
+	 (point)))
+    (let ((wbounds (bounds-of-thing-at-point 'word)))
+      (unless (consp wbounds)
+	(error "No word at point"))
+      (if (>= arg 0)
+	  (goto-char (car wbounds))
+	(goto-char (cdr wbounds)))
+      (push-mark (save-excursion
+		   (forward-word arg)
+		   (point)))
+      (activate-mark))))
+
+
+
 
 (provide 'my-funcs)
