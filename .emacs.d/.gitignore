@@ -4,5 +4,6 @@ projectile-bookmarks.eld
 auto-save-list/
 elpa/
 undo/
+backup/
 recentf
 **/*~

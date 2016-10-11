@@ -65,6 +65,8 @@
       "b n" 'next-buffer
       "b p" 'previous-buffer
       "b d" 'kill-this-buffer
+      "j"   'previous-buffer
+      "k"   'next-buffer
       "f f" 'helm-find-files
       "e l" 'eval-last-sexp
       "e b" 'eval-buffer

@@ -150,4 +150,27 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
       (enlarge-window-horizontally 1)
     (shrink-window-horizontally 1)))
 
+;; Regexp for useful and useless buffers for smarter buffer switching
+(defvar my-funcs/useless-buffers-regexp '("*\.\+")
+  "Regexp used to determine if a buffer is not useful.")
+(defvar my-funcs/useful-buffers-regexp '("\\*scratch\\*")
+  "Regexp used to define buffers that are useful despite matching `my-funcs/useless-buffers-regexp'.")
+
+(defun my-funcs/useful-buffer-p (buffer)
+  "Determines whether or not the given BUFFER is useful."
+  (let ((buf-name (buffer-name buffer)))
+    (or (with-current-buffer buffer
+	  (derived-mode-p 'comint-mode))
+	(cl-loop for useful-regexp in my-funcs/useful-buffers-regexp
+		 thereis (string-match-p useful-regexp buf-name))
+	(cl-loop for useless-regexp in my-funcs/useless-buffers-regexp
+		 never (string-match-p useless-regexp buf-name)))))
+
+(let ((buf-pred-entry (assq 'buffer-predicate default-frame-alist)))
+  (if buf-pred-entry
+      ;; `buffer-predicate' entry exists, modify it
+      (setcdr buf-pred-entry #'my-funcs/useful-buffer-p)
+    ;; `buffer-predicate' entry doesn't exist, create it
+    (push '(buffer-predicate . my-funcs/useful-buffer-p) default-frame-alist)))
+
 (provide 'my-funcs)
