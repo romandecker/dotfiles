@@ -10,8 +10,11 @@
     :ensure t
     :config
     (helm-projectile-on))
-  (use-package helm-ag
+  (use-package ag
     :ensure t
-    :config))
+    :config
+    (use-package helm-ag
+      :ensure t
+      :config)))
 
 (provide 'my-helm)
