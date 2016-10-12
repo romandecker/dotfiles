@@ -17,6 +17,7 @@
     (kbd "m") 'dired-mark
     (kbd "u") 'dired-unmark
     (kbd "U") 'dired-unmark-all-marks
+    (kbd "c") 'my-funcs/dired-create-file
     (kbd "C") 'dired-create-directory
     (kbd "n") 'evil-search-next
     (kbd "N") 'evil-search-previous

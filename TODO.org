@@ -1,5 +1,3 @@
-* javascript
-** Indentation
-Find a way to set Js Expr Indent Offset to -2 other than via SPC : customize
-* Autocomletion/Snippets
-** Find a way to use TAB for everything
+* Elisp
+** Snippet for provide
+Ability to automatically insert current file name
