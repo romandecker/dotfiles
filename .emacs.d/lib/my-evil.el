@@ -82,12 +82,13 @@
       "p d" 'helm-projectile-find-dir
       "p a" 'helm-projectile-ag
       "t u" 'undo-tree-visualize
+      "t z" 'zoom-window-zoom
       "w q" 'evil-window-delete
       "w o" 'delete-other-windows
       "w |" 'split-window-right
       "w -" 'split-window-below
       "w r" 'hydra-window-resize/body
-      "z"   'zoom-window-zoom
+      "w z" 'zoom-window-zoom
       ". s" 'my-funcs/open-snippet-dir
       ". e" 'my-funcs/open-dotfile
       ". r" 'my-funcs/reload-dotfile

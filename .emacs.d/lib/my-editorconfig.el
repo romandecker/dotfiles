@@ -6,7 +6,7 @@
    (lambda (hash)
      (let ((indent-size (gethash 'indent_size hash)))
        (when (not (null indent-size))
-         (setq js-indent-level (string-to-number (indent-size)))
+         (setq js-indent-level (string-to-number indent-size))
          (setq js-expr-indent-offset (- js-indent-level))))))
   (add-to-list 'editorconfig-indentation-alist
 	       '(js2-mode js2-basic-offset))

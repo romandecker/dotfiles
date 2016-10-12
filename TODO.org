@@ -1,3 +1,1 @@
-* Elisp
-** Snippet for provide
-Ability to automatically insert current file name
+* editorconfig-bug

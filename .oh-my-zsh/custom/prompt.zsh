@@ -95,3 +95,4 @@ then
 else
   PROMPT="%B%3~$ %b"
 fi
+
