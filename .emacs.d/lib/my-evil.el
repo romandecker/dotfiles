@@ -77,7 +77,7 @@
       "f r" 'helm-recentf
       "f s" 'save-buffer
       "f d" 'dired-jump
-      "p p" 'helm-projectile-switch-project
+      "p p" 'persp-switch
       "p f" 'helm-projectile-find-file-dwim
       "p d" 'helm-projectile-find-dir
       "p a" 'helm-projectile-ag
