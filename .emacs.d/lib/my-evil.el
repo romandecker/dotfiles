@@ -61,41 +61,45 @@
     :config
     (evil-leader/set-leader "SPC")
     (evil-leader/set-key
-      ":" 'helm-M-x
-      "~" 'my-term-funcs/toggle-term
-      "TAB" 'my-window-funcs/switch-to-last-buffer
-      "b b" 'helm-buffers-list
-      "b n" 'next-buffer
-      "b p" 'previous-buffer
-      "b d" 'kill-this-buffer
-      "j"   'previous-buffer
-      "k"   'next-buffer
-      "f f" 'helm-find-files
-      "e l" 'eval-last-sexp
-      "e b" 'eval-buffer
-      "e f" 'eval-defun
-      "f r" 'helm-recentf
-      "f s" 'save-buffer
-      "f d" 'dired-jump
-      "p p" 'persp-switch
-      "p f" 'helm-projectile-find-file-dwim
-      "p d" 'helm-projectile-find-dir
-      "p a" 'helm-projectile-ag
-      "t u" 'undo-tree-visualize
-      "t z" 'zoom-window-zoom
-      "w q" 'evil-window-delete
-      "w o" 'delete-other-windows
-      "w |" 'split-window-right
-      "w -" 'split-window-below
-      "w r" 'hydra-window-resize/body
-      "w z" 'zoom-window-zoom
-      ". s" 'my-funcs/open-snippet-dir
-      ". e" 'my-funcs/open-dotfile
-      ". r" 'my-funcs/reload-dotfile
-      "? k" 'describe-key
-      "? v" 'describe-variable
-      "? f" 'describe-function
-      "? m" 'describe-mode)
+      "SPC"   'helm-mini
+      ":"     'helm-M-x
+      "~"     'my-term-funcs/toggle-term
+      "TAB"   'my-window-funcs/switch-to-last-buffer
+      "b b"   'helm-buffers-list
+      "b n"   'next-buffer
+      "b p"   'previous-buffer
+      "b d"   'kill-this-buffer
+      "b m"   (lambda () (interactive) (switch-to-buffer (messages-buffer)))
+      "j"     'previous-buffer
+      "k"     'next-buffer
+      "f f"   'helm-find-files
+      "e l"   'eval-last-sexp
+      "e b"   'eval-buffer
+      "e f"   'eval-defun
+      "f r"   'helm-recentf
+      "f s"   'save-buffer
+      "f d"   'dired-jump
+      "p p"   'projectile-switch-project
+      "p f"   'helm-projectile-find-file-dwim
+      "p d"   'helm-projectile-find-dir
+      "p a"   'helm-projectile-ag
+      "t u"   'undo-tree-visualize
+      "t z"   'zoom-window-zoom
+      "w q"   'evil-window-delete
+      "w o"   'delete-other-windows
+      "w |"   'split-window-right
+      "w -"   'split-window-below
+      "w r"   'hydra-window-resize/body
+      "w z"   'zoom-window-zoom
+      ". s"   'my-funcs/open-snippet-dir
+      ". e"   'my-funcs/open-dotfile
+      ". r"   'my-funcs/reload-dotfile
+      ". l d" 'add-dir-local-variable
+      ". l f" 'add-file-local-variable
+      "? k"   'describe-key
+      "? v"   'describe-variable
+      "? f"   'describe-function
+      "? m"   'describe-mode)
     (global-set-key (kbd "C-j") 'my-window-funcs/window-down)
     (global-set-key (kbd "C-k") 'my-window-funcs/window-up)
     (global-set-key (kbd "C-h") 'my-window-funcs/window-left)
@@ -117,6 +121,7 @@
     "SPC t"   "Toggles"
     "SPC w"   "Windows"
     "SPC ."   "Dotfiles"
+    "SPC . l" "Dir/File-local variables"
     "SPC ?"   "Get help")
   (which-key-mode))
 

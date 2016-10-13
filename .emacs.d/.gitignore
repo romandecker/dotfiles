@@ -2,8 +2,10 @@
 .emacs.desktop.lock
 projectile-bookmarks.eld
 auto-save-list/
+persp-confs/
 elpa/
 undo/
 backup/
 recentf
+workgroups
 **/*~

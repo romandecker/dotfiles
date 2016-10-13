@@ -16,7 +16,6 @@
 
 (tool-bar-mode -1)     ; disable the tool-bar
 (menu-bar-mode -1)     ; disable the menu-bar
-(desktop-save-mode 1)  ; restore last active session
 (global-linum-mode 1)  ; show line-numbers everywhere
 (show-paren-mode)
 (electric-pair-mode 1)
@@ -37,18 +36,18 @@
 (require 'my-company)
 (require 'my-hydra)
 (require 'my-backup)
-(require 'my-perspective)
+(require 'my-projectile)
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
 ; general-purpose string-manipulation library
 (use-package s
   :ensure t
   :config)
 
-(use-package projectile
-  :ensure t
-  :config
-  (setq projectile-switch-project-action 'projectile-dired)
-  (projectile-global-mode))
   
 (use-package zoom-window
   :ensure t
@@ -97,7 +96,14 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (perspective evil-org helm-swoop ag powerline-evil hydra s yasnippet evil-commentary evil-exchange company flycheck flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes))))
+    (exec-path-from-shell workgroups mocha icicles perspective evil-org helm-swoop ag powerline-evil hydra s yasnippet evil-commentary evil-exchange company flycheck flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes)))
+ '(safe-local-variable-values
+   (quote
+    ((mocha-reporter . "spec")
+     (mocha-project-test-directory . "test")
+     (mocha-options . "--recursive -t 30000")
+     (mocha-environment-variables . "NODE_ENV=test")
+     (mocha-which-node . "/Users/romand/.nvm/versions/node/v6.6.0/bin/node")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
