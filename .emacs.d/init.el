@@ -9,7 +9,8 @@
 (setq
  package-enable-at-startup nil
  inhibit-startup-screen t
- x-select-enable-clipboard t)
+ x-select-enable-clipboard t
+ uniquify-buffer-name-style "post-forward")
 
 (set-default
  'truncate-lines t)
@@ -25,7 +26,6 @@
   (package-install 'use-package))
 (require 'use-package)
 
-(require 'dired-x)
 (require 'my-evil)
 (require 'my-term)
 (require 'my-helm)
@@ -37,6 +37,8 @@
 (require 'my-hydra)
 (require 'my-backup)
 (require 'my-projectile)
+(require 'my-dired)
+(require 'my-markdown)
 
 (use-package exec-path-from-shell
   :ensure t
@@ -89,24 +91,6 @@
 (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
 (put 'dired-find-alternate-file 'disabled nil)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (exec-path-from-shell workgroups mocha icicles perspective evil-org helm-swoop ag powerline-evil hydra s yasnippet evil-commentary evil-exchange company flycheck flatui-theme zoom-window which-key use-package rainbow-delimiters multi-term js2-mode helm-projectile helm-ag evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-args elisp-slime-nav editorconfig color-theme avk-emacs-themes)))
- '(safe-local-variable-values
-   (quote
-    ((mocha-reporter . "spec")
-     (mocha-project-test-directory . "test")
-     (mocha-options . "--recursive -t 30000")
-     (mocha-environment-variables . "NODE_ENV=test")
-     (mocha-which-node . "/Users/romand/.nvm/versions/node/v6.6.0/bin/node")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(setq custom-file "~/.emacs.d/customize.el")
+(load custom-file)

@@ -7,6 +7,7 @@
   (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
   (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
   (define-key evil-insert-state-map [tab] 'my-funcs/tab-indent-or-complete)
+  (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
   ; (define-key evil-insert-state-map (kbd "TAB") 'my-funcs/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
@@ -14,11 +15,12 @@
     (kbd "h") 'my-funcs/dired-up-directory
     (kbd "RET") 'dired-find-alternate-file
     (kbd "l") 'dired-find-alternate-file
+    (kbd "c") 'dired-do-rename
     (kbd "m") 'dired-mark
     (kbd "u") 'dired-unmark
     (kbd "U") 'dired-unmark-all-marks
-    (kbd "c") 'my-funcs/dired-create-file
-    (kbd "C") 'dired-create-directory
+    (kbd "o") 'my-funcs/dired-create-file
+    (kbd "O") 'dired-create-directory
     (kbd "n") 'evil-search-next
     (kbd "N") 'evil-search-previous
     (kbd "y") 'dired-do-copy
@@ -27,6 +29,10 @@
     :ensure t
     :config
     (global-evil-surround-mode))
+  (use-package evil-paredit
+    :ensure t
+    :config
+    (add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode))
   (use-package evil-numbers
     :ensure t
     :config
@@ -63,7 +69,7 @@
     (evil-leader/set-key
       "SPC"   'helm-mini
       ":"     'helm-M-x
-      "~"     'my-term-funcs/toggle-term
+      "~"     'my-funcs/toggle-project-term
       "TAB"   'my-window-funcs/switch-to-last-buffer
       "b b"   'helm-buffers-list
       "b n"   'next-buffer
@@ -79,8 +85,9 @@
       "f r"   'helm-recentf
       "f s"   'save-buffer
       "f d"   'dired-jump
-      "p p"   'projectile-switch-project
-      "p f"   'helm-projectile-find-file-dwim
+      "p c"   'wg-create-workgroup
+      "p p"   'wg-switch-to-workgroup
+      "p f"   'helm-projectile-find-file
       "p d"   'helm-projectile-find-dir
       "p a"   'helm-projectile-ag
       "t u"   'undo-tree-visualize
