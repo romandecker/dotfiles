@@ -6,6 +6,8 @@ persp-confs/
 elpa/
 undo/
 backup/
+eshell/
 recentf
 workgroups
+customize.el
 **/*~
