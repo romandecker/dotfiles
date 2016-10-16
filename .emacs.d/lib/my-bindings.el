@@ -26,6 +26,7 @@
       "f r"   'helm-recentf
       "f s"   'save-buffer
       "f d"   'dired-jump
+      "g s"   'magit-status
       "p c"   'wg-create-workgroup
       "p p"   'wg-switch-to-workgroup
       "p f"   'helm-projectile-find-file
@@ -65,6 +66,7 @@
     "SPC b"   "Buffers"
     "SPC e"   "Evaluate"
     "SPC f"   "Files"
+    "SPC g"   "Git"
     "SPC p"   "Projects"
     "SPC t"   "Toggles"
     "SPC w"   "Windows"
