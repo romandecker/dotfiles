@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 (require 'my-utils)
-(load my/custom-file)
+(when (file-exists-p my/custom-file)
+  (load my/custom-file))
 
 (use-package projectile
   :ensure t

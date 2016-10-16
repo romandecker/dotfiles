@@ -74,30 +74,4 @@
   (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode) (eldoc-mode))))
 
 
-;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (magit jiggle evil-paredit markdown-mode zoom-window yasnippet workgroups which-key use-package rainbow-delimiters persp-mode multi-term mocha hydra helm-projectile helm-ag flycheck flatui-theme exec-path-from-shell evil-surround evil-numbers evil-mc evil-matchit evil-leader evil-exchange evil-commentary evil-args elisp-slime-nav editorconfig dired-k company ag)))
- '(safe-local-variable-values
-   (quote
-    ((helm-ag--extra-options . "--hidden")
-     (ag-arguments "--smart-case" "--stats" "--hidden")
-     (eval setq yas-snippet-dirs
-	   (\`
-	    ("~/.emacs.d/snippets"
-	     (\,
-	      (concat
-	       (file-name-directory
-		(dir-locals-find-file "."))
-	       ".emacs.d/snippets")))))))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;; init.el ends here(custom-set-variables
