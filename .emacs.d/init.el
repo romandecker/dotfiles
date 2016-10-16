@@ -72,6 +72,3 @@
   :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode) (eldoc-mode))))
-
-
-;;; init.el ends here(custom-set-variables

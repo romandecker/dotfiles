@@ -19,7 +19,8 @@
   (projectile-mode 1))
 
 (defun my/save-workgroups ()
-  (wg-update-all-workgroups-and-save))
+  (when (wg-list t)
+    (wg-update-all-workgroups-and-save)))
 
 
 (provide 'my-projectile)

@@ -4,6 +4,8 @@
 (defconst my/dotfile "~/.emacs.d/init.el")
 (defconst my/electric-pairs '(("(" . ")") ("[" . "]") ("{" . "}")))
 (defconst my/workgroups-file "~/.emacs.d/workgroups")
+
+(defvaralias 'my/custom-file 'custom-file)
 (defconst my/custom-file "~/.emacs.d/customize.el")
 
 (defun my/reload-dotfile ()

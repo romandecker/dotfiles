@@ -5,8 +5,20 @@
   (define-key evil-insert-state-map (kbd "DEL") 'my/smart-delete)
   (define-key evil-insert-state-map [tab] 'my/tab-indent-or-complete)
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
-  ; (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
+  (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+
+  ; camel-case-motion
+  (define-key evil-normal-state-map (kbd "w") 'evil-forward-little-word-begin)
+  (define-key evil-normal-state-map (kbd "e") 'evil-forward-little-word-end)
+  (define-key evil-normal-state-map (kbd "b") 'evil-backward-little-word-begin)
+  (define-key evil-operator-state-map (kbd "w") 'evil-forward-little-word-begin)
+  (define-key evil-operator-state-map (kbd "e") 'evil-forward-little-word-end)
+  (define-key evil-operator-state-map (kbd "b") 'evil-backward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "w") 'evil-forward-little-word-begin)
+  (define-key evil-visual-state-map (kbd "e") 'evil-forward-little-word-end)
+  (define-key evil-visual-state-map (kbd "b") 'evil-backward-little-word-begin)
+
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (use-package evil-surround
     :ensure t
@@ -41,6 +53,7 @@
     :ensure t
     :config
     (evil-commentary-mode))
+  (require 'evil-little-word)
   (require 'my-bindings)
   (evil-mode 1)) ; evil-leader must be enabled before evil
 

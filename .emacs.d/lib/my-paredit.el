@@ -1,10 +1,14 @@
 ;;; package --- My custom paredit config
 ;;; Commentary:
 ;;; Code:
-(use-package paredit
+(use-package evil-paredit
   :ensure t
-  :config)
+  :config
+  (evil-define-key 'normal emacs-lisp-mode-map
+    (kbd "] ]") 'paredit-forward-slurp-sexp
+    (kbd "] [") 'paredit-forward-barf-sexp
+    (kbd "[ ]") 'paredit-backward-barf-sexp
+    (kbd "[ [") 'paredit-backward-slurp-sexp))
 
-((foo (bar baz) quux) zot)
 (provide 'my-paredit)
 ;;; my-paredit.el ends here
