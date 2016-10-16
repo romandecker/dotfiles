@@ -1,5 +1,3 @@
-(require 'my-funcs)
-
 (use-package hydra
   :ensure t
   :config
@@ -10,9 +8,9 @@
 
   (defhydra hydra-window-resize ()
     "Window resizing"
-    ("j" my-funcs/resize-window-down "down")
-    ("k" my-funcs/resize-window-up "up")
-    ("l" my-funcs/resize-window-right "right")
-    ("h" my-funcs/resize-window-left "left")))
+    ("j" my/resize-window-down "down")
+    ("k" my/resize-window-up "up")
+    ("l" my/resize-window-right "right")
+    ("h" my/resize-window-left "left")))
 
 (provide 'my-hydra)

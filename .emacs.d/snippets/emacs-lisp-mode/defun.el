@@ -2,5 +2,5 @@
 # name: defun
 # key: defun
 # --
-(defun ${1:my-funcs/${2:}} (${3:})
+(defun ${1:my/${2:}} (${3:})
   ${4:})

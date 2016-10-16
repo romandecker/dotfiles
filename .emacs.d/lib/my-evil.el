@@ -1,38 +1,17 @@
-(require 'my-funcs)
-(require 'my-window-funcs)
-
 (use-package evil
   :ensure t
   :config
-  (define-key evil-insert-state-map (kbd "SPC") 'my-funcs/smart-space)
-  (define-key evil-insert-state-map (kbd "DEL") 'my-funcs/smart-delete)
-  (define-key evil-insert-state-map [tab] 'my-funcs/tab-indent-or-complete)
+  (define-key evil-insert-state-map (kbd "SPC") 'my/smart-space)
+  (define-key evil-insert-state-map (kbd "DEL") 'my/smart-delete)
+  (define-key evil-insert-state-map [tab] 'my/tab-indent-or-complete)
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
-  ; (define-key evil-insert-state-map (kbd "TAB") 'my-funcs/tab-indent-or-complete)
+  ; (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
-  (evil-define-key 'normal dired-mode-map
-    (kbd "h") 'my-funcs/dired-up-directory
-    (kbd "RET") 'dired-find-alternate-file
-    (kbd "l") 'dired-find-alternate-file
-    (kbd "c") 'dired-do-rename
-    (kbd "m") 'dired-mark
-    (kbd "u") 'dired-unmark
-    (kbd "U") 'dired-unmark-all-marks
-    (kbd "o") 'my-funcs/dired-create-file
-    (kbd "O") 'dired-create-directory
-    (kbd "n") 'evil-search-next
-    (kbd "N") 'evil-search-previous
-    (kbd "y") 'dired-do-copy
-    (kbd "q") 'kill-this-buffer)
   (use-package evil-surround
     :ensure t
     :config
     (global-evil-surround-mode))
-  (use-package evil-paredit
-    :ensure t
-    :config
-    (add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode))
   (use-package evil-numbers
     :ensure t
     :config
@@ -50,8 +29,8 @@
   (use-package evil-mc
     :ensure t
     :config
-    (define-key evil-normal-state-map (kbd "C-n") 'my-funcs/smart-c-n)
-    (evil-define-key 'normal evil-mc-key-map (kbd "C-n") 'my-funcs/smart-c-n)
+    (define-key evil-normal-state-map (kbd "C-n") 'my/smart-c-n)
+    (evil-define-key 'normal evil-mc-key-map (kbd "C-n") 'my/smart-c-n)
     (global-evil-mc-mode 1))
   (use-package evil-exchange
     :ensure t
@@ -62,75 +41,9 @@
     :ensure t
     :config
     (evil-commentary-mode))
-  (use-package evil-leader
-    :ensure t
-    :config
-    (evil-leader/set-leader "SPC")
-    (evil-leader/set-key
-      "SPC"   'helm-mini
-      ":"     'helm-M-x
-      "~"     'my-funcs/toggle-project-term
-      "TAB"   'my-window-funcs/switch-to-last-buffer
-      "b b"   'helm-buffers-list
-      "b n"   'next-buffer
-      "b p"   'previous-buffer
-      "b d"   'kill-this-buffer
-      "b m"   (lambda () (interactive) (switch-to-buffer (messages-buffer)))
-      "j"     'previous-buffer
-      "k"     'next-buffer
-      "f f"   'helm-find-files
-      "e l"   'eval-last-sexp
-      "e b"   'eval-buffer
-      "e f"   'eval-defun
-      "f r"   'helm-recentf
-      "f s"   'save-buffer
-      "f d"   'dired-jump
-      "p c"   'wg-create-workgroup
-      "p p"   'wg-switch-to-workgroup
-      "p f"   'helm-projectile-find-file
-      "p d"   'helm-projectile-find-dir
-      "p a"   'helm-projectile-ag
-      "t u"   'undo-tree-visualize
-      "t z"   'zoom-window-zoom
-      "w q"   'evil-window-delete
-      "w o"   'delete-other-windows
-      "w |"   'split-window-right
-      "w -"   'split-window-below
-      "w r"   'hydra-window-resize/body
-      "w z"   'zoom-window-zoom
-      ". s"   'my-funcs/open-snippet-dir
-      ". e"   'my-funcs/open-dotfile
-      ". r"   'my-funcs/reload-dotfile
-      ". l d" 'add-dir-local-variable
-      ". l f" 'add-file-local-variable
-      "? k"   'describe-key
-      "? v"   'describe-variable
-      "? f"   'describe-function
-      "? m"   'describe-mode)
-    (global-set-key (kbd "C-j") 'my-window-funcs/window-down)
-    (global-set-key (kbd "C-k") 'my-window-funcs/window-up)
-    (global-set-key (kbd "C-h") 'my-window-funcs/window-left)
-    (global-set-key (kbd "C-l") 'my-window-funcs/window-right)
-    (global-evil-leader-mode))
+  (require 'my-bindings)
   (evil-mode 1)) ; evil-leader must be enabled before evil
 
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-add-key-based-replacements
-    "SPC TAB" "Last active buffer"
-    "SPC :"   "Execute ex-command"
-    "SPC ~"   "Toggle terminal"
-    "SPC b"   "Buffers"
-    "SPC e"   "Evaluate"
-    "SPC f"   "Files"
-    "SPC p"   "Projects"
-    "SPC t"   "Toggles"
-    "SPC w"   "Windows"
-    "SPC ."   "Dotfiles"
-    "SPC . l" "Dir/File-local variables"
-    "SPC ?"   "Get help")
-  (which-key-mode))
 
 
 (provide 'my-evil)

@@ -1,7 +1,8 @@
 ;;; package --- My custom config for project-stuff
 ;;; Commentary:
 ;;; Code:
-(defconst my-funcs/workgroups-file "~/.emacs.d/workgroups")
+(require 'my-utils)
+(load my/custom-file)
 
 (use-package projectile
   :ensure t
@@ -11,12 +12,12 @@
     :config
     (setq wg-morph-on nil)
     (workgroups-mode 1)
-    (when (file-exists-p my-funcs/workgroups-file)
-      (wg-load my-funcs/workgroups-file))
-    (add-hook 'kill-emacs-hook #'my-funcs/save-workgroups))
+    (when (file-exists-p my/workgroups-file)
+      (wg-load my/workgroups-file))
+    (add-hook 'kill-emacs-hook #'my/save-workgroups))
   (projectile-mode 1))
 
-(defun my-funcs/save-workgroups ()
+(defun my/save-workgroups ()
   (wg-update-all-workgroups-and-save))
 
 

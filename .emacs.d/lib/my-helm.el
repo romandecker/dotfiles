@@ -1,3 +1,6 @@
+;;; package --- My custom helm config
+;;; Commentary:
+;;; Code:
 (use-package helm
   :ensure t
   :config
@@ -20,3 +23,4 @@
 		  :after #'evil-mc-mode))))
 
 (provide 'my-helm)
+;;; my-helm.el ends here

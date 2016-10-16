@@ -8,7 +8,7 @@
  vc-make-backup-files t
  backup-directory-alist '(("" . "~/.emacs.d/backup/per-save")))
 
-(defun my-funcs/force-backup-of-buffer ()
+(defun my/force-backup-of-buffer ()
   ;; Make a special "per session" backup at the first save of each
   ;; emacs session.
   (when (not buffer-backed-up)
@@ -22,6 +22,6 @@
   (let ((buffer-backed-up nil))
     (backup-buffer)))
 
-(add-hook 'before-save-hook  'my-funcs/force-backup-of-buffer)
+(add-hook 'before-save-hook  'my/force-backup-of-buffer)
 
 (provide 'my-backup)
