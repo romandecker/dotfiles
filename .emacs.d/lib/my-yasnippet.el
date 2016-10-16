@@ -1,6 +1,7 @@
 (use-package yasnippet
   :ensure t
   :config
+  (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
   (define-key yas-minor-mode-map [tab] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
 

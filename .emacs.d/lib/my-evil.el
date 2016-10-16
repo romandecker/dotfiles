@@ -7,7 +7,6 @@
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
   (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-
   ; camel-case-motion
   (define-key evil-normal-state-map (kbd "w") 'evil-forward-little-word-begin)
   (define-key evil-normal-state-map (kbd "e") 'evil-forward-little-word-end)

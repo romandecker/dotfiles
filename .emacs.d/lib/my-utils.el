@@ -74,17 +74,17 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 	(if (looking-at "->") t nil)))))
 
 (defun my/do-yas-expand ()
-  (let ((yas/fallback-behavior 'return-nil))
-    (yas/expand)))
+  (let ((yas-fallback-behavior 'return-nil))
+    (yas-expand)))
+
 (defun my/tab-indent-or-complete ()
   (interactive)
-  (message "checking wether or not to indent!")
   (cond
    ((minibufferp)
     (minibuffer-complete))
    (t
     (indent-for-tab-command)
-    (if (or (not yas/minor-mode)
+    (if (or (not yas-minor-mode)
 	    (null (my/do-yas-expand)))
 	(if (my/check-expansion)
 	    (progn
@@ -96,7 +96,7 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 
 (defun my/tab-complete-or-next-field ()
   (interactive)
-  (if (or (not yas/minor-mode)
+  (if (or (not yas-minor-mode)
 	  (null (my/do-yas-expand)))
       (if company-candidates
 	  (company-complete-selection)
@@ -111,7 +111,7 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 
 (defun my/expand-snippet-or-complete-selection ()
   (interactive)
-  (if (or (not yas/minor-mode)
+  (if (or (not yas-minor-mode)
 	  (null (my/do-yas-expand))
 	  (company-abort))
       (company-complete-selection)))

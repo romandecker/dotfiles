@@ -7,6 +7,7 @@ elpa/
 undo/
 backup/
 eshell/
+.yas-compiled-snippets.el
 recentf
 workgroups
 customize.el
