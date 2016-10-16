@@ -26,7 +26,13 @@
       "f r"   'helm-recentf
       "f s"   'save-buffer
       "f d"   'dired-jump
+      "g a"   'magit-stage-file
+      "g b"   'magit-commit
+      "g c"   'magit-commit
+      "g d"   'magit-diff-buffer-file-popup
+      "g l"   'magit-log-buffer-file-popup
       "g s"   'magit-status
+      "g u"   'magit-unstage-file
       "p c"   'wg-create-workgroup
       "p p"   'wg-switch-to-workgroup
       "p f"   'helm-projectile-find-file
