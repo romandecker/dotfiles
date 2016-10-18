@@ -34,6 +34,7 @@
 (require 'my-markdown)
 (require 'my-rainbow-delimiters)
 (require 'my-magit)
+(require 'my-paredit)
 
 (use-package exec-path-from-shell
   :ensure t

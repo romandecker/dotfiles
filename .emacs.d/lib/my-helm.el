@@ -8,6 +8,8 @@
   (define-key helm-map (kbd "C-k") 'helm-previous-line)
   (define-key helm-map (kbd "C-w") 'backward-kill-word)
   (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action) ; complete with tab
+  (setq helm-mode-fuzzy-match t
+	helm-completion-in-region-fuzzy-match t)
   (helm-mode 1)
   (use-package helm-projectile
     :ensure t
