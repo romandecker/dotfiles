@@ -33,6 +33,9 @@
       "g l"   'magit-log-buffer-file-popup
       "g s"   'magit-status
       "g u"   'magit-unstage-file
+      "o c"   'org-capture
+      "o y"   'org-store-link
+      "o p"   'org-insert-link
       "p c"   'wg-create-workgroup
       "p p"   'wg-switch-to-workgroup
       "p f"   'helm-projectile-find-file
@@ -73,6 +76,7 @@
     "SPC e"   "Evaluate"
     "SPC f"   "Files"
     "SPC g"   "Git"
+    "SPC o"   "Org"
     "SPC p"   "Projects"
     "SPC t"   "Toggles"
     "SPC w"   "Windows"
