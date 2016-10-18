@@ -54,6 +54,7 @@
 
 (use-package undo-tree
   :ensure t
+  :defer 5
   :config
   (global-undo-tree-mode))
 

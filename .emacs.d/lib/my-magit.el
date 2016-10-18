@@ -3,6 +3,9 @@
 ;;; Code:
 (use-package evil-magit
   :ensure t
-  :config)
+  :defer 5
+  :config
+  (message "evil-magit has loaded!"))
+
 (provide 'my-magit)
 ;;; my-magit.el ends here

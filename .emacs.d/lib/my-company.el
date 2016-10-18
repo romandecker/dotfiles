@@ -3,6 +3,7 @@
 ;;; Code
 (use-package company
   :ensure t
+  :defer 1
   :bind (:map company-active-map
 	      ("M-n" . nil)
 	      ("M-p" . nil)
@@ -16,7 +17,8 @@
   (setq company-idle-delay 0.2
 	company-minimum-prefix-length 2)
   (nconc company-backends '(company-yasnippet))
-  (global-company-mode))
+  (global-company-mode)
+  (message "company has loaded!"))
 
 (provide 'my-company)
 ;;; my-company.el ends here
