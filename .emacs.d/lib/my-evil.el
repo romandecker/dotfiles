@@ -18,6 +18,7 @@
   (define-key evil-visual-state-map (kbd "e") 'evil-forward-little-word-end)
   (define-key evil-visual-state-map (kbd "b") 'evil-backward-little-word-begin)
 
+
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (use-package evil-surround
     :ensure t
@@ -42,6 +43,8 @@
     :config
     (define-key evil-normal-state-map (kbd "C-n") 'my/smart-c-n)
     (evil-define-key 'normal evil-mc-key-map (kbd "C-n") 'my/smart-c-n)
+    (define-key evil-normal-state-map (kbd "C-p") 'my/ctrlp-dwim)
+    (evil-define-key 'normal evil-mc-key-map (kbd "C-p") 'my/ctrlp-dwim)
     (global-evil-mc-mode 1))
   (use-package evil-exchange
     :ensure t
@@ -54,8 +57,7 @@
     (evil-commentary-mode))
   (require 'evil-little-word)
   (require 'my-bindings)
+  (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
   (evil-mode 1)) ; evil-leader must be enabled before evil
-
-
 
 (provide 'my-evil)

@@ -254,5 +254,18 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (my/window-move 'evil-window-right))
 
+(defun my/switch-to-messages()
+  (interactive)
+  (switch-to-buffer (messages-buffer)))
+
+(defun my/ctrlp-dwim ()
+  (interactive)
+  (if (evil-mc-has-cursors-p)
+      (progn 
+	(message "Fake cursors exist!")
+	(evil-mc-make-and-goto-prev-match))
+    (helm-projectile-find-file)))
+
+
 (provide 'my-utils)
 ;;; my-utils.el ends here

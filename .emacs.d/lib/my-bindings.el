@@ -16,7 +16,7 @@
       "b n"   'next-buffer
       "b p"   'previous-buffer
       "b d"   'kill-this-buffer
-      "b m"   (lambda () (interactive) (switch-to-buffer (messages-buffer)))
+      "b m"   'my/switch-to-messages
       "j"     'previous-buffer
       "k"     'next-buffer
       "f f"   'helm-find-files
