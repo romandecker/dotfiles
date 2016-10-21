@@ -18,7 +18,6 @@
   (define-key evil-visual-state-map (kbd "e") 'evil-forward-little-word-end)
   (define-key evil-visual-state-map (kbd "b") 'evil-backward-little-word-begin)
 
-
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (use-package evil-surround
     :ensure t

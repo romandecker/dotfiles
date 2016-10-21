@@ -20,6 +20,7 @@
 (require 'my-config)
 (require 'my-utils)
 (require 'my-evil)
+(require 'my-org)
 (require 'my-dired)
 (require 'my-term)
 (require 'my-helm)
