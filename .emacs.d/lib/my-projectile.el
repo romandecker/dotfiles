@@ -5,6 +5,16 @@
 (when (file-exists-p my/custom-file)
   (load my/custom-file))
 
+(defun my/wg-switch-hook ()
+  "Installed as a hook for wg-switch-hook.  When we land on an 'empty' project
+after switch, open projectile's switch dialog with the workgroup's
+name preselected."
+  (when (string= "*scratch*" (buffer-name (current-buffer)))
+    (helm
+     :sources '(helm-source-projectile-projects)
+     :input (wg-name (wg-current-workgroup)))
+    (helm-projectile-switch-project)))
+
 (use-package projectile
   :ensure t
   :config
@@ -22,14 +32,6 @@
 (defun my/save-workgroups ()
   (when (wg-list t)
     (wg-update-all-workgroups-and-save)))
-
-(defun my/wg-switch-hook ()
-  (when (string= "*scratch*" (buffer-name (current-buffer)))
-    (helm
-     :sources '(helm-source-projectile-projects)
-     :input (wg-name (wg-current-workgroup)))
-    (helm-projectile-switch-project)))
-
 
 (provide 'my-projectile)
 ;;; my-projectile.el ends here

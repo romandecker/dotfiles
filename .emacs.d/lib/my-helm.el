@@ -22,7 +22,10 @@
       :ensure t
       :config
       (advice-add 'helm-ag--edit
-		  :after #'evil-mc-mode))))
+		  :after #'evil-mc-mode)))
+  (use-package helm-descbinds
+    :ensure t
+    :config))
 
 (provide 'my-helm)
 ;;; my-helm.el ends here

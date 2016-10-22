@@ -54,6 +54,7 @@
       ". r"   'my/reload-dotfile
       ". l d" 'add-dir-local-variable
       ". l f" 'add-file-local-variable
+      "? b"   'helm-descbinds
       "? k"   'describe-key
       "? v"   'describe-variable
       "? f"   'describe-function
@@ -64,6 +65,15 @@
 (global-set-key (kbd "C-k") 'my/window-up)
 (global-set-key (kbd "C-h") 'my/window-left)
 (global-set-key (kbd "C-l") 'my/window-right)
+
+(use-package buffer-move
+  :ensure t
+  :config
+  (global-set-key (kbd "C-S-j") 'buf-move-down)
+  (global-set-key (kbd "C-S-k") 'buf-move-up)
+  (global-set-key (kbd "C-S-h") 'buf-move-left)
+  (global-set-key (kbd "C-S-l") 'buf-move-right))
+
 
 (use-package which-key
   :ensure t

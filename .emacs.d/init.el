@@ -36,6 +36,7 @@
 (require 'my-rainbow-delimiters)
 (require 'my-magit)
 (require 'my-paredit)
+(require 'my-prog)
 
 (use-package exec-path-from-shell
   :ensure t
