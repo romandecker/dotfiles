@@ -13,6 +13,11 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(defvaralias 'my/custom-file 'custom-file)
+(defconst my/custom-file "~/.emacs.d/customize.el")
+(when (file-exists-p my/custom-file)
+  (load my/custom-file))
+
 (use-package diminish
   :ensure t
   :config)
@@ -44,6 +49,7 @@
 (require 'my-paredit)
 (require 'my-powerline)
 (require 'my-prog)
+(require 'my-powerline)
 
 (use-package exec-path-from-shell
   :ensure t

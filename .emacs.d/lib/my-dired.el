@@ -1,3 +1,6 @@
+;;; package --- My custom dired config
+;;; Commentary:
+;;; Code:
 (require 'dired-x)
 
 (setq dired-listing-switches "-alh"
@@ -12,7 +15,7 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 (eval-after-load 'evil
-  '(progn 
+  '(progn
     (evil-define-key 'normal dired-mode-map
       (kbd "h")   'my/dired-up-directory
       (kbd "RET") 'dired-find-alternate-file
@@ -34,3 +37,4 @@
   )
 
 (provide 'my-dired)
+;;; my-dired.el ends here

@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (require 'my-utils)
-(when (file-exists-p my/custom-file)
-  (load my/custom-file))
 
 (defun my/wg-switch-hook ()
   "Installed as a hook for wg-switch-hook.  When we land on an 'empty' project

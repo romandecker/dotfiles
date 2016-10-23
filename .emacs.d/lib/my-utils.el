@@ -3,10 +3,8 @@
 ;;; Code:
 (defconst my/dotfile "~/.emacs.d/init.el")
 (defconst my/electric-pairs '(("(" . ")") ("[" . "]") ("{" . "}")))
-(defconst my/workgroups-file "~/.emacs.d/workgroups")
+(defconst my/workgroups-file (expand-file-name "~/.emacs.d/workgroups"))
 
-(defvaralias 'my/custom-file 'custom-file)
-(defconst my/custom-file "~/.emacs.d/customize.el")
 
 (defun my/reload-dotfile ()
   "Reload '~/.emacs.d/init.el'."

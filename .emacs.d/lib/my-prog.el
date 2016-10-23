@@ -18,7 +18,18 @@
 (use-package whitespace-cleanup-mode
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'whitespace-cleanup-mode))
+  (add-hook 'prog-mode-hook #'whitespace-cleanup-mode))
+
+(require 'whitespace)
+(setq-default show-trailing-whitespace t)
+
+(defun my/hide-trailing-whitespace ()
+  (setq show-trailing-whitespace nil))
+
+(add-hook 'minibuffer-setup-hook #'my/hide-trailing-whitespace)
+(add-hook 'helm-mode-hook #'my/hide-trailing-whitespace)
+(add-hook 'term-mode-hook #'my/hide-trailing-whitespace)
+
 
 (provide 'my-prog)
 ;;; my-prog.el ends here
