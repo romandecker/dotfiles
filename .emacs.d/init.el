@@ -43,7 +43,7 @@
 (require 'my-magit)
 (require 'my-paredit)
 (require 'my-powerline)
-
+(require 'my-prog)
 
 (use-package exec-path-from-shell
   :ensure t
