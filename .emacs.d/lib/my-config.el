@@ -15,10 +15,11 @@
 (electric-pair-mode 1)
 
 (set-default 'truncate-lines t)
-(mapcar
- (lambda (hook) (add-hook hook (lambda () (setq truncate-lines nil))))
- '(message-mode-hook))
+(-each '(message-mode-hook)
+ (lambda (hook) (add-hook hook (lambda () (message "turning truncate off!")(setq truncate-lines nil)))))
 
-(add-hook 'message-mode-hook (lambda () (setq truncate-lines nil)))
+; always wrap around in messages buffer
+(with-current-buffer (messages-buffer)
+  (setq-local truncate-lines nil))
 
 (provide 'my-config)

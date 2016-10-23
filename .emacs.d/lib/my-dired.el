@@ -1,6 +1,14 @@
 (require 'dired-x)
 
-(setq dired-listing-switches "-alh")
+(setq dired-listing-switches "-alh"
+      dired-dwim-target t
+      dired-recursive-copies 'always
+      dired-recursive-deletes 'always)
+
+(setq-default dired-omit-mode t
+	      dired-omit-verbose nil
+	      dired-omit-files "^(\\.\\|\\.\\.)$")
+
 (put 'dired-find-alternate-file 'disabled nil)
 
 (eval-after-load 'evil
@@ -19,5 +27,10 @@
       (kbd "N")   'evil-search-previous
       (kbd "y")   'dired-do-copy
       (kbd "q")   'kill-this-buffer)))
+
+(use-package dired-details+
+  :ensure t
+  :config
+  )
 
 (provide 'my-dired)

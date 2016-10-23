@@ -17,6 +17,12 @@
   :ensure t
   :config)
 
+; general-purpose string-manipulation library
+(use-package s :ensure t :config)
+
+; general-purpose list library (-map, etc...)
+(use-package dash :ensure t :config)
+
 (require 'my-config)
 (require 'my-utils)
 (require 'my-evil)
@@ -36,16 +42,14 @@
 (require 'my-rainbow-delimiters)
 (require 'my-magit)
 (require 'my-paredit)
+(require 'my-powerline)
+
 
 (use-package exec-path-from-shell
   :ensure t
   :config
   (exec-path-from-shell-initialize))
 
-; general-purpose string-manipulation library
-(use-package s
-  :ensure t
-  :config)
 
 (use-package zoom-window
   :ensure t
