@@ -1,10 +1,14 @@
 (require 'dired-x)
 
-(setq dired-listing-switches "-alh")
+(setq dired-listing-switches "-alh"
+      dired-recursive-copies 'always
+      dired-recursive-deletes 'always
+      dired-dwim-target t)
+
 (put 'dired-find-alternate-file 'disabled nil)
 
 (eval-after-load 'evil
-  '(progn 
+  '(progn
     (evil-define-key 'normal dired-mode-map
       (kbd "h")   'my/dired-up-directory
       (kbd "RET") 'dired-find-alternate-file
