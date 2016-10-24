@@ -43,12 +43,15 @@
       "p /"   'helm-projectile-ag
       "t u"   'undo-tree-visualize
       "t z"   'zoom-window-zoom
-      "w q"   'evil-window-delete
+      "t n"   'linum-mode
+      "w u"   'winner-undo
+      "w C-r" 'winner-redo
       "w o"   'delete-other-windows
-      "w |"   'split-window-right
-      "w -"   'split-window-below
+      "w q"   'evil-window-delete
       "w r"   'hydra-window-resize/body
       "w z"   'zoom-window-zoom
+      "w |"   'split-window-right
+      "w -"   'split-window-below
       ". s"   'my/open-snippet-dir
       ". e"   'my/open-dotfile
       ". r"   'my/reload-dotfile

@@ -19,10 +19,16 @@
   (define-key evil-visual-state-map (kbd "b") 'evil-backward-little-word-begin)
 
   ;; Make movement keys work like they should
-  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-normal-state-map
+    (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map
+    (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map
+    (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map
+    (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
+  (define-key evil-normal-state-map (kbd "0") 'my/goto-bol-dwim)
 
   ; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
@@ -42,7 +48,9 @@
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))
 
-  (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+  (evil-define-key 'normal emacs-lisp-mode-map
+    (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+
   (use-package evil-surround
     :ensure t
     :config

@@ -11,9 +11,10 @@
 
 (tool-bar-mode -1)     ; disable the tool-bar
 (menu-bar-mode -1)     ; disable the menu-bar
-(global-linum-mode 1)  ; show line-numbers everywhere
 (show-paren-mode)
 (electric-pair-mode 1)
+(winner-mode 1)
+(add-hook 'prog-mode-hook #'linum-mode)
 
 (set-face-attribute 'default nil :height 115)
 

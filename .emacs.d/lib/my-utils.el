@@ -264,6 +264,13 @@ Repeated invocations toggle between the two most recently open buffers."
     (helm-projectile-find-file)))
 
 
+(defun my/goto-bol-dwim ()
+  "Move point to `beginning-of-line`.
+If repeated, cycle position between `back-to-indentation` and `beginning of line`"
+  (interactive "^")
+  (if (= (point) (progn (back-to-indentation) (point)))
+      (beginning-of-line)))
+
 
 (provide 'my-utils)
 ;;; my-utils.el ends here
