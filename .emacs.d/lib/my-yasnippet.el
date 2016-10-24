@@ -3,6 +3,8 @@
   :after company
   :config
   (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
+  (add-to-list 'yas-key-syntaxes 'yas-longest-key-from-newline)
+
   (define-key yas-minor-mode-map [tab] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
 
@@ -14,4 +16,13 @@
   (yas-global-mode 1)
   (message "yasnippet has loaded!"))
 
+
 (provide 'my-yasnippet)
+
+(defun yas-longest-key-from-newline (start-point)
+  "Look for snippet keys between point and last newline, longer first."
+  (if (= (point) start-point)
+      (skip-chars-backward "^\n")
+    (forward-char))
+  (unless (<= start-point (1+ (point)))
+    'again))

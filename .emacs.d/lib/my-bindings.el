@@ -8,7 +8,6 @@
     :config
     (evil-leader/set-leader "SPC")
     (evil-leader/set-key
-      "SPC"   'helm-mini
       ":"     'helm-M-x
       "~"     'my/toggle-project-term
       "TAB"   'my/switch-to-last-buffer
@@ -38,9 +37,10 @@
       "o p"   'org-insert-link
       "p c"   'wg-create-workgroup
       "p p"   'wg-switch-to-workgroup
+      "p P"   'helm-projectile-switch-project
       "p f"   'helm-projectile-find-file
       "p d"   'helm-projectile-find-dir
-      "p a"   'helm-projectile-ag
+      "p /"   'helm-projectile-ag
       "t u"   'undo-tree-visualize
       "t z"   'zoom-window-zoom
       "w q"   'evil-window-delete
@@ -55,10 +55,12 @@
       ". l d" 'add-dir-local-variable
       ". l f" 'add-file-local-variable
       "? b"   'helm-descbinds
-      "? k"   'describe-key
-      "? v"   'describe-variable
       "? f"   'describe-function
-      "? m"   'describe-mode)
+      "? F"   'describe-font
+      "? k"   'describe-key
+      "? m"   'describe-mode
+      "? s"   'yas-describe-tables
+      "? v"   'describe-variable)
     (global-evil-leader-mode))
 
 (global-set-key (kbd "C-j") 'my/window-down)
@@ -79,6 +81,7 @@
   :ensure t
   :config
   (which-key-add-key-based-replacements
+    "SPC SPC" "Mode-specifc things"
     "SPC TAB" "Last active buffer"
     "SPC :"   "Execute ex-command"
     "SPC ~"   "Toggle terminal"

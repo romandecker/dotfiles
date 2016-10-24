@@ -1,7 +1,6 @@
 (setq
  inhibit-startup-screen t
- x-select-enable-clipboard t
- uniquify-buffer-name-style "post-forward")
+ x-select-enable-clipboard t)
 
 ; tabs are evil
 (setq-default
@@ -15,6 +14,8 @@
 (global-linum-mode 1)  ; show line-numbers everywhere
 (show-paren-mode)
 (electric-pair-mode 1)
+
+(set-face-attribute 'default nil :height 115)
 
 (set-default 'truncate-lines t)
 (-each '(message-mode-hook)

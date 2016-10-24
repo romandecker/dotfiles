@@ -21,7 +21,8 @@
   (add-hook 'prog-mode-hook #'whitespace-cleanup-mode))
 
 (require 'whitespace)
-(setq-default show-trailing-whitespace t)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(global-whitespace-mode)
 
 (defun my/hide-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
@@ -29,7 +30,6 @@
 (add-hook 'minibuffer-setup-hook #'my/hide-trailing-whitespace)
 (add-hook 'helm-mode-hook #'my/hide-trailing-whitespace)
 (add-hook 'term-mode-hook #'my/hide-trailing-whitespace)
-
 
 (provide 'my-prog)
 ;;; my-prog.el ends here

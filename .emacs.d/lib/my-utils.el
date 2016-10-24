@@ -19,17 +19,17 @@
 (defun my/get-pair ()
   "Get the according pair around the point or return nil if point is not inside an adjacent pair."
   (let ((preceding (string (preceding-char)))
-	(following (string (following-char))))
+  (following (string (following-char))))
     (let ((match (cdr (assoc preceding my/electric-pairs))))
       (if (equal following match)
-	  match
-	nil))))
+    match
+  nil))))
 
 (defun my/smart-space ()
   "Insert a space at point, and if inside and adjacent pair, also insert another space to keep whitespace balanced."
   (interactive) (when (my/get-pair)
-		  (insert " ")
-		  (backward-char))
+      (insert " ")
+      (backward-char))
   (insert " "))
 
 (defun my/smart-delete ()
@@ -37,22 +37,22 @@
 If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
   (interactive)
   (let ((preceding (string (preceding-char)))
-	(following (string (following-char))))
+  (following (string (following-char))))
     (if (and (equal preceding " ") (equal following " "))
-	(let ((before (string (char-before (- (point) 1))))
-	      (after (string (char-after (+ (point) 1)))))
-	  (let ((match (cdr (assoc before my/electric-pairs))))
-	    (if (equal after match)
-		(progn
-					; between spaces and brackets -> delete both spaces first
-		  (delete-backward-char 1)
-		  (delete-char 1))
-					; between spaces, but not between brackets -> normal delete
-	      (delete-backward-char 1))))
+  (let ((before (string (char-before (- (point) 1))))
+        (after (string (char-after (+ (point) 1)))))
+    (let ((match (cdr (assoc before my/electric-pairs))))
+      (if (equal after match)
+    (progn
+          ; between spaces and brackets -> delete both spaces first
+      (delete-backward-char 1)
+      (delete-char 1))
+          ; between spaces, but not between brackets -> normal delete
+        (delete-backward-char 1))))
       ;; we're not even between spaces, perform "normal" delete, optionally deleting a pair
       (if (my/get-pair)
-	  (electric-pair-delete-pair 1)
-	(delete-backward-char 1)))))
+    (electric-pair-delete-pair 1)
+  (delete-backward-char 1)))))
 
 
 (defun my/dired-up-directory ()
@@ -68,8 +68,8 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
     (if (looking-at "\\_>") t
       (backward-char 1)
       (if (looking-at "\\.") t
-	(backward-char 1)
-	(if (looking-at "->") t nil)))))
+  (backward-char 1)
+  (if (looking-at "->") t nil)))))
 
 (defun my/do-yas-expand ()
   (let ((yas-fallback-behavior 'return-nil))
@@ -83,35 +83,35 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
    (t
     (indent-for-tab-command)
     (if (or (not yas-minor-mode)
-	    (null (my/do-yas-expand)))
-	(if (my/check-expansion)
-	    (progn
-	      (company-manual-begin)
-	      (if (null company-candidates)
-		  (progn
-		    (company-abort)
-		    (indent-for-tab-command)))))))))
+      (null (my/do-yas-expand)))
+  (if (my/check-expansion)
+      (progn
+        (company-manual-begin)
+        (if (null company-candidates)
+      (progn
+        (company-abort)
+        (indent-for-tab-command)))))))))
 
 (defun my/tab-complete-or-next-field ()
   (interactive)
   (if (or (not yas-minor-mode)
-	  (null (my/do-yas-expand)))
+    (null (my/do-yas-expand)))
       (if company-candidates
-	  (company-complete-selection)
-	(if (my/check-expansion)
-	    (progn
-	      (company-manual-begin)
-	      (if (null company-candidates)
-		  (progn
-		    (company-abort)
-		    (yas-next-field))))
-	  (yas-next-field)))))
+    (company-complete-selection)
+  (if (my/check-expansion)
+      (progn
+        (company-manual-begin)
+        (if (null company-candidates)
+      (progn
+        (company-abort)
+        (yas-next-field))))
+    (yas-next-field)))))
 
 (defun my/expand-snippet-or-complete-selection ()
   (interactive)
   (if (or (not yas-minor-mode)
-	  (null (my/do-yas-expand))
-	  (company-abort))
+    (null (my/do-yas-expand))
+    (company-abort))
       (company-complete-selection)))
 
 (defun my/abort-company-or-yas ()
@@ -123,7 +123,7 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 (defun my/open-snippet-dir ()
   (interactive)
   (let* ((dir (file-name-as-directory (car yas-snippet-dirs)))
-	 (path (concat dir (symbol-name major-mode))))
+   (path (concat dir (symbol-name major-mode))))
     (dired path)))
 
 (defun my/resize-window-down ()
@@ -164,11 +164,11 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
   "Determines whether or not the given BUFFER is useful."
   (let ((buf-name (buffer-name buffer)))
     (or (with-current-buffer buffer
-	  (derived-mode-p 'comint-mode))
-	(cl-loop for useful-regexp in my/useful-buffers-regexp
-		 thereis (string-match-p useful-regexp buf-name))
-	(cl-loop for useless-regexp in my/useless-buffers-regexp
-		 never (string-match-p useless-regexp buf-name)))))
+    (derived-mode-p 'comint-mode))
+  (cl-loop for useful-regexp in my/useful-buffers-regexp
+     thereis (string-match-p useful-regexp buf-name))
+  (cl-loop for useless-regexp in my/useless-buffers-regexp
+     never (string-match-p useless-regexp buf-name)))))
 
 (let ((buf-pred-entry (assq 'buffer-predicate default-frame-alist)))
   (if buf-pred-entry
@@ -190,32 +190,31 @@ keep adding cursors in multiple cursor mode."
   (interactive "p\np")
   (setq arg (if arg arg 1))
   (if (and allow-extend
-	   (or (and (eq last-command this-command) (mark t))
-	       (region-active-p)))
+     (or (and (eq last-command this-command) (mark t))
+         (region-active-p)))
       (set-mark
        (save-excursion
-	 (when (< (mark) (point))
-	   (setq arg (- arg)))
-	 (goto-char (mark))
-	 (forward-word arg)
-	 (point)))
+   (when (< (mark) (point))
+     (setq arg (- arg)))
+   (goto-char (mark))
+   (forward-word arg)
+   (point)))
     (let ((wbounds (bounds-of-thing-at-point 'word)))
       (unless (consp wbounds)
-	(error "No word at point"))
+  (error "No word at point"))
       (if (>= arg 0)
-	  (goto-char (car wbounds))
-	(goto-char (cdr wbounds)))
+    (goto-char (car wbounds))
+  (goto-char (cdr wbounds)))
       (push-mark (save-excursion
-		   (forward-word arg)
-		   (point)))
+       (forward-word arg)
+       (point)))
       (activate-mark))))
 
 (defun my/dired-create-file (file)
   (interactive
    (list
-    (read-file-name "Create file: "
-		    (dired-current-directory))))
-  (write-region "" nil (expand-file-name file) t) 
+    (read-file-name "Create file: " (dired-current-directory))))
+  (write-region "" nil (expand-file-name file) t)
   (dired-add-file file)
   (revert-buffer)
   (dired-goto-file (expand-file-name file)))
@@ -259,10 +258,11 @@ Repeated invocations toggle between the two most recently open buffers."
 (defun my/ctrlp-dwim ()
   (interactive)
   (if (evil-mc-has-cursors-p)
-      (progn 
-	(message "Fake cursors exist!")
-	(evil-mc-make-and-goto-prev-match))
+      (progn
+  (message "Fake cursors exist!")
+  (evil-mc-make-and-goto-prev-match))
     (helm-projectile-find-file)))
+
 
 
 (provide 'my-utils)

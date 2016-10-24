@@ -26,9 +26,21 @@
 
   ; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
-  
+
+
+
+  ; d deletes to black-hole, m ("move" deletes and yanks)
+  (evil-define-operator my/delete-to-blackhole (beg end type yank-handler)
+    (interactive "<R><y>")
+    (evil-delete beg end type ?_ yank-handler))
+
+  (define-key evil-normal-state-map (kbd "d") 'my/delete-to-blackhole)
+  (define-key evil-visual-state-map (kbd "d") 'my/delete-to-blackhole)
+  (define-key evil-normal-state-map (kbd "m") 'evil-delete)
+  (define-key evil-visual-state-map (kbd "m") 'evil-delete)
+
   (setq evil-insert-state-cursor '((bar . 3) "red")
-	evil-normal-state-cursor '(box "black"))
+        evil-normal-state-cursor '(box "black"))
 
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (use-package evil-surround
