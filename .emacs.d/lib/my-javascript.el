@@ -15,6 +15,9 @@
     :ensure t
     :config
     (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    (evil-define-key 'normal js2-mode-map
+      (kbd "] ]") 'js2r-forward-slurp
+      (kbd "] [") 'js2r-forward-barf)
     (evil-leader/set-key-for-mode 'js2-mode
       "SPC e f" 'js2r-extract-function
       "SPC e m" 'js2r-extract-method
@@ -34,7 +37,7 @@
       "SPC SPC e" "Extract..."
       "SPC SPC j" "Join..."
       "SPC SPC s" "Split...")))
-    
+
 (use-package mocha
   :ensure t
   :config)

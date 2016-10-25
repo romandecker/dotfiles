@@ -2,6 +2,8 @@
   :ensure t
   :after company
   :config
+  (setq
+   yas-snippet-dirs "~/.emacs.d/snippets")
   (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
   (add-to-list 'yas-key-syntaxes 'yas-longest-key-from-newline)
 

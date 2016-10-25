@@ -9,8 +9,8 @@
       dired-recursive-deletes 'always)
 
 (setq-default dired-omit-mode t
-	      dired-omit-verbose nil
-	      dired-omit-files "^(\\.\\|\\.\\.)$")
+        dired-omit-verbose nil
+        dired-omit-files "^(\\.\\|\\.\\.)$")
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -18,6 +18,7 @@
   '(progn
     (evil-define-key 'normal dired-mode-map
       (kbd "h")   'my/dired-up-directory
+      (kbd "DEL")   'my/dired-up-directory
       (kbd "RET") 'dired-find-alternate-file
       (kbd "l")   'dired-find-alternate-file
       (kbd "c")   'dired-do-rename

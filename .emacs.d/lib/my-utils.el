@@ -16,45 +16,6 @@
   (interactive)
   (find-file my/dotfile))
 
-(defun my/get-pair ()
-  "Get the according pair around the point or return nil if point is not inside an adjacent pair."
-  (let ((preceding (string (preceding-char)))
-  (following (string (following-char))))
-    (let ((match (cdr (assoc preceding my/electric-pairs))))
-      (if (equal following match)
-    match
-  nil))))
-
-(defun my/smart-space ()
-  "Insert a space at point, and if inside and adjacent pair, also insert another space to keep whitespace balanced."
-  (interactive) (when (my/get-pair)
-      (insert " ")
-      (backward-char))
-  (insert " "))
-
-(defun my/smart-delete ()
-  "Delete a character. If inside an adjacent pair, also delete the according closing character.
-If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
-  (interactive)
-  (let ((preceding (string (preceding-char)))
-  (following (string (following-char))))
-    (if (and (equal preceding " ") (equal following " "))
-  (let ((before (string (char-before (- (point) 1))))
-        (after (string (char-after (+ (point) 1)))))
-    (let ((match (cdr (assoc before my/electric-pairs))))
-      (if (equal after match)
-    (progn
-          ; between spaces and brackets -> delete both spaces first
-      (delete-backward-char 1)
-      (delete-char 1))
-          ; between spaces, but not between brackets -> normal delete
-        (delete-backward-char 1))))
-      ;; we're not even between spaces, perform "normal" delete, optionally deleting a pair
-      (if (my/get-pair)
-    (electric-pair-delete-pair 1)
-  (delete-backward-char 1)))))
-
-
 (defun my/dired-up-directory ()
   "Take dired up one directory, but behave like dired-find-alternative-file (leave no orphan buffer)"
   (interactive)
@@ -158,7 +119,8 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
 (defvar my/useless-buffers-regexp '("*\.\+")
   "Regexp used to determine if a buffer is not useful.")
 (defvar my/useful-buffers-regexp '("\\*scratch\\*")
-  "Regexp used to define buffers that are useful despite matching `my/useless-buffers-regexp'.")
+  "Regexp used to define buffers that are useful despite matching
+  `my/useless-buffers-regexp'.")
 
 (defun my/useful-buffer-p (buffer)
   "Determines whether or not the given BUFFER is useful."
@@ -178,8 +140,9 @@ If inside a pair with spaces, e.g. `( | )` delete both spaces symmetrically''"
     (push '(buffer-predicate . my/useful-buffer-p) default-frame-alist)))
 
 (defun my/smart-c-n ()
-  "Better C-n in normal mode. Will select the current word if not already using multiple cursors. Else,
-keep adding cursors in multiple cursor mode."
+  "Better C-n in normal mode. Will select the current word if not
+already using multiple cursors. Else, keep adding cursors in multiple
+cursor mode."
   (interactive)
   (if (evil-mc-has-cursors-p)
       (evil-mc-make-and-goto-next-match)
@@ -259,7 +222,6 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (if (evil-mc-has-cursors-p)
       (progn
-  (message "Fake cursors exist!")
   (evil-mc-make-and-goto-prev-match))
     (helm-projectile-find-file)))
 
@@ -271,6 +233,12 @@ If repeated, cycle position between `back-to-indentation` and `beginning of line
   (if (= (point) (progn (back-to-indentation) (point)))
       (beginning-of-line)))
 
+(defun my/reload-dir-locals ()
+  "Reload all directory-local-variables. Also reloads all snippets."
+  (interactive)
+  (hack-dir-local-variables)
+  (hack-local-variables-apply)
+  (yas-reload-all))
 
 (provide 'my-utils)
 ;;; my-utils.el ends here

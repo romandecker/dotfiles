@@ -57,6 +57,7 @@
       ". r"   'my/reload-dotfile
       ". l d" 'add-dir-local-variable
       ". l f" 'add-file-local-variable
+      ". l r" 'my/reload-dir-locals
       "? b"   'helm-descbinds
       "? f"   'describe-function
       "? F"   'describe-font

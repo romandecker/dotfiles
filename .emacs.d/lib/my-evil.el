@@ -1,8 +1,8 @@
 (use-package evil
   :ensure t
   :config
-  (define-key evil-insert-state-map (kbd "SPC") 'my/smart-space)
-  (define-key evil-insert-state-map (kbd "DEL") 'my/smart-delete)
+  ;(define-key evil-insert-state-map (kbd "SPC") 'my/smart-space)
+  ;(define-key evil-insert-state-map (kbd "DEL") 'my/smart-delete)
   (define-key evil-insert-state-map [tab] 'my/tab-indent-or-complete)
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
   (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
@@ -32,8 +32,6 @@
 
   ; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
-
-
 
   ; d deletes to black-hole, m ("move" deletes and yanks)
   (evil-define-operator my/delete-to-blackhole (beg end type yank-handler)
@@ -81,6 +79,7 @@
     :ensure t
     :config
     (setq evil-exchange-key (kbd "gx"))
+    (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode)
     (evil-exchange-install))
   (use-package evil-commentary
     :ensure t
@@ -89,6 +88,11 @@
   (require 'evil-little-word)
   (require 'my-bindings)
   (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
+
+  (require 'delim-pad)
+  (delim-pad-mode 1)
+
+
   (evil-mode 1)) ; evil-leader must be enabled before evil
 
 (provide 'my-evil)

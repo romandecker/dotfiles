@@ -2,12 +2,13 @@
   :ensure t
   :mode (("\\.org$" . org-mode))
   :config
-  (setq org-default-notes-file "~/Dropbox/org/notes.org"
-	org-log-done t)
+  (setq
+   org-default-notes-file "~/Dropbox/org/notes.org"
+   org-log-done t)
   (use-package org-bullets
     :ensure t
     :config
-    (add-hook 'org-mode-hook (lambda () (message "enabling org-bullets!") (org-bullets-mode 1))))
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
   (use-package org-beautify-theme
     :ensure t
     :config)
@@ -24,8 +25,9 @@
       (kbd "C-k") 'my/window-up
       (kbd "C-h") 'my/window-left
       (kbd "C-l") 'my/window-right
-      (kbd "<") 'org-metaleft
-      (kbd ">") 'org-metaright))
+      (kbd "<")   'org-metaleft
+      (kbd ">")   'org-metaright
+      (kbd "S-j") 'evil-join))
 
   (evil-define-key 'insert org-mode-map
     (kbd "TAB") 'org-cycle
