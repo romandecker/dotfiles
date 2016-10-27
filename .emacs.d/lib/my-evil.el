@@ -1,8 +1,8 @@
 (use-package evil
   :ensure t
   :config
-  (define-key evil-insert-state-map (kbd "SPC") 'my/smart-space)
-  (define-key evil-insert-state-map (kbd "DEL") 'my/smart-delete)
+  ;(define-key evil-insert-state-map (kbd "SPC") 'my/smart-space)
+  ;(define-key evil-insert-state-map (kbd "DEL") 'my/smart-delete)
   (define-key evil-insert-state-map [tab] 'my/tab-indent-or-complete)
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
   (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
@@ -18,8 +18,37 @@
   (define-key evil-visual-state-map (kbd "e") 'evil-forward-little-word-end)
   (define-key evil-visual-state-map (kbd "b") 'evil-backward-little-word-begin)
 
+  ;; Make movement keys work like they should
+  (define-key evil-normal-state-map
+    (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map
+    (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map
+    (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map
+    (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 
-  (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+  (define-key evil-normal-state-map (kbd "0") 'my/goto-bol-dwim)
+
+  ; Make horizontal movement cross lines
+  (setq-default evil-cross-lines t)
+
+  ; d deletes to black-hole, m ("move" deletes and yanks)
+  (evil-define-operator my/delete-to-blackhole (beg end type yank-handler)
+    (interactive "<R><y>")
+    (evil-delete beg end type ?_ yank-handler))
+
+  (define-key evil-normal-state-map (kbd "d") 'my/delete-to-blackhole)
+  (define-key evil-visual-state-map (kbd "d") 'my/delete-to-blackhole)
+  (define-key evil-normal-state-map (kbd "m") 'evil-delete)
+  (define-key evil-visual-state-map (kbd "m") 'evil-delete)
+
+  (setq evil-insert-state-cursor '((bar . 3) "red")
+        evil-normal-state-cursor '(box "black"))
+
+  (evil-define-key 'normal emacs-lisp-mode-map
+    (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+
   (use-package evil-surround
     :ensure t
     :config
@@ -50,6 +79,7 @@
     :ensure t
     :config
     (setq evil-exchange-key (kbd "gx"))
+    (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode)
     (evil-exchange-install))
   (use-package evil-commentary
     :ensure t
@@ -58,6 +88,11 @@
   (require 'evil-little-word)
   (require 'my-bindings)
   (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
+
+  (require 'delim-pad)
+  (delim-pad-mode 1)
+
+
   (evil-mode 1)) ; evil-leader must be enabled before evil
 
 (provide 'my-evil)

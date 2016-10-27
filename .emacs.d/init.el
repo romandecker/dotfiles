@@ -13,13 +13,25 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(defvaralias 'my/custom-file 'custom-file)
+(defconst my/custom-file "~/.emacs.d/customize.el")
+(when (file-exists-p my/custom-file)
+  (load my/custom-file))
+
 (use-package diminish
   :ensure t
   :config)
 
+; general-purpose string-manipulation library
+(use-package s :ensure t :config)
+
+; general-purpose list library (-map, etc...)
+(use-package dash :ensure t :config)
+
 (require 'my-config)
 (require 'my-utils)
 (require 'my-evil)
+(require 'my-org)
 (require 'my-dired)
 (require 'my-term)
 (require 'my-helm)
@@ -36,16 +48,16 @@
 (require 'my-magit)
 (require 'my-paredit)
 (require 'my-origami)
+(require 'my-powerline)
+(require 'my-prog)
+(require 'my-powerline)
+(require 'my-elisp)
 
 (use-package exec-path-from-shell
   :ensure t
   :config
   (exec-path-from-shell-initialize))
 
-; general-purpose string-manipulation library
-(use-package s
-  :ensure t
-  :config)
 
 (use-package zoom-window
   :ensure t
@@ -67,8 +79,3 @@
 (use-package recentf
   :ensure t
   :config)
-
-(use-package elisp-slime-nav
-  :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode) (eldoc-mode))))

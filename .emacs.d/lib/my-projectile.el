@@ -2,8 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 (require 'my-utils)
-(when (file-exists-p my/custom-file)
-  (load my/custom-file))
+
+(defun my/wg-switch-hook ()
+  "Installed as a hook for wg-switch-hook.  When we land on an 'empty' project
+after switch, open projectile's switch dialog with the workgroup's
+name preselected."
+  (when (string= "*scratch*" (buffer-name (current-buffer)))
+    (helm
+     :sources '(helm-source-projectile-projects)
+     :input (wg-name (wg-current-workgroup)))
+    (helm-projectile-switch-project)))
 
 (use-package projectile
   :ensure t
@@ -12,6 +20,7 @@
     :ensure t
     :config
     (setq wg-morph-on nil)
+    (add-hook 'wg-switch-hook #'my/wg-switch-hook)
     (workgroups-mode 1)
     (when (file-exists-p my/workgroups-file)
       (wg-load my/workgroups-file))

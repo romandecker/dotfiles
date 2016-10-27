@@ -8,7 +8,6 @@
     :config
     (evil-leader/set-leader "SPC")
     (evil-leader/set-key
-      "SPC"   'helm-mini
       ":"     'helm-M-x
       "~"     'my/toggle-project-term
       "TAB"   'my/switch-to-last-buffer
@@ -38,26 +37,34 @@
       "o p"   'org-insert-link
       "p c"   'wg-create-workgroup
       "p p"   'wg-switch-to-workgroup
+      "p P"   'helm-projectile-switch-project
       "p f"   'helm-projectile-find-file
       "p d"   'helm-projectile-find-dir
-      "p a"   'helm-projectile-ag
+      "p /"   'helm-projectile-ag
       "t u"   'undo-tree-visualize
       "t z"   'zoom-window-zoom
-      "w q"   'evil-window-delete
+      "t n"   'linum-mode
+      "w u"   'winner-undo
+      "w C-r" 'winner-redo
       "w o"   'delete-other-windows
-      "w |"   'split-window-right
-      "w -"   'split-window-below
+      "w q"   'evil-window-delete
       "w r"   'hydra-window-resize/body
       "w z"   'zoom-window-zoom
+      "w |"   'split-window-right
+      "w -"   'split-window-below
       ". s"   'my/open-snippet-dir
       ". e"   'my/open-dotfile
       ". r"   'my/reload-dotfile
       ". l d" 'add-dir-local-variable
       ". l f" 'add-file-local-variable
-      "? k"   'describe-key
-      "? v"   'describe-variable
+      ". l r" 'my/reload-dir-locals
+      "? b"   'helm-descbinds
       "? f"   'describe-function
-      "? m"   'describe-mode)
+      "? F"   'describe-font
+      "? k"   'describe-key
+      "? m"   'describe-mode
+      "? s"   'yas-describe-tables
+      "? v"   'describe-variable)
     (global-evil-leader-mode))
 
 (global-set-key (kbd "C-j") 'my/window-down)
@@ -65,10 +72,20 @@
 (global-set-key (kbd "C-h") 'my/window-left)
 (global-set-key (kbd "C-l") 'my/window-right)
 
+(use-package buffer-move
+  :ensure t
+  :config
+  (global-set-key (kbd "C-S-j") 'buf-move-down)
+  (global-set-key (kbd "C-S-k") 'buf-move-up)
+  (global-set-key (kbd "C-S-h") 'buf-move-left)
+  (global-set-key (kbd "C-S-l") 'buf-move-right))
+
+
 (use-package which-key
   :ensure t
   :config
   (which-key-add-key-based-replacements
+    "SPC SPC" "Mode-specifc things"
     "SPC TAB" "Last active buffer"
     "SPC :"   "Execute ex-command"
     "SPC ~"   "Toggle terminal"
