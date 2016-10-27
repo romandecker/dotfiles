@@ -22,6 +22,5 @@
   (when (wg-list t)
     (wg-update-all-workgroups-and-save)))
 
-
 (provide 'my-projectile)
 ;;; my-projectile.el ends here

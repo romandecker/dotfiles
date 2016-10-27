@@ -35,6 +35,7 @@
 (require 'my-rainbow-delimiters)
 (require 'my-magit)
 (require 'my-paredit)
+(require 'my-origami)
 
 (use-package exec-path-from-shell
   :ensure t
@@ -50,7 +51,6 @@
   :ensure t
   :config
   (setq zoom-window-mode-line-color "blue"))
-
 
 (use-package undo-tree
   :ensure t
