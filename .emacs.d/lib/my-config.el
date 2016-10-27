@@ -6,12 +6,7 @@
 (setq-default
  indent-tabs-mode nil
  tab-width 2
- tab-stop-list (number-sequence 2 120 2))
-
- ;; default values for indentation (possibly overwritten by editorconfig)
- js2-basic-offset 2
- js-indent-level 2
- js-expr-indent-offset -2
+ tab-stop-list (number-sequence 2 120 2)
  indent-tabs-mode nil)
 
 (tool-bar-mode -1)     ; disable the tool-bar

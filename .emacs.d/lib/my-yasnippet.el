@@ -3,7 +3,7 @@
   :after company
   :config
   (setq
-   yas-snippet-dirs "~/.emacs.d/snippets")
+   yas-snippet-dirs '("~/.emacs.d/snippets"))
   (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
   (add-to-list 'yas-key-syntaxes 'yas-longest-key-from-newline)
 
@@ -18,6 +18,9 @@
   (yas-global-mode 1)
   (message "yasnippet has loaded!"))
 
+
+  "Helm source definition for Projectile files.")
+(helm :sources 'my/helm-source-projectile-files-list)
 
 (provide 'my-yasnippet)
 
