@@ -25,6 +25,7 @@
       "f r"   'helm-recentf
       "f s"   'save-buffer
       "f d"   'dired-jump
+      "g g"   'my-git/start-time-machine
       "g a"   'magit-stage-file
       "g b"   'magit-commit
       "g c"   'magit-commit

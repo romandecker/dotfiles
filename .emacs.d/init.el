@@ -51,12 +51,7 @@
 (require 'my-powerline)
 (require 'my-prog)
 (require 'my-powerline)
-; (require 'my-elisp)
-
-(use-package elisp-slime-nav
-  :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode) (eldoc-mode))))
+(require 'my-elisp)
 
 (use-package exec-path-from-shell
   :ensure t
