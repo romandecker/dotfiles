@@ -19,9 +19,6 @@
   (message "yasnippet has loaded!"))
 
 
-  "Helm source definition for Projectile files.")
-(helm :sources 'my/helm-source-projectile-files-list)
-
 (provide 'my-yasnippet)
 
 (defun yas-longest-key-from-newline (start-point)

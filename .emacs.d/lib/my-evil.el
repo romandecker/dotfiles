@@ -92,7 +92,6 @@
   (require 'delim-pad)
   (delim-pad-mode 1)
 
-
   (evil-mode 1)) ; evil-leader must be enabled before evil
 
 (provide 'my-evil)

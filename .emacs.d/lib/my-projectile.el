@@ -27,6 +27,7 @@ name preselected."
     (add-hook 'kill-emacs-hook #'my/save-workgroups))
   (projectile-mode 1))
 
+
 (defun my/save-workgroups ()
   (when (wg-list t)
     (wg-update-all-workgroups-and-save)))

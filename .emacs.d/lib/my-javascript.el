@@ -38,6 +38,44 @@
       "SPC SPC j" "Join..."
       "SPC SPC s" "Split...")))
 
+(defun my-javascript/requirable-files ()
+  "Get all project files that are requirable with node's `require`"
+  (-filter
+   (lambda (path)
+     (string-match-p ".js\\(on\\)?$" path))
+   (projectile-current-project-files)))
+
+(defvar my-javascript/helm-source-requirable-project-files
+  (helm-build-in-buffer-source "Requirable files"
+    :data (lambda ()
+            (condition-case nil
+                (my-javascript/requirable-files)
+              (error nil)))
+    :fuzzy-match helm-projectile-fuzzy-match
+    :action my/helm-action-return-candidate
+    )
+  "Helm source definition for files that can be required using node's `require`.")
+
+(defun my-javascript/helm-get-requirable-project-file (&optional initial-input)
+  "Start helm to search for requirable project files and return the selected
+candidate.
+If INITIAL-INPUT is given, helm will initially be filled with the
+given string."
+  (let* ((path-from-root
+          (helm :sources my-javascript/helm-source-requirable-project-files
+                :input initial-input)))
+    (when path-from-root
+      (let* ((abspath (concat (projectile-project-root) path-from-root))
+             (relpath (file-relative-name
+                       abspath
+                       (file-name-directory buffer-file-name)))
+             ; make sure that relpath starts with "./"
+             (relpath (if (string-match "^\\.\\./" relpath)
+                          relpath
+                        (concat "./" relpath))))
+        ; "index.js can be left out so remove it if it's there
+        (replace-regexp-in-string "/index.js$" "" relpath)))))
+
 (use-package mocha
   :ensure t
   :config)
