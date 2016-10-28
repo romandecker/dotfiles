@@ -38,8 +38,19 @@
       "SPC SPC j" "Join..."
       "SPC SPC s" "Split...")))
 
+;; Add NodeJS error format so that files can be jumped to in compilation-mode
+(setq compilation-error-regexp-alist-alist
+      (cons '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
+                   1 ;; file
+                   2 ;; line
+                   3 ;; column
+                   )
+            compilation-error-regexp-alist-alist))
+(setq compilation-error-regexp-alist
+      (cons 'node compilation-error-regexp-alist))
+
 (defun my-javascript/requirable-files ()
-  "Get all project files that are requirable with node's `require`"
+  "Get all project files that are requirable with node's `require`."
   (-filter
    (lambda (path)
      (string-match-p ".js\\(on\\)?$" path))
