@@ -4,70 +4,74 @@
 (provide 'my-bindings)
 
 (use-package evil-leader
-    :ensure t
-    :config
-    (evil-leader/set-leader "SPC")
-    (evil-leader/set-key
-      ":"     'helm-M-x
-      "~"     'my/toggle-project-term
-      "TAB"   'my/switch-to-last-buffer
-      "b b"   'helm-buffers-list
-      "b n"   'next-buffer
-      "b p"   'previous-buffer
-      "b d"   'kill-this-buffer
-      "b m"   'my/switch-to-messages
-      "j"     'previous-buffer
-      "k"     'next-buffer
-      "f f"   'helm-find-files
-      "e l"   'eval-last-sexp
-      "e b"   'eval-buffer
-      "e f"   'eval-defun
-      "f r"   'helm-recentf
-      "f s"   'save-buffer
-      "f d"   'dired-jump
-      "g g"   'my-git/start-time-machine
-      "g a"   'magit-stage-file
-      "g b"   'magit-commit
-      "g c"   'magit-commit
-      "g d"   'magit-diff-buffer-file-popup
-      "g l"   'magit-log-buffer-file-popup
-      "g s"   'magit-status
-      "g u"   'magit-unstage-file
-      "o c"   'org-capture
-      "o y"   'org-store-link
-      "o p"   'org-insert-link
-      "p c"   'wg-create-workgroup
-      "p p"   'wg-switch-to-workgroup
-      "p P"   'helm-projectile-switch-project
-      "p f"   'helm-projectile-find-file
-      "p d"   'helm-projectile-find-dir
-      "p /"   'helm-projectile-ag
-      "t u"   'undo-tree-visualize
-      "t z"   'zoom-window-zoom
-      "t n"   'linum-mode
-      "u"     'universal-argument
-      "w u"   'winner-undo
-      "w C-r" 'winner-redo
-      "w o"   'delete-other-windows
-      "w q"   'evil-window-delete
-      "w r"   'hydra-window-resize/body
-      "w z"   'zoom-window-zoom
-      "w |"   'split-window-right
-      "w -"   'split-window-below
-      ". s"   'my/open-snippet-dir
-      ". e"   'my/open-dotfile
-      ". r"   'my/reload-dotfile
-      ". l d" 'add-dir-local-variable
-      ". l f" 'add-file-local-variable
-      ". l r" 'my/reload-dir-locals
-      "? b"   'helm-descbinds
-      "? f"   'describe-function
-      "? F"   'describe-font
-      "? k"   'describe-key
-      "? m"   'describe-mode
-      "? s"   'yas-describe-tables
-      "? v"   'describe-variable)
-    (global-evil-leader-mode))
+  :ensure t
+  :config
+  (evil-leader/set-leader "SPC")
+  (evil-leader/set-key
+    ":"     'helm-M-x
+    "~"     'my/toggle-project-term
+    "TAB"   'my/switch-to-last-buffer
+    "b b"   'helm-buffers-list
+    "b n"   'next-buffer
+    "b p"   'previous-buffer
+    "b d"   'kill-this-buffer
+    "b m"   'my/switch-to-messages
+    "j"     'previous-buffer
+    "k"     'next-buffer
+    "f f"   'helm-find-files
+    "e l"   'eval-last-sexp
+    "e b"   'eval-buffer
+    "e e"   'my/eval-current-sexp
+    "e f"   'eval-defun
+    "e r"   'eval-region
+    "f r"   'helm-recentf
+    "f s"   'save-buffer
+    "f d"   'dired-jump
+    "g g"   'my-git/start-time-machine
+    "g a"   'magit-stage-file
+    "g b"   'magit-commit
+    "g c"   'magit-commit
+    "g d"   'magit-diff-buffer-file-popup
+    "g l"   'magit-log-buffer-file-popup
+    "g s"   'magit-status
+    "g u"   'magit-unstage-file
+    "g h s" 'git-gutter+-stage-hunks
+    "g h s" 'git-gutter+-stage-hunks
+    "o c"   'org-capture
+    "o y"   'org-store-link
+    "o p"   'org-insert-link
+    "p c"   'wg-create-workgroup
+    "p p"   'wg-switch-to-workgroup
+    "p P"   'helm-projectile-switch-project
+    "p f"   'helm-projectile-find-file
+    "p d"   'helm-projectile-find-dir
+    "p /"   'helm-projectile-ag
+    "t u"   'undo-tree-visualize
+    "t z"   'zoom-window-zoom
+    "t n"   'linum-mode
+    "u"     'universal-argument
+    "w u"   'winner-undo
+    "w C-r" 'winner-redo
+    "w o"   'delete-other-windows
+    "w q"   'evil-window-delete
+    "w r"   'hydra-window-resize/body
+    "w z"   'zoom-window-zoom
+    "w |"   'split-window-right
+    "w -"   'split-window-below
+    ". s"   'my/open-snippet-dir
+    ". e"   'my/open-dotfile
+    ". r"   'my/reload-dotfile
+    ". l d" 'add-dir-local-variable
+    ". l f" 'add-file-local-variable
+    ". l r" 'my/reload-dir-locals
+    "? b"   'helm-descbinds
+    "? f"   'describe-function
+    "? F"   'describe-font
+    "? k"   'describe-key
+    "? m"   'describe-mode
+    "? s"   'yas-describe-tables
+    "? v"   'describe-variable)
+  (global-evil-leader-mode))
 
 (global-set-key (kbd "C-j") 'my/window-down)
 (global-set-key (kbd "C-k") 'my/window-up)

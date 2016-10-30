@@ -15,10 +15,26 @@
     "git-timemachine"
     ("j" git-timemachine-show-next-revision "Next commit")
     ("k" git-timemachine-show-previous-revision "Previous commit")
-    ("q" git-timemachine-quit "Quit timemachine")
-    )
-  )
+    ("q" git-timemachine-quit "Quit timemachine")))
 
+(use-package gitconfig-mode
+  :ensure t
+  :config)
+
+(use-package gitignore-mode
+  :ensure t
+  :config)
+
+(use-package gitattributes-mode
+  :ensure t
+  :config)
+
+(use-package git-gutter-fringe+
+  :ensure t
+  :config
+  (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
+  (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
+  )
 
 (defun my-git/start-time-machine ()
   (interactive)
