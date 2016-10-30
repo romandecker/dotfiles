@@ -45,6 +45,7 @@
       "t u"   'undo-tree-visualize
       "t z"   'zoom-window-zoom
       "t n"   'linum-mode
+      "u"     'universal-argument
       "w u"   'winner-undo
       "w C-r" 'winner-redo
       "w o"   'delete-other-windows

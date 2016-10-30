@@ -20,6 +20,11 @@
   :config
   (add-hook 'prog-mode-hook #'whitespace-cleanup-mode))
 
+(use-package aggressive-indent
+  :ensure t
+  :config
+  (global-aggressive-indent-mode))
+
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (global-whitespace-mode)

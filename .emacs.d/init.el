@@ -52,6 +52,7 @@
 (require 'my-prog)
 (require 'my-powerline)
 (require 'my-elisp)
+(require 'my-visuals)
 
 (use-package exec-path-from-shell
   :ensure t

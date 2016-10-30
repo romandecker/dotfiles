@@ -10,7 +10,7 @@
 
 (setq-default dired-omit-mode t
         dired-omit-verbose nil
-        dired-omit-files "^(\\.\\|\\.\\.)$")
+        dired-omit-files "^\\.\\.?$")
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -34,8 +34,13 @@
 
 (use-package dired-details+
   :ensure t
+  :config)
+
+(use-package dired-subtree
+  :ensure t
   :config
-  )
+  (evil-define-key 'normal dired-mode-map
+    (kbd "TAB") 'dired-subtree-toggle))
 
 (provide 'my-dired)
 ;;; my-dired.el ends here
