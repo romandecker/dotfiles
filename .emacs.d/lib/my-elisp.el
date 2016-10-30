@@ -12,5 +12,14 @@
     (paredit-forward-up)
     (eval-last-sexp nil)))
 
+(use-package evil-paredit
+  :ensure t
+  :config
+  (evil-define-key 'normal emacs-lisp-mode-map
+    (kbd "] ]") 'paredit-forward-slurp-sexp
+    (kbd "] [") 'paredit-forward-barf-sexp
+    (kbd "[ ]") 'paredit-backward-barf-sexp
+    (kbd "[ [") 'paredit-backward-slurp-sexp))
+
 (provide 'my-elisp)
 ;;; my-elisp.el ends here

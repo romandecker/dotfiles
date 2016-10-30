@@ -36,7 +36,8 @@
     "g s"   'magit-status
     "g u"   'magit-unstage-file
     "g h s" 'git-gutter+-stage-hunks
-    "g h s" 'git-gutter+-stage-hunks
+    "g h r" 'git-gutter+-revert-hunk
+    "g h h" 'git-gutter+-show-hunk-inline-at-point
     "o c"   'org-capture
     "o y"   'org-store-link
     "o p"   'org-insert-link

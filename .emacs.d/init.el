@@ -46,7 +46,6 @@
 (require 'my-markdown)
 (require 'my-rainbow-delimiters)
 (require 'my-magit)
-(require 'my-paredit)
 (require 'my-origami)
 (require 'my-powerline)
 (require 'my-prog)
