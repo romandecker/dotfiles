@@ -88,7 +88,13 @@ given string."
 
 (use-package mocha
   :ensure t
-  :config)
-
+  :config
+  (evil-leader/set-key
+    "SPC t p"   'mocha-test-project
+    "SPC t f"   'mocha-test-file
+    "SPC t t"   'mocha-test-at-point
+    "SPC t d p" 'mocha-debug-project
+    "SPC t d f" 'mocha-debug-file
+    "SPC t d t" 'mocha-debug-at-point))
 
 (provide 'my-javascript)
