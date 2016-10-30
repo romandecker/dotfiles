@@ -32,15 +32,26 @@
 (use-package git-gutter-fringe+
   :ensure t
   :config
+  (setq git-gutter-fr+-side 'right-fringe)
+  (set-face-foreground 'git-gutter+-modified "#ea8212")
   (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
   (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
-  )
+  (add-hook 'prog-mode-hook #'git-gutter+-mode))
+
+(fringe-helper-define 'git-gutter-fr+-modified nil
+  "...x...."
+  "....xx.."
+  "......x."
+  "....xx.."
+  "..xx...."
+  ".x......"
+  "..xx...."
+  "....x...")
 
 (defun my-git/start-time-machine ()
   (interactive)
   (git-timemachine)
   (hydra-git-timemachine/body))
-
 
 (provide 'my-magit)
 ;;; my-magit.el ends here

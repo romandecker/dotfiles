@@ -49,6 +49,7 @@
     "t u"   'undo-tree-visualize
     "t z"   'zoom-window-zoom
     "t n"   'linum-mode
+    "t g"   'git-gutter+-toggle-fringe
     "u"     'universal-argument
     "w u"   'winner-undo
     "w C-r" 'winner-redo
