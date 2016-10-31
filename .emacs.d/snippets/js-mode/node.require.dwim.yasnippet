@@ -3,12 +3,9 @@
 # key: =
 # --
 = require( '`
-(let* ((regexp "^\\(const\\|var\\)[[:space:]]+\\([[:word:]]+\\)[[:space:]]*=")
+(let* ((regexp "^[[:space:]]*\\(const\\|var\\)[[:space:]]+\\([[:word:]]+\\)[[:space:]]*=")
        (line (thing-at-point 'line t))
        (match (string-match regexp line)))
-  (when match
-    (let ((var (match-string 2 line)))
-      (or
-        (my-javascript/helm-get-requirable-project-file (downcase var)))
-        var)))
+  (let ((var (match-string 2 line)))
+    (my-javascript/helm-get-requirable-project-file (downcase var))))
 `' );
