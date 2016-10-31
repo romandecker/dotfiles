@@ -15,11 +15,10 @@
   (define-key yas-keymap [(control tab)] 'yas-next-field)
   (define-key yas-keymap (kbd "C-g") 'my/abort-company-or-yas)
 
-  (yas-global-mode 1)
-  (message "yasnippet has loaded!"))
+  (yas-global-mode 1))
 
+(let* ((line (thing-at-point 'line 5))))
 
-(provide 'my-yasnippet)
 
 (defun yas-longest-key-from-newline (start-point)
   "Look for snippet keys between point and last newline, longer first."
@@ -28,3 +27,5 @@
     (forward-char))
   (unless (<= start-point (1+ (point)))
     'again))
+
+(provide 'my-yasnippet)
