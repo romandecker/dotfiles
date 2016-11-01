@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: my-config
+# key: my-config
+# --
+;;; package --- ${1:}
+;;; Commentary:
+;;; Code:
+
+${5:}
+
+(provide '${4:`(s-dashed-words (file-name-base buffer-file-name))`})
+;;; `(file-name-nondirectory buffer-file-name)` ends here

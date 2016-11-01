@@ -14,7 +14,6 @@
 (show-paren-mode)
 (electric-pair-mode 1)
 (winner-mode 1)
-(add-hook 'prog-mode-hook #'linum-mode)
 
 (set-face-attribute 'default nil :height 115)
 

@@ -25,6 +25,11 @@
   :config
   (global-aggressive-indent-mode))
 
+(use-package aggressive-fill-paragraph
+  :ensure t
+  :config
+  (afp-setup-recommended-hooks))
+
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (global-whitespace-mode)
@@ -32,6 +37,7 @@
 (defun my/hide-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
 
+(add-hook 'prog-mode-hook #'linum-mode)
 (add-hook 'minibuffer-setup-hook #'my/hide-trailing-whitespace)
 (add-hook 'helm-mode-hook #'my/hide-trailing-whitespace)
 (add-hook 'term-mode-hook #'my/hide-trailing-whitespace)
