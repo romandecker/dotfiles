@@ -22,10 +22,10 @@
   :ensure t
   :config)
 
-; general-purpose string-manipulation library
+                                        ; general-purpose string-manipulation library
 (use-package s :ensure t :config)
 
-; general-purpose list library (-map, etc...)
+                                        ; general-purpose list library (-map, etc...)
 (use-package dash :ensure t :config)
 
 (require 'my-config)
@@ -58,7 +58,6 @@
   :config
   (exec-path-from-shell-initialize))
 
-
 (use-package zoom-window
   :ensure t
   :config
@@ -75,7 +74,7 @@
   :config
   (load-theme 'flatui t))
 
-; for keeping track of recent files, provides helm-recentf with data
+;; for keeping track of recent files, provides helm-recentf with data
 (use-package recentf
   :ensure t
   :config)

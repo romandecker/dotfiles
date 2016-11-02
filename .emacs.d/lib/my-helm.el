@@ -28,7 +28,18 @@
                   :after #'evil-mc-mode)))
   (use-package helm-descbinds
     :ensure t
-    :config))
+    :config)
+  (use-package helm-swoop
+    :ensure t
+    :config
+    (define-key helm-swoop-map (kbd "C-w") 'backward-kill-word)
+    (define-key helm-swoop-map (kbd "C-c e") 'helm-swoop-edit)
+    (define-key evil-normal-state-map (kbd "g *") 'helm-swoop)
+    (define-key evil-normal-state-map (kbd "g /") 'helm-swoop-without-pre-input)
+    (define-key helm-swoop-edit-map (kbd "C-c C-c") 'helm-swoop--edit-complete)
+    (define-key helm-swoop-edit-map (kbd "C-c C-g") 'helm-swoop--edit-cancel)
+    (advice-add 'helm-swoop--edit
+                :after #'evil-mc-mode)))
 
 (defvar my/helm-action-return-candidate
   (helm-make-actions "Select" (lambda (candidate) candidate)))

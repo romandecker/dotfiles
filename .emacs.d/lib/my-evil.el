@@ -1,13 +1,12 @@
 (use-package evil
   :ensure t
   :config
-  ;(define-key evil-insert-state-map (kbd "SPC") 'my/smart-space)
-  ;(define-key evil-insert-state-map (kbd "DEL") 'my/smart-delete)
   (define-key evil-insert-state-map [tab] 'my/tab-indent-or-complete)
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
   (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  ; camel-case-motion
+
+  ;; camel-case-motion
   (define-key evil-normal-state-map (kbd "w") 'evil-forward-little-word-begin)
   (define-key evil-normal-state-map (kbd "e") 'evil-forward-little-word-end)
   (define-key evil-normal-state-map (kbd "b") 'evil-backward-little-word-begin)
@@ -30,10 +29,10 @@
 
   (define-key evil-normal-state-map (kbd "0") 'my/goto-bol-dwim)
 
-  ; Make horizontal movement cross lines
+  ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
 
-  ; d deletes to black-hole, m ("move" deletes and yanks)
+  ;; d deletes to black-hole, m ("move" deletes and yanks)
   (evil-define-operator my/delete-to-blackhole (beg end type yank-handler)
     (interactive "<R><y>")
     (evil-delete beg end type ?_ yank-handler))
@@ -48,6 +47,8 @@
 
   (evil-define-key 'normal emacs-lisp-mode-map
     (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+
+  (define-key evil-normal-state-map (kbd "g p") 'evil-paste-pop)
 
   (use-package evil-surround
     :ensure t
@@ -74,12 +75,12 @@
     (evil-define-key 'normal evil-mc-key-map (kbd "C-n") 'my/smart-c-n)
     (define-key evil-normal-state-map (kbd "C-p") 'my/ctrlp-dwim)
     (evil-define-key 'normal evil-mc-key-map (kbd "C-p") 'my/ctrlp-dwim)
-    (global-evil-mc-mode 1))
+    (global-evil-mc-mode 1)
+    (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode))
   (use-package evil-exchange
     :ensure t
     :config
     (setq evil-exchange-key (kbd "gx"))
-    (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode)
     (evil-exchange-install))
   (use-package evil-commentary
     :ensure t
