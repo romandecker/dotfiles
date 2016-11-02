@@ -79,3 +79,11 @@
 (use-package recentf
   :ensure t
   :config)
+
+(use-package atomic-chrome
+  :ensure t
+  :defer 15
+  :config
+  (atomic-chrome-start-server)
+  (message "atomic-chrome started!"))
+;;; init.el ends here

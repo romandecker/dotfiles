@@ -1,3 +1,6 @@
+;;; package --- My custom snippet/template config
+;;; Commentary:
+;;; Code:
 (use-package yasnippet
   :ensure t
   :after company
@@ -15,10 +18,19 @@
   (define-key yas-keymap [(control tab)] 'yas-next-field)
   (define-key yas-keymap (kbd "C-g") 'my/abort-company-or-yas)
 
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  (use-package yatemplate
+    :ensure t
+    :diminish auto-insert-mode
+    :config
+    (auto-insert-mode 1)
+    (yatemplate-fill-alist)
 
-(let* ((line (thing-at-point 'line 5))))
-
+    (defun yatemplate-expand-yas-buffer ()
+      "Replaced with own custom implementation."
+      (goto-char (point-max))
+      (evil-insert-state)
+      (yas-expand))))
 
 (defun yas-longest-key-from-newline (start-point)
   "Look for snippet keys between point and last newline, longer first."
@@ -28,4 +40,6 @@
   (unless (<= start-point (1+ (point)))
     'again))
 
+
 (provide 'my-yasnippet)
+;;; my-yasnippet.el ends here

@@ -36,7 +36,14 @@
   (set-face-foreground 'git-gutter+-modified "#ea8212")
   (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
   (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
-  (add-hook 'prog-mode-hook #'git-gutter+-mode))
+  (add-hook 'prog-mode-hook #'git-gutter+-mode)
+  (evil-leader/set-key
+    "g h s" 'git-gutter+-stage-hunks
+    "g h r" 'git-gutter+-revert-hunk
+    "g h h" 'git-gutter+-show-hunk-inline-at-point
+    "g h H" 'git-gutter+-show-hunk)
+  (which-key-add-key-based-replacements
+    "SPC g h"   "Hunks"))
 
 (fringe-helper-define 'git-gutter-fr+-modified nil
   "...x...."
