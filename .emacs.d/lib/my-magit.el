@@ -33,10 +33,11 @@
   :ensure t
   :config
   (setq git-gutter-fr+-side 'right-fringe)
-  (set-face-foreground 'git-gutter+-modified "#ea8212")
+  (set-face-foreground 'git-gutter+-added "#22be22")
+  (set-face-foreground 'git-gutter+-modified "#fb9323")
   (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
   (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
-  (add-hook 'prog-mode-hook #'git-gutter+-mode)
+  (add-hook 'prog-mode-hook (lambda () (interactive) (git-gutter+-mode 1)))
   (evil-leader/set-key
     "g h s" 'git-gutter+-stage-hunks
     "g h r" 'git-gutter+-revert-hunk
@@ -46,14 +47,14 @@
     "SPC g h"   "Hunks"))
 
 (fringe-helper-define 'git-gutter-fr+-modified nil
-  "...x...."
-  "....xx.."
-  "......x."
-  "....xx.."
-  "..xx...."
-  ".x......"
-  "..xx...."
-  "....x...")
+  "..xxx..."
+  "...xxxx."
+  ".....xx."
+  "...xxxx."
+  ".xxxx..."
+  ".xx....."
+  ".xxxx..."
+  "...xxx..")
 
 (defun my-git/start-time-machine ()
   (interactive)
