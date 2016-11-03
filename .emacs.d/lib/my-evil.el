@@ -34,7 +34,7 @@
   ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
 
-  (define-key evil-normal-state-map (kbd "m") 'evil-move)
+  (define-key evil-normal-state-map (kbd "m") 'my/evil-move)
 
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))
@@ -144,6 +144,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   ;; place cursor on beginning of line
   (when (and (evil-called-interactively-p)
              (eq type 'line))
-    (evil-first-non-blank)))
+    (evil-first-non-blank))
+  )
 
 (provide 'my-evil)
