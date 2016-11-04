@@ -20,11 +20,6 @@
   :config
   (add-hook 'prog-mode-hook #'whitespace-cleanup-mode))
 
-(use-package aggressive-indent
-  :ensure t
-  :config
-  (global-aggressive-indent-mode))
-
 (use-package aggressive-fill-paragraph
   :ensure t
   :config

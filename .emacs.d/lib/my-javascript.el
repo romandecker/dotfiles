@@ -45,8 +45,17 @@
                    3 ;; column
                    )
          compilation-error-regexp-alist-alist)
-
 (pushnew 'node compilation-error-regexp-alist)
+
+
+(pushnew '(jshint "\\(.+\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), .*$"
+                   1 ;; file
+                   2 ;; line
+                   3 ;; column
+                   )
+         compilation-error-regexp-alist-alist)
+(pushnew 'jshint compilation-error-regexp-alist)
+
 
 (defun my-javascript/requirable-files ()
   "Get all project files that are requirable with node's `require`."
