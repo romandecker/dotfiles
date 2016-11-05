@@ -27,6 +27,7 @@
 (require 'my-visuals)
 (require 'my-text-objects)
 (require 'my-undo-tree)
+(require 'my-bookmarks)
 (require 'my-misc)
 
 ;;; init.el ends here

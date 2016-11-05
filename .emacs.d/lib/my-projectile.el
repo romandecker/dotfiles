@@ -44,8 +44,14 @@ more easily."
         "p TAB" 'my/switch-to-last-workgroup
         "p c"   'wg-create-workgroup
         "p p"   'wg-switch-to-workgroup
-        "p r"   'projectile-compile-project))
+        "p r"   'projectile-compile-project
+        "p d"   'my/find-project-root))
   (projectile-mode 1))
+
+
+(defun my/find-project-root ()
+  (interactive)
+  (find-file (projectile-project-root)))
 
 
 (defun my/save-workgroups ()

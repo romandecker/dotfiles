@@ -37,5 +37,12 @@
 (add-hook 'helm-mode-hook #'my/hide-trailing-whitespace)
 (add-hook 'term-mode-hook #'my/hide-trailing-whitespace)
 
+(defun my/toggle-compilation-scroll ()
+  (interactive)
+  (setq compilation-scroll-output (not compilation-scroll-output))
+  (message "compilation-scroll-output: %s" compilation-scroll-output))
+
+(define-key compilation-mode-map (kbd "s") 'my/toggle-compilation-scroll)
+
 (provide 'my-prog)
 ;;; my-prog.el ends here
