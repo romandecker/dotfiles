@@ -16,13 +16,6 @@
   (interactive)
   (find-file my/dotfile))
 
-(defun my/dired-up-directory ()
-  "Take dired up one directory, but behave like dired-find-alternative-file (leave no orphan buffer)"
-  (interactive)
-  (let ((old (current-buffer)))
-    (dired-up-directory)
-    (kill-buffer old)))
-
 (defun my/check-expansion ()
   "checks wether or not expansion should be done"
   (save-excursion
@@ -239,6 +232,7 @@ If repeated, cycle position between `back-to-indentation` and `beginning of line
   (hack-dir-local-variables)
   (hack-local-variables-apply)
   (yas-reload-all))
+
 
 (provide 'my-utils)
 ;;; my-utils.el ends here

@@ -18,7 +18,7 @@
   '(progn
     (evil-define-key 'normal dired-mode-map
       (kbd "h")   'my/dired-up-directory
-      (kbd "DEL")   'my/dired-up-directory
+      (kbd "DEL") 'my/dired-up-directory
       (kbd "RET") 'dired-find-alternate-file
       (kbd "l")   'dired-find-alternate-file
       (kbd "c")   'dired-do-rename
@@ -41,6 +41,13 @@
   :config
   (evil-define-key 'normal dired-mode-map
     (kbd "TAB") 'dired-subtree-toggle))
+
+(defun my/dired-up-directory ()
+  "Take dired up one directory, but behave like dired-find-alternative-file (leave no orphan buffer)"
+  (interactive)
+  (let ((old (current-buffer)))
+    (dired-up-directory)
+    (kill-buffer old)))
 
 (provide 'my-dired)
 ;;; my-dired.el ends here

@@ -10,8 +10,22 @@ name preselected."
   (when (string= "*scratch*" (buffer-name (current-buffer)))
     (helm
      :sources '(helm-source-projectile-projects)
-     :input (wg-name (wg-current-workgroup)))
-    (helm-projectile-switch-project)))
+     :input (wg-name (wg-current-workgroup)))))
+
+(defvar my/last-workgroup nil)
+
+(defun my/before-switch-workgroup (workgroup &optional base)
+  "Save the old workgroup before switching, so that it can later be switched to
+more easily."
+  (setq my/last-workgroup (wg-current-workgroup t)))
+
+(advice-add 'wg-switch-to-workgroup :before #'my/before-switch-workgroup)
+
+(defun my/switch-to-last-workgroup ()
+  (interactive)
+  (if my/last-workgroup
+      (wg-switch-to-workgroup my/last-workgroup)
+    (message "No last workgroup!")))
 
 (use-package projectile
   :ensure t
@@ -24,7 +38,13 @@ name preselected."
     (workgroups-mode 1)
     (when (file-exists-p my/workgroups-file)
       (wg-load my/workgroups-file))
-    (add-hook 'kill-emacs-hook #'my/save-workgroups))
+    (add-hook 'kill-emacs-hook #'my/save-workgroups)
+    (evil-leader/set-key
+        "p -"   'my/switch-to-last-workgroup
+        "p TAB" 'my/switch-to-last-workgroup
+        "p c"   'wg-create-workgroup
+        "p p"   'wg-switch-to-workgroup
+        "p r"   'projectile-compile-project))
   (projectile-mode 1))
 
 

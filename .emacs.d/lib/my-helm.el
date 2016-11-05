@@ -40,8 +40,7 @@
     (define-key helm-swoop-edit-map (kbd "C-c C-c") 'helm-swoop--edit-complete)
     (define-key helm-swoop-edit-map (kbd "C-c C-g") 'helm-swoop--edit-cancel)
     (advice-add 'helm-swoop--edit
-                :after #'evil-mc-mode))
-  )
+                :after #'evil-mc-mode)))
 
 (defvar my/helm-action-return-candidate
   (helm-make-actions "Select" (lambda (candidate) candidate)))

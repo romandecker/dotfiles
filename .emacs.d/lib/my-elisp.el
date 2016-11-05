@@ -21,5 +21,17 @@
     (kbd "[ ]") 'paredit-backward-barf-sexp
     (kbd "[ [") 'paredit-backward-slurp-sexp))
 
+
+(defun my/reload-help ()
+  "Use revert-buffer (without confirmation) to reload the help buffer."
+  (interactive)
+  (message "Reloading...")
+  (revert-buffer nil t))
+
+;; some bindings for help-mode
+(define-key help-mode-map (kbd "DEL") 'help-go-back)
+(define-key help-mode-map [tab] 'forward-button)
+(define-key help-mode-map (kbd "r") 'my/reload-help)
+
 (provide 'my-elisp)
 ;;; my-elisp.el ends here

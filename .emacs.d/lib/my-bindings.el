@@ -41,8 +41,6 @@
     "o c"   'org-capture
     "o y"   'org-store-link
     "o p"   'org-insert-link
-    "p c"   'wg-create-workgroup
-    "p p"   'wg-switch-to-workgroup
     "p P"   'helm-projectile-switch-project
     "p f"   'helm-projectile-find-file
     "p d"   'helm-projectile-find-dir
@@ -51,6 +49,8 @@
     "t z"   'zoom-window-zoom
     "t n"   'linum-mode
     "t g"   'git-gutter+-toggle-fringe
+    "t w v" 'toggle-truncate-lines
+    "t w w" 'aggressive-fill-paragraph-mode
     "u"     'universal-argument
     "w u"   'winner-undo
     "w C-r" 'winner-redo
@@ -80,6 +80,8 @@
 (global-set-key (kbd "C-h") 'my/window-left)
 (global-set-key (kbd "C-l") 'my/window-right)
 
+(define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
+
 (use-package buffer-move
   :ensure t
   :config
@@ -88,25 +90,26 @@
   (global-set-key (kbd "C-S-h") 'buf-move-left)
   (global-set-key (kbd "C-S-l") 'buf-move-right))
 
-
 (use-package which-key
   :ensure t
   :config
   (which-key-add-key-based-replacements
-    "SPC SPC" "Mode-specifc things"
-    "SPC TAB" "Last active buffer"
-    "SPC :"   "Execute ex-command"
-    "SPC ~"   "Toggle terminal"
-    "SPC b"   "Buffers"
-    "SPC e"   "Evaluate"
-    "SPC f"   "Files"
-    "SPC g"   "Git"
-    "SPC o"   "Org"
-    "SPC p"   "Projects"
-    "SPC t"   "Toggles"
-    "SPC w"   "Windows"
-    "SPC ."   "Dotfiles"
-    "SPC . l" "Dir/File-local variables"
-    "SPC ?"   "Get help")
+    "SPC SPC"   "Mode-specifc things"
+    "SPC TAB"   "Last active buffer"
+    "SPC :"     "Execute ex-command"
+    "SPC ~"     "Toggle terminal"
+    "SPC b"     "Buffers"
+    "SPC e"     "Evaluate"
+    "SPC f"     "Files"
+    "SPC g"     "Git"
+    "SPC o"     "Org"
+    "SPC p"     "Projects"
+    "SPC t"     "Toggles"
+    "SPC t w"   "Wrapping"
+    "SPC t w v" "Visual wrapping"
+    "SPC w"     "Windows"
+    "SPC ."     "Dotfiles"
+    "SPC . l"   "Dir/File-local variables"
+    "SPC ?"     "Get help")
   (which-key-mode))
 ;;; my-bindings.el ends here
