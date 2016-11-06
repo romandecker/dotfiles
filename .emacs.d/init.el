@@ -39,5 +39,6 @@
 (require 'my-undo-tree)
 (require 'my-bookmarks)
 (require 'my-misc)
+(require 'my-realgud)
 
 ;;; init.el ends here

@@ -85,7 +85,7 @@
   (use-package evil-exchange
     :ensure t
     :config
-    (setq evil-exchange-key (kbd "gx"))
+    (setq evil-previous-key (kbd "g x"))
     (evil-exchange-install))
   (use-package evil-commentary
     :ensure t

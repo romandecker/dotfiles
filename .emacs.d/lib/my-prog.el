@@ -25,9 +25,15 @@
   :config
   (afp-setup-recommended-hooks))
 
+(evil-leader/set-key
+  "c c" 'recompile
+  "c p" 'projectile-compile-project
+  "c x" 'kill-compilation)
+
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (global-whitespace-mode)
+
 
 (defun my/hide-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
@@ -37,10 +43,19 @@
 (add-hook 'helm-mode-hook #'my/hide-trailing-whitespace)
 (add-hook 'term-mode-hook #'my/hide-trailing-whitespace)
 
+(setq compilation-environment '("TERM=xterm-256color"))
+
 (defun my/toggle-compilation-scroll ()
   (interactive)
   (setq compilation-scroll-output (not compilation-scroll-output))
   (message "compilation-scroll-output: %s" compilation-scroll-output))
+
+(require 'ansi-color)
+(defun my/colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region compilation-filter-start (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook #'my/colorize-compilation-buffer)
 
 (define-key compilation-mode-map (kbd "s") 'my/toggle-compilation-scroll)
 

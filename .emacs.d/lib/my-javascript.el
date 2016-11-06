@@ -1,16 +1,23 @@
-(setq    ;; default values for indentation (possibly overwritten by editorconfig)
- js2-basic-offset 2
- js-indent-level 2
- js-expr-indent-offset -2)
+;;; package --- My custom config for editing JS
+;;; Commentary:
+;;; Code:
 
 (use-package js2-mode
   :ensure t
   :config
-  (js2-mode-hide-warnings-and-errors)          ; do not show errors (use flycheck for that)
+  ;; do not show errors (use flycheck for that)
+  (js2-mode-hide-warnings-and-errors)
+
   (setq
-   js2-skip-preprocessor-directives nil)       ; allow shebangs in js-files (for node)
+   js2-skip-preprocessor-directives nil   ; allow shebangs in js-files (for node)
+
+   ;; default values for indentation (possibly overwritten by editorconfig)
+   js2-basic-offset 2
+   js-indent-level 2
+   js-expr-indent-offset -2)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+
   (use-package js2-refactor
     :ensure t
     :config
@@ -104,6 +111,9 @@ given string."
     "SPC t t"   'mocha-test-at-point
     "SPC t d p" 'mocha-debug-project
     "SPC t d f" 'mocha-debug-file
-    "SPC t d t" 'mocha-debug-at-point))
+    "SPC t d t" 'mocha-debug-at-point)
+  (add-hook 'mocha-compilation-mode-hook (lambda () (setq truncate-lines nil))))
+
 
 (provide 'my-javascript)
+;;; my-javascript.el ends here
