@@ -8,7 +8,6 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (package-initialize)
 
-(add-to-list 'load-path "~/.emacs.d/lib")
 
 (setq package-enable-at-startup nil)
 

@@ -1,9 +1,6 @@
 ;;; package --- Utility functions, variables & constants
 ;;; Commentary:
 ;;; Code:
-(defconst my/dotfile "~/.emacs.d/init.el")
-(defconst my/electric-pairs '(("(" . ")") ("[" . "]") ("{" . "}")))
-(defconst my/workgroups-file (expand-file-name "~/.emacs.d/workgroups"))
 
 
 (defun my/reload-dotfile ()
