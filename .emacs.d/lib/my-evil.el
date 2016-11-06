@@ -73,6 +73,7 @@
     :config
     (define-key evil-normal-state-map (kbd "C-n") 'my/smart-c-n)
     (define-key evil-normal-state-map (kbd "C-p") 'my/ctrlp-dwim)
+    (define-key evil-visual-state-map (kbd "i") 'my/place-cursors-along-region)
     (evil-define-key 'normal evil-mc-key-map
       (kbd "C-n") 'my/smart-c-n
       (kbd "C-p") 'my/ctrlp-dwim
@@ -180,15 +181,20 @@ to the appropriate digraph-group by pressing `:`."
   (interactive)
   (insert "ß"))
 
-(defun my/place-cursors-along-rectangle ()
-  (interactive)
-  (evil-mc-pause-cursors)
-  (evil-mc-make-cursor-here)
-  (evil-mc-make-cursor-here)
-  (evil-mc-resume-cursors)
-  )
 
-;(define-key evil-normal-state-map (kbd "g t") 'my/place-cursors-along-rectangle)
-
+(defun my/place-cursors-along-region (start end)
+  "Place cursors along the given region given by START and END (or
+interactively along the current region)."
+  (interactive "r")
+  (let ((col (my/column-at start)))
+    (evil-normal-state)
+    (evil-mc-pause-cursors)
+    (goto-char start)
+    (save-excursion
+      (while (< (point) end)
+          (evil-next-visual-line)
+          (evil-mc-make-cursor-here)
+          (move-to-column col)))
+    (evil-mc-resume-cursors)))
 
 (provide 'my-evil)

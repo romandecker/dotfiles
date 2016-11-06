@@ -230,6 +230,12 @@ If repeated, cycle position between `back-to-indentation` and `beginning of line
   (hack-local-variables-apply)
   (yas-reload-all))
 
+(defun my/column-at (pos)
+  "Get the column corresponding to the given buffer position POS."
+  (save-excursion
+    (goto-char pos)
+    (current-column)))
+
 
 (provide 'my-utils)
 ;;; my-utils.el ends here
