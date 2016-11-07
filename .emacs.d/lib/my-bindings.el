@@ -41,10 +41,6 @@
     "o c"   'org-capture
     "o y"   'org-store-link
     "o p"   'org-insert-link
-    "p P"   'helm-projectile-switch-project
-    "p f"   'helm-projectile-find-file
-    "p d"   'helm-projectile-find-dir
-    "p /"   'helm-projectile-ag
     "t u"   'undo-tree-visualize
     "t z"   'zoom-window-zoom
     "t n"   'linum-mode

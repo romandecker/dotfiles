@@ -1,6 +1,7 @@
 (setq
  inhibit-startup-screen t
- x-select-enable-clipboard t)
+ x-select-enable-clipboard t
+ visible-bell t)
 
 ; tabs are evil
 (setq-default

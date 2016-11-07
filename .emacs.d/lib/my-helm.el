@@ -18,6 +18,11 @@
   (use-package helm-projectile
     :ensure t
     :config
+    (evil-leader/set-key
+        "p P"   'helm-projectile-switch-project
+        "p f"   'helm-projectile-find-file
+        "p d"   'helm-projectile-find-dir
+        "p /"   'helm-projectile-ag)
     (helm-projectile-on))
   (use-package ag
     :ensure t

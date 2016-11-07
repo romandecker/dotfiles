@@ -6,7 +6,7 @@
   :after evil
   :config
   (setq highlight-symbol-idle-delay 0.5)
-  (add-hook 'prog-mode-hook 'hPermissionighlight-symbol-mode)
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
   (define-key evil-normal-state-map (kbd "] o") 'highlight-symbol-next)
   (define-key evil-normal-state-map (kbd "[ o") 'highlight-symbol-prev))
 

@@ -68,16 +68,15 @@ If no project is active, sets it to `bookmark-default-file'."
       (wg-load my/workgroups-file))
     (add-hook 'kill-emacs-hook #'my/save-workgroups)
     (evil-leader/set-key
-        "p -"   'my/switch-to-last-workgroup
-        "p TAB" 'my/switch-to-last-workgroup
-        "p c"   'wg-create-workgroup
-        "p p"   'wg-switch-to-workgroup
-        "p r"   'projectile-compile-project
-        "p d"   'my/find-project-root))
+      "p -"   'my/switch-to-last-workgroup
+      "p TAB" 'my/switch-to-last-workgroup
+      "p c"   'wg-create-workgroup
+      "p p"   'wg-switch-to-workgroup
+      "p r"   'projectile-compile-project
+      "p d"   'my/find-project-root))
   (add-hook 'projectile-after-switch-project-hook #'my/set-yas-snippet-dirs)
   (add-hook 'projectile-after-switch-project-hook #'my/set-bookmark-file)
   (projectile-mode 1))
-
 
 (defun my/find-project-root ()
   (interactive)
