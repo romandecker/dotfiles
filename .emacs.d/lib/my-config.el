@@ -15,6 +15,7 @@
 (electric-pair-mode 1)
 (winner-mode 1)
 
+;; make the default font smaller
 (set-face-attribute 'default nil :height 115)
 
 (defalias 'yes-or-no-p 'y-or-n-p) ; use y or n everywhere cause it's shorter to type
@@ -23,8 +24,13 @@
 (-each '(message-mode-hook)
  (lambda (hook) (add-hook hook (lambda () (message "turning truncate off!")(setq truncate-lines nil)))))
 
+
 ; always wrap around in messages buffer
-(with-current-buffer (messages-buffer)
-  (setq-local truncate-lines nil))
+(add-hook 'messages-buffer-mode-hook (lambda ()
+                                       (setq-local truncate-lines nil)))
+
+(defconst my/dotfile "~/.emacs.d/init.el")
+(defconst my/workgroups-file (expand-file-name "~/.emacs.d/workgroups"))
+(defconst my/local-emacs-dir ".emacs.local/")
 
 (provide 'my-config)

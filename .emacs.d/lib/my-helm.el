@@ -8,6 +8,7 @@
   (define-key helm-map (kbd "C-k") 'helm-previous-line)
   (define-key helm-map (kbd "C-w") 'backward-kill-word)
   (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action) ; complete with tab
+  (define-key evil-normal-state-map (kbd "g p") 'helm-show-kill-ring)
   (setq helm-mode-fuzzy-match t
         helm-completion-in-region-fuzzy-match t
         helm-autoresize-max-height 30
@@ -28,7 +29,18 @@
                   :after #'evil-mc-mode)))
   (use-package helm-descbinds
     :ensure t
-    :config))
+    :config)
+  (use-package helm-swoop
+    :ensure t
+    :config
+    (define-key helm-swoop-map (kbd "C-w") 'backward-kill-word)
+    (define-key helm-swoop-map (kbd "C-c e") 'helm-swoop-edit)
+    (define-key evil-normal-state-map (kbd "g *") 'helm-swoop)
+    (define-key evil-normal-state-map (kbd "g /") 'helm-swoop-without-pre-input)
+    (define-key helm-swoop-edit-map (kbd "C-c C-c") 'helm-swoop--edit-complete)
+    (define-key helm-swoop-edit-map (kbd "C-c C-g") 'helm-swoop--edit-cancel)
+    (advice-add 'helm-swoop--edit
+                :after #'evil-mc-mode)))
 
 (defvar my/helm-action-return-candidate
   (helm-make-actions "Select" (lambda (candidate) candidate)))

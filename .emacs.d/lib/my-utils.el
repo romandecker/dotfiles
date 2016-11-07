@@ -1,9 +1,6 @@
 ;;; package --- Utility functions, variables & constants
 ;;; Commentary:
 ;;; Code:
-(defconst my/dotfile "~/.emacs.d/init.el")
-(defconst my/electric-pairs '(("(" . ")") ("[" . "]") ("{" . "}")))
-(defconst my/workgroups-file (expand-file-name "~/.emacs.d/workgroups"))
 
 
 (defun my/reload-dotfile ()
@@ -15,13 +12,6 @@
   "Open '~/.emacs.d/init.el'."
   (interactive)
   (find-file my/dotfile))
-
-(defun my/dired-up-directory ()
-  "Take dired up one directory, but behave like dired-find-alternative-file (leave no orphan buffer)"
-  (interactive)
-  (let ((old (current-buffer)))
-    (dired-up-directory)
-    (kill-buffer old)))
 
 (defun my/check-expansion ()
   "checks wether or not expansion should be done"
@@ -239,6 +229,13 @@ If repeated, cycle position between `back-to-indentation` and `beginning of line
   (hack-dir-local-variables)
   (hack-local-variables-apply)
   (yas-reload-all))
+
+(defun my/column-at (pos)
+  "Get the column corresponding to the given buffer position POS."
+  (save-excursion
+    (goto-char pos)
+    (current-column)))
+
 
 (provide 'my-utils)
 ;;; my-utils.el ends here
