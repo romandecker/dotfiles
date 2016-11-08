@@ -6,4 +6,5 @@
   :ensure t
   :config)
 
+(provide 'my-realgud)
 ;;; my-realgud.el ends here
