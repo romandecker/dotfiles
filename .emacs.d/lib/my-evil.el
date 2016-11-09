@@ -186,12 +186,13 @@ to the appropriate digraph-group by pressing `:`."
   "Place cursors along the given region given by START and END (or
 interactively along the current region)."
   (interactive "r")
-  (let ((col (my/column-at start)))
+  (let ((col (my/column-at start))
+        (last (line-number-at-pos end)))
     (evil-normal-state)
     (evil-mc-pause-cursors)
     (goto-char start)
     (save-excursion
-      (while (< (point) end)
+      (while (< (line-number-at-pos (point)) last)
           (evil-next-visual-line)
           (evil-mc-make-cursor-here)
           (move-to-column col)))
