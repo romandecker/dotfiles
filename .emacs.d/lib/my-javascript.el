@@ -26,24 +26,25 @@
       (kbd "] ]") 'js2r-forward-slurp
       (kbd "] [") 'js2r-forward-barf)
     (evil-leader/set-key-for-mode 'js2-mode
-      "SPC e f" 'js2r-extract-function
-      "SPC e m" 'js2r-extract-method
-      "SPC e v" 'js2r-extract-var
-      "SPC l"   'js2r-log-this
-      "SPC s o" 'js2r-expand-object
-      "SPC s a" 'js2r-expand-array
-      "SPC s f" 'js2r-expand-function
-      "SPC s s" 'js2r-split-string
-      "SPC j o" 'js2r-contract-object
-      "SPC j a" 'js2r-contract-array
-      "SPC j f" 'js2r-contract-function
-      "SPC r"   'js2r-rename-var
-      "SPC ."   'js2r-var-to-this
-      "SPC 3"   'js2r-ternary-to-if)
+      "SPC r e f" 'js2r-extract-function
+      "SPC r e m" 'js2r-extract-method
+      "SPC r e v" 'js2r-extract-var
+      "SPC r l"   'js2r-log-this
+      "SPC r s o" 'js2r-expand-object
+      "SPC r s a" 'js2r-expand-array
+      "SPC r s f" 'js2r-expand-function
+      "SPC r s s" 'js2r-split-string
+      "SPC r j o" 'js2r-contract-object
+      "SPC r j a" 'js2r-contract-array
+      "SPC r j f" 'js2r-contract-function
+      "SPC r r"   'js2r-rename-var
+      "SPC r ."   'js2r-var-to-this
+      "SPC r 3"   'js2r-ternary-to-if)
     (which-key-add-key-based-replacements
-      "SPC SPC e" "Extract..."
-      "SPC SPC j" "Join..."
-      "SPC SPC s" "Split...")))
+      "SPC SPC r"   "Refactor..."
+      "SPC SPC r e" "Extract..."
+      "SPC SPC r j" "Join..."
+      "SPC SPC r s" "Split...")))
 
 ;; Add NodeJS error format so that files can be jumped to in compilation-mode
 (pushnew '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
