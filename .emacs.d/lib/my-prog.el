@@ -30,6 +30,9 @@
   "c p" 'projectile-compile-project
   "c x" 'kill-compilation)
 
+(which-key-add-key-based-replacements
+  "SPC c" "Compile")
+
 (require 'whitespace)
 (setq whitespace-style '(face tabs lines-tail))
 
