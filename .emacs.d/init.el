@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -32,7 +31,6 @@
 (require 'my-origami)
 (require 'my-powerline)
 (require 'my-prog)
-(require 'my-powerline)
 (require 'my-elisp)
 (require 'my-visuals)
 (require 'my-text-objects)
@@ -40,5 +38,5 @@
 (require 'my-bookmarks)
 (require 'my-misc)
 (require 'my-realgud)
-
-;;; init.el ends here
+(require 'my-latex)
+(require 'my-docview)

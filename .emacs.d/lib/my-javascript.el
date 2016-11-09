@@ -104,7 +104,7 @@ given string."
 (use-package mocha
   :ensure t
   :config
-  (evil-leader/set-key
+  (evil-leader/set-key-for-mode 'js2-mode
     "SPC t p"   'mocha-test-project
     "SPC t f"   'mocha-test-file
     "SPC t t"   'mocha-test-at-point
@@ -113,6 +113,14 @@ given string."
     "SPC t d t" 'mocha-debug-at-point)
   (add-hook 'mocha-compilation-mode-hook (lambda () (setq truncate-lines nil))))
 
+(use-package nodejs-repl
+  :ensure t
+  :config
+  (add-hook 'nodejs-repl-mode-hook #'delim-pad-mode)
+  (define-key nodejs-repl-mode-map [tab] 'comint-dynamic-complete)
+  (define-key nodejs-repl-mode-map (kbd "C-r") 'comint-history-isearch-backward)
+  (define-key nodejs-repl-mode-map (kbd "C-p") 'comint-previous-input)
+  (define-key nodejs-repl-mode-map (kbd "C-n") 'comint-next-input))
 
 (provide 'my-javascript)
 ;;; my-javascript.el ends here

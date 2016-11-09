@@ -38,7 +38,7 @@
   :config
   (evil-leader/set-key
     "q r"   'restart-emacs
-    "q u i t" 'kill-emacs)
+    "q q" 'kill-emacs)
   (which-key-add-key-based-replacements
     "SPC q" "Quitting"))
 

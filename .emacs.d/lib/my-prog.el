@@ -31,9 +31,7 @@
   "c x" 'kill-compilation)
 
 (require 'whitespace)
-(setq whitespace-style '(face empty tabs lines-tail trailing))
-(global-whitespace-mode)
-
+(setq whitespace-style '(face tabs lines-tail))
 
 (defun my/hide-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
