@@ -117,7 +117,7 @@ given string."
 (use-package nodejs-repl
   :ensure t
   :config
-  (add-hook 'nodejs-repl-mode-hook #'delim-pad-mode)
+  (add-hook 'nodejs-repl-mode-hook '(delim-pad-mode t))
   (define-key nodejs-repl-mode-map [tab] 'comint-dynamic-complete)
   (define-key nodejs-repl-mode-map (kbd "C-r") 'comint-history-isearch-backward)
   (define-key nodejs-repl-mode-map (kbd "C-p") 'comint-previous-input)
