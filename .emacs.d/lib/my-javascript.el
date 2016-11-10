@@ -123,5 +123,9 @@ given string."
   (define-key nodejs-repl-mode-map (kbd "C-p") 'comint-previous-input)
   (define-key nodejs-repl-mode-map (kbd "C-n") 'comint-next-input))
 
+(use-package nvm
+  :ensure t
+  :config)
+
 (provide 'my-javascript)
 ;;; my-javascript.el ends here
