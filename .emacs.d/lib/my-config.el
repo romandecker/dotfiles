@@ -1,7 +1,8 @@
 (setq
  inhibit-startup-screen t
  x-select-enable-clipboard t
- visible-bell t)
+ visible-bell t
+ ring-bell-function (lambda () (message "!!!!")))
 
 ; tabs are evil
 (setq-default
@@ -19,11 +20,15 @@
 ;; make the default font smaller
 (set-face-attribute 'default nil :height 115)
 
-(defalias 'yes-or-no-p 'y-or-n-p) ; use y or n everywhere cause it's shorter to type
+;; use y or n everywhere cause it's shorter to type
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (set-default 'truncate-lines t)
 (-each '(message-mode-hook)
- (lambda (hook) (add-hook hook (lambda () (message "turning truncate off!")(setq truncate-lines nil)))))
+ (lambda (hook) (add-hook hook
+                          (lambda ()
+                            (message "turning truncate off!")
+                            (setq truncate-lines nil)))))
 
 
 ; always wrap around in messages buffer
