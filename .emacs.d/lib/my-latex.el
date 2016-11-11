@@ -33,7 +33,8 @@
 (add-hook 'latex-mode-hook '(flyspell-mode t))
 
 (evil-leader/set-key
-  "t s" 'flyspell-prog-mode)
+  "t s" 'flyspell-prog-mode
+  "t S" 'flyspell-mode)
 
 (evil-define-key 'normal flyspell-mode-map
   (kbd "] s") 'flyspell-goto-next-error)
@@ -44,6 +45,21 @@
   (add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode)
   (evil-define-key 'normal flyspell-mode-map
     (kbd "g =") 'flyspell-popup-correct))
+
+(use-package synosaurus
+  :ensure t
+  :config
+  (setq synosaurus-choose-method 'popup)
+  (define-key evil-normal-state-map (kbd "g s") 'synosaurus-choose-and-replace))
+
+(use-package google-translate
+  :ensure t
+  :config
+  (setq google-translate-default-source-language "en"
+        google-translate-default-target-language "de"
+        google-translate-translation-directions-alist '(("en" . "de") ("de" . "en")))
+  (define-key evil-normal-state-map (kbd "g t") 'google-translate-at-point)
+  (define-key evil-normal-state-map (kbd "g T") 'google-translate-at-point-reverse))
 
 (provide 'my-latex)
 ;;; my-latex.el ends here

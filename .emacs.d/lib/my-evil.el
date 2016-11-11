@@ -100,7 +100,7 @@
   (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
 
   (require 'delim-pad)
-  (add-hook 'prog-mode-hook '(delim-pad-mode t))decorate
+  (add-hook 'prog-mode-hook '(delim-pad-mode t))
   (add-hook 'help-mode-hook (lambda () (delim-pad-mode -1)))
 
   (define-key evil-normal-state-map [escape] 'keyboard-quit)

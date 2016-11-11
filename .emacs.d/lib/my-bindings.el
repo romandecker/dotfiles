@@ -108,4 +108,5 @@
     "SPC . l"   "Dir/File-local variables"
     "SPC ?"     "Get help")
   (which-key-mode))
+
 ;;; my-bindings.el ends here
