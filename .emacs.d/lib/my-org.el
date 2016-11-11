@@ -32,7 +32,7 @@
     (kbd "TAB") 'org-cycle
     [tab]       'org-cycle)
 
-  (define-key evil-normal-state-map (kbd "g x") 'org-open-at-point-global)
+  (define-key evil-normal-state-map (kbd "RET") 'org-open-at-point-global)
 
   (evil-leader/set-key-for-mode 'org-mode
     "SPC l" 'org-toggle-link-display))
