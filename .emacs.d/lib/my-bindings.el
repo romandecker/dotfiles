@@ -56,7 +56,6 @@
     "w z"   'zoom-window-zoom
     "w |"   'split-window-right
     "w -"   'split-window-below
-    ". s"   'my/open-snippet-dir
     ". e"   'my/open-dotfile
     ". r"   'my/reload-dotfile
     ". l d" 'add-dir-local-variable
@@ -67,7 +66,6 @@
     "? F"   'describe-font
     "? k"   'describe-key
     "? m"   'describe-mode
-    "? s"   'yas-describe-tables
     "? v"   'describe-variable)
   (global-evil-leader-mode))
 

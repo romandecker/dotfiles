@@ -40,3 +40,4 @@
 (require 'my-realgud)
 (require 'my-latex)
 (require 'my-docview)
+(require 'my-collaboration)

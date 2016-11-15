@@ -18,6 +18,11 @@
   (define-key yas-keymap [(control tab)] 'yas-next-field)
   (define-key yas-keymap (kbd "C-g") 'my/abort-company-or-yas)
 
+  (evil-leader/set-key
+    ". s n"   'yas-new-snippet
+    ". s d"   'my/open-snippet-dir
+    "? s"     'yas-describe-tables)
+
   (yas-global-mode 1)
   (use-package yatemplate
     :ensure t

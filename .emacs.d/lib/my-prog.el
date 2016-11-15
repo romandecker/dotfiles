@@ -39,7 +39,7 @@
 (defun my/hide-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
 
-(add-hook 'prog-mode-hook '(linum-mode t))
+(add-hook 'prog-mode-hook (lambda () (linum-mode t)))
 (add-hook 'minibuffer-setup-hook #'my/hide-trailing-whitespace)
 (add-hook 'helm-mode-hook #'my/hide-trailing-whitespace)
 (add-hook 'term-mode-hook #'my/hide-trailing-whitespace)

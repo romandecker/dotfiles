@@ -18,7 +18,12 @@
         company-minimum-prefix-length 2)
   (nconc company-backends '(company-yasnippet))
   (global-company-mode)
+  (use-package company-quickhelp
+    :ensure t
+    :config
+    (company-quickhelp-mode 1))
   (message "company has loaded!"))
+
 
 (provide 'my-company)
 ;;; my-company.el ends here

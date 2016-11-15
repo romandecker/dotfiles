@@ -2,19 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package latex-preview-pane
-  :ensure t
-  :config
+(use-package latex-preview-pane :ensure t :config
   (latex-preview-pane-enable))
 
 (require 'langtool)
 
 (setq langtool-language-tool-jar
       "~/bin/LanguageTool-3.5/languagetool-commandline.jar")
-
-(setq langtool-default-language "en-US")
-
-(defun langtool-autoshow-detail-popup (overlays)
+(setq langtool-default-language "en-US") (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
     ;; Do not interrupt current popup
     (unless (or popup-instances
@@ -60,6 +55,32 @@
         google-translate-translation-directions-alist '(("en" . "de") ("de" . "en")))
   (define-key evil-normal-state-map (kbd "g t") 'google-translate-at-point)
   (define-key evil-normal-state-map (kbd "g T") 'google-translate-at-point-reverse))
+
+(use-package helm-bibtex
+  :ensure t
+  :config
+  (defvar my-latex/helm-source-bibtex
+    (helm-build-sync-source "BibTeX entries"
+      :init 'bibtex-completion-init
+      :candidates 'bibtex-completion-candidates
+      :filtered-candidate-transformer 'helm-bibtex-candidates-formatter
+      :action (helm-make-actions
+               "Insert BibTeX key"          'helm-bibtex-insert-key
+               "Insert BibTeX entry"        'helm-bibtex-insert-bibtex))
+    "Helm source for searching through bibtex entries.")
+  
+  (defun my/helm-bibtex (&optional arg)
+    "Search BibTeX entries.
+
+    With a prefix ARG, the cache is invalidated and the bibliography
+    reread."
+    (interactive "P")
+    (when arg
+        (bibtex-completion-clear-cache))
+    (helm :sources (list my-latex/helm-source-bibtex)
+            :full-frame helm-bibtex-full-frame
+            :buffer "*helm bibtex*"
+            :candidate-number-limit 500)))
 
 (provide 'my-latex)
 ;;; my-latex.el ends here

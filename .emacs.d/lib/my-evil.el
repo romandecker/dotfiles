@@ -73,7 +73,7 @@
     :config
     (define-key evil-normal-state-map (kbd "C-n") 'my/smart-c-n)
     (define-key evil-normal-state-map (kbd "C-p") 'my/ctrlp-dwim)
-    (define-key evil-visual-state-map (kbd "i") 'my/place-cursors-along-region)
+    (define-key evil-visual-state-map (kbd "|") 'my/place-cursors-along-region)
     (evil-define-key 'normal evil-mc-key-map
       (kbd "C-n") 'my/smart-c-n
       (kbd "C-p") 'my/ctrlp-dwim
