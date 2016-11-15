@@ -2,7 +2,7 @@
  inhibit-startup-screen t
  x-select-enable-clipboard t
  visible-bell t
- ring-bell-function (lambda () (message "!!!!")))
+ ring-bell-function 'ignore)
 
 ; tabs are evil
 (setq-default

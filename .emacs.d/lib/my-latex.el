@@ -60,8 +60,7 @@
   (define-key evil-normal-state-map (kbd "g t") 'google-translate-at-point)
   (define-key evil-normal-state-map (kbd "g T") 'google-translate-at-point-reverse)
   (evil-leader/set-key
-    "a t" 'google-translate-query-translate
-    "a T" 'google-translate-query-translate-reverse))
+    "a t" 'google-translate-smooth-translate))
 
 (use-package helm-bibtex
   :ensure t

@@ -4,15 +4,6 @@
 
 (require 'thingatpt-plus)
 
-(defun my/test ()
-  (interactive)
-  (let* ((bounds (tap-bounds-of-thing-nearest-point 'string))
-         (start (car bounds))
-         (end (cdr bounds)))
-    (goto-char start)))
-
-(define-key evil-normal-state-map (kbd "g t") 'my/test)
-
 (evil-define-text-object evil-outer-nearest-string (count &optional beg end type)
   "Select the nearest string."
   (let* ((bounds (tap-bounds-of-thing-nearest-point 'string))
