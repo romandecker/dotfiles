@@ -6,6 +6,8 @@
   :config
   (define-key helm-map (kbd "C-j") 'helm-next-line)
   (define-key helm-map (kbd "C-k") 'helm-previous-line)
+  (define-key helm-map (kbd "C-d") 'helm-next-page)
+  (define-key helm-map (kbd "C-u") 'helm-previous-page)
   (define-key helm-map (kbd "C-w") 'backward-kill-word)
   (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action) ; complete with tab
   (define-key evil-normal-state-map (kbd "g p") 'helm-show-kill-ring)

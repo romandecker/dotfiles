@@ -6,6 +6,9 @@
   (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 
+  (add-to-list 'evil-insert-state-modes 'calculator-mode)
+  (add-to-list 'evil-normal-state-modes 'package-menu-mode)
+
   ;; camel-case-motion
   (define-key evil-normal-state-map (kbd "w") 'evil-forward-little-word-begin)
   (define-key evil-normal-state-map (kbd "e") 'evil-forward-little-word-end)
@@ -97,7 +100,6 @@
     (global-evil-quickscope-mode 1))
   (require 'evil-little-word)
   (require 'my-bindings)
-  (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
 
   (require 'delim-pad)
   (add-hook 'prog-mode-hook '(delim-pad-mode t))

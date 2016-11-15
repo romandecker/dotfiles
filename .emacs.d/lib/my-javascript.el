@@ -121,7 +121,7 @@ given string."
   (define-key nodejs-repl-mode-map [tab] 'comint-dynamic-complete)
   (define-key nodejs-repl-mode-map (kbd "C-r") 'comint-history-isearch-backward)
   (define-key nodejs-repl-mode-map (kbd "C-p") 'comint-previous-input)
-  (define-key nodejs-repl-mode-map (kbd "C-n") 'comint-next-input))
+  (define-key nodejs-repl-mode-map (kbd "C-n") 'comint-next-input)))
 
 (use-package nvm
   :ensure t

@@ -9,7 +9,9 @@
 
 (setq langtool-language-tool-jar
       "~/bin/LanguageTool-3.5/languagetool-commandline.jar")
-(setq langtool-default-language "en-US") (defun langtool-autoshow-detail-popup (overlays)
+(setq langtool-default-language "en-US")
+
+(defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
     ;; Do not interrupt current popup
     (unless (or popup-instances
@@ -45,7 +47,9 @@
   :ensure t
   :config
   (setq synosaurus-choose-method 'popup)
-  (define-key evil-normal-state-map (kbd "g s") 'synosaurus-choose-and-replace))
+  (define-key evil-normal-state-map (kbd "g s") 'synosaurus-choose-and-replace)
+  (evil-leader/set-key
+    "a s" 'synosaurus-lookup))
 
 (use-package google-translate
   :ensure t
@@ -54,7 +58,10 @@
         google-translate-default-target-language "de"
         google-translate-translation-directions-alist '(("en" . "de") ("de" . "en")))
   (define-key evil-normal-state-map (kbd "g t") 'google-translate-at-point)
-  (define-key evil-normal-state-map (kbd "g T") 'google-translate-at-point-reverse))
+  (define-key evil-normal-state-map (kbd "g T") 'google-translate-at-point-reverse)
+  (evil-leader/set-key
+    "a t" 'google-translate-query-translate
+    "a T" 'google-translate-query-translate-reverse))
 
 (use-package helm-bibtex
   :ensure t

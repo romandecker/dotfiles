@@ -11,6 +11,12 @@
     ":"     'helm-M-x
     "~"     'my/toggle-project-term
     "TAB"   'my/switch-to-last-buffer
+    "a ."   'my/open-current-file-with
+    "a d"   'my/open-current-dir-in-explorer
+    "a c"   'calculator
+    "a p"   'helm-top ; TODO bindings?
+    "a P"   'package-list-packages
+    "a ~"   'multi-term
     "b b"   'helm-buffers-list
     "b n"   'next-buffer
     "b p"   'previous-buffer
@@ -41,7 +47,6 @@
     "o c"   'org-capture
     "o y"   'org-store-link
     "o p"   'org-insert-link
-    "t u"   'undo-tree-visualize
     "t z"   'zoom-window-zoom
     "t n"   'linum-mode
     "t g"   'git-gutter+-toggle-fringe
@@ -92,6 +97,7 @@
     "SPC TAB"   "Last active buffer"
     "SPC :"     "Execute ex-command"
     "SPC ~"     "Toggle terminal"
+    "SPC a"     "Applications"
     "SPC b"     "Buffers"
     "SPC e"     "Evaluate"
     "SPC f"     "Files"

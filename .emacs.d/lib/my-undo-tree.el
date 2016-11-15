@@ -11,6 +11,8 @@
   (define-key undo-tree-visualizer-mode-map (kbd "h") 'undo-tree-visualize-switch-branch-left)
   (define-key undo-tree-visualizer-mode-map (kbd "l") 'undo-tree-visualize-switch-branch-right)
   (add-hook 'undo-tree-visualizer-mode-hook #'turn-off-evil-mode)
+  (evil-leader/set-key
+    "u" 'undo-tree-visualize)
   (global-undo-tree-mode))
 
 (provide 'my-undo-tree)
