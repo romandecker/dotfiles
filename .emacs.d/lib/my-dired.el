@@ -30,7 +30,8 @@
       (kbd "n")   'evil-search-next
       (kbd "N")   'evil-search-previous
       (kbd "y")   'dired-do-copy
-      (kbd "q")   'kill-this-buffer)))
+      (kbd "q")   'kill-this-buffer
+      (kbd "!")   'dired-do-shell-command)))
 
 (eval-after-load 'dired-aux
  '(add-to-list 'dired-compress-file-suffixes

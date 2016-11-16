@@ -14,9 +14,7 @@
    ;; default values for indentation (possibly overwritten by editorconfig)
    js2-basic-offset 2
    js-indent-level 2
-   js-expr-indent-offset -2)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+   js-expr-indent-offset -2) (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)) (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
   (use-package js2-refactor
     :ensure t
@@ -126,6 +124,37 @@ given string."
 (use-package nvm
   :ensure t
   :config)
+
+(require 'npm)
+(evil-leader/set-key-for-mode 'js2-mode
+  "SPC n i" 'npm-install
+  "SPC n c" 'npm-new
+  "SPC n s" 'npm-new-dependency
+  "SPC n v" 'npm-version
+  )
+(which-key-add-key-based-replacements
+  "SPC SPC n" "npm")
+
+(require 'yarn)
+(evil-leader/set-key-for-mode 'js2-mode
+  "SPC y c" 'npm-new
+  "SPC y d" 'yarn-add-dev
+  "SPC y l" 'yarn-link
+  "SPC y L" 'yarn-link-package
+  "SPC y i" 'yarn-install
+  "SPC y o" 'yarn-outdated
+  "SPC y p" 'yarn-add-peer
+  "SPC y r" 'yarn-run
+  "SPC y s" 'yarn-add
+  "SPC y v" 'yarn-version
+  "SPC y w" 'yarn-why
+  )
+(which-key-add-key-based-replacements
+  "SPC SPC y"    "yarn"
+  "SPC SPC y l"  "Link this package"
+  "SPC SPC y L"  "Link another package"
+  )
+
 
 (provide 'my-javascript)
 ;;; my-javascript.el ends here

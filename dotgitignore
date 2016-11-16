@@ -6,3 +6,5 @@
 .vscode/
 .emacs.local/
 .dir-locals.el
+.floo
+.flooignore

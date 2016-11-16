@@ -102,7 +102,7 @@
   (require 'my-bindings)
 
   (require 'delim-pad)
-  (add-hook 'prog-mode-hook '(delim-pad-mode t))
+  (add-hook 'prog-mode-hook (lambda () (delim-pad-mode t)))
   (add-hook 'help-mode-hook (lambda () (delim-pad-mode -1)))
 
   (define-key evil-normal-state-map [escape] 'keyboard-quit)
