@@ -41,3 +41,4 @@
 (require 'my-latex)
 (require 'my-docview)
 (require 'my-collaboration)
+(require 'my-html)
