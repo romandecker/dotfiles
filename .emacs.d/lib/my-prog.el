@@ -58,6 +58,15 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook #'my/colorize-compilation-buffer)
 
+(defun my/init-compilation-mode ()
+  (local-unset-key "g")
+  (local-unset-key "h")
+  (evil-define-key 'motion compilation-mode-map
+    (kbd "r" ) 'recompile
+    (kbd "h" ) 'evil-backward-char))
+
+(add-hook 'compilation-mode-hook #'my/init-compilation-mode)
+
 (define-key compilation-mode-map (kbd "s") 'my/toggle-compilation-scroll)
 
 (provide 'my-prog)
