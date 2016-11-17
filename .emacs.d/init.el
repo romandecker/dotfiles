@@ -42,3 +42,4 @@
 (require 'my-docview)
 (require 'my-collaboration)
 (require 'my-html)
+(require 'my-raml)

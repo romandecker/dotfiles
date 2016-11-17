@@ -62,8 +62,9 @@
   (local-unset-key "g")
   (local-unset-key "h")
   (evil-define-key 'motion compilation-mode-map
-    (kbd "r" ) 'recompile
-    (kbd "h" ) 'evil-backward-char))
+    (kbd "r" )  'recompile
+    (kbd "h" )  'evil-backward-char
+    (kbd "C-u") 'evil-scroll-page-up))
 
 (add-hook 'compilation-mode-hook #'my/init-compilation-mode)
 
