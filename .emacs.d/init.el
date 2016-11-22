@@ -43,3 +43,4 @@
 (require 'my-collaboration)
 (require 'my-html)
 (require 'my-raml)
+(require 'my-docker)
