@@ -102,6 +102,7 @@
     "SPC e"     "Evaluate"
     "SPC f"     "Files"
     "SPC g"     "Git"
+    "SPC i"     "Insert..."
     "SPC o"     "Org"
     "SPC p"     "Projects"
     "SPC t"     "Toggles"
