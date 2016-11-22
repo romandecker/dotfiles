@@ -14,7 +14,11 @@
    ;; default values for indentation (possibly overwritten by editorconfig)
    js2-basic-offset 2
    js-indent-level 2
-   js-expr-indent-offset -2) (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)) (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+   js-expr-indent-offset -2)
+
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
+  (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
   (use-package js2-refactor
     :ensure t
