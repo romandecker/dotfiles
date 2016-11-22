@@ -124,7 +124,8 @@ This respects the `emojify-emoji-styles' variable."
   "If set to t, will automatically prompt for a gitmoji insertion when committing.")
 
 (defun my/autoinsert-gitmoji ()
-  (when my/autoinsert-gitmoji
+  (when (and my/autoinsert-gitmoji
+             (looking-at "[[:space:]]*$"))
     (my/insert-gitmoji)))
 
 (evil-leader/set-key
