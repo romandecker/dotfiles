@@ -19,6 +19,7 @@
   (define-key yas-keymap (kbd "C-g") 'my/abort-company-or-yas)
 
   (evil-leader/set-key
+    "i s"     'yas-insert-snippet
     ". s n"   'yas-new-snippet
     ". s d"   'my/open-snippet-dir
     "? s"     'yas-describe-tables)
