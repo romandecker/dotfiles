@@ -41,6 +41,7 @@
   (evil-leader/set-key
     "g h s" 'git-gutter+-stage-hunks
     "g h r" 'git-gutter+-revert-hunk
+    "g h _" 'git-gutter+-revert-hunk
     "g h h" 'git-gutter+-show-hunk-inline-at-point
     "g h H" 'git-gutter+-show-hunk)
   (which-key-add-key-based-replacements
