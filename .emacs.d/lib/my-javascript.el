@@ -155,6 +155,7 @@ given string."
   "SPC SPC y L"  "Link another package"
   )
 
+(setenv "NODE_NO_READLINE" "1")
 
 (provide 'my-javascript)
 ;;; my-javascript.el ends here
