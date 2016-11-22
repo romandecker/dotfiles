@@ -126,7 +126,7 @@ given string."
   :config)
 
 (require 'npm)
-(evil-leader/set-key-for-mode 'js2-mode
+(evil-leader/set-key-for-mode 'js-mode
   "SPC n i" 'npm-install
   "SPC n c" 'npm-new
   "SPC n s" 'npm-new-dependency
@@ -136,7 +136,8 @@ given string."
   "SPC SPC n" "npm")
 
 (require 'yarn)
-(evil-leader/set-key-for-mode 'js2-mode
+(evil-leader/set-key-for-mode 'js-mode
+  "SPC y a" 'yarn-add
   "SPC y c" 'npm-new
   "SPC y d" 'yarn-add-dev
   "SPC y l" 'yarn-link
@@ -145,7 +146,6 @@ given string."
   "SPC y o" 'yarn-outdated
   "SPC y p" 'yarn-add-peer
   "SPC y r" 'yarn-run
-  "SPC y s" 'yarn-add
   "SPC y v" 'yarn-version
   "SPC y w" 'yarn-why
   )
