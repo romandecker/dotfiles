@@ -7,8 +7,7 @@
   :config
   (message "evil-magit has loaded!"))
 
-(use-package git-timemachine
-  :ensure t
+(use-package git-timemachine :ensure t
   :after hydra
   :config
   (defhydra hydra-git-timemachine ()
@@ -94,19 +93,19 @@ This respects the `emojify-emoji-styles' variable."
                        ":penguin: - Fixing something on Linux."
                        ":checkered-flag: - Fixing something on Windows."
                        ":bookmark: - Releasing / Version tags."
-                       ":rotating-light: - Removing linter warnings."
+                       ":rotating_light: - Removing linter warnings."
                        ":construction: - Work in progress."
-                       ":green-heart: - Fixing CI Build."
-                       ":arrow-down: - Downgrading dependencies."
-                       ":arrow-up: - Upgrading dependencies."
+                       ":green_heart: - Fixing CI Build."
+                       ":arrow_down: - Downgrading dependencies."
+                       ":arrow_up: - Upgrading dependencies."
                        ":construction_worker: - Adding CI build system."
-                       ":chart-with-upwards-trend: - Adding analytics or tracking code."
+                       ":chart_with_upwards_trend: - Adding analytics or tracking code."
                        ":hammer: - Heavy refactoring."
-                       ":heavy-minus-sign: - Removing a dependency."
+                       ":heavy_minus_sign: - Removing a dependency."
                        ":whale: - Work about Docker."
-                       ":heavy-plus-sign: - Adding a dependency."
+                       ":heavy_plus_sign: - Adding a dependency."
                        ":wrench: - Changing configuration files."
-                       ":globe-with-meridians: - Internationalization and localization."
+                       ":globe_with_meridians: - Internationalization and localization."
                        ":pencil: - Fixing typos."
                        ":hankey: - Writing bad code that needs to be improved."
                        ))
