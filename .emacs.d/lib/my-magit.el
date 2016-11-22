@@ -123,6 +123,11 @@ This respects the `emojify-emoji-styles' variable."
   "If set to t, will automatically prompt for a gitmoji insertion when committing.")
 
 (defun my/autoinsert-gitmoji ()
+  "Automatically prompt for a gitmoji when `my/autoinsert-gitmoji' is set to t and point is on an empty line.
+Used for automatically inserting on magit-commit."
+  ;; make sure dir-locals are respected
+  (hack-dir-local-variables)
+  (hack-local-variables-apply)
   (when (and my/autoinsert-gitmoji
              (looking-at "[[:space:]]*$"))
     (my/insert-gitmoji)))
