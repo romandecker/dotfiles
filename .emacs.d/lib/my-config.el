@@ -1,16 +1,25 @@
+;;; package --- Basic general-purpose config options
+;;; Commentary:
+;;; Code:
 (setq
  inhibit-startup-screen t
  x-select-enable-clipboard t
  visible-bell t
  ring-bell-function 'ignore
+ use-dialog-box nil
  gc-cons-threshold 50000000)
 
 ; tabs are evil
 (setq-default
  indent-tabs-mode nil
  tab-width 2
+ evil-shift-width 2
  tab-stop-list (number-sequence 2 120 2)
- indent-tabs-mode nil)
+ indent-tabs-mode nil
+ indicate-empty-lines t)
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
 
 (tool-bar-mode -1)     ; disable the tool-bar
 (menu-bar-mode -1)     ; disable the menu-bar
@@ -41,3 +50,4 @@
 (defconst my/local-emacs-dir ".emacs.local/")
 
 (provide 'my-config)
+;;; my-config.el ends here

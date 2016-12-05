@@ -13,6 +13,7 @@
   :init
   (add-hook 'js2-mode-hook (progn
                              (editorconfig-mode 1)
+                             (setq evil-shift-width js2-basic-offset)
                              (setq js-indent-level js2-basic-offset)
                              (setq js-expr-indent-offset (- js-indent-level)))))
 
