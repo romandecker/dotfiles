@@ -161,5 +161,19 @@ given string."
 
 (setenv "NODE_NO_READLINE" "1")
 
+(defun delim-pad-js2-fix (orig-fun &rest args)
+  "Fix incorrect behaviour of delim-pad in js2-mode.
+
+For some reason `forward-sexp' suddenly broke in js2-mode. This shims
+`forward-sexp-function' in js2-mode when `delim-pad-cmd' is called so
+that it behaves like in js-mode (which is correct for most cases)"
+  (if (eq major-mode 'js2-mode)
+      (let ((forward-sexp-function nil))
+        (apply orig-fun args))
+    (apply orig-fun args))
+  )
+(advice-add 'delim-pad-cmd :around #'delim-pad-js2-fix)
+
+
 (provide 'my-javascript)
 ;;; my-javascript.el ends here
