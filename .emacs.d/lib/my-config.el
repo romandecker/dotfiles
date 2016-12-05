@@ -2,7 +2,8 @@
  inhibit-startup-screen t
  x-select-enable-clipboard t
  visible-bell t
- ring-bell-function 'ignore)
+ ring-bell-function 'ignore
+ gc-cons-threshold 50000000)
 
 ; tabs are evil
 (setq-default
