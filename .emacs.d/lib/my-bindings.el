@@ -25,6 +25,7 @@
     "j"     'previous-buffer
     "k"     'next-buffer
     "f f"   'helm-find-files
+    "e :"   'eval-expression
     "e l"   'eval-last-sexp
     "e b"   'eval-buffer
     "e e"   'my/eval-current-sexp
