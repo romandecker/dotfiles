@@ -40,7 +40,7 @@
   (set-face-foreground 'git-gutter+-modified "#fb9323")
   (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
   (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
-  (add-hook 'prog-mode-hook (lambda () (interactive) (git-gutter+-mode 1)))
+  (add-hook 'prog-mode-hook (lambda () (git-gutter+-mode 1)))
   (evil-leader/set-key
     "g h s" 'git-gutter+-stage-hunks
     "g h r" 'git-gutter+-revert-hunk
