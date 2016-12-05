@@ -23,6 +23,9 @@
 (use-package aggressive-fill-paragraph
   :ensure t
   :config
+  (add-to-list 'afp-fill-comments-only-mode-list 'js2-mode)
+  (add-to-list 'afp-fill-comments-only-mode-list 'yaml-mode)
+  (add-to-list 'afp-fill-comments-only-mode-list 'snippet-mode)
   (afp-setup-recommended-hooks))
 
 (evil-leader/set-key
