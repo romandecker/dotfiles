@@ -1,6 +1,10 @@
 ;;; package --- My custom magit config
 ;;; Commentary:
 ;;; Code:
+
+;; disable "VC" (emacs internal version control stuff)
+(setq vc-handled-backends nil)
+
 (use-package evil-magit
   :ensure t
   :defer 5
