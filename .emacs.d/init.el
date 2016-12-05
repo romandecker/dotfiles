@@ -38,7 +38,7 @@
 (require 'my-undo-tree)
 (require 'my-misc)
 (require 'my-realgud)
-(require 'my-latex)
+(require 'my-writing)
 (require 'my-docview)
 (require 'my-collaboration)
 (require 'my-html)
