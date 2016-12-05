@@ -50,6 +50,10 @@
   (which-key-add-key-based-replacements
     "SPC g h"   "Hunks"))
 
+
+(define-key evil-normal-state-map (kbd "] c") 'smerge-next)
+(define-key evil-normal-state-map (kbd "[ c") 'smerge-prev)
+
 (fringe-helper-define 'git-gutter-fr+-modified nil
   "..xxx..."
   "...xxxx."
