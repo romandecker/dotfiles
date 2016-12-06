@@ -108,7 +108,7 @@
 ;; Regexp for useful and useless buffers for smarter buffer switching
 (defvar my/useless-buffers-regexp '("*\.\+")
   "Regexp used to determine if a buffer is not useful.")
-(defvar my/useful-buffers-regexp '("\\*scratch\\*")
+(defvar my/useful-buffers-regexp '()
   "Regexp used to define buffers that are useful despite matching
   `my/useless-buffers-regexp'.")
 
@@ -210,7 +210,8 @@ Repeated invocations toggle between the two most recently open buffers."
 
 (defun my/ctrlp-dwim ()
   (interactive)
-  (if (evil-mc-has-cursors-p)
+  (if (and (boundp 'evil-mc-has-cursors-p)
+           (evil-mc-has-cursors-p))
       (progn
   (evil-mc-make-and-goto-prev-match))
     (helm-projectile-find-file)))

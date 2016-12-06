@@ -7,11 +7,11 @@
 
 (use-package evil-magit
   :ensure t
-  :defer 5
-  :config
-  (message "evil-magit has loaded!"))
+  :after magit
+  :config)
 
-(use-package git-timemachine :ensure t
+(use-package git-timemachine
+  :ensure t
   :after hydra
   :config
   (defhydra hydra-git-timemachine ()
@@ -50,9 +50,25 @@
   (which-key-add-key-based-replacements
     "SPC g h"   "Hunks"))
 
+(general-define-key
+ :prefix my/leader
+ :keymaps 'normal
+  "g g"   'my-git/start-time-machine
+  "g a"   'magit-stage-file
+  "g b"   'magit-commit
+  "g c"   'magit-commit
+  "g d"   'magit-diff-buffer-file-popup
+  "g l"   'magit-log-buffer-file-popup
+  "g s"   'magit-status
+  "g u"   'magit-unstage-file
+  "g h s" 'git-gutter+-stage-hunks
+  "g h r" 'git-gutter+-revert-hunk
+  "g h h" 'git-gutter+-show-hunk-inline-at-point)
 
-(define-key evil-normal-state-map (kbd "] c") 'smerge-next)
-(define-key evil-normal-state-map (kbd "[ c") 'smerge-prev)
+(general-define-key
+ :keymaps 'normal
+  "] c" 'smerge-next
+  "[ c" 'smerge-prev)
 
 (fringe-helper-define 'git-gutter-fr+-modified nil
   "..xxx..."

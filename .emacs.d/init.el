@@ -11,6 +11,7 @@
 
 (require 'my-setup)            ; initial setup, libraries and basic stuff
 (require 'my-config)           ; Some basic configuration settings
+(require 'my-general)
 (require 'my-utils)
 (require 'my-evil)
 (require 'my-org)
@@ -44,3 +45,7 @@
 (require 'my-html)
 (require 'my-raml)
 (require 'my-docker)
+(require 'my-pomodoro)
+
+(when (file-exists-p my/workgroups-file)
+  (wg-load my/workgroups-file))

@@ -59,13 +59,12 @@ If no project is active, sets it to `bookmark-default-file'."
   :config
   (use-package workgroups
     :ensure t
+    :after helm projectile helm-projectile
     :config
     (setq wg-morph-on nil
           wg-use-faces nil)
-    (add-hook 'wg-switch-hook #'my/wg-switch-hook)
+    ; (add-hook 'wg-switch-hook #'my/wg-switch-hook)
     (workgroups-mode 1)
-    (when (file-exists-p my/workgroups-file)
-      (wg-load my/workgroups-file))
     (add-hook 'kill-emacs-hook #'my/save-workgroups)
     (evil-leader/set-key
       "p -"   'my/switch-to-last-workgroup

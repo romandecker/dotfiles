@@ -4,6 +4,7 @@
 
 (use-package js2-mode
   :ensure t
+  :after helm
   :config
   ;; do not show errors (use flycheck for that)
   (js2-mode-hide-warnings-and-errors)
@@ -22,142 +23,158 @@
 
   (use-package js2-refactor
     :ensure t
+    :general
+    (:states 'normal
+     :keymaps 'js2-mode-map
+     "] ]" 'js2r-forward-slurp
+     "] [" 'js2r-forward-barf)
+    (:prefix my/local-leader
+     :states 'normal
+     :keymaps 'js2-mode-map
+     "r e f" 'js2r-extract-function
+     "r e m" 'js2r-extract-method
+     "r e v" 'js2r-extract-var
+     "r l"   'js2r-log-this
+     "r s o" 'js2r-expand-object
+     "r s a" 'js2r-expand-array
+     "r s f" 'js2r-expand-function
+     "r s s" 'js2r-split-string
+     "r j o" 'js2r-contract-object
+     "r j a" 'js2r-contract-array
+     "r j f" 'js2r-contract-function
+     "r r"   'js2r-rename-var
+     "r ."   'js2r-var-to-this
+     "r 3"   'js2r-ternary-to-if)
     :config
     (add-hook 'js2-mode-hook #'js2-refactor-mode)
-    (evil-define-key 'normal js2-mode-map
-      (kbd "] ]") 'js2r-forward-slurp
-      (kbd "] [") 'js2r-forward-barf)
-    (evil-leader/set-key-for-mode 'js2-mode
-      "SPC r e f" 'js2r-extract-function
-      "SPC r e m" 'js2r-extract-method
-      "SPC r e v" 'js2r-extract-var
-      "SPC r l"   'js2r-log-this
-      "SPC r s o" 'js2r-expand-object
-      "SPC r s a" 'js2r-expand-array
-      "SPC r s f" 'js2r-expand-function
-      "SPC r s s" 'js2r-split-string
-      "SPC r j o" 'js2r-contract-object
-      "SPC r j a" 'js2r-contract-array
-      "SPC r j f" 'js2r-contract-function
-      "SPC r r"   'js2r-rename-var
-      "SPC r ."   'js2r-var-to-this
-      "SPC r 3"   'js2r-ternary-to-if)
     (which-key-add-key-based-replacements
-      "SPC SPC r"   "Refactor..."
-      "SPC SPC r e" "Extract..."
-      "SPC SPC r j" "Join..."
-      "SPC SPC r s" "Split...")))
+      (concat my/local-leader " r")   "Refactor..."
+      (concat my/local-leader " r e") "Extract..."
+      (concat my/local-leader " r j") "Join..."
+      (concat my/local-leader " r s") "Split..."))
 
-;; Add NodeJS error format so that files can be jumped to in compilation-mode
-(pushnew '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
-                1 ;; file
-                2 ;; line
-                3 ;; column
-                )
-         compilation-error-regexp-alist-alist)
-(pushnew 'node compilation-error-regexp-alist)
-
-(pushnew '(jshint "^\\(.+\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), .*$"
+  ;; Add NodeJS error format so that files can be jumped to in compilation-mode
+  (pushnew '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
                   1 ;; file
                   2 ;; line
                   3 ;; column
                   )
-         compilation-error-regexp-alist-alist)
+           compilation-error-regexp-alist-alist)
+  (pushnew 'node compilation-error-regexp-alist)
 
-(pushnew 'jshint compilation-error-regexp-alist)
+  (pushnew '(jshint "^\\(.+\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), .*$"
+                    1 ;; file
+                    2 ;; line
+                    3 ;; column
+                    )
+           compilation-error-regexp-alist-alist)
+  (pushnew 'jshint compilation-error-regexp-alist)
 
-(defun my-javascript/requirable-files ()
-  "Get all project files that are requirable with node's `require`."
-  (-filter
-   (lambda (path)
-     (string-match-p ".js\\(on\\)?$" path))
-   (projectile-current-project-files)))
+  (defun my-javascript/requirable-files ()
+    "Get all project files that are requirable with node's `require`."
+    (-filter
+     (lambda (path)
+       (string-match-p ".js\\(on\\)?$" path))
+     (projectile-current-project-files)))
 
-(defvar my-javascript/helm-source-requirable-project-files
-  (helm-build-in-buffer-source "Requirable files"
-    :data (lambda ()
-            (condition-case nil
-                (my-javascript/requirable-files)
-              (error nil)))
-    :fuzzy-match helm-projectile-fuzzy-match
-    :action my/helm-action-return-candidate
-    )
-  "Helm source definition for files that can be required using node's `require`.")
+  (require 'helm-source)
+  (defvar my-javascript/helm-source-requirable-project-files
+    (helm-build-in-buffer-source "Requirable files"
+      :data (lambda ()
+              (condition-case nil
+                  (my-javascript/requirable-files)
+                (error nil)))
+      ; :fuzzy-match helm-projectile-fuzzy-match
+      :action my/helm-action-return-candidate
+      )
+    "Helm source definition for files that can be required using node's `require`.")
 
-(defun my-javascript/helm-get-requirable-project-file (&optional initial-input)
-  "Start helm to search for requirable project files and return the selected
+  (defun my-javascript/helm-get-requirable-project-file (&optional initial-input)
+    "Start helm to search for requirable project files and return the selected
 candidate.
 If INITIAL-INPUT is given, helm will initially be filled with the
 given string."
-  (let* ((path-from-root
-          (helm :sources my-javascript/helm-source-requirable-project-files
-                :input initial-input)))
-    (when path-from-root
-      (let* ((abspath (concat (projectile-project-root) path-from-root))
-             (relpath (file-relative-name
-                       abspath
-                       (file-name-directory buffer-file-name)))
-             ; make sure that relpath starts with "./"
-             (relpath (if (string-match "^\\.\\./" relpath)
-                          relpath
-                        (concat "./" relpath))))
-        ; "index.js can be left out so remove it if it's there
-        (replace-regexp-in-string "/index.js$" "" relpath)))))
+    (let* ((path-from-root
+            (helm :sources my-javascript/helm-source-requirable-project-files
+                  :input initial-input)))
+      (when path-from-root
+        (let* ((abspath (concat (projectile-project-root) path-from-root))
+               (relpath (file-relative-name
+                         abspath
+                         (file-name-directory buffer-file-name)))
+                                        ; make sure that relpath starts with "./"
+               (relpath (if (string-match "^\\.\\./" relpath)
+                            relpath
+                          (concat "./" relpath))))
+                                        ; "index.js can be left out so remove it if it's there
+          (replace-regexp-in-string "/index.js$" "" relpath))))))
+
 
 (use-package mocha
   :ensure t
+  :general
+  (:prefix my/local-leader
+   :states 'normal
+   :keymaps 'js2-mode-map
+   "t p"   'mocha-test-project
+   "t f"   'mocha-test-file
+   "t t"   'mocha-test-at-point
+   "t d p" 'mocha-debug-project
+   "t d f" 'mocha-debug-file
+   "t d t" 'mocha-debug-at-point)
   :config
   (evil-leader/set-key-for-mode 'js2-mode
-    "SPC t p"   'mocha-test-project
-    "SPC t f"   'mocha-test-file
-    "SPC t t"   'mocha-test-at-point
-    "SPC t d p" 'mocha-debug-project
-    "SPC t d f" 'mocha-debug-file
-    "SPC t d t" 'mocha-debug-at-point)
-  (add-hook 'mocha-compilation-mode-hook (lambda () (setq truncate-lines nil))))
+    (add-hook 'mocha-compilation-mode-hook (lambda () (setq truncate-lines nil)))))
 
 (use-package nodejs-repl
   :ensure t
+  :general
+  (:keymaps 'nodejs-repl-mode-map
+   [tab] 'comint-dynamic-complete
+   "C-r" 'comint-history-isearch-backward
+   "C-p" 'comint-previous-input
+   "C-n" 'comint-next-input)
   :config
-  (add-hook 'nodejs-repl-mode-hook (lambda () (delim-pad-mode t)))
-  (define-key nodejs-repl-mode-map [tab] 'comint-dynamic-complete)
-  (define-key nodejs-repl-mode-map (kbd "C-r") 'comint-history-isearch-backward)
-  (define-key nodejs-repl-mode-map (kbd "C-p") 'comint-previous-input)
-  (define-key nodejs-repl-mode-map (kbd "C-n") 'comint-next-input))
+  (add-hook 'nodejs-repl-mode-hook (lambda () (delim-pad-mode t))))
 
 (use-package nvm
   :ensure t
   :config)
 
 (require 'npm)
-(evil-leader/set-key-for-mode 'js-mode
-  "SPC n i" 'npm-install
-  "SPC n c" 'npm-new
-  "SPC n s" 'npm-new-dependency
-  "SPC n v" 'npm-version
-  )
+(general-define-key
+ :states 'normal
+ :keymaps 'js2-mode-map
+ :prefix my/local-leader
+  "n i" 'npm-install
+  "n c" 'npm-new
+  "n s" 'npm-new-dependency
+  "n v" 'npm-version)
+
 (which-key-add-key-based-replacements
-  "SPC SPC n" "npm")
+  (concat my/local-leader " n") "npm")
 
 (require 'yarn)
-(evil-leader/set-key-for-mode 'js-mode
-  "SPC y a" 'yarn-add
-  "SPC y c" 'npm-new
-  "SPC y d" 'yarn-add-dev
-  "SPC y l" 'yarn-link
-  "SPC y L" 'yarn-link-package
-  "SPC y i" 'yarn-install
-  "SPC y o" 'yarn-outdated
-  "SPC y p" 'yarn-add-peer
-  "SPC y r" 'yarn-run
-  "SPC y v" 'yarn-version
-  "SPC y w" 'yarn-why
-  )
+(general-define-key
+ :states 'normal
+ :keymaps 'js2-mode-map
+ :prefix my/local-leader
+  "y a" 'yarn-add
+  "y c" 'npm-new
+  "y d" 'yarn-add-dev
+  "y l" 'yarn-link
+  "y L" 'yarn-link-package
+  "y i" 'yarn-install
+  "y o" 'yarn-outdated
+  "y p" 'yarn-add-peer
+  "y r" 'yarn-run
+  "y v" 'yarn-version
+  "y w" 'yarn-why)
+
 (which-key-add-key-based-replacements
-  "SPC SPC y"    "yarn"
-  "SPC SPC y l"  "Link this package"
-  "SPC SPC y L"  "Link another package"
-  )
+  (concat my/local-leader " y")    "yarn"
+  (concat my/local-leader " y l")  "Link this package"
+  (concat my/local-leader " y L")  "Link another package")
 
 (setenv "NODE_NO_READLINE" "1")
 

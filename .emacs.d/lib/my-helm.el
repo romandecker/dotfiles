@@ -3,29 +3,34 @@
 ;;; Code:
 (use-package helm
   :ensure t
+  :general
+  (:keymaps 'helm-map
+   "C-j" 'helm-next-line
+   "C-k" 'helm-previous-line
+   "C-d" 'helm-next-page
+   "C-u" 'helm-previous-page
+   "C-w" 'backward-kill-word
+   "TAB" 'helm-execute-persistent-action) ; complete with tab
+  (:states 'normal
+   "g p" 'helm-show-kill-ring)
   :config
-  (define-key helm-map (kbd "C-j") 'helm-next-line)
-  (define-key helm-map (kbd "C-k") 'helm-previous-line)
-  (define-key helm-map (kbd "C-d") 'helm-next-page)
-  (define-key helm-map (kbd "C-u") 'helm-previous-page)
-  (define-key helm-map (kbd "C-w") 'backward-kill-word)
-  (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action) ; complete with tab
-  (define-key evil-normal-state-map (kbd "g p") 'helm-show-kill-ring)
-  (setq helm-mode-fuzzy-match t
-        helm-completion-in-region-fuzzy-match t
+  (setq helm-mode-fuzzy-match t helm-completion-in-region-fuzzy-match t
         helm-autoresize-max-height 30
         helm-autoresize-min-height 1)
   (helm-autoresize-mode t)
   (helm-mode 1)
+
   (use-package helm-projectile
     :ensure t
+    :general
+    (:prefix my/leader
+     "p P"   'helm-projectile-switch-project
+     "p f"   'helm-projectile-find-file
+     "p d"   'helm-projectile-find-dir
+     "p /"   'helm-projectile-ag)
     :config
-    (evil-leader/set-key
-        "p P"   'helm-projectile-switch-project
-        "p f"   'helm-projectile-find-file
-        "p d"   'helm-projectile-find-dir
-        "p /"   'helm-projectile-ag)
     (helm-projectile-on))
+
   (use-package ag
     :ensure t
     :config
@@ -34,23 +39,31 @@
       :config
       (advice-add 'helm-ag--edit
                   :after #'evil-mc-mode)))
+
   (use-package helm-descbinds
     :ensure t
     :config)
+
   (use-package helm-swoop
     :ensure t
+    :general
+    (:keymaps 'helm-swoop-map
+     "C-w"   'backward-kill-word
+     "C-c e" 'helm-swoop-edit)
+    (:keymaps 'helm-swoop-edit-map
+     "C-c C-c" 'helm-swoop--edit-complete
+     "C-c C-g" 'helm-swoop--edit-cancel)
+    (:states 'normal
+     "g *" 'helm-swoop
+     "g /" 'helm-swoop-without-pre-input)
     :config
-    (define-key helm-swoop-map (kbd "C-w") 'backward-kill-word)
-    (define-key helm-swoop-map (kbd "C-c e") 'helm-swoop-edit)
-    (define-key evil-normal-state-map (kbd "g *") 'helm-swoop)
-    (define-key evil-normal-state-map (kbd "g /") 'helm-swoop-without-pre-input)
-    (define-key helm-swoop-edit-map (kbd "C-c C-c") 'helm-swoop--edit-complete)
-    (define-key helm-swoop-edit-map (kbd "C-c C-g") 'helm-swoop--edit-cancel)
     (advice-add 'helm-swoop--edit
-                :after #'evil-mc-mode)))
+                :after #'evil-mc-mode))
 
-(defvar my/helm-action-return-candidate
-  (helm-make-actions "Select" (lambda (candidate) candidate)))
+  (defvar my/helm-action-return-candidate
+    (helm-make-actions "Select" (lambda (candidate) candidate))))
+
+
 
 ;; Replace helm-help-event-loop with own implementation that uses more
 ;; evil bindings

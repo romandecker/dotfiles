@@ -1,4 +1,5 @@
 (use-package editorconfig
+  :after js2-mode
   :ensure t
   :config
   (add-hook
@@ -13,9 +14,11 @@
   :init
   (add-hook 'js2-mode-hook (progn
                              (editorconfig-mode 1)
-                             (setq evil-shift-width js2-basic-offset)
-                             (setq js-indent-level js2-basic-offset)
-                             (setq js-expr-indent-offset (- js-indent-level)))))
+                             (when (boundp 'js2-basic-offset)
+                               (setq evil-shift-width js2-basic-offset
+                                     js-indent-level js2-basic-offset))
+                             (when (boundp 'js-indent-level)
+                               (setq js-expr-indent-offset (- js-indent-level))))))
 
 (use-package column-marker
   :ensure t

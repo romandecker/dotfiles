@@ -1,24 +1,30 @@
 (use-package evil
   :ensure t
-  :config
-  (define-key evil-insert-state-map [tab] 'my/tab-indent-or-complete)
-  (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
-  (define-key evil-insert-state-map (kbd "TAB") 'my/tab-indent-or-complete)
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 
+  :general
+  (:keymaps 'insert
+   [tab] 'my/tab-indent-or-complete
+   "TAB" 'my/tab-indent-or-complete
+   "C-l" 'evil-delete-char)
+  (:keymaps '(normal visual operator)
+   "C-u" 'evil-scroll-up
+   "w"   'evil-forward-little-word-begin
+   "e"   'evil-forward-little-word-end
+   "b"   'evil-backward-little-word-begin)
+  (:keymaps '(normal visual)
+   ;; smart go-to-bol (toggle between true BOL and first significant character)
+   "0"   'my/goto-bol-dwim)
+  (:keymaps 'insert
+   ;; quicker digraphs for german (just like it works in default mac apps)
+   "M-u" 'my/quick-digraph
+   "M-s" 'my/insert-sharp-s
+   )
+  (:keymaps 'normal
+   "] p" 'evil-paste-pop
+   "[ p" 'evil-paste-pop-next)
+  :config
   (add-to-list 'evil-insert-state-modes 'calculator-mode)
   (add-to-list 'evil-normal-state-modes 'package-menu-mode)
-
-  ;; camel-case-motion
-  (define-key evil-normal-state-map (kbd "w") 'evil-forward-little-word-begin)
-  (define-key evil-normal-state-map (kbd "e") 'evil-forward-little-word-end)
-  (define-key evil-normal-state-map (kbd "b") 'evil-backward-little-word-begin)
-  (define-key evil-operator-state-map (kbd "w") 'evil-forward-little-word-begin)
-  (define-key evil-operator-state-map (kbd "e") 'evil-forward-little-word-end)
-  (define-key evil-operator-state-map (kbd "b") 'evil-backward-little-word-begin)
-  (define-key evil-visual-state-map (kbd "w") 'evil-forward-little-word-begin)
-  (define-key evil-visual-state-map (kbd "e") 'evil-forward-little-word-end)
-  (define-key evil-visual-state-map (kbd "b") 'evil-backward-little-word-begin)
 
   ;; Make movement keys work like they should
   (define-key evil-normal-state-map
@@ -32,57 +38,46 @@
   (define-key evil-motion-state-map
     (kbd "<remap> <evil-previous-line>") 'evil-previous-line)
 
-  ;; smart go-to-bol (toggle between true BOL and first significant character)
-  (define-key evil-normal-state-map (kbd "0") 'my/goto-bol-dwim)
-
-  ;; quicker digraphs for german (just like it works in default mac apps)
-  (define-key evil-insert-state-map (kbd "M-u") 'my/quick-digraph)
-  (define-key evil-insert-state-map (kbd "M-s") 'my/insert-sharp-s)
-
   ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
 
-  (define-key evil-normal-state-map (kbd "m") 'my/evil-move)
-
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))
-
-  (evil-define-key 'normal emacs-lisp-mode-map
-    (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
-
-  (define-key evil-normal-state-map (kbd "] p") 'evil-paste-pop)
-  (define-key evil-normal-state-map (kbd "[ p") 'evil-paste-pop-next)
-
   (use-package evil-surround
     :ensure t
     :config
     (global-evil-surround-mode))
   (use-package evil-numbers
     :ensure t
-    :config
-    (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-    (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt))
+    :general
+    (:keymaps 'normal
+     "C-a" 'evil-numbers/inc-at-pt
+     "C-x" 'evil-numbers/dec-at-pt))
   (use-package evil-args
     :ensure t
-    :config
-    (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-    (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
+    :general
+    (:keymaps '(evil-inner-text-objects-map) "a" 'evil-inner-arg)
+    (:keymaps '(evil-outer-text-objects-map) "a" 'evil-outer-arg))
   (use-package evil-matchit
     :ensure t
     :config
     (global-evil-matchit-mode 1))
   (use-package evil-mc
     :ensure t
+    :general
+    (:keymaps 'normal
+     "C-n" 'my/smart-c-n
+     "C-p" 'my/ctrlp-dwim)
+    (:keymaps 'visual
+     "|" 'my/place-cursors-along-region)
+    (:states 'normal
+     :keymaps 'evil-mc-key-map
+     "C-n"    'my/smart-c-n
+     "C-p"    'my/ctrlp-dwim
+     [escape] 'evil-mc-undo-all-cursors
+     "C-s"    'evil-mc-skip-and-goto-next-match
+     "C-S-p"  'evil-mc-skip-and-goto-prev-cursor)
     :config
-    (define-key evil-normal-state-map (kbd "C-n") 'my/smart-c-n)
-    (define-key evil-normal-state-map (kbd "C-p") 'my/ctrlp-dwim)
-    (define-key evil-visual-state-map (kbd "|") 'my/place-cursors-along-region)
-    (evil-define-key 'normal evil-mc-key-map
-      (kbd "C-n") 'my/smart-c-n
-      (kbd "C-p") 'my/ctrlp-dwim
-      [escape] 'evil-mc-undo-all-cursors
-      (kbd "C-s") 'evil-mc-skip-and-goto-next-match
-      (kbd "C-S-p") 'evil-mc-skip-and-goto-prev-cursor)
     (global-evil-mc-mode 1)
     (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode))
   (use-package evil-exchange
@@ -105,6 +100,7 @@
   (add-hook 'prog-mode-hook (lambda () (delim-pad-mode 1)))
   (add-hook 'help-mode-hook (lambda () (delim-pad-mode -1)))
 
+  ;; make Esc quit most things
   (define-key evil-normal-state-map [escape] 'keyboard-quit)
   (define-key evil-visual-state-map [escape] 'keyboard-quit)
   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
@@ -114,6 +110,38 @@
   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
   (advice-add 'evil-delete :around 'my/evil-delete)
+
+  (define-key evil-normal-state-map (kbd "m") 'my/evil-move)
+
+  ;; basically, this is the original, unadvised evil-delete operator
+  (evil-define-operator my/evil-move (beg end type register yank-handler)
+    "Delete and yank text from BEG to END with TYPE.
+  Save in REGISTER or in the kill-ring with YANK-HANDLER."
+    (interactive "<R><x><y>")
+    (unless register
+      (let ((text (filter-buffer-substring beg end)))
+        (unless (string-match-p "\n" text)
+          ;; set the small delete register
+          (evil-set-register ?- text))))
+    (let ((evil-was-yanked-without-register nil))
+      (evil-yank beg end type register yank-handler))
+    (cond
+     ((eq type 'block)
+      (evil-apply-on-block #'delete-region beg end nil))
+     ((and (eq type 'line)
+           (= end (point-max))
+           (or (= beg end)
+               (/= (char-before end) ?\n))
+           (/= beg (point-min))
+           (=  (char-before beg) ?\n))
+      (delete-region (1- beg) end))
+     (t
+      (delete-region beg end)))
+    ;; place cursor on beginning of line
+    (when (and (evil-called-interactively-p)
+               (eq type 'line))
+      (evil-first-non-blank))
+    )
 
   (evil-mode 1)) ; evil-leader must be enabled before evil
 
@@ -132,35 +160,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (defun my/evil-delete (orig-fn beg end &optional type register &rest args)
   (apply orig-fn beg end type ?_ args))
 
-;; basically, this is the original, unadvised evil-delete operator
-(evil-define-operator my/evil-move (beg end type register yank-handler)
-  "Delete and yank text from BEG to END with TYPE.
-Save in REGISTER or in the kill-ring with YANK-HANDLER."
-  (interactive "<R><x><y>")
-  (unless register
-    (let ((text (filter-buffer-substring beg end)))
-      (unless (string-match-p "\n" text)
-        ;; set the small delete register
-        (evil-set-register ?- text))))
-  (let ((evil-was-yanked-without-register nil))
-    (evil-yank beg end type register yank-handler))
-  (cond
-   ((eq type 'block)
-    (evil-apply-on-block #'delete-region beg end nil))
-   ((and (eq type 'line)
-         (= end (point-max))
-         (or (= beg end)
-             (/= (char-before end) ?\n))
-         (/= beg (point-min))
-         (=  (char-before beg) ?\n))
-    (delete-region (1- beg) end))
-   (t
-    (delete-region beg end)))
-  ;; place cursor on beginning of line
-  (when (and (evil-called-interactively-p)
-             (eq type 'line))
-    (evil-first-non-blank))
-  )
 
 (defun my/quick-digraph-read-key ( &optional prompt )
   "To be used as an advice overriding `read-key`. Always returns the
