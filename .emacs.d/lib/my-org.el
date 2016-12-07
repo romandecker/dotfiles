@@ -2,7 +2,8 @@
   :ensure t
   :mode (("\\.org$" . org-mode))
   :general
-  (:keymaps 'org-mode-map
+  (:states 'normal
+   :keymaps 'org-mode-map
    "o" '(lambda () (interactive) (my/org-eol-call 'my/org-insert-item-dwim))
    "C-j" 'my/window-down
    "C-k" 'my/window-up
@@ -25,10 +26,15 @@
    :states 'normal
    :keymaps 'org-mode-map
    "t l" 'org-toggle-link-display)
-
+  (:prefix my/local-leader
+   :keymaps 'org-mode-map
+   :states 'normal
+   "t" 'org-todo)
   :config
   (setq
+   org-directory "~/Dropbox/org"
    org-default-notes-file "~/Dropbox/org/notes.org"
+   org-agenda-files '("~/Dropbox/org/agenda")
    org-log-done t)
   (use-package org-bullets
     :ensure t

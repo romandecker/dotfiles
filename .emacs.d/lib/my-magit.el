@@ -1,5 +1,4 @@
-;;; package --- My custom magit config
-;;; Commentary:
+;;; package --- My custom magit config ;;; Commentary:
 ;;; Code:
 
 ;; disable "VC" (emacs internal version control stuff)
@@ -9,6 +8,14 @@
   :ensure t
   :after magit
   :config)
+
+(use-package gitlab
+  :ensure t
+  :config
+  (use-package git-commit-insert-issue
+    :ensure t
+    :config
+    (add-hook 'git-commit-mode-hook #'git-commit-insert-issue-mode)))
 
 (use-package git-timemachine
   :ensure t

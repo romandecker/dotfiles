@@ -31,7 +31,13 @@
 ;; for keeping track of recent files, provides helm-recentf with data
 (use-package recentf
   :ensure t
-  :config)
+  :config
+  (recentf-mode 1))
+
+(use-package popwin
+  :ensure t
+  :config
+  (popwin-mode 1))
 
 (use-package atomic-chrome
   :ensure t

@@ -87,8 +87,10 @@
   (use-package evil-exchange
     :ensure t
     :config
-    (setq evil-exchange-key (kbd "g x"))
-    (evil-exchange-install))
+    (general-nmap "c" (general-key-dispatch 'evil-change
+                        "s" 'evil-surround-change
+                        "x" 'evil-exchange
+                        "X" 'evil-exchange-cancel)))
   (use-package evil-commentary
     :ensure t
     :config

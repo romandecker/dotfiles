@@ -3,6 +3,7 @@
 ;;; Code:
 (use-package helm
   :ensure t
+  :demand t
   :general
   (:keymaps 'helm-map
    "C-j" 'helm-next-line
@@ -22,6 +23,7 @@
 
   (use-package helm-projectile
     :ensure t
+    :demand t
     :general
     (:prefix my/leader
      "p P"   'helm-projectile-switch-project
