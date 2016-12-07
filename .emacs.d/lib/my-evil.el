@@ -23,6 +23,7 @@
    "] p" 'evil-paste-pop
    "[ p" 'evil-paste-pop-next)
   :config
+  (message "configuring evil")
   (add-to-list 'evil-insert-state-modes 'calculator-mode)
   (add-to-list 'evil-normal-state-modes 'package-menu-mode)
 
@@ -37,7 +38,7 @@
     (kbd "<remap> <evil-next-line>") 'evil-next-line)
   (define-key evil-motion-state-map
     (kbd "<remap> <evil-previous-line>") 'evil-previous-line)
-
+  
   ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
 
@@ -62,8 +63,10 @@
     :ensure t
     :config
     (global-evil-matchit-mode 1))
+  (message "configuring evil-mc")
   (use-package evil-mc
     :ensure t
+    :demand t
     :general
     (:keymaps 'normal
      "C-n" 'my/smart-c-n
@@ -78,6 +81,7 @@
      "C-s"    'evil-mc-skip-and-goto-next-match
      "C-S-p"  'evil-mc-skip-and-goto-prev-cursor)
     :config
+    (message "enabling global evil-mc-mode")
     (global-evil-mc-mode 1)
     (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode))
   (use-package evil-exchange

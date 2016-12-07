@@ -13,12 +13,20 @@
 (use-package git-timemachine
   :ensure t
   :after hydra
+  :general
+  (:prefix my/leader
+   :keymaps 'normal
+   "g g"   'my-git/start-time-machine)
   :config
   (defhydra hydra-git-timemachine ()
     "git-timemachine"
     ("j" git-timemachine-show-next-revision "Next commit")
     ("k" git-timemachine-show-previous-revision "Previous commit")
-    ("q" git-timemachine-quit "Quit timemachine")))
+    ("q" git-timemachine-quit "Quit timemachine"))
+  (defun my-git/start-time-machine ()
+    (interactive)
+    (git-timemachine)
+    (hydra-git-timemachine/body)))
 
 (use-package gitconfig-mode
   :ensure t
@@ -34,26 +42,45 @@
 
 (use-package git-gutter-fringe+
   :ensure t
+  :demand t
+  :general
+  (:prefix my/leader
+   :keymaps 'normal
+   "g h s" 'git-gutter+-stage-hunks
+   "g h r" 'git-gutter+-revert-hunk
+   "g h _" 'git-gutter+-revert-hunk
+   "g h h" 'git-gutter+-show-hunk-inline-at-point
+   "g h H" 'git-gutter+-show-hunk)
+  (:keymaps 'normal
+   "] h" 'git-gutter+-next-hunk
+   "[ h" 'git-gutter+-previous-hunk)
   :config
   (setq git-gutter-fr+-side 'right-fringe)
   (set-face-foreground 'git-gutter+-added "#22be22")
   (set-face-foreground 'git-gutter+-modified "#fb9323")
-  (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
-  (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
   (add-hook 'prog-mode-hook (lambda () (git-gutter+-mode 1)))
-  (evil-leader/set-key
-    "g h s" 'git-gutter+-stage-hunks
-    "g h r" 'git-gutter+-revert-hunk
-    "g h _" 'git-gutter+-revert-hunk
-    "g h h" 'git-gutter+-show-hunk-inline-at-point
-    "g h H" 'git-gutter+-show-hunk)
+
   (which-key-add-key-based-replacements
-    "SPC g h"   "Hunks"))
+    (concat my/leader " g h") "Hunks")
+
+  (fringe-helper-define 'git-gutter-fr+-modified nil
+    "..xxx..."
+    "...xxxx."
+    ".....xx."
+    "...xxxx."
+    ".xxxx..."
+    ".xx....."
+    ".xxxx..."
+    "...xxx..")
+
+  (defun my/toggle-git-gutter ()
+    "Handler for toggling git gutter"
+    (interactive)
+    (git-gutter+-toggle-fringe)))
 
 (general-define-key
  :prefix my/leader
  :keymaps 'normal
-  "g g"   'my-git/start-time-machine
   "g a"   'magit-stage-file
   "g b"   'magit-commit
   "g c"   'magit-commit
@@ -70,27 +97,17 @@
   "] c" 'smerge-next
   "[ c" 'smerge-prev)
 
-(fringe-helper-define 'git-gutter-fr+-modified nil
-  "..xxx..."
-  "...xxxx."
-  ".....xx."
-  "...xxxx."
-  ".xxxx..."
-  ".xx....."
-  ".xxxx..."
-  "...xxx..")
-
-(defun my-git/start-time-machine ()
-  (interactive)
-  (git-timemachine)
-  (hydra-git-timemachine/body))
-
 (use-package emojify
   :ensure t
+  :general
+  (:prefix my/leader
+   :keymaps 'normal
+   "i e" 'emojify-insert-emoji
+   "i g" 'my/insert-gitmoji
+   "t e" 'emojify-mode)
   :config
-  (global-emojify-mode)
-  )
-
+  (global-emojify-mode))
+:white-check-mark: 
 (defun my/insert-gitmoji ()
   "Interactively prompt for Emojis and insert them in the current buffer.
 
@@ -156,9 +173,6 @@ Used for automatically inserting on magit-commit."
              (looking-at "[[:space:]]*$"))
     (my/insert-gitmoji)))
 
-(evil-leader/set-key
-  "i e" 'emojify-insert-emoji
-  "i g" 'my/insert-gitmoji)
 
 (add-hook 'git-commit-mode-hook #'my/autoinsert-gitmoji)
 

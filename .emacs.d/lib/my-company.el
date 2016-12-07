@@ -3,15 +3,19 @@
 ;;; Code
 (use-package company
   :ensure t
-  :defer 1
-  :bind (:map company-active-map
-              ("M-n" . nil)
-              ("M-p" . nil)
-              ("C-n" . company-select-next)
-              ("C-p" . company-select-previous)
-              ("C-w" . backward-kill-word)
-              ([tab] . my/expand-snippet-or-complete-selection)
-              ("TAB" . my/expand-snippet-or-complete-selection))
+  :demand t
+  :general
+  (:keymaps 'company-active-map
+    "M-n" nil
+    "M-p" nil
+    "C-n" 'company-select-next
+    "C-p" 'company-select-previous
+    "C-w" 'backward-kill-word
+    [tab] 'my/expand-snippet-or-complete-selection
+    "TAB" 'my/expand-snippet-or-complete-selection)
+  (:keymaps 'company-mode-map
+   :states 'insert
+   "C-n" 'company-complete)
   :diminish company-mode
   :config
   (setq company-idle-delay 0.2
@@ -23,7 +27,6 @@
     :config
     (company-quickhelp-mode 1))
   (message "company has loaded!"))
-
 
 (provide 'my-company)
 ;;; my-company.el ends here

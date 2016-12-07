@@ -31,7 +31,7 @@
 (require 'my-rainbow-delimiters)
 (require 'my-magit)
 (require 'my-origami)
-(require 'my-powerline)
+(require 'my-modeline)
 (require 'my-prog)
 (require 'my-elisp)
 (require 'my-visuals)
@@ -46,6 +46,4 @@
 (require 'my-raml)
 (require 'my-docker)
 (require 'my-pomodoro)
-
-(when (file-exists-p my/workgroups-file)
-  (wg-load my/workgroups-file))
+(require 'my-workgroups)

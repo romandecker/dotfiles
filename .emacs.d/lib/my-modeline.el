@@ -1,4 +1,4 @@
-;;; package --- My custom powerline config
+;;; package --- My custom modeline config
 ;;; Commentary:
 ;;; Code:
 (use-package smart-mode-line
@@ -7,5 +7,5 @@
   (setq sml/theme 'automatic)
   (sml/setup))
 
-(provide 'my-powerline)
-;;; my-powerline.el ends here
+(provide 'my-modeline)
+;;; my-modeline.el ends here

@@ -23,70 +23,69 @@
 (setq langtool-autoshow-message-function
       'langtool-autoshow-detail-popup)
 
-(evil-leader/set-key-for-mode 'latex-mode
+(general-define-key
+ :prefix my/local-leader
+ :keymaps 'latex-mode
+ :states 'normal
   "SPC s" 'langtool-check
   "SPC S" 'langtool-check-done)
 
 (add-hook 'latex-mode-hook '(flyspell-mode t))
 
-(evil-leader/set-key
+(general-define-key
+ :prefix my/leader
+ :states 'normal
   "t s" 'flyspell-prog-mode
   "t S" 'flyspell-mode)
 
-(evil-define-key 'normal flyspell-mode-map
-  (kbd "] s") 'flyspell-goto-next-error)
+(general-define-key
+ :states 'normal
+ :keymaps 'flyspell-mode-map
+  "] s" 'flyspell-goto-next-error)
 
 (use-package flyspell-popup
   :ensure t
+  :general
+  (:keymaps 'flyspell-mode-map
+   :states 'normal
+   "g =" 'flyspell-popup-correct)
   :config
-  (add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode)
-  (evil-define-key 'normal flyspell-mode-map
-    (kbd "g =") 'flyspell-popup-correct))
+  (add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode))
 
 (use-package synosaurus
   :ensure t
+  :general
+  (:keymaps 'normal
+   "g s" 'synosaurus-choose-and-replace)
+  (:prefix my/leader
+   :states 'normal
+    "a s" 'synosaurus-lookup)
   :config
-  (setq synosaurus-choose-method 'popup)
-  (define-key evil-normal-state-map (kbd "g s") 'synosaurus-choose-and-replace)
-  (evil-leader/set-key
-    "a s" 'synosaurus-lookup))
+  (setq synosaurus-choose-method 'popup))
 
 (use-package google-translate
   :ensure t
+  :demand t
+  :general
+  (:keymaps 'normal
+   "g t" 'google-translate-at-point
+   "g T" 'google-translate-at-point-reverse)
+  (:prefix my/leader
+   :keymaps 'normal
+    "a t" 'google-translate-smooth-translate)
   :config
   (setq google-translate-default-source-language "en"
         google-translate-default-target-language "de"
-        google-translate-translation-directions-alist '(("en" . "de") ("de" . "en")))
-  (define-key evil-normal-state-map (kbd "g t") 'google-translate-at-point)
-  (define-key evil-normal-state-map (kbd "g T") 'google-translate-at-point-reverse)
-  (evil-leader/set-key
-    "a t" 'google-translate-smooth-translate))
+        google-translate-translation-directions-alist '(("en" . "de") ("de" . "en"))))
 
-(use-package helm-bibtex
-  :ensure t
-  :config
-  (defvar my-writing/helm-source-bibtex
-    (helm-build-sync-source "BibTeX entries"
-      :init 'bibtex-completion-init
-      :candidates 'bibtex-completion-candidates
-      :filtered-candidate-transformer 'helm-bibtex-candidates-formatter
-      :action (helm-make-actions
-               "Insert BibTeX key"          'helm-bibtex-insert-key
-               "Insert BibTeX entry"        'helm-bibtex-insert-bibtex))
-    "Helm source for searching through bibtex entries.")
-  
-  (defun my/helm-bibtex (&optional arg)
-    "Search BibTeX entries.
-
-    With a prefix ARG, the cache is invalidated and the bibliography
-    reread."
-    (interactive "P")
-    (when arg
-        (bibtex-completion-clear-cache))
-    (helm :sources (list my-writing/helm-source-bibtex)
-            :full-frame helm-bibtex-full-frame
-            :buffer "*helm bibtex*"
-            :candidate-number-limit 500)))
+(require 'my-company-bibtex)
+(add-to-list 'company-backends 'company-bibtex)
+;; (use-package company-bibtex
+;;   :ensure t
+;;   :demand t
+;;   :after company
+;;   :config
+;;   (add-to-list 'company-backends 'company-bibtex))
 
 (use-package writegood-mode
   :ensure t

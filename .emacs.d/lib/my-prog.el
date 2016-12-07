@@ -3,12 +3,13 @@
 ;;; Code:
 (use-package highlight-symbol
   :ensure t
-  :after evil
+  :general
+  (:keymaps 'normal
+   "] o" 'highlight-symbol-next
+   "[ o" 'highlight-symbol-prev)
   :config
   (setq highlight-symbol-idle-delay 0.5)
-  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
-  (define-key evil-normal-state-map (kbd "] o") 'highlight-symbol-next)
-  (define-key evil-normal-state-map (kbd "[ o") 'highlight-symbol-prev))
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode))
 
 (use-package indent-guide
   :ensure t
@@ -27,14 +28,6 @@
   (add-to-list 'afp-fill-comments-only-mode-list 'yaml-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'snippet-mode)
   (afp-setup-recommended-hooks))
-
-(evil-leader/set-key
-  "c c" 'recompile
-  "c p" 'projectile-compile-project
-  "c x" 'kill-compilation)
-
-(which-key-add-key-based-replacements
-  "SPC c" "Compile")
 
 (require 'whitespace)
 (setq whitespace-style '(face tabs lines-tail))

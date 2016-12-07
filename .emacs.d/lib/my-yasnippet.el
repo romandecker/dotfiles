@@ -3,7 +3,6 @@
 ;;; Code:
 (use-package yasnippet
   :ensure t
-  :after company
   :config
   (setq
    yas-snippet-dirs '("~/.emacs.d/snippets"))

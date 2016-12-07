@@ -35,6 +35,8 @@
    "b p"   'previous-buffer
    "b d"   'kill-this-buffer
    "b m"   'my/switch-to-messages
+   "c c"   'recompile
+   "c x"   'kill-compilation
    "j"     'previous-buffer
    "k"     'next-buffer
    "f f"   'helm-find-files
@@ -51,7 +53,7 @@
    "o p"   'org-insert-link
    "t z"   'zoom-window-zoom
    "t n"   'linum-mode
-   "t g"   'git-gutter+-toggle-fringe
+   "t g"   'my/toggle-git-gutter
    "t w v" 'toggle-truncate-lines
    "t w w" 'aggressive-fill-paragraph-mode
    "u"     'universal-argument
@@ -59,7 +61,6 @@
    "w C-r" 'winner-redo
    "w o"   'delete-other-windows
    "w q"   'evil-window-delete
-   "w r"   'hydra-window-resize/body
    "w z"   'zoom-window-zoom
    "w |"   'split-window-right
    "w -"   'split-window-below
@@ -91,6 +92,7 @@
     "SPC a"     "Applications"
     "SPC a ."   "Current..."
     "SPC b"     "Buffers"
+    "SPC c"     "Compile"
     "SPC e"     "Evaluate"
     "SPC f"     "Files"
     "SPC g"     "Git"

@@ -3,8 +3,11 @@
 ;;; Code:
 (use-package origami
   :ensure t
+  :general
+  (:keymaps 'origami-mode-map
+   :states 'normal
+   "z a" 'origami-toggle-node)
   :config
-  (define-key evil-normal-state-map (kbd "z a") 'origami-toggle-node)
   (global-origami-mode))
 
 (provide 'my-origami)

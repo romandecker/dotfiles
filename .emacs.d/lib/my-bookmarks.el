@@ -6,14 +6,15 @@
 
 (use-package bookmark+
   :ensure t
-  :after evil-leader
+  :general
+  (:prefix my/leader
+   :keymaps 'normal
+   "m" 'helm-bookmarks)
   :config
   (setq
    bmkp-last-as-first-bookmark-file nil)
-  (evil-leader/set-key
-    "m" 'helm-bookmarks)
   (which-key-add-key-based-replacements
-    "SPC m" "Bookmarks"))
+    (concat my/leader " m") "Bookmarks"))
 
 (provide 'my-bookmarks)
 ;;; my-bookmarks.el ends here

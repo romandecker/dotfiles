@@ -3,6 +3,7 @@
 ;;; Code:
 (use-package elisp-slime-nav
   :ensure t
+  :diminish elisp-slime-nav-mode
   :general
   (:states 'normal
    :keymaps 'emacs-lisp-mode-map
@@ -40,9 +41,11 @@
 
 
 ;; some bindings for help-mode
-(define-key help-mode-map (kbd "DEL") 'help-go-back)
-(define-key help-mode-map [tab] 'forward-button)
-(define-key help-mode-map (kbd "r") 'my/reload-help)
+(general-define-key
+ :keymaps 'help-mode-map
+  "DEL" 'help-go-back
+  [tab] 'forward-button
+  "r"   'my/reload-help)
 
 (provide 'my-elisp)
 ;;; my-elisp.el ends here
