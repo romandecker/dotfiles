@@ -99,6 +99,7 @@
 
 (use-package emojify
   :ensure t
+  :demand t
   :general
   (:prefix my/leader
    :keymaps 'normal
@@ -172,7 +173,6 @@ Used for automatically inserting on magit-commit."
   (when (and my/autoinsert-gitmoji
              (looking-at "[[:space:]]*$"))
     (my/insert-gitmoji)))
-
 
 (add-hook 'git-commit-mode-hook #'my/autoinsert-gitmoji)
 
