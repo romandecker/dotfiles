@@ -139,7 +139,14 @@ given string."
 
 (use-package nvm
   :ensure t
-  :config)
+  :config
+  (defun my/nvm-use ()
+    (interactive)
+    (when (projectile-project-p)
+      (nvm-use-for (projectile-project-root))
+      (message "Activated node %s" nvm-current-version)
+      (exec-path-from-shell-copy-env "PATH")))
+  (add-hook 'projectile-after-switch-project-hook #'my/nvm-use))
 
 (require 'npm)
 (general-define-key
@@ -170,6 +177,28 @@ given string."
   "y r" 'yarn-run
   "y v" 'yarn-version
   "y w" 'yarn-why)
+
+(defun my/run-in-project-dir (orig-fun &rest args)
+  "If currently in a project, run the given function with `default-directory' set to
+the project's root. If not currently in a project, run the function normally.
+To be used as an around-advice."
+  (if (projectile-project-p)
+      (let ((default-directory (projectile-project-root)))
+        (apply orig-fun args)))
+  (apply orig-fun args))
+
+;; automatically run yarn-functions inside the project root
+(dolist (fun '(yarn-add
+               yarn-add-dev
+               yarn-link
+               yarn-link-package
+               yarn-install
+               yarn-outdated
+               yarn-add-peer
+               yarn-run
+               yarn-version
+               yarn-why))
+  (advice-add fun :around #'my/run-in-project-dir))
 
 (which-key-add-key-based-replacements
   (concat my/local-leader " y")    "yarn"

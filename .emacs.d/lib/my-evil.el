@@ -1,5 +1,6 @@
 (use-package evil
   :ensure t
+  :demand t
 
   :general
   (:keymaps 'insert

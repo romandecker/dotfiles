@@ -80,12 +80,6 @@
 
 (require 'my-company-bibtex)
 (add-to-list 'company-backends 'company-bibtex)
-;; (use-package company-bibtex
-;;   :ensure t
-;;   :demand t
-;;   :after company
-;;   :config
-;;   (add-to-list 'company-backends 'company-bibtex))
 
 (use-package writegood-mode
   :ensure t
