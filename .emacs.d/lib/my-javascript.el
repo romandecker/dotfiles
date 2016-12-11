@@ -164,7 +164,7 @@ given string."
 (require 'yarn)
 (general-define-key
  :states 'normal
- :keymaps 'js2-mode-map
+ :keymaps '(js2-mode-map json-mode)
  :prefix my/local-leader
   "y a" 'yarn-add
   "y c" 'npm-new
@@ -184,8 +184,8 @@ the project's root. If not currently in a project, run the function normally.
 To be used as an around-advice."
   (if (projectile-project-p)
       (let ((default-directory (projectile-project-root)))
-        (apply orig-fun args)))
-  (apply orig-fun args))
+        (apply orig-fun args))
+    (apply orig-fun args)))
 
 ;; automatically run yarn-functions inside the project root
 (dolist (fun '(yarn-add
