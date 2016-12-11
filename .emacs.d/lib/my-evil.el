@@ -88,10 +88,15 @@
   (use-package evil-exchange
     :ensure t
     :config
-    (general-nmap "c" (general-key-dispatch 'evil-change
-                        "s" 'evil-surround-change
-                        "x" 'evil-exchange
-                        "X" 'evil-exchange-cancel)))
+    (evil-exchange-install)
+
+    ;; TODO: sadly, this breaks evil-mc, figure out a workaround
+    ;; (general-define-key :keymaps 'normal "c"
+    ;;   (general-key-dispatch 'evil-change
+    ;;     "s" 'evil-surround-change
+    ;;     "x" 'evil-exchange
+    ;;     "X" 'evil-exchange-cancel)))
+    )
   (use-package evil-commentary
     :ensure t
     :config
