@@ -34,11 +34,6 @@
   :config
   (recentf-mode 1))
 
-(use-package popwin
-  :ensure t
-  :config
-  (popwin-mode 1))
-
 (use-package atomic-chrome
   :ensure t
   :defer 15
