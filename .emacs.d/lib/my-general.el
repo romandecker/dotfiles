@@ -40,7 +40,7 @@
    "j"     'previous-buffer
    "k"     'next-buffer
    "f f"   'helm-find-files
-   "e :"   'eval-expression
+   "e :"   'helm-eval-expression
    "e l"   'eval-last-sexp
    "e b"   'eval-buffer
    "e f"   'eval-defun
