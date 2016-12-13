@@ -40,6 +40,9 @@
   (define-key evil-motion-state-map
     (kbd "<remap> <evil-previous-line>") 'evil-previous-line)
   
+  ;; take care not to override global leader
+  (define-key evil-motion-state-map (kbd my/leader) nil)
+
   ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
 

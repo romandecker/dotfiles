@@ -11,16 +11,25 @@
         my/local-leader "C-SPC"
         general-default-keymaps 'evil-normal-state-map)
 
+  (global-unset-key (kbd my/local-leader))
+
+  (define-key help-mode-map (kbd my/leader) nil)
 
   ;; global keymaps
-  (general-define-key :keymaps 'normal
-                      "C-h" 'my/window-left
-                      "C-j" 'my/window-down
-                      "C-k" 'my/window-up
-                      "C-l" 'my/window-right)
+  (global-set-key (kbd "C-h") 'my/window-left)
+  (global-set-key (kbd "C-j") 'my/window-down)
+  (global-set-key (kbd "C-k") 'my/window-up)
+  (global-set-key (kbd "C-l") 'my/window-right)
+
+
+  (defmacro my/define-leader-map (&rest body)
+    `(general-define-key
+      :prefix my/leader
+      :keymaps '(normal visual motion help-mode-map)
+       ,@body))
+
   ;; leader keymaps
-  (general-define-key
-   :prefix my/leader
+  (my/define-leader-map
    ":"     'helm-M-x
    "~"     'my/toggle-project-term
    "TAB"   'my/switch-to-last-buffer

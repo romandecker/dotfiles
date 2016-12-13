@@ -164,7 +164,7 @@ given string."
 (require 'yarn)
 (general-define-key
  :states 'normal
- :keymaps '(js2-mode-map json-mode)
+ :keymaps '(js2-mode-map json-mode-map)
  :prefix my/local-leader
   "y a" 'yarn-add
   "y c" 'npm-new
