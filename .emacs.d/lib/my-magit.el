@@ -4,6 +4,13 @@
 ;; disable "VC" (emacs internal version control stuff)
 (setq vc-handled-backends nil)
 
+;; make sure magit doesn't override global leader
+(general-emacs-define-key
+    '(magit-status-mode-map
+      magit-diff-mode-map
+      magit-log-mode-map)
+  my/leader nil)
+
 (use-package evil-magit
   :ensure t
   :after magit

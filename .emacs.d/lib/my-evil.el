@@ -106,7 +106,6 @@
     :config
     (global-evil-quickscope-mode 1))
   (require 'evil-little-word)
-  (require 'my-bindings)
 
   (require 'delim-pad)
   (add-hook 'prog-mode-hook (lambda () (delim-pad-mode 1)))

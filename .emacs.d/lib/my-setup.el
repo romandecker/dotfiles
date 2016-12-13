@@ -32,15 +32,6 @@
 ;; general-purpose list library (-map, etc...)
 (use-package dash :ensure t :config)
 
-(use-package restart-emacs
-  :ensure t
-  :after evil-leader
-  :config
-  (evil-leader/set-key
-    "Q R"   'restart-emacs
-    "Q Q" 'kill-emacs)
-  (which-key-add-key-based-replacements
-    "SPC q" "Quitting"))
 
 (provide 'my-setup)
 ;;; my-setup.el ends here

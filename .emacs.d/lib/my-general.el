@@ -11,6 +11,7 @@
         my/local-leader "C-SPC"
         general-default-keymaps 'evil-normal-state-map)
 
+
   ;; global keymaps
   (general-define-key :keymaps 'normal
                       "C-h" 'my/window-left
@@ -20,7 +21,6 @@
   ;; leader keymaps
   (general-define-key
    :prefix my/leader
-   :keymaps '(normal visual)
    ":"     'helm-M-x
    "~"     'my/toggle-project-term
    "TAB"   'my/switch-to-last-buffer
@@ -107,6 +107,7 @@
     "SPC . l"   "Dir/File-local variables"
     "SPC ?"     "Get help")
   (which-key-mode))
+  
 
 (provide 'my-general)
 ;;; my-general.el ends here

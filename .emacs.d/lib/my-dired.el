@@ -33,6 +33,9 @@
   "q"   'kill-this-buffer
   "!"   'dired-do-shell-command)
 
+;; take care not to override global leader
+(general-emacs-define-key dired-mode-map my/leader nil)
+
 (eval-after-load 'dired-aux
  '(add-to-list 'dired-compress-file-suffixes
                  '("\\.zip\\'" ".zip" "unzip")))
