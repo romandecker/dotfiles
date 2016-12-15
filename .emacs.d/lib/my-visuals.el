@@ -41,5 +41,8 @@
   (atomic-chrome-start-server)
   (message "atomic-chrome started!"))
 
+(setq scroll-conservatively 10000
+      scroll-margin 5)
+
 (provide 'my-visuals)
 ;;; my-visuals.el ends here
