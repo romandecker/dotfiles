@@ -28,6 +28,8 @@
   (global-set-key (kbd "C-S-l") 'buf-move-right))
 
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
+(define-key minibuffer-local-map (kbd "C-p") 'previous-history-element)
+(define-key minibuffer-local-map (kbd "C-n") 'next-history-element)
 
 (provide 'my-misc)
 ;;; my-misc.el ends here
