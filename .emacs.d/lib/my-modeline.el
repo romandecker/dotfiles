@@ -10,50 +10,66 @@
 
 ;; TODO some WIP-code for custom modeline below
 
+(defun moduline/render-module (module)
+  (let ((render (alist-get 'render module)))
+    (funcall render module)))
+
 ;; use force-mode-line-update to update modeline!
 (require 's)
-(defcustom
-  moduline/path-transformers
-  '(moduline/shorten-home moduline/shorten-projects moduline/shorten-dotfiles)
-  "List of replacers that will be applied in order to (buffer-file-name) before displaying it in the mode-line")
 
+(cl-defun moduline/buffer-path-create (&key (transformers
+                                             '(moduline/buffer-path-shorten-home)))
+  "Create a new buffer-path module. The buffer-path module displays
+the current-buffer's path when rendered. It can be configured to
+format the path based on various transformations."
+  (let ((module `((type . buffer-path)
+                  (transformers . ,transformers)
+                  (render . moduline/buffer-path-render))))
+    module))
 
-(defun moduline/shorten-home (full-path)
+(defun moduline/buffer-path-render (module)
+  "Render a buffer-path module."
+  (let ((path (buffer-file-name))
+        (transformers (alist-get 'transformers module)))
+    (dolist (replacer transformers)
+      (when (functionp replacer)
+          (setq path (funcall replacer path))))
+    path))
+
+(defun moduline/buffer-path-shorten-home (full-path)
   "Transform /Users/roman/foo or /home/roman/foo to ~/foo."
   (let ((home (expand-file-name "~")))
     (if (s-starts-with? home full-path)
         (concat "~" (substring full-path (length home)))
       full-path)))
 
-(defun moduline/shorten-projects (path)
+(defun moduline/buffer-path-shorten-projects (path)
   (replace-regexp-in-string "~/projects/" ":P:/" path))
 
-(defun moduline/shorten-dotfiles (path)
+(defun moduline/buffer-path-shorten-dotfiles (path)
   (replace-regexp-in-string "~/.dotfiles/" ":.:/" path))
 
-(defun moduline/render-buffer-path ()
-  (let ((path (buffer-file-name)))
-    (dolist (replacer moduline/path-transformers)
-      (if (functionp replacer)
-          (progn
-            (setq path (apply replacer `(,path))))))
-    path))
 
+(defconst my/buffer-path-module (moduline/buffer-path-create))
+(moduline/buffer-path-render my/buffer-path-module)
 
 
 (require 'cl)
 (require 'cl-lib)
 
 
+
 (cl-defun moduline/progress-create (style
                                     &key (color "black")
                                     &key (length 1))
+  "Create a new progress-module"
   (let ((module `((type . progress)
                   (style . ,style)
                   (progress . 0)
-                  (length . ,length))))
+                  (length . ,length)
+                  (render . moduline/progress-render))))
     (if (eq style 'clock)
-        (setf (alist-get 'image-count module) 8)
+        (setf (alist-get 'image-count module) 17)
       (setf (alist-get 'image-count module) 16))
     (setf (alist-get 'images module)
           (moduline/progress-load-images module color))
@@ -80,6 +96,12 @@
     (if (>= progress 1)
         (moduline/repeat-image module-length full-tile)
       (append head joiner tail))))
+
+(defun moduline/progress-set (progress module)
+  (setf (alist-get 'progress module) progress))
+
+(defun moduline/progress-get (module)
+  (alist-get 'progress module))
 
 (defun moduline/repeat-image (n image &optional fallback-str)
   (unless fallback-str
@@ -127,31 +149,35 @@
                   :color-symbols `(("black" . ,moduline/progress-bar-color))))))
 
 
-(defconst my/progress-bar (moduline/progress-create 'bar :length 5 :color "light sea green"))
+(defconst my/progress-clock (moduline/progress-create 'clock :length 1 :color "green"))
 
-(progn
-  (setf (alist-get 'progress my/progress-bar) 0.5)
+(progn 
+  (moduline/progress-set 0.6 my/progress-clock)
   (force-mode-line-update))
 
-; (progn
-;   (setq mode-line-format
-;         (list
-;          '(:eval (moduline/render-buffer-path))
-;          " "
-;          '(:eval (moduline/progress-render my/progress-bar))
-;          ))
-;   (force-mode-line-update))
+;; (progn
+;;   (setq mode-line-format
+;;         (list
+;;          " "
+;;          '(:eval (moduline/render-module my/buffer-path-module))
+;;          " "
+;;          '(:eval (moduline/render-module my/progress-clock))))
+;;   (force-mode-line-update))
 
-;; (setq my/progress 0)
+(moduline/progress-set 0 my/progress-clock)
 ;; (setq my/timer (run-at-time
 ;;                 1
 ;;                 0.1
 ;;                 (lambda () 
-;;                   (setq my/progress (if (> my/progress 1)
-;;                                         0
-;;                                       (+ my/progress 0.01)))
-;;                   (force-mode-line-update))))
-;; ; (cancel-timer my/timer)
+;;                   (let ((p (moduline/progress-get my/progress-clock)))
+;;                     (moduline/progress-set 
+;;                      (if (> p 1)
+;;                          0
+;;                        (+ p 0.01))
+;;                      my/progress-clock)
+;;                   (force-mode-line-update)))))
+
+;;(cancel-timer my/timer)
 
 
 (provide 'my-modeline)
