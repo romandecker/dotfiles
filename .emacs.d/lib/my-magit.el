@@ -21,6 +21,10 @@
   :config
   (use-package git-commit-insert-issue
     :ensure t
+    :general
+    (:prefix my/leader
+     :keymaps 'normal
+     "i i" 'git-commit-insert-issue-gitlab-insert)
     :config
     (add-hook 'git-commit-mode-hook #'git-commit-insert-issue-mode)))
 
