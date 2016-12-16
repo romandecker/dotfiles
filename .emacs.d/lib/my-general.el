@@ -25,7 +25,7 @@
   (defmacro my/define-leader-map (&rest body)
     `(general-define-key
       :prefix my/leader
-      :keymaps '(normal visual motion help-mode-map)
+      :keymaps '(normal visual motion help-mode-map compilation-mode-map)
        ,@body))
 
   ;; leader keymaps

@@ -57,6 +57,7 @@
 (defun my/init-compilation-mode ()
   (local-unset-key "g")
   (local-unset-key "h")
+  (local-unset-key "SPC")
   (evil-define-key 'motion compilation-mode-map
     (kbd "r" )  'recompile
     (kbd "h" )  'evil-backward-char
