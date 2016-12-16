@@ -4,6 +4,10 @@
   :general
   (:states 'insert
    :keymaps 'term-raw-map
+   "C-j"   'my/window-down
+   "C-k"   'my/window-up
+   "C-h"   'my/window-left
+   "C-l"   'my/window-right
    "C-n"   'term-send-down
    "C-p"   'term-send-up
    "C-d"   'term-send-eof
