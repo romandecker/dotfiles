@@ -27,6 +27,7 @@
   (message "configuring evil")
   (add-to-list 'evil-insert-state-modes 'calculator-mode)
   (add-to-list 'evil-normal-state-modes 'package-menu-mode)
+  (add-to-list 'evil-normal-state-modes 'debugger-mode)
 
   ;; Make movement keys work like they should
   (define-key evil-normal-state-map

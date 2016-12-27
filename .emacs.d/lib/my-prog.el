@@ -66,6 +66,7 @@
 (add-hook 'compilation-mode-hook #'my/init-compilation-mode)
 
 (define-key compilation-mode-map (kbd "s") 'my/toggle-compilation-scroll)
+(general-evil-define-key '(normal insert visual) 'debugger-mode-map "q" 'quit-window)
 
 (provide 'my-prog)
 ;;; my-prog.el ends here

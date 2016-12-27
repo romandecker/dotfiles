@@ -9,6 +9,7 @@
 ;; make sure emacs finds all my-*.el files
 (add-to-list 'load-path "~/.emacs.d/lib")
 
+
 (require 'my-setup)            ; initial setup, libraries and basic stuff
 (require 'my-config)           ; Some basic configuration settings
 (require 'my-backup)
