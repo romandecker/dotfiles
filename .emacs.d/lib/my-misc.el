@@ -27,9 +27,25 @@
   (global-set-key (kbd "C-S-h") 'buf-move-left)
   (global-set-key (kbd "C-S-l") 'buf-move-right))
 
+(defun my/isearch-backward-kill-word ()
+  "Just like `kill-backward-word', but for the isearch minibuffer."
+  (interactive)
+  (if (null (cdr isearch-cmds))
+      (ding)
+    (let* ((current (string-reverse (isearch--state-string (car isearch-cmds))))
+           (match (string-match "[[:word:]][^[:word:]]" current)))
+      (while (and (not (null (cdr isearch-cmds)))
+                  (or (null match)
+                      (>= match 0)))
+        (setf isearch-cmds (cdr isearch-cmds)
+              match (if (null match) match (1- match))))
+      (isearch--set-state (car isearch-cmds))))
+  (isearch-update))
+
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 (define-key minibuffer-local-map (kbd "C-p") 'previous-history-element)
 (define-key minibuffer-local-map (kbd "C-n") 'next-history-element)
+(define-key minibuffer-local-map (kbd "C-v") 'evil-paste-after)
+(define-key isearch-mode-map (kbd "C-w") 'my/isearch-backward-kill-word)
 
 (provide 'my-misc)
-;;; my-misc.el ends here
