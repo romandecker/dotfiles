@@ -290,5 +290,31 @@ Version 2015-11-30"
     ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ➢ for example: with nautilus
     )))
 
+(defun my/download-file (url target)
+  "Download a file from an url to a local file. If point is on an url,
+do not prompt for the url and take that url instead.  If prompt is on
+a file name, do not prompt for a file name and take that instead.
+Return the path that the file has been downloaded to."
+  (interactive
+   (let* ((url (or (thing-at-point 'url) (read-string "Url: ")))
+          (path (read-file-name
+                 "Download to:"
+                 default-directory
+                 (when url (file-name-nondirectory url)))))
+     (list url path)))
+  (url-copy-file url target 1)
+  target)
+
+(defun my/download-file-and-insert-path ()
+  "Use `my/download-file' to download a file and insert its local path
+into the current buffer."
+  (interactive)
+  (let ((path (call-interactively 'my/download-file)))
+    (evil-open-below 1)
+    (insert path)))
+
+(my/define-leader-map
+ "i d" 'my/download-file-and-insert-path)
+
 (provide 'my-utils)
 ;;; my-utils.el ends here
