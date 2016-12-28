@@ -305,16 +305,29 @@ Return the path that the file has been downloaded to."
   (url-copy-file url target 1)
   target)
 
+(defun my/relpath-from-current (path)
+  "Calculate the relative path to the given PATH from the current file."
+  (let ((relpath (file-relative-name path default-directory)))
+    (if (string-match "^\\.\\./" relpath)
+        relpath
+      (concat "./" relpath))))
+
 (defun my/download-file-and-insert-path ()
   "Use `my/download-file' to download a file and insert its local path
 into the current buffer."
   (interactive)
-  (let ((path (call-interactively 'my/download-file)))
-    (evil-open-below 1)
-    (insert path)))
+  (let* ((path (call-interactively 'my/download-file))
+         (relpath (file-relative-name path default-directory))
+         (relpath (if (string-match "^\\.\\./" relpath)
+                      relpath
+                    (concat "./" relpath))))
+  (when (thing-at-point 'url)
+    (evil-open-below 1))
+  (insert (my/relpath-from-current path))))
 
 (my/define-leader-map
  "i d" 'my/download-file-and-insert-path)
+
 
 (provide 'my-utils)
 ;;; my-utils.el ends here
