@@ -35,14 +35,21 @@
    org-directory "~/Dropbox/org"
    org-default-notes-file "~/Dropbox/org/notes.org"
    org-agenda-files '("~/Dropbox/org/agenda")
-   org-log-done t)
+   org-log-done t
+   org-image-actual-width nil)
   (use-package org-bullets
     :ensure t
     :config
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
   (use-package org-beautify-theme
     :ensure t
-    :config))
+    :config)
+  (use-package org-download
+    :ensure t
+    :general
+    (:keymaps 'org-mode-map
+     (kbd "<drag-n-drop>") 'org-download))
+  )
 
 
 (defun my/org-eol-call (fun)
