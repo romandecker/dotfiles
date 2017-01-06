@@ -47,4 +47,5 @@
 (require 'my-raml)
 (require 'my-docker)
 (require 'my-pomodoro)
+(require 'my-sgml)
 (require 'my-workgroups)
