@@ -26,8 +26,10 @@
     :general
     (:states 'normal
      :keymaps 'js2-mode-map
-     "] ]" 'js2r-forward-slurp
-     "] [" 'js2r-forward-barf)
+     "] ]" 'my/generic-slurp-right
+     "] [" 'my/generic-barf-right
+     "[ ]" 'my/generic-barf-left
+     "[ [" 'my/generic-slurp-left)
     (:prefix my/local-leader
      :states 'normal
      :keymaps 'js2-mode-map

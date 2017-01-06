@@ -328,6 +328,43 @@ into the current buffer."
 (my/define-leader-map
  "i d" 'my/download-file-and-insert-path)
 
+(defun my/generic-slurp-right ()
+  (interactive)
+  (my/generic-slurp-barf-right 'forward-word))
+
+(defun my/generic-barf-right ()
+  (interactive)
+  (my/generic-slurp-barf-right 'backward-word))
+
+(defun my/generic-slurp-left ()
+  (interactive)
+  (my/generic-slurp-barf-left 'backward-word))
+
+(defun my/generic-barf-left ()
+  (interactive)
+  (my/generic-slurp-barf-left 'forward-word))
+
+(defun my/generic-slurp-barf (regex-fun regexp use-char-fn delete-char-fn move-word-fn)
+  (save-excursion
+    (when (funcall regex-fun regexp)
+      (let ((ch (funcall use-char-fn)))
+        (funcall delete-char-fn 1)
+        (funcall move-word-fn)
+        (insert (char-to-string ch))))))
+
+(defun my/generic-slurp-barf-right (move-word-fn)
+  (my/generic-slurp-barf 're-search-forward
+                         "[\]\)\}\"\']"
+                         'char-before
+                         'delete-backward-char
+                         move-word-fn))
+
+(defun my/generic-slurp-barf-left (move-word-fn)
+  (my/generic-slurp-barf 're-search-backward
+                         "[\[\(\{\"\']"
+                         'char-after
+                         'delete-char
+                         move-word-fn))
 
 (provide 'my-utils)
 ;;; my-utils.el ends here
