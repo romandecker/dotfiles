@@ -25,12 +25,12 @@
 
 (general-define-key
  :prefix my/local-leader
- :keymaps 'latex-mode
  :states 'normal
-  "SPC s" 'langtool-check
-  "SPC S" 'langtool-check-done)
+ :keymaps 'LaTeX-mode-map
+  "s" 'langtool-check
+  "S" 'langtool-check-done)
 
-(add-hook 'latex-mode-hook '(flyspell-mode t))
+(add-hook 'LaTeX-mode-hook (lambda () (flyspell-mode t)))
 
 (general-define-key
  :prefix my/leader

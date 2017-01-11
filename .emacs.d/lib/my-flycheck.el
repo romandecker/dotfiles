@@ -3,6 +3,7 @@
 ;;; Code:
 (use-package flycheck
   :ensure t
+  :demand t
   :general
   (:keymaps 'normal
    "] e" 'flycheck-next-error
