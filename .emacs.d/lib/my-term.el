@@ -21,6 +21,12 @@
    "C-]"   'my/term-send-esc
    "C-S-v" 'term-paste
    "SPC"   'my/term-send-space)    ; must use this, or else smart-space overrides space here
+  (:states 'normal
+   :keymaps 'term-raw-map
+   "C-j"   'my/window-down
+   "C-k"   'my/window-up
+   "C-h"   'my/window-left
+   "C-l"   'my/window-right)
   :config
   (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
 
