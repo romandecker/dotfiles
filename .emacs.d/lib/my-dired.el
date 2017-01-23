@@ -17,21 +17,45 @@
 (general-define-key
  :states 'normal
  :keymaps 'dired-mode-map
-  "h"   'my/dired-up-directory
+  "!"   'dired-do-shell-command
   "DEL" 'my/dired-up-directory
   "RET" 'dired-find-alternate-file
+  "b"   'evil-backward-little-word-begin
+  "c"   'my/dired-start-change
+  "e"   'evil-forward-little-word-end
+  "g g" 'evil-goto-first-line
+  "G"   'evil-goto-line
+  "h"   'my/dired-up-directory
   "l"   'dired-find-alternate-file
-  "c"   'dired-do-rename
-  "m"   'dired-mark
-  "u"   'dired-unmark
-  "U"   'dired-unmark-all-marks
-  "o"   'my/dired-create-file
-  "O"   'dired-create-directory
+  "m"   'my/dired-toggle-mark
+  "M"   'dired-do-rename
   "n"   'evil-search-next
   "N"   'evil-search-previous
-  "y"   'dired-do-copy
+  "o"   'my/dired-create-file
+  "O"   'dired-create-directory
   "q"   'kill-this-buffer
-  "!"   'dired-do-shell-command)
+  "u"   'dired-unmark
+  "U"   'dired-unmark-all-marks
+  "v"   'evil-visual-char
+  "V"   'evil-visual-line
+  "w"   'evil-forward-little-word-begin
+  "y"   'dired-do-copy)
+
+(defun my/dired-marked-p ()
+  (= dired-marker-char (string-to-char (thing-at-point 'line))))
+
+(defun my/dired-toggle-mark()
+  (interactive)
+  (if (my/dired-marked-p)
+      (call-interactively 'dired-unmark)
+    (call-interactively 'dired-mark)))
+
+(defun my/dired-start-change ()
+  (interactive)
+  (dired-toggle-read-only)
+  (call-interactively 'evil-change))
+
+
 
 ;; take care not to override global leader
 (general-emacs-define-key dired-mode-map my/leader nil)
