@@ -48,4 +48,5 @@
 (require 'my-docker)
 (require 'my-pomodoro)
 (require 'my-sgml)
+(require 'my-sql)
 (require 'my-workgroups)
