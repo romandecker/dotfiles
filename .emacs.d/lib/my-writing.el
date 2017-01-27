@@ -23,12 +23,16 @@
 (setq langtool-autoshow-message-function
       'langtool-autoshow-detail-popup)
 
+(general-evil-define-key 'normal 'LaTeX-mode-map
+  "C-j" 'my/window-down)
+
 (general-define-key
  :prefix my/local-leader
  :states 'normal
  :keymaps 'LaTeX-mode-map
-  "s" 'langtool-check
-  "S" 'langtool-check-done)
+  "s"  'langtool-check
+  "S"  'langtool-check-done)
+
 
 (add-hook 'LaTeX-mode-hook (lambda () (flyspell-mode t)))
 
