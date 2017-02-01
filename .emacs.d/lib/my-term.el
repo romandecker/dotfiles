@@ -28,7 +28,10 @@
    "C-h"   'my/window-left
    "C-l"   'my/window-right)
   :config
-  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (yas-minor-mode -1)
+              (company-mode -1)))
 
   (defun my/toggle-project-term ()
     (interactive)
