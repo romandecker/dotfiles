@@ -58,6 +58,7 @@
   (local-unset-key "g")
   (local-unset-key "h")
   (local-unset-key "SPC")
+  (setq truncate-lines nil)
   (evil-define-key 'motion compilation-mode-map
     (kbd "r" )  'recompile
     (kbd "h" )  'evil-backward-char
