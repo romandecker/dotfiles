@@ -366,5 +366,32 @@ into the current buffer."
                          'delete-char
                          move-word-fn))
 
+(defun my/evil-select-pasted ()
+  "Mark the last pasted text."
+  (interactive)
+  (let ((start-marker (evil-get-marker (string-to-char "[")))
+        (end-marker (evil-get-marker (string-to-char "]"))))
+    (evil-visual-select start-marker end-marker)))
+
+(defun my/indent-last-paste ()
+  "Re-indent the last pasted text."
+  (interactive)
+  (let ((start-marker (evil-get-marker (string-to-char "[")))
+        (end-marker (evil-get-marker (string-to-char "]"))))
+    (evil-indent start-marker end-marker)))
+
+(evil-define-command my/formatted-paste-after (count &optional register yank-handler)
+  :suppress-operator t
+  (interactive "P<x>")
+  (evil-paste-after count register yank-handler)
+  (my/indent-last-paste))
+
+(evil-define-command my/formatted-paste-before (count &optional register yank-handler)
+  :suppress-operator t
+  (interactive "P<x>")
+  (evil-paste-before count register yank-handler)
+  (my/indent-last-paste))
+
+
 (provide 'my-utils)
 ;;; my-utils.el ends here

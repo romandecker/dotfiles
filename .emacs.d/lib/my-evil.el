@@ -22,7 +22,8 @@
    )
   (:keymaps 'normal
    "] p" 'evil-paste-pop
-   "[ p" 'evil-paste-pop-next)
+   "[ p" 'evil-paste-pop-next
+   "g p" 'my/evil-select-pasted)
   :config
   (message "configuring evil")
   (add-to-list 'evil-insert-state-modes 'calculator-mode)
@@ -46,6 +47,11 @@
 
   ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
+
+  (general-define-key :keymaps 'normal "="
+    (general-key-dispatch 'evil-indent
+      "p" 'my/formatted-paste-after
+      "P" 'my/formatted-paste-before))
 
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))
