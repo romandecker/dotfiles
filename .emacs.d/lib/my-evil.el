@@ -30,6 +30,20 @@
   (add-to-list 'evil-normal-state-modes 'package-menu-mode)
   (add-to-list 'evil-normal-state-modes 'debugger-mode)
 
+
+  (evil-define-command my/formatted-paste-after (count &optional register yank-handler)
+    :suppress-operator t
+    (interactive "P<x>")
+    (evil-paste-after count register yank-handler)
+    (my/indent-last-paste))
+
+  (evil-define-command my/formatted-paste-before (count &optional register yank-handler)
+    :suppress-operator t
+    (interactive "P<x>")
+    (evil-paste-before count register yank-handler)
+    (my/indent-last-paste))
+
+
   ;; Make movement keys work like they should
   (define-key evil-normal-state-map
     (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)

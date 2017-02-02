@@ -380,18 +380,6 @@ into the current buffer."
         (end-marker (evil-get-marker (string-to-char "]"))))
     (evil-indent start-marker end-marker)))
 
-(evil-define-command my/formatted-paste-after (count &optional register yank-handler)
-  :suppress-operator t
-  (interactive "P<x>")
-  (evil-paste-after count register yank-handler)
-  (my/indent-last-paste))
-
-(evil-define-command my/formatted-paste-before (count &optional register yank-handler)
-  :suppress-operator t
-  (interactive "P<x>")
-  (evil-paste-before count register yank-handler)
-  (my/indent-last-paste))
-
 
 (provide 'my-utils)
 ;;; my-utils.el ends here
