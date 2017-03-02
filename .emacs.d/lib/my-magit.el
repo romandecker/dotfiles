@@ -30,6 +30,7 @@
 
 (use-package git-timemachine
   :ensure t
+  :demand t
   :after hydra
   :general
   (:prefix my/leader
