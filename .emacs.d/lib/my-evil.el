@@ -67,6 +67,10 @@
       "p" 'my/formatted-paste-after
       "P" 'my/formatted-paste-before))
 
+  (general-define-key :keymaps 'normal "d"
+    (general-key-dispatch 'evil-delete
+      "s" 'evil-surround-delete))
+
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))
   (use-package evil-surround
