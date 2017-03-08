@@ -11,6 +11,18 @@
       magit-log-mode-map)
   my/leader nil)
 
+(general-define-key :prefix my/local-leader
+                    :keymaps '(smerge-basic-map smerge-mode-map)
+  "m m" 'smerge-keep-mine
+  "m a" 'smerge-keep-all
+  "m b" 'smerge-keep-base
+  "m c" 'smerge-keep-current
+  "m o" 'smerge-keep-other)
+
+(which-key-add-key-based-replacements
+  (concat my/local-leader " m") "Merging")
+
+
 (use-package evil-magit
   :ensure t
   :after magit
@@ -169,6 +181,7 @@ This respects the `emojify-emoji-styles' variable."
                        ":globe_with_meridians: - Internationalization and localization."
                        ":pencil: - Fixing typos."
                        ":hankey: - Writing bad code that needs to be improved."
+                       ":twisted_rightwards_arrows: - Merge commit."
                        ))
          ;; Vanilla Emacs completion and Icicles use the completion list mode to display candidates
          ;; the following makes sure emojify is enabled in the completion list
@@ -194,6 +207,7 @@ Used for automatically inserting on magit-commit."
     (my/insert-gitmoji)))
 
 (add-hook 'git-commit-mode-hook #'my/autoinsert-gitmoji)
+
 
 (provide 'my-magit)
 ;;; my-magit.el ends here
