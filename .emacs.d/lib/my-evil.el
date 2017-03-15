@@ -239,4 +239,27 @@ interactively along the current region)."
           (move-to-column col)))
     (evil-mc-resume-cursors)))
 
+(defun my/open-around (orig-fun &rest args)
+  "Advice to be added around `evil-open-below' and `evil-open-above' that will
+handle insertion of block comment prefixes when inside of a block-comment."
+  (let ((prefix (my/in-c-block-comment-prefix)))
+    (if prefix
+        (let ((evil-auto-indent nil))
+          (apply orig-fun args)
+          (insert prefix))
+      (apply orig-fun args))))
+
+(advice-add 'evil-open-below :around #'my/open-around)
+(advice-add 'evil-open-above :around #'my/open-around)
+
+(defun my/newline (orig-fun &rest args)
+  "Advice to be added around `newline' that will handle insertion of
+block comment prefixes when inside of a block-comment."
+  (let ((prefix (my/in-c-block-comment-prefix)))
+    (apply orig-fun args)
+    (when prefix
+        (insert prefix))))
+
+(advice-add 'newline :around #'my/newline)
+
 (provide 'my-evil)

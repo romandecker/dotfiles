@@ -380,6 +380,20 @@ into the current buffer."
         (end-marker (evil-get-marker (string-to-char "]"))))
     (evil-indent start-marker end-marker)))
 
+(defun my/in-c-block-comment-p ()
+  "Return `t' if point is currently inside a c-style block-comment."
+  (when (my/in-c-block-comment-prefix)
+    t))
+  
+
+(defun my/in-c-block-comment-prefix ()
+  "Return the block comment prefix."
+  (save-excursion
+    (save-match-data
+      (when (nth 4 (syntax-ppss))
+        (move-beginning-of-line nil)
+        (when (looking-at " *\\* *")
+          (match-string-no-properties 0))))))
 
 (provide 'my-utils)
 ;;; my-utils.el ends here
