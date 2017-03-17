@@ -67,10 +67,29 @@
       "p" 'my/formatted-paste-after
       "P" 'my/formatted-paste-before))
 
-  (general-nmap "d"
-                (general-key-dispatch 'evil-delete
-                  "s" 'evil-surround-delete))
-  (general-vmap "d" 'evil-delete)
+
+  ;; evil-exchange breaks under evil-mc, so take care to disable it
+  ;; when evil-mc is active
+  (defun my/enable-evil-exchange ()
+    "Enable c x to trigger evil-exchange. Wrapped in a function to be easily enabled for evil-mc."
+    (general-nmap "c"
+      ;; c x should trigger evil-exchange, c <everything else> should
+      ;; trigger evil change
+      (general-key-dispatch 'evil-change
+        ;; c x x and c x X should swap chars
+        "x" (general-key-dispatch 'evil-exchange
+              "x" 'my/swap-chars
+              "X" 'transpose-chars)
+        "X" 'evil-exchange-cancel))
+    (general-vmap "c" 'evil-change))
+
+  ;; reinstate the normal evil-change binding so that evil-mc works
+  (defun my/disable-evil-exchange ()
+    (general-nmap "c" 'evil-change))
+
+  (my/enable-evil-exchange)
+  (add-hook 'evil-mc-before-cursors-created 'my/disable-evil-exchange)
+  (add-hook 'evil-mc-after-cursors-deleted 'my/enable-evil-exchange)
 
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))

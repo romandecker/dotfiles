@@ -395,5 +395,12 @@ into the current buffer."
         (when (looking-at " *\\* *")
           (match-string-no-properties 0))))))
 
+(defun my/swap-chars ()
+  "Swap the two characters before point."
+  (interactive)
+  (save-excursion
+    (evil-forward-char)
+    (transpose-chars nil)))
+
 (provide 'my-utils)
 ;;; my-utils.el ends here
