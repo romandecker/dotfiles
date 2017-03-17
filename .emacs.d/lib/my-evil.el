@@ -68,35 +68,16 @@
       "P" 'my/formatted-paste-before))
 
 
-  ;; evil-exchange breaks under evil-mc, so take care to disable it
-  ;; when evil-mc is active
-  (defun my/enable-evil-exchange ()
-    "Enable c x to trigger evil-exchange. Wrapped in a function to be easily enabled for evil-mc."
-    (general-nmap "c"
-      ;; c x should trigger evil-exchange, c <everything else> should
-      ;; trigger evil change
-      (general-key-dispatch 'evil-change
-        ;; c x x and c x X should swap chars
-        "x" (general-key-dispatch 'evil-exchange
-              "x" 'my/swap-chars
-              "X" 'transpose-chars)
-        "X" 'evil-exchange-cancel))
-    (general-vmap "c" 'evil-change))
-
-  ;; reinstate the normal evil-change binding so that evil-mc works
-  (defun my/disable-evil-exchange ()
-    (general-nmap "c" 'evil-change))
-
-  (my/enable-evil-exchange)
-  (add-hook 'evil-mc-before-cursors-created 'my/disable-evil-exchange)
-  (add-hook 'evil-mc-after-cursors-deleted 'my/enable-evil-exchange)
-
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))
   (use-package evil-surround
     :ensure t
     :config
-    (global-evil-surround-mode))
+    (global-evil-surround-mode)
+    (general-nmap "d"
+      (general-key-dispatch 'evil-delete
+        "s" 'evil-surround-delete))
+    (general-vmap "d" 'evil-delete))
   (use-package evil-numbers
     :ensure t
     :general
@@ -112,7 +93,6 @@
     :ensure t
     :config
     (global-evil-matchit-mode 1))
-  (message "configuring evil-mc")
   (use-package evil-mc
     :ensure t
     :demand t
@@ -133,18 +113,35 @@
     (message "enabling global evil-mc-mode")
     (global-evil-mc-mode 1)
     (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode))
+
   (use-package evil-exchange
     :ensure t
     :config
     (evil-exchange-install)
 
-    ;; TODO: sadly, this breaks evil-mc, figure out a workaround
-    ;; (general-define-key :keymaps 'normal "c"
-    ;;   (general-key-dispatch 'evil-change
-    ;;     "s" 'evil-surround-change
-    ;;     "x" 'evil-exchange
-    ;;     "X" 'evil-exchange-cancel)))
-    )
+    ;; evil-exchange breaks under evil-mc, so take care to disable it
+    ;; when evil-mc is active
+    (defun my/enable-evil-exchange ()
+      "Enable c x to trigger evil-exchange. Wrapped in a function to be easily enabled for evil-mc."
+      (general-nmap "c"
+                    ;; c x should trigger evil-exchange, c <everything else> should
+                    ;; trigger evil change
+                    (general-key-dispatch 'evil-change
+                      ;; c x x and c x X should swap chars
+                      "x" (general-key-dispatch 'evil-exchange
+                            "x" 'my/swap-chars
+                            "X" 'transpose-chars)
+                      "X" 'evil-exchange-cancel))
+      (general-vmap "c" 'evil-change))
+
+    ;; reinstate the normal evil-change binding so that evil-mc works
+    (defun my/disable-evil-exchange ()
+      (general-nmap "c" 'evil-change))
+
+    (my/enable-evil-exchange)
+    (add-hook 'evil-mc-before-cursors-created 'my/disable-evil-exchange)
+    (add-hook 'evil-mc-after-cursors-deleted 'my/enable-evil-exchange))
+
   (use-package evil-commentary
     :ensure t
     :config
