@@ -25,6 +25,7 @@
 
 (use-package evil-magit
   :ensure t
+  :demand t
   :after magit
   :config)
 
