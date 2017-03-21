@@ -1,6 +1,25 @@
 ;;; package --- My custom config for general programming stuff
 ;;; Commentary:
 ;;; Code:
+
+;; set compilation-error-regexp-alist to not contain anything I never
+;; actually edit
+(setq compilation-error-regexp-alist
+      '(
+        ant
+        maven
+        bash
+        borland
+        python-tracebacks-and-caml
+        cucumber
+        gcc-include
+        ruby-Test::Unit
+        ;; gnu ; gnu clashes with node
+        lcc
+        perl
+        phpweblint
+        ))
+
 (use-package highlight-symbol
   :ensure t
   :general
