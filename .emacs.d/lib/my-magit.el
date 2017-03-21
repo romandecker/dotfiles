@@ -139,15 +139,14 @@
    "t e" 'emojify-mode)
   :config
   (global-emojify-mode))
-:white-check-mark: 
+
 (defun my/insert-gitmoji ()
   "Interactively prompt for Emojis and insert them in the current buffer.
 
 This respects the `emojify-emoji-styles' variable."
   (interactive)
- (emojify-create-emojify-emojis)
-  (let* ((emojify-in-insertion-command-p t)
-         (styles (mapcar #'symbol-name emojify-emoji-styles))
+  (emojify-create-emojify-emojis)
+  (let* ((emojify-minibuffer-reading-emojis-p t)
          (line-spacing 7)
          (completion-ignore-case t)
          (candidates '(":art: - Improving structure / format of the code."
@@ -185,11 +184,14 @@ This respects the `emojify-emoji-styles' variable."
                        ))
          ;; Vanilla Emacs completion and Icicles use the completion list mode to display candidates
          ;; the following makes sure emojify is enabled in the completion list
-         (completion-list-mode-hook (cons #'emojify--insert-minibuffer-setup-hook completion-list-mode-hook))
+         (completion-list-mode-hook (cons #'emojify--completing-read-minibuffer-setup-hook
+                                          completion-list-mode-hook))
          ;; (Vertical) Ido and Ivy displays candidates in minibuffer this makes sure candidates are emojified
          ;; when Ido or Ivy are used
-         (minibuffer-setup-hook (cons #'emojify--insert-minibuffer-setup-hook minibuffer-setup-hook))
-         (helm-after-initialize-hook (cons #'emojify--insert-helm-hook (bound-and-true-p helm-after-initialize-hook))))
+         (minibuffer-setup-hook (cons #'emojify--completing-read-minibuffer-setup-hook
+                                      minibuffer-setup-hook))
+         (helm-after-initialize-hook (cons #'emojify--completing-read-helm-hook
+                                           (bound-and-true-p helm-after-initialize-hook))))
     (insert (car (split-string (completing-read "Insert Emoji: " candidates) " ")))))
 
 (defcustom my/autoinsert-gitmoji
