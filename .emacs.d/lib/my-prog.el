@@ -48,6 +48,12 @@
   (add-to-list 'afp-fill-comments-only-mode-list 'snippet-mode)
   (afp-setup-recommended-hooks))
 
+(use-package dtrt-indent
+  :ensure t
+  :demand t
+  :config
+  (dtrt-indent-mode))
+
 (require 'whitespace)
 (setq whitespace-style '(face tabs lines-tail))
 
