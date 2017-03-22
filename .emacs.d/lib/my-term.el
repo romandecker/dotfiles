@@ -1,5 +1,6 @@
 (use-package multi-term
   :ensure t
+  :demand t
   :after projectile
   :general
   (:states 'insert
