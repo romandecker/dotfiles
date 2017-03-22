@@ -40,10 +40,11 @@
    "a P"   'package-list-packages
    "a ~"   'multi-term
    "b b"   'helm-buffers-list
+   "b d"   'bury-buffer
+   "b m"   'my/switch-to-messages
    "b n"   'next-buffer
    "b p"   'previous-buffer
-   "b d"   'kill-this-buffer
-   "b m"   'my/switch-to-messages
+   "b x"   'kill-this-buffer
    "c c"   'recompile
    "c x"   'kill-compilation
    "j"     'previous-buffer
