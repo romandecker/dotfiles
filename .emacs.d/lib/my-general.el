@@ -58,6 +58,7 @@
    "f r"   'helm-recentf
    "f s"   'save-buffer
    "f d"   'dired-jump
+   "i u"   'my/insert-random-uuid
    "o c"   'org-capture
    "o y"   'org-store-link
    "o p"   'org-insert-link

@@ -402,5 +402,10 @@ into the current buffer."
     (evil-forward-char)
     (transpose-chars nil)))
 
+(defun my/insert-random-uuid ()
+  (interactive)
+  (let ((uuid (shell-command-to-string "uuidgen")))
+    (insert (s-trim-right (downcase uuid)))))
+
 (provide 'my-utils)
 ;;; my-utils.el ends here
