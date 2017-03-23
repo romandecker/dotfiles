@@ -49,4 +49,5 @@
 (require 'my-pomodoro)
 (require 'my-sgml)
 (require 'my-sql)
+(require 'my-typescript)
 (require 'my-workgroups)
