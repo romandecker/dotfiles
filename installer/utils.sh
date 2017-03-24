@@ -19,8 +19,7 @@ else
 fi
 
 sudo='sudo'
-
-if ! [ -z "command -v $SUDO" ]; then
+if ! [ -z "command -v $sudo" ]; then
     sudo=''
 fi
 

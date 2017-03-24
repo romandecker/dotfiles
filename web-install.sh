@@ -3,7 +3,15 @@
 os=''
 LINUX='linux'
 MAC='mac'
-DOTFILES_PATH='~/.installed-dotfiles'
+DOTFILES_PATH="$HOME/.dotfiles"
+
+
+set -e
+
+sudo='sudo'
+if ! [ -z "command -v $sudo" ]; then
+    sudo=''
+fi
 
 function ensure() {
     local package=$1
@@ -20,7 +28,7 @@ function ensure() {
 
     echo "$package is not installed, installing... (you might be asked for your password)"
     if [ "$os" == "$LINUX" ]; then
-        sudo apt-get install -y $package
+        $sudo apt-get install -y $package
     elif [ "$os" == "$MAC" ]; then
         brew install $package
     fi
@@ -43,6 +51,8 @@ fi
 
 ensure git
 
-git clone --recursive git@github.com:DeX3/dotfiles.git $DOTFILES_PATH
+git clone --recursive https://github.com/DeX3/dotfiles $DOTFILES_PATH
+
+chmod -R +x $DOTFILES_PATH/installer
 
 $DOTFILES_PATH/installer/install.sh

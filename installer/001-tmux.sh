@@ -9,7 +9,7 @@ echo "######## tmux ########"
 
 ensure tmux
 
-clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 link_dotfile .tmux.conf
 link_dotfile .tmux.conf.macosx

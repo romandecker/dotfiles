@@ -25,7 +25,7 @@ link_dotfile .nvimrc
 link_dotfile .vim/ftplugin
 
 echo "Installing vim-plug..."
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 nvim -c PlugInstall -c qall

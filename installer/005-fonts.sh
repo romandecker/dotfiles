@@ -7,6 +7,6 @@ source $SCRIPT_DIR/utils.sh
 
 echo "######## fonts #######"
 
-pushd $SCRIPT_DIR../submodules/powerline-fonts
+pushd $SCRIPT_DIR/../submodules/powerline-fonts
 ./install.sh
 popd

@@ -10,4 +10,4 @@ echo "######### git ########"
 link_dotfile dotgitignore .gitignore
 
 echo "Configuring global git excludesfile"
-git config --global core.excludesfile ~/.gitignore
+git config --global core.excludesfile $HOME/.gitignore

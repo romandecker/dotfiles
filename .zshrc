@@ -44,7 +44,7 @@ autoload -U zcalc
 setopt histignorealldups
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/zsh_history
 
 export PATH=$PATH:$DOTFILES_DIR/submodules/tmuxifier/bin
 eval "$(tmuxifier init -)"
@@ -56,8 +56,8 @@ killport() {
   kill -9 $pid
 }
 
-if [ -f ~/.zshrc.local ]; then
+if [ -f $HOME/zshrc.local ]; then
     # if a local config file exists, source it
-    source ~/.zshrc.local
+    source $HOME/zshrc.local
 fi
 
