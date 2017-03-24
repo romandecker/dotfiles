@@ -16,8 +16,14 @@ from inside it. Make sure that the repo stays where it was when you executed the
 installer or else, the symlinks will break. In that case you can always run
 `./install.sh` again :).
 
-## Server installation
+## Installation
 
 ```sh
-curl -f https://raw.githubusercontent.com/DeX3/dotfiles/master/server-install.sh | bash
+curl -f https://raw.githubusercontent.com/DeX3/dotfiles/master/web-install.sh | bash
+```
+
+For servers (just minimal config):
+
+```sh
+curl -f https://raw.githubusercontent.com/DeX3/dotfiles/master/web-install-server.sh | bash
 ```
