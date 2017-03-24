@@ -2,6 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Add NodeJS error format so that files can be jumped to in compilation-mode
+(pushnew '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
+                1 ;; file
+                2 ;; line
+                3 ;; column
+                )
+          compilation-error-regexp-alist-alist)
+(pushnew 'node compilation-error-regexp-alist)
+
+(pushnew '(jshint "^\\(.+\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), .*$"
+                  1 ;; file
+                  2 ;; line
+                  3 ;; column
+                  )
+          compilation-error-regexp-alist-alist)
+(pushnew 'jshint compilation-error-regexp-alist)
+
 (use-package js2-mode
   :ensure t
   :after helm
@@ -54,23 +71,6 @@
       (concat my/local-leader " r e") "Extract..."
       (concat my/local-leader " r j") "Join..."
       (concat my/local-leader " r s") "Split..."))
-
-  ;; Add NodeJS error format so that files can be jumped to in compilation-mode
-  (pushnew '(node "^[  ]+at \\(?:[^\(\n]+ \(\\)?\\([a-zA-Z\.0-9_/-]+\\):\\([0-9]+\\):\\([0-9]+\\)\)?$"
-                  1 ;; file
-                  2 ;; line
-                  3 ;; column
-                  )
-           compilation-error-regexp-alist-alist)
-  (pushnew 'node compilation-error-regexp-alist)
-
-  (pushnew '(jshint "^\\(.+\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), .*$"
-                    1 ;; file
-                    2 ;; line
-                    3 ;; column
-                    )
-           compilation-error-regexp-alist-alist)
-  (pushnew 'jshint compilation-error-regexp-alist)
 
   (defun my-javascript/requirable-files ()
     "Get all project files that are requirable with node's `require`."
