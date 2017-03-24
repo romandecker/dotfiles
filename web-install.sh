@@ -43,6 +43,6 @@ fi
 
 ensure git
 
-git clone git@github.com:DeX3/dotfiles.git $DOTFILES_PATH
+git clone --recursive git@github.com:DeX3/dotfiles.git $DOTFILES_PATH
 
 $DOTFILES_PATH/installer/install.sh

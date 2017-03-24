@@ -9,8 +9,6 @@ echo "######## tmux ########"
 
 ensure tmux
 
-clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
-
 clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 link_dotfile .tmux.conf

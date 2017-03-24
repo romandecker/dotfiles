@@ -1,3 +1,6 @@
 set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
 bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char

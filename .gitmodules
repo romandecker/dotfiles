@@ -1,0 +1,9 @@
+[submodule "submodules/tmuxifier"]
+	path = submodules/tmuxifier
+	url = https://github.com/jimeh/tmuxifier.git
+[submodule "submodules/powerline-fonts"]
+	path = submodules/powerline-fonts
+	url = https://github.com/powerline/fonts.git
+[submodule "submodules/pure-prompt"]
+	path = submodules/pure-prompt
+	url = https://github.com/sindresorhus/pure
