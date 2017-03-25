@@ -53,6 +53,4 @@ ensure git
 
 git clone --recursive https://github.com/DeX3/dotfiles $DOTFILES_PATH
 
-chmod -R +x $DOTFILES_PATH/installer
-
 $DOTFILES_PATH/installer/install.sh

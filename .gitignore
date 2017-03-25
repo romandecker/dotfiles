@@ -3,4 +3,6 @@ installer/node_modules
 /.emacs.d/url/cookies
 /.emacs.d/.mc-lists.el
 /.emacs.d/emojis
+/.emacs.d/tramp
 flycheck_*.el
+.emacs.d/.edbi-ds-history
