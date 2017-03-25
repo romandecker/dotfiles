@@ -41,10 +41,12 @@ compinit
 
 autoload -U zcalc
 
-setopt histignorealldups
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=$HOME/zsh_history
+setopt histignorealldups    # ignore duplicates
+setopt hist_ignore_space    # do not save commands starting with space to history
+export HISTSIZE=1000
+export SAVEHIST=1000
+export HISTFILE=$HOME/.zsh_history
+
 
 export PATH=$PATH:$DOTFILES_DIR/submodules/tmuxifier/bin
 eval "$(tmuxifier init -)"
