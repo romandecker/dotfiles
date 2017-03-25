@@ -58,6 +58,9 @@ killport() {
   kill -9 $pid
 }
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
 if [ -f $HOME/zshrc.local ]; then
     # if a local config file exists, source it
     source $HOME/zshrc.local
