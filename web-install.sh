@@ -22,7 +22,7 @@ function ensure() {
     fi
 
     if [ -x "$(command -v $command)" ]; then
-        echo "$command is already installed"
+        cecho "$command$normal is already installed"
         return
     fi
 

@@ -5,6 +5,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $SCRIPT_DIR/utils.sh
 
-echo "######## emacs #######"
+section emacs
 
 link_dotfile .emacs.d
