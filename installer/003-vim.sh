@@ -24,8 +24,10 @@ link_dotfile .vimrc.abbreviations
 link_dotfile .nvimrc
 link_dotfile .vim/ftplugin
 
-echo "Installing vim-plug..."
-curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if ! [ -d $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
+    echo "Installing vim-plug..."
+    curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 nvim -c PlugInstall -c qall
