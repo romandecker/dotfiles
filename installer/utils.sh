@@ -24,15 +24,15 @@ gray=$(tput setaf 7)                      # dim white text
 darkgray="$bold"$(tput setaf 0)           # bold black = dark gray text
 white="$bold$gray"                        # bright white text
 
-if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    os=$LINUX
-else
+if [ "$(uname)" == "Darwin" ]; then
     os=$MAC
 
     # make sure brew is installed
-    if [ -x "$(command -v brew)" ]; then
-      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    if ! [ -x "$(command -v brew)" ]; then
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    os=$LINUX
 fi
 
 sudo='sudo'
