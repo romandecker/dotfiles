@@ -5,8 +5,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $SCRIPT_DIR/utils.sh
 
-section neovim
-
 mkdir -p $HOME/.vim
 
 if [ $os == $LINUX ]; then
