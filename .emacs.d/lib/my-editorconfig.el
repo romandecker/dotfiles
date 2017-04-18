@@ -2,6 +2,7 @@
   :after js2-mode
   :ensure t
   :config
+  (editorconfig-mode 1)
   (add-hook
    'editorconfig-custom-hooks
    (lambda (hash)
@@ -18,7 +19,8 @@
                                (setq evil-shift-width js2-basic-offset
                                      js-indent-level js2-basic-offset))
                              (when (boundp 'js-indent-level)
-                               (setq js-expr-indent-offset (- js-indent-level))))))
+                               (setq js-expr-indent-offset (- js-indent-level)))))
+  )
 
 (use-package column-marker
   :ensure t
