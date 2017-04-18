@@ -4,6 +4,7 @@
 
 (use-package workgroups
   :ensure t
+  :demand t
   :after projectile
   :general
   (:prefix my/leader
