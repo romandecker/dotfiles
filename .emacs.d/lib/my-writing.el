@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package latex-preview-pane :ensure t :config
-  (latex-preview-pane-enable))
-
 (require 'langtool)
 
 (setq langtool-language-tool-jar

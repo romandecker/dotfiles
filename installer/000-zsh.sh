@@ -5,8 +5,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $SCRIPT_DIR/utils.sh
 
-section "zsh"
-
 ensure zsh
 
 link_dotfile .zshrc
