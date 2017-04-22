@@ -23,6 +23,9 @@
   :ensure t
   :after helm
   :config
+  (require 'prettier-js)
+  (setq prettier-target-mode "js2-mode")
+
   ;; do not show errors (use flycheck for that)
   (js2-mode-hide-warnings-and-errors)
 
