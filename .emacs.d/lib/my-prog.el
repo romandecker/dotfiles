@@ -46,6 +46,7 @@
   (add-to-list 'afp-fill-comments-only-mode-list 'js2-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'yaml-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'snippet-mode)
+  (add-to-list 'afp-fill-comments-only-mode-list 'elisp-mode)
   (afp-setup-recommended-hooks))
 
 (use-package dtrt-indent
