@@ -65,6 +65,7 @@
    "t z"   'zoom-window-zoom
    "t n"   'linum-mode
    "t g"   'my/toggle-git-gutter
+   "t r"   'read-only-mode
    "t w v" 'toggle-truncate-lines
    "t w w" 'aggressive-fill-paragraph-mode
    "u"     'universal-argument

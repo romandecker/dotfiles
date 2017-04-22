@@ -19,8 +19,12 @@
           compilation-error-regexp-alist-alist)
 (pushnew 'jshint compilation-error-regexp-alist)
 
+;; prevent a '.' in multi-line declarations to perform indentation
+(setq js--indent-operator-re "[-+*/%<>&^|?:]\\([^-+*/.]\\|$\\)\\|!?=\\|\\_<\\(in\\(?:stanceof\\)?\\)\\_>")
+
 (use-package js2-mode
   :ensure t
+  :demand t
   :after helm
   :config
   (require 'prettier-js)
