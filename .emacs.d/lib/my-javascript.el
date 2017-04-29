@@ -8,7 +8,7 @@
                 2 ;; line
                 3 ;; column
                 )
-          compilation-error-regexp-alist-alist)
+         compilation-error-regexp-alist-alist)
 (pushnew 'node compilation-error-regexp-alist)
 
 (pushnew '(jshint "^\\(.+\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), .*$"
@@ -16,7 +16,7 @@
                   2 ;; line
                   3 ;; column
                   )
-          compilation-error-regexp-alist-alist)
+         compilation-error-regexp-alist-alist)
 (pushnew 'jshint compilation-error-regexp-alist)
 
 ;; prevent a '.' in multi-line declarations to perform indentation
@@ -27,11 +27,12 @@
   :demand t
   :after helm
   :config
-  (require 'prettier-js)
-  (setq prettier-target-mode "js2-mode")
-
   ;; do not show errors (use flycheck for that)
   (js2-mode-hide-warnings-and-errors)
+
+  (require 'prettier-js)
+  (setq prettier-target-mode "js2-mode"
+        prettier-args '("--print-width 100" "--single-quote"))
 
   (setq
    js2-skip-preprocessor-directives nil   ; allow shebangs in js-files (for node)
@@ -93,7 +94,7 @@
               (condition-case nil
                   (my-javascript/requirable-files)
                 (error nil)))
-      ; :fuzzy-match helm-projectile-fuzzy-match
+                                        ; :fuzzy-match helm-projectile-fuzzy-match
       :action my/helm-action-return-candidate
       )
     "Helm source definition for files that can be required using node's `require`.")
