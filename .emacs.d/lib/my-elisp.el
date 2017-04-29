@@ -35,6 +35,12 @@
   (message "Reloading...")
   (revert-buffer nil t))
 
+(general-define-key
+ :keymaps 'emacs-lisp-mode-map
+ :states 'normal
+ "<f9>"   'edebug-step-in
+ "S-<f9>" 'edebug-step-out)
+
 (require 'fuco-lisp-indent)
 (add-hook 'emacs-lisp-mode-hook
           (lambda () (setq-local lisp-indent-function #'Fuco1/lisp-indent-function)))

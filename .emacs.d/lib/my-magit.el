@@ -138,8 +138,15 @@
    "i e" 'emojify-insert-emoji
    "i g" 'my/insert-gitmoji
    "t e" 'emojify-mode)
+  :init
+  ;; for some reason, emojify doesn't have the :memo: emoji registered
+  ;; correctly, so add it here as a user-emoji
+  (setq emojify-user-emojis '((":memo:" . (("name" . "Memo")
+                                           ("image" . "~/.emacs.d/emojis/emojione-v2.2.6-22/1f4dd.png")
+                                           ("style" . "github")))))
   :config
   (global-emojify-mode))
+
 
 (defun my/insert-gitmoji ()
   "Interactively prompt for Emojis and insert them in the current buffer.

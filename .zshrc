@@ -1,6 +1,5 @@
 # 10 ms for key sequences
-export KEYTIMEOUT=1
-
+export KEYTIMEOUT=1 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export LANG=en_US.UTF-8
 
@@ -61,8 +60,8 @@ killport() {
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-if [ -f $HOME/zshrc.local ]; then
+if [ -f $HOME/.zshrc.local ]; then
     # if a local config file exists, source it
-    source $HOME/zshrc.local
+    source $HOME/.zshrc.local
 fi
 
