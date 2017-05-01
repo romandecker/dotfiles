@@ -27,6 +27,7 @@
   :ensure t
   :demand t
   :after magit
+  :general
   :config)
 
 (use-package gitlab
