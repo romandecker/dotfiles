@@ -80,6 +80,16 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook #'my/colorize-compilation-buffer)
 
+(defun my/send-input-to-compilation (input &optional nl)
+  "Send INPUT to the compilation process. Interactively also sends a terminating newline."
+  (interactive "MInput: \nd")
+  (let* ((string (concat input (if nl "\n")))
+         (compilation-buffer (get-buffer "*compilation*")))
+    (process-send-string (get-buffer-process compilation-buffer) string)))
+
+(my/define-leader-map
+ "c i"     'my/send-input-to-compilation)
+
 (defun my/init-compilation-mode ()
   (local-unset-key "g")
   (local-unset-key "h")
@@ -88,12 +98,14 @@
   (evil-define-key 'motion compilation-mode-map
     (kbd "r" )  'recompile
     (kbd "h" )  'evil-backward-char
-    (kbd "C-u") 'evil-scroll-page-up))
+    (kbd "C-u") 'evil-scroll-page-up
+    (kbd "i")   'my/send-input-to-compilation))
 
 (add-hook 'compilation-mode-hook #'my/init-compilation-mode)
 
 (define-key compilation-mode-map (kbd "s") 'my/toggle-compilation-scroll)
 (general-evil-define-key '(normal insert visual) 'debugger-mode-map "q" 'quit-window)
+
 
 (provide 'my-prog)
 ;;; my-prog.el ends here
