@@ -23,7 +23,11 @@
   (:keymaps 'normal
    "] p" 'evil-paste-pop
    "[ p" 'evil-paste-pop-next
-   "g p" 'my/evil-select-pasted)
+   "g p" 'my/evil-select-pasted
+   "C-o" 'goto-last-change           ; make c-i/c-o always stay in the
+   "C-i" 'goto-last-change-reverse   ; current file
+   "g ;" 'evil-jump-forward          ; make g ;/g , do what C-o/C-i did before
+   "g ," 'evil-jump-backward)
   :config
   (message "configuring evil")
   (add-to-list 'evil-insert-state-modes 'calculator-mode)

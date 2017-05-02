@@ -27,7 +27,8 @@
    "C-j"   'my/window-down
    "C-k"   'my/window-up
    "C-h"   'my/window-left
-   "C-l"   'my/window-right)
+   "C-l"   'my/window-right
+   "p"     'term-paste)
   :config
   (add-hook 'term-mode-hook
             (lambda ()

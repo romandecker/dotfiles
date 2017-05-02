@@ -4,6 +4,14 @@
 
 (use-package emmet-mode
   :ensure t
+  :general
+  (:states 'insert
+   :keymaps 'emmet-mode-keymap
+   "C-y ," 'emmet-expand-line
+   "C-j"   'my/window-down)
+  (:states 'normal
+   :keymaps 'emmet-mode-keymap
+   "C-j"   'my/window-down)
   :config
   (add-hook 'sgml-mode-hook #'emmet-mode)
   (add-hook 'css-mode-hook #'emmet-mode)

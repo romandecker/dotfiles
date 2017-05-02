@@ -8,7 +8,7 @@
                 2 ;; line
                 3 ;; column
                 )
-          compilation-error-regexp-alist-alist)
+         compilation-error-regexp-alist-alist)
 (pushnew 'node compilation-error-regexp-alist)
 
 (pushnew '(jshint "^\\(.+\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), .*$"
@@ -16,7 +16,7 @@
                   2 ;; line
                   3 ;; column
                   )
-          compilation-error-regexp-alist-alist)
+         compilation-error-regexp-alist-alist)
 (pushnew 'jshint compilation-error-regexp-alist)
 
 ;; prevent a '.' in multi-line declarations to perform indentation
@@ -27,11 +27,24 @@
   :demand t
   :after helm
   :config
-  (require 'prettier-js)
-  (setq prettier-target-mode "js2-mode")
-
   ;; do not show errors (use flycheck for that)
   (js2-mode-hide-warnings-and-errors)
+
+  (require 'prettier-js)
+  (setq prettier-target-mode "js2-mode"
+        prettier-args '("--print-width 100" "--single-quote" "--jsx-bracket-same-line"))
+
+  ;; automatically make prettier-js target the current js-based mode
+  (add-hook 'js2-mode-hook (lambda () (setq-local prettier-target-mode "js2-mode")))
+
+  ;; make prettier available as a minor mode for easy toggling
+  (define-minor-mode my/prettier-js-mode
+    :init-value nil
+    :lighter " Prty"
+    :keymap (make-sparse-keymap)
+    (if my/prettier-js-mode
+        (add-hook 'before-save-hook 'prettier-before-save)
+      (remove-hook 'before-save-hook 'prettier-before-save)))
 
   (setq
    js2-skip-preprocessor-directives nil   ; allow shebangs in js-files (for node)
@@ -42,7 +55,6 @@
    js-expr-indent-offset -2)
 
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
   (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
   (use-package js2-refactor
@@ -93,7 +105,7 @@
               (condition-case nil
                   (my-javascript/requirable-files)
                 (error nil)))
-      ; :fuzzy-match helm-projectile-fuzzy-match
+                                        ; :fuzzy-match helm-projectile-fuzzy-match
       :action my/helm-action-return-candidate
       )
     "Helm source definition for files that can be required using node's `require`.")
@@ -118,6 +130,10 @@ given string."
                                         ; "index.js can be left out so remove it if it's there
           (replace-regexp-in-string "/index.js$" "" relpath))))))
 
+(use-package rjsx-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode)))
 
 (use-package mocha
   :ensure t

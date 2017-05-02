@@ -13,14 +13,15 @@
   (add-to-list 'editorconfig-indentation-alist
                '(js2-mode js2-basic-offset))
   :init
-  (add-hook 'js2-mode-hook (progn
-                             (editorconfig-mode 1)
-                             (when (boundp 'js2-basic-offset)
-                               (setq evil-shift-width js2-basic-offset
-                                     js-indent-level js2-basic-offset))
-                             (when (boundp 'js-indent-level)
-                               (setq js-expr-indent-offset (- js-indent-level)))))
-  )
+  (defun my/setup-editorconfig-for-js ()
+    (editorconfig-mode 1)
+    (when (boundp 'js2-basic-offset)
+      (setq evil-shift-width js2-basic-offset
+            js-indent-level js2-basic-offset))
+    (when (boundp 'js-indent-level)
+      (setq js-expr-indent-offset (- 0 js-indent-level))))
+
+  (add-hook 'js2-mode-hook 'my/setup-editorconfig-for-js))
 
 (use-package column-marker
   :ensure t

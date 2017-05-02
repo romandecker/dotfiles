@@ -51,3 +51,6 @@
 (require 'my-sql)
 (require 'my-typescript)
 (require 'my-workgroups)
+
+;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook
+;; js2-mode-hook js2-jsx-mode-hook
