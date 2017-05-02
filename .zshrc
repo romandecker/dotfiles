@@ -11,6 +11,7 @@ bindkey '^N' down-history
 
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
+bindkey '^[[3~' delete-char
 bindkey '^w' vi-backward-kill-word
 
 bindkey '^r' history-incremental-search-backward
