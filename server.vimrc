@@ -13,11 +13,11 @@ Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 Plug 'kana/vim-operator-user'
 
 " Motions
-Plug 'camelcasemotion'
+Plug 'bkad/CamelCaseMotion'
 Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
-Plug 'matchit.zip' " More uses for %
+Plug 'tmhedberg/matchit' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
 Plug 'easymotion/vim-easymotion'
 Plug 'jeetsukumaran/vim-indentwise'
@@ -157,6 +157,7 @@ nnoremap $ g$
 
 " save with leader s
 nmap <leader>s :w<CR>
+nmap <leader>fs :w<CR>
 " save with C-s (when forwarding is enabled in terminal, or in gui)
 nmap <C-s> :w<CR>
 
