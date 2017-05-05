@@ -162,9 +162,9 @@ nmap <leader>fs :w<CR>
 nmap <C-s> :w<CR>
 
 " enable camelcasemotion
-nmap w ,w
-nmap b ,b
-nmap e ,e
+nmap <silent> w <Plug>CamelCaseMotion_w
+nmap <silent> b <Plug>CamelCaseMotion_b
+nmap <silent> e <Plug>CamelCaseMotion_e
 
 " Redirect all delete-operations to black-hole
 " Use 'm' ("move") for all cut-operations
