@@ -13,11 +13,11 @@ Plug 'michaeljsmith/vim-indent-object'   " indent text-object
 Plug 'kana/vim-operator-user'
 
 " Motions
-Plug 'camelcasemotion'
+Plug 'bkad/CamelCaseMotion'
 Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (ix,ax)
-Plug 'matchit.zip' " More uses for %
+Plug 'tmhedberg/matchit' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
 Plug 'easymotion/vim-easymotion'
 Plug 'jeetsukumaran/vim-indentwise'
@@ -157,13 +157,14 @@ nnoremap $ g$
 
 " save with leader s
 nmap <leader>s :w<CR>
+nmap <leader>fs :w<CR>
 " save with C-s (when forwarding is enabled in terminal, or in gui)
 nmap <C-s> :w<CR>
 
 " enable camelcasemotion
-nmap w ,w
-nmap b ,b
-nmap e ,e
+nmap <silent> w <Plug>CamelCaseMotion_w
+nmap <silent> b <Plug>CamelCaseMotion_b
+nmap <silent> e <Plug>CamelCaseMotion_e
 
 " Redirect all delete-operations to black-hole
 " Use 'm' ("move") for all cut-operations
