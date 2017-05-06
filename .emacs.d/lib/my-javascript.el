@@ -82,7 +82,9 @@
      "r j f" 'js2r-contract-function
      "r r"   'js2r-rename-var
      "r ."   'js2r-var-to-this
-     "r 3"   'js2r-ternary-to-if)
+     "r 3"   'js2r-ternary-to-if
+     "r t a" 'js2r-toggle-arrow-function-and-expression
+     )
     :config
     (add-hook 'js2-mode-hook #'js2-refactor-mode)
     (which-key-add-key-based-replacements
