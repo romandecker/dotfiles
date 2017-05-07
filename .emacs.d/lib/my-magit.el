@@ -201,6 +201,7 @@ This respects the `emojify-emoji-styles' variable."
                        ":package: - Updating compiled files or packages."
                        ":rewind: - Reverting changes."
                        ":bookmark: - Releasing / Version tags."
+                       ":keyboard: - Work on key bindings."
                        ))
          ;; Vanilla Emacs completion and Icicles use the completion list mode to display candidates
          ;; the following makes sure emojify is enabled in the completion list
