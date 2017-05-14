@@ -52,6 +52,10 @@ Plug 'tpope/vim-eunuch' " Some unix commands as vim commands
 Plug 'kopischke/vim-fetch' " open files with line numbers like file.c:22
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout
 
+" Server-specific
+Plug 'vim-scripts/nginx.vim'
+
+
 call plug#end()
 " }}}
 
@@ -262,6 +266,10 @@ autocmd VimResized * exe "normal! \<c-w>="
 
 autocmd FileType javascript autocmd BufWritePre <buffer> StripWhitespace
 
+" Automatically activate nginx.vim for nginx config files
+autocmd BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif 
+
+
 " Set ctrlp method depending on whether ag is available or not
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
@@ -276,3 +284,7 @@ else
 endif
 
 " }}}
+
+" Local Variables:
+" mode: vimrc
+" End:

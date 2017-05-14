@@ -50,6 +50,7 @@
 (require 'my-sgml)
 (require 'my-sql)
 (require 'my-typescript)
+(require 'my-vimrc)     ; going full circle ;)
 (require 'my-workgroups)
 
 ;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook

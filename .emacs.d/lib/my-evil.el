@@ -6,7 +6,15 @@
   (:keymaps 'insert
    [tab] 'my/tab-indent-or-complete
    "TAB" 'my/tab-indent-or-complete
-   "C-l" 'evil-delete-char)
+   "C-l" 'evil-delete-char
+
+   ;; quicker digraphs for german (just like it works in default mac apps)
+   "M-u" 'my/quick-digraph
+   "M-s" 'my/insert-sharp-s
+
+   "C-x C-l" 'hippie-expand
+   )
+
   (:keymaps '(normal visual operator)
    "C-u" 'evil-scroll-up
    "w"   'evil-forward-little-word-begin
@@ -15,11 +23,6 @@
   (:keymaps '(normal visual)
    ;; smart go-to-bol (toggle between true BOL and first significant character)
    "0"   'my/goto-bol-dwim)
-  (:keymaps 'insert
-   ;; quicker digraphs for german (just like it works in default mac apps)
-   "M-u" 'my/quick-digraph
-   "M-s" 'my/insert-sharp-s
-   )
   (:keymaps 'normal
    "] p" 'evil-paste-pop
    "[ p" 'evil-paste-pop-next
