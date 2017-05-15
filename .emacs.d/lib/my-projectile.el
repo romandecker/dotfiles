@@ -25,9 +25,10 @@ currently active project."
     (setq
      yas-snippet-dirs
      (if (projectile-project-p)
-         (cons
-          (concat (projectile-project-root) my/local-snippet-dir)
-          my/global-yas-snippet-dirs)
+         (let ((full-snippet-path) (concat (projectile-project-root) my/local-snippet-dir))
+           (if (file-exists-p full-snippet-path)
+               (cons full-snippet-path my/global-yas-snippet-dirs)
+             my/global-yas-snippet-dirs))
        my/global-yas-snippet-dirs))
     (yas-reload-all))
 
