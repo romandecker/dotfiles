@@ -201,8 +201,7 @@ function."
                  (erase-buffer)))
            (with-current-buffer patchbuf
              (erase-buffer))
-           (message "ok so far %s" width-args)
-           (if (zerop (apply 'call-process
+           (if (zerop (apply 'call-process-region nil nil
                              prettier-command nil (list (list :file outputfile) errorfile)
                              nil (append (append prettier-args width-args) (list bufferfile))))
                (progn
