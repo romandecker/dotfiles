@@ -21,6 +21,11 @@
   (helm-autoresize-mode t)
   (helm-mode 1)
 
+  (defcustom my/helm-projectile-args nil "Custom arguments to be passed to ag when called via helm-projectile.")
+  (defun my/helm-projectile-ag ()
+    (interactive)
+    (helm-projectile-ag my/helm-projectile-args))
+
   (use-package helm-projectile
     :ensure t
     :demand t
@@ -29,7 +34,7 @@
      "p P"   'helm-projectile-switch-project
      "p f"   'helm-projectile-find-file
      "p d"   'helm-projectile-find-dir
-     "p /"   'helm-projectile-ag)
+     "p /"   'my/helm-projectile-ag)
     :config
     (helm-projectile-on))
 
