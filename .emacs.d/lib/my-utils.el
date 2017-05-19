@@ -38,7 +38,7 @@
 
 (defun my/tab-dwim ()
   (interactive)
-  (message "in my/tab-dwim: %s" company-selection-changed)
+  (message "in my/tab-dwim: %s" (safe-length company-candidates))
   (cond
    ;; when in minibuffer, perform minibuffer-completion
    ((minibufferp)
@@ -68,9 +68,9 @@
     (when (not (my/try-completion))
       (indent-for-tab-command)))
 
-   ((company-tooltip-visible-p)
-    (company-complete)
-    )
+   ((or (company-tooltip-visible-p)
+        (eq (safe-length company-candidates) 1))
+    (company-complete))
 
    (t
     (message "just inserting a tab")
