@@ -11,8 +11,8 @@
     "C-n" 'company-select-next
     "C-p" 'company-select-previous
     "C-w" 'backward-kill-word
-    [tab] 'my/expand-snippet-or-complete-selection
-    "TAB" 'my/expand-snippet-or-complete-selection)
+    [tab] 'my/tab-dwim
+    "TAB" 'my/tab-dwim)
   (:keymaps 'company-mode-map
    :states 'insert
    "C-n" 'company-complete)

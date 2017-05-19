@@ -26,44 +26,66 @@
   (let ((yas-fallback-behavior 'return-nil))
     (yas-expand)))
 
-(defun my/tab-indent-or-complete ()
+(defun my/at-completion-marker ()
+  (or
+   (save-excursion (backward-char 1) (looking-at "\\."))
+   (save-excursion (backward-char 2) (looking-at "->"))
+   ))
+
+(defun my/try-expand-snippet ()
+  (let ((yas-fallback-behavior 'return-nil))
+    (yas-expand)))
+
+(defun my/tab-dwim ()
   (interactive)
+  (message "in my/tab-dwim: %s" company-selection-changed)
   (cond
+   ;; when in minibuffer, perform minibuffer-completion
    ((minibufferp)
+    (message "Completing minibuffer")
     (minibuffer-complete))
+
+   ;; we're currently expanding a snippet
+   ((my/is-snippet-active)
+    (message "Snippet currently active")
+    (or (progn (message "Trying to expand another snippet") nil)
+         (my/try-expand-snippet)     ; try to expand an inner snippet
+         (progn (message "could not expand another snippet") nil)
+         (my/try-completion)         ; try company completion
+         (yas-next-field)))           ; move to the next field
+
+   ;; a completion has already started and there were changes to the selection
+   ((and (company-tooltip-visible-p) (not (null company-candidates)) company-selection-changed)
+    (company-complete))
+
+   ;; a snippet can potentially be expanded, try it
+   ((and (progn (message "trying to expand snippet") t) (yas-minor-mode) (my/do-yas-expand))
+    (message "Successfully expanded snippet"))
+
+   ;; try completion
+   ((my/at-completion-marker)
+    (message "at completion marker")
+    (when (not (my/try-completion))
+      (indent-for-tab-command)))
+
+   ((company-tooltip-visible-p)
+    (company-complete)
+    )
+
    (t
-    (indent-for-tab-command)
-    (if (or (not yas-minor-mode)
-      (null (my/do-yas-expand)))
-  (if (my/check-expansion)
-      (progn
-        (company-manual-begin)
-        (if (null company-candidates)
-      (progn
-        (company-abort)
-        (indent-for-tab-command)))))))))
+    (message "just inserting a tab")
+    (insert-tab))))
 
-(defun my/tab-complete-or-next-field ()
-  (interactive)
-  (if (or (not yas-minor-mode)
-    (null (my/do-yas-expand)))
-      (if company-candidates
-    (company-complete-selection)
-  (if (my/check-expansion)
-      (progn
-        (company-manual-begin)
-        (if (null company-candidates)
-      (progn
-        (company-abort)
-        (yas-next-field))))
-    (yas-next-field)))))
+(defun my/try-completion ()
+  (company-manual-begin)
+  (when (null company-candidates)
+    (company-abort)
+    t))
 
-(defun my/expand-snippet-or-complete-selection ()
-  (interactive)
-  (if (or (not yas-minor-mode)
-    (null (my/do-yas-expand))
-    (company-abort))
-      (company-complete-selection)))
+(defun my/is-snippet-active ()
+  (and
+   (yas-minor-mode)
+   (not (null (car (yas-active-snippets))))))
 
 (defun my/abort-company-or-yas ()
   (interactive)

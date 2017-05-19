@@ -4,8 +4,8 @@
 
   :general
   (:keymaps 'insert
-   [tab] 'my/tab-indent-or-complete
-   "TAB" 'my/tab-indent-or-complete
+   [tab] 'my/tab-dwim
+   "TAB" 'my/tab-dwim
    "C-l" 'evil-delete-char
 
    ;; quicker digraphs for german (just like it works in default mac apps)
