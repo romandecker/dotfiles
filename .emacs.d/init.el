@@ -52,6 +52,7 @@
 (require 'my-typescript)
 (require 'my-vimrc)     ; going full circle ;)
 (require 'my-tramp)
+(require 'my-whitespace)
 (require 'my-workgroups)
 
 ;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook

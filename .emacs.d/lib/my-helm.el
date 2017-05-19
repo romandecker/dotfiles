@@ -1,6 +1,16 @@
 ;;; package --- My custom helm config
 ;;; Commentary:
 ;;; Code:
+
+
+(defcustom my/helm-projectile-args nil "Custom arguments to be passed to ag when called via helm-projectile.")
+
+(defun my/helm-projectile-ag ()
+  "Use this in place of `helm-projectile-ag' to make sure it respects the custom var `my/helm-projectile-args'"
+  (interactive)
+  (helm-projectile-ag my/helm-projectile-args))
+
+
 (use-package helm
   :ensure t
   :demand t
@@ -20,11 +30,6 @@
         helm-autoresize-min-height 1)
   (helm-autoresize-mode t)
   (helm-mode 1)
-
-  (defcustom my/helm-projectile-args nil "Custom arguments to be passed to ag when called via helm-projectile.")
-  (defun my/helm-projectile-ag ()
-    (interactive)
-    (helm-projectile-ag my/helm-projectile-args))
 
   (use-package helm-projectile
     :ensure t
