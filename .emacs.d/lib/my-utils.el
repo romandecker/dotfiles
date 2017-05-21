@@ -38,48 +38,45 @@
 
 (defun my/tab-dwim ()
   (interactive)
-  (message "in my/tab-dwim: %s" (safe-length company-candidates))
   (cond
    ;; when in minibuffer, perform minibuffer-completion
    ((minibufferp)
-    (message "Completing minibuffer")
     (minibuffer-complete))
 
    ;; we're currently expanding a snippet
-   ((my/is-snippet-active)
-    (message "Snippet currently active")
-    (or (progn (message "Trying to expand another snippet") nil)
-         (my/try-expand-snippet)     ; try to expand an inner snippet
-         (progn (message "could not expand another snippet") nil)
-         (my/try-completion)         ; try company completion
-         (yas-next-field)))           ; move to the next field
+   ((my/is-snippet-active)       
+    (cond
+     ((my/try-expand-snippet))     ; try to expand an inner snippet
+     ((company-tooltip-visible-p)   ; if completion is active, do completion
+      (company-complete))
+     (t                             ; else, move to the next field
+      (yas-next-field))))
 
    ;; a completion has already started and there were changes to the selection
-   ((and (company-tooltip-visible-p) (not (null company-candidates)) company-selection-changed)
+   ((and company-mode (company-tooltip-visible-p) (not (null company-candidates)) company-selection-changed)
     (company-complete))
 
    ;; a snippet can potentially be expanded, try it
-   ((and (progn (message "trying to expand snippet") t) (yas-minor-mode) (my/do-yas-expand))
-    (message "Successfully expanded snippet"))
+   ((and (yas-minor-mode) (my/do-yas-expand)))
 
    ;; try completion
-   ((my/at-completion-marker)
-    (message "at completion marker")
+   ((and company-mode (my/at-completion-marker))
     (when (not (my/try-completion))
       (indent-for-tab-command)))
 
-   ((or (company-tooltip-visible-p)
-        (eq (safe-length company-candidates) 1))
-    (company-complete))
+   ((and company-mode
+         (or (company-tooltip-visible-p)
+             (eq (safe-length company-candidates) 1))
+         (company-complete)))
 
    (t
-    (message "just inserting a tab")
     (insert-tab))))
 
 (defun my/try-completion ()
   (company-manual-begin)
-  (when (null company-candidates)
-    (company-abort)
+  (if (null company-candidates)
+      (progn (company-abort)
+             nil)
     t))
 
 (defun my/is-snippet-active ()

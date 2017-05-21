@@ -153,6 +153,12 @@
     :ensure t
     :config
     (evil-commentary-mode))
+
+  (use-package evil-goggles
+    :ensure t
+    :config
+    (evil-goggles-mode))
+
   (use-package evil-quickscope
     :ensure t
     :config
