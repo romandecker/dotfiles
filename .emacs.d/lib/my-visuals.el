@@ -7,20 +7,20 @@
 ;;   :config
 ;;   (load-theme 'flatui t))
 
-(use-package spacemacs-theme
-  :ensure t
-  :config
-  (load-theme 'spacemacs-light t))
+;; (use-package spacemacs-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'spacemacs-light t))
 
 ;; (use-package twilight-bright-theme
 ;;   :ensure t
 ;;   :config
 ;;   (load-theme 'twilight-bright t))
 
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :ensure t
-;;   :config
-;;   (load-theme 'sanityinc-tomorrow-day t))
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-day t))
 
 (use-package beacon
   :ensure t
