@@ -32,7 +32,7 @@
 
   (require 'prettier-js)
   (setq prettier-target-mode "js2-mode"
-        prettier-args '("--print-width 100" "--single-quote" "--jsx-bracket-same-line"))
+        prettier-args '("--print-width" "100" "--single-quote" "--jsx-bracket-same-line"))
 
   ;; automatically make prettier-js target the current js-based mode
   (add-hook 'js2-mode-hook (lambda () (setq-local prettier-target-mode "js2-mode")))
