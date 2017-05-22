@@ -41,6 +41,7 @@
    "a ~"   'multi-term
    "b b"   'helm-buffers-list
    "b d"   'bury-buffer
+   "b c"   'my/switch-to-compilation
    "b m"   'my/switch-to-messages
    "b n"   'next-buffer
    "b p"   'previous-buffer

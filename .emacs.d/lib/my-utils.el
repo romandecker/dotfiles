@@ -223,9 +223,13 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (my/window-move 'evil-window-right))
 
-(defun my/switch-to-messages()
+(defun my/switch-to-messages ()
   (interactive)
   (switch-to-buffer (messages-buffer)))
+
+(defun my/switch-to-compilation ()
+  (interactive)
+  (switch-to-buffer "*compilation*"))
 
 (defun my/ctrlp-dwim ()
   (interactive)

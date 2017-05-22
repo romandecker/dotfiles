@@ -247,6 +247,23 @@ that it behaves like in js-mode (which is correct for most cases)"
   )
 (advice-add 'delim-pad-cmd :around #'delim-pad-js2-fix)
 
+(require 'json)
+(require 'subr-x)
+(defun my/get-npm-packages ()
+  "Returns a list of npm packages required by the current project."
+  (let* ((root (file-name-directory (cond
+                                     ((projectile-project-p) (projectile-project-root))
+                                     (t default-directory))))
+         (package-json-path (concat root "package.json"))
+         (package-json (with-temp-buffer
+                 (insert-file-contents package-json-path)
+                 (let ((json-object-type 'hash-table)) (json-read))))
+         (deps (hash-table-keys (or (gethash "dependencies" package-json) (make-hash-table))))
+         (dev-deps (hash-table-keys (or (gethash "devDependencies" package-json) (make-hash-table))))
+         (peer-deps (hash-table-keys (or (gethash "peerDependencies" package-json) (make-hash-table))))
+         )
+    (append deps dev-deps peer-deps)))
+
 
 (provide 'my-javascript)
 ;;; my-javascript.el ends here
