@@ -121,34 +121,33 @@ function."
         ;; negative), deleting lines increments it. This order
         ;; simplifies the forward-line invocations.
         (line-offset 0))
-    (let ((yas--inhibit-overlay-hooks t))
-      (save-excursion
-        (with-current-buffer patch-buffer
-          (goto-char (point-min))
-          (while (not (eobp))
-            (unless (looking-at "^\\([ad]\\)\\([0-9]+\\) \\([0-9]+\\)")
-              (error "invalid rcs patch or internal error in prettier--apply-rcs-patch"))
-            (forward-line)
-            (let ((action (match-string 1))
-                  (from (string-to-number (match-string 2)))
-                  (len  (string-to-number (match-string 3))))
-              (cond
-               ((equal action "a")
-                (let ((start (point)))
-                  (forward-line len)
-                  (let ((text (buffer-substring start (point))))
-                    (with-current-buffer target-buffer
-                      (setq line-offset (- line-offset len))
-                      (goto-char (point-min))
-                      (forward-line (- from len line-offset))
-                      (insert text)))))
-               ((equal action "d")
-                (with-current-buffer target-buffer
-                  (prettier--goto-line (- from line-offset))
-                  (setq line-offset (+ line-offset len))
-                  (prettier--delete-whole-line len)))
-               (t
-                (error "invalid rcs patch or internal error in prettier--apply-rcs-patch"))))))))))
+    (save-excursion
+      (with-current-buffer patch-buffer
+        (goto-char (point-min))
+        (while (not (eobp))
+          (unless (looking-at "^\\([ad]\\)\\([0-9]+\\) \\([0-9]+\\)")
+            (error "invalid rcs patch or internal error in prettier--apply-rcs-patch"))
+          (forward-line)
+          (let ((action (match-string 1))
+                (from (string-to-number (match-string 2)))
+                (len  (string-to-number (match-string 3))))
+            (cond
+             ((equal action "a")
+              (let ((start (point)))
+                (forward-line len)
+                (let ((text (buffer-substring start (point))))
+                  (with-current-buffer target-buffer
+                    (setq line-offset (- line-offset len))
+                    (goto-char (point-min))
+                    (forward-line (- from len line-offset))
+                    (insert text)))))
+             ((equal action "d")
+              (with-current-buffer target-buffer
+                (prettier--goto-line (- from line-offset))
+                (setq line-offset (+ line-offset len))
+                (prettier--delete-whole-line len)))
+             (t
+              (error "invalid rcs patch or internal error in prettier--apply-rcs-patch")))))))))
 
 (defun prettier--process-errors (filename tmpfile errorfile errbuf)
   (with-current-buffer errbuf
@@ -202,12 +201,16 @@ function."
                  (erase-buffer)))
            (with-current-buffer patchbuf
              (erase-buffer))
-           (if (zerop (apply 'call-process-region nil nil
+           (if (zerop (apply 'call-process
                              prettier-command nil (list (list :file outputfile) errorfile)
                              nil (append (append prettier-args width-args) (list bufferfile))))
                (progn
                  (call-process-region (point-min) (point-max) "diff" nil patchbuf nil "-n" "-"
                                       outputfile)
+                 (save-excursion
+                   (let ((snippets (yas-active-snippets)))
+                     (cl-loop for snippet in snippets
+                              do (yas--commit-snippet snippet))))
                  (prettier--apply-rcs-patch patchbuf)
                  (message "Applied prettier with args `%s'" prettier-args)
                  (if errbuf (prettier--kill-error-buffer errbuf)))
