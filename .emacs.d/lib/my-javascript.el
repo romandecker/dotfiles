@@ -100,6 +100,25 @@
        (string-match-p ".js\\(on\\)?$" path))
      (projectile-current-project-files)))
 
+
+  (defun my/process-candidate (candidate)
+    (message "Processing %s" candidate)
+    (let* ((abspath (concat (projectile-project-root) candidate))
+           (relpath (file-relative-name
+                     abspath
+                     (file-name-directory buffer-file-name)))
+           ;; make sure that relpath starts with "./"
+           (relpath (if (string-match "^\\.\\./" relpath)
+                        relpath
+                      (concat "./" relpath))))
+      ;; "index.js can be left out so remove it if it's there
+      (replace-regexp-in-string "/index.js$" "" relpath)))
+
+  (defvar my/helm-action-return-require-path-to-file
+    (helm-make-actions
+     "Select"
+     'my/process-candidate))
+
   (require 'helm-source)
   (defvar my-javascript/helm-source-requirable-project-files
     (helm-build-in-buffer-source "Requirable files"
@@ -108,29 +127,34 @@
                   (my-javascript/requirable-files)
                 (error nil)))
                                         ; :fuzzy-match helm-projectile-fuzzy-match
-      :action my/helm-action-return-candidate
+      :action my/helm-action-return-require-path-to-file
       )
     "Helm source definition for files that can be required using node's `require`.")
 
+  (defvar my-javascript/helm-source-node-builtins
+    (helm-build-in-buffer-source "node builtins"
+      :data '("fs" "stream" "path")
+      :action my/helm-action-return-candidate))
+  
+
+  (defvar my-javascript/helm-source-npm-packages
+    (helm-build-in-buffer-source "NPM packages"
+      :data (lambda ()
+              (my-javascript/get-npm-packages))
+      :action my/helm-action-return-candidate
+    )
+  "Helm source definition for requirable npm packages.")
+
   (defun my-javascript/helm-get-requirable-project-file (&optional initial-input)
+    (interactive)
     "Start helm to search for requirable project files and return the selected
 candidate.
 If INITIAL-INPUT is given, helm will initially be filled with the
 given string."
-    (let* ((path-from-root
-            (helm :sources my-javascript/helm-source-requirable-project-files
-                  :input initial-input)))
-      (when path-from-root
-        (let* ((abspath (concat (projectile-project-root) path-from-root))
-               (relpath (file-relative-name
-                         abspath
-                         (file-name-directory buffer-file-name)))
-                                        ; make sure that relpath starts with "./"
-               (relpath (if (string-match "^\\.\\./" relpath)
-                            relpath
-                          (concat "./" relpath))))
-                                        ; "index.js can be left out so remove it if it's there
-          (replace-regexp-in-string "/index.js$" "" relpath))))))
+    (helm :sources '(my-javascript/helm-source-requirable-project-files
+                     my-javascript/helm-source-npm-packages
+                     my-javascript/helm-source-node-builtins)
+          :input initial-input)))
 
 (use-package rjsx-mode
   :ensure t
@@ -249,20 +273,21 @@ that it behaves like in js-mode (which is correct for most cases)"
 
 (require 'json)
 (require 'subr-x)
-(defun my/get-npm-packages ()
+(defun my-javascript/get-npm-packages ()
   "Returns a list of npm packages required by the current project."
-  (let* ((root (file-name-directory (cond
-                                     ((projectile-project-p) (projectile-project-root))
-                                     (t default-directory))))
-         (package-json-path (concat root "package.json"))
-         (package-json (with-temp-buffer
-                 (insert-file-contents package-json-path)
-                 (let ((json-object-type 'hash-table)) (json-read))))
-         (deps (hash-table-keys (or (gethash "dependencies" package-json) (make-hash-table))))
-         (dev-deps (hash-table-keys (or (gethash "devDependencies" package-json) (make-hash-table))))
-         (peer-deps (hash-table-keys (or (gethash "peerDependencies" package-json) (make-hash-table))))
-         )
-    (append deps dev-deps peer-deps)))
+  (ignore-errors
+    (let* ((root (file-name-directory (cond
+                                       ((projectile-project-p) (projectile-project-root))
+                                       (t default-directory))))
+           (package-json-path (concat root "package.json"))
+           (package-json (with-temp-buffer
+                           (insert-file-contents package-json-path)
+                           (let ((json-object-type 'hash-table)) (json-read))))
+           (deps (hash-table-keys (or (gethash "dependencies" package-json) (make-hash-table))))
+           (dev-deps (hash-table-keys (or (gethash "devDependencies" package-json) (make-hash-table))))
+           (peer-deps (hash-table-keys (or (gethash "peerDependencies" package-json) (make-hash-table))))
+           )
+      (append deps dev-deps peer-deps))))
 
 
 (provide 'my-javascript)

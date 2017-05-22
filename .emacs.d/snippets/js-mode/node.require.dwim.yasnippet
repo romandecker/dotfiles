@@ -1,11 +1,11 @@
 # -*- mode: snippet -*-
 # name: node.require.dwim
-# key: =
+# key: require
 # --
-= require( '`
+require( '`
 (let* ((regexp "^[[:space:]]*\\(const\\|var\\)[[:space:]]+\\([[:word:]]+\\)[[:space:]]*=")
        (line (thing-at-point 'line t))
        (match (string-match regexp line)))
   (let ((var (match-string 2 line)))
-    (my-javascript/helm-get-requirable-project-file (downcase var))))
+    (my-javascript/helm-get-requirable-project-file (downcase (or var "")))))
 `' );

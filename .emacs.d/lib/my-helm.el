@@ -76,7 +76,6 @@
     (helm-make-actions "Select" (lambda (candidate) candidate))))
 
 
-
 ;; Replace helm-help-event-loop with own implementation that uses more
 ;; evil bindings
 (eval-after-load "helm-lib"
