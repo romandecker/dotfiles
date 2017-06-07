@@ -31,11 +31,7 @@
   (js2-mode-hide-warnings-and-errors)
 
   (require 'prettier-js)
-  (setq prettier-target-mode "js2-mode"
-        prettier-args '("--print-width" "100" "--single-quote" "--jsx-bracket-same-line"))
-
-  ;; automatically make prettier-js target the current js-based mode
-  (add-hook 'js2-mode-hook (lambda () (setq-local prettier-target-mode "js2-mode")))
+  (setq prettier-args '("--print-width" "100" "--single-quote" "--jsx-bracket-same-line"))
 
   ;; make prettier available as a minor mode for easy toggling
   (define-minor-mode my/prettier-js-mode
@@ -87,6 +83,7 @@
      )
     :config
     (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    (setq js2r-always-insert-parens-around-arrow-function-params nil)
     (which-key-add-key-based-replacements
       (concat my/local-leader " r")   "Refactor..."
       (concat my/local-leader " r e") "Extract..."

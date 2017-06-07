@@ -44,10 +44,10 @@
   :type 'list
   :group 'prettier)
 
-(defcustom prettier-target-mode
-  "js-mode"
-  "Name of the major mode to be used by 'prettier-before-save'."
-  :type 'string
+(defcustom prettier-target-modes
+  '("js-mode" "js2-mode" "rjsx-mode")
+  "List of major mode names to be used by 'prettier-before-save'."
+  :type 'list
   :group 'prettier)
 
 (defcustom prettier-show-errors 'buffer
@@ -75,7 +75,7 @@ a `before-save-hook'."
   "Add this to .emacs to run prettier on the current buffer when saving:
  (add-hook 'before-save-hook 'prettier-before-save)."
   (interactive)
-  (when (string-equal (symbol-name major-mode) prettier-target-mode) (prettier)))
+  (when (member (symbol-name major-mode) prettier-target-modes) (prettier)))
 
 (defun prettier--goto-line (line)
   (goto-char (point-min))
