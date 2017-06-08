@@ -48,6 +48,7 @@ export SAVEHIST=1000
 export HISTFILE=$HOME/.zsh_history
 
 
+export TMUXIFIER_LAYOUT_PATH="$DOTFILES_DIR/.tmux-layouts"
 export PATH=$PATH:$DOTFILES_DIR/submodules/tmuxifier/bin
 eval "$(tmuxifier init -)"
 export TMUXIFIER_TMUX_OPTS=-2

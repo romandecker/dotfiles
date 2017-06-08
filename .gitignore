@@ -1,8 +1,9 @@
-installer/node_modules
+/installer/node_modules
 /.emacs.d/bookmarks
 /.emacs.d/url/cookies
 /.emacs.d/.mc-lists.el
 /.emacs.d/emojis
 /.emacs.d/tramp
+/.emacs.d/.edbi-ds-history
+/.tmux-layouts
 flycheck_*.el
-.emacs.d/.edbi-ds-history
