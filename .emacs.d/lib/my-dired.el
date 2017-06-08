@@ -19,6 +19,7 @@
  :keymaps 'dired-mode-map
   "!"   'dired-do-shell-command
   "DEL" 'my/dired-up-directory
+  "C-j" 'my/window-down
   "RET" 'dired-find-alternate-file
   "b"   'evil-backward-little-word-begin
   "c"   'my/dired-start-change

@@ -75,6 +75,7 @@
    "w o"   'delete-other-windows
    "w q"   'evil-window-delete
    "w z"   'zoom-window-zoom
+   "w Z"   'hydra-zoom/body
    "w |"   'split-window-right
    "w -"   'split-window-below
    ". e"   'my/open-dotfile

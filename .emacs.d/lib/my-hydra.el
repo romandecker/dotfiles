@@ -6,11 +6,15 @@
    "w r"   'hydra-window-resize/body
    "z"     'hydra-zoom/body)
   :config
+  (defun my/reset-text-scale ()
+    (interactive)
+    (text-scale-set 0))
+
   (defhydra hydra-zoom ()
     "Zoom"
     ("+" text-scale-increase "in")
     ("-" text-scale-decrease "out")
-    ("0" (lambda () (text-scale-set 0) "reset")))
+    ("0" my/reset-text-scale "reset"))
 
   (defhydra hydra-window-resize ()
     "Window resizing"
