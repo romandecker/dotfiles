@@ -84,6 +84,8 @@
    ". l f" 'add-file-local-variable
    ". l r" 'my/reload-dir-locals
    "? b"   'helm-descbinds
+   "? c c" 'flycheck-describe-checker
+   "? c s" 'flycheck-verify-setup
    "? f"   'describe-function
    "? F"   'describe-font
    "? k"   'describe-key
