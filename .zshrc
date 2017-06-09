@@ -20,6 +20,9 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '\e.' insert-last-word
 
+autoload edit-command-line
+zle -N edit-command-line
+
 bindkey -a v begin-selection
 bindkey -M vicmd v edit-command-line
 bindkey '^X^E' edit-command-line
@@ -43,6 +46,9 @@ autoload -U zcalc
 
 setopt histignorealldups    # ignore duplicates
 setopt hist_ignore_space    # do not save commands starting with space to history
+setopt inc_append_history
+setopt share_history
+
 export HISTSIZE=1000
 export SAVEHIST=1000
 export HISTFILE=$HOME/.zsh_history
@@ -65,6 +71,9 @@ encrypt-for() {
   echo "Send this to $1:"
   echo "echo $b64 | base64 -D | gpg -d"
 }
+
+source ~/.dotfiles/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
