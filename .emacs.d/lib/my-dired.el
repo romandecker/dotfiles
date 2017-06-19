@@ -35,6 +35,7 @@
   "o"   'my/dired-create-file
   "O"   'dired-create-directory
   "q"   'kill-this-buffer
+  "r"   'revert-buffer
   "u"   'dired-unmark
   "U"   'dired-unmark-all-marks
   "v"   'evil-visual-char

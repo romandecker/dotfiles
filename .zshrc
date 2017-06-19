@@ -72,6 +72,11 @@ encrypt-for() {
   echo "echo $b64 | base64 -D | gpg -d"
 }
 
+docker-cleanup() {
+  docker rmi $(docker images -q -f dangling=true)
+}
+
+
 source ~/.dotfiles/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 
