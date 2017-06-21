@@ -56,6 +56,15 @@
   (atomic-chrome-start-server)
   (message "atomic-chrome started!"))
 
+(use-package fill-column-indicator
+  :ensure t
+  :config
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (my/define-leader-map
+   "t f" 'global-fci-mode)
+  (global-fci-mode))
+
+
 (setq scroll-conservatively 10000
       scroll-margin 5)
 

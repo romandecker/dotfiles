@@ -32,6 +32,7 @@
 ;; general-purpose list library (-map, etc...)
 (use-package dash :ensure t :config)
 
+(require 'add-hook-x)
 
 (provide 'my-setup)
 ;;; my-setup.el ends here
