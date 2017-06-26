@@ -63,6 +63,7 @@
    "o c"   'org-capture
    "o y"   'org-store-link
    "o p"   'org-insert-link
+   "r"     'revert-buffer
    "t z"   'zoom-window-zoom
    "t n"   'linum-mode
    "t g"   'my/toggle-git-gutter
