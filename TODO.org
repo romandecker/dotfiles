@@ -1,2 +1,35 @@
-* editorconfig-bug
-* Project-local snippets
+* Projects
+
+Set up a better project system to not accidentally "fall" to other
+projects when killing buffers
+* Macros
+** my/edit-evil-macro
+
+A command that can edit any evil using `kmacro-edit-macro`. See this
+for some pointers: https://stackoverflow.com/questions/22817120/how-can-i-save-evil-mode-vim-style-macros-to-my-init-el/22820324
+
+
+* Bugs
+
+** Macro recording bug
+
+Recording a macro that contains `c w` will record the `w` twice (view
+the last recorded macro using `kmacro-edit-macro`).
+
+** Cannot cancel `kmacro-edit-macro` with evil
+
+Is normally cancelled with `C-x k RET` but that doesn't work with evil.
+** fci-mode bug
+
+fci-mode causes some visual glitches with company and also sometimes
+fucks up editing. Find a better alternative. Also, there's a problem
+with that package that shows the current indentation level with `|`s
+
+
+** Cannot always repeat indentation command made in visual mode
+
+Example:
+1) Paste some text
+2) Use `g p` to visually select pasted text
+3) Press `> >` to indent the text once
+4) Press `.` to repeat indentation of pasted text -> doesn't work

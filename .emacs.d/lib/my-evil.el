@@ -291,4 +291,30 @@ block comment prefixes when inside of a block-comment."
 
 (advice-add 'newline :around #'my/newline)
 
+(evil-define-command evil-edit-macro (register)
+  "Edit keyboard macro MACRO. MACRO is read from a register
+when called interactively."
+  :keep-visual t
+  :suppress-operator t
+  (interactive
+   (let ((register (or evil-this-register (read-char))))
+     (when (eq register ?@)
+       (unless evil-last-register
+         (user-error "No previously executed keyboard macro"))
+       (setq register evil-last-register))
+     (list register)))
+  (message "doing stuff with register %s" register)
+  ;; this is not yet working, it doesn't seem to correctly write back
+  ;; to the original register, and evil doesn't pick up the change
+  (lexical-let ((macro (evil-get-register register t)))
+    (edit-kbd-macro
+     macro
+     nil
+     nil
+     (lambda (macro)
+       (message "Setting register %s to %s" register macro)
+       (evil-set-register register macro)))))
+
+;; (general-nmap "g t" 'evil-edit-macro)
+
 (provide 'my-evil)
