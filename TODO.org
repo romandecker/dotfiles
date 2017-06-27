@@ -2,13 +2,6 @@
 
 Set up a better project system to not accidentally "fall" to other
 projects when killing buffers
-* Macros
-** my/edit-evil-macro
-
-A command that can edit any evil using `kmacro-edit-macro`. See this
-for some pointers: https://stackoverflow.com/questions/22817120/how-can-i-save-evil-mode-vim-style-macros-to-my-init-el/22820324
-
-
 * Bugs
 
 ** Macro recording bug

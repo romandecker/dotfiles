@@ -95,7 +95,7 @@
 
   (general-evil-define-key 'normal tabulated-list-mode-map
     "g s"   'tabulated-list-sort
-    [tab]   'tablist-forward-column
+    [tab] 'tablist-forward-column
     "S-TAB" 'tablist-backward-column
     "q"     'quit-window))
 

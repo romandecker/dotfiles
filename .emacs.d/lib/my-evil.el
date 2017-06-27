@@ -1,3 +1,27 @@
+;; -*- lexical-binding: t; -*-
+
+(evil-define-command my/edit-evil-macro (register)
+  "Edit keyboard macro MACRO. MACRO is read from a register
+when called interactively."
+  :keep-visual t
+  :suppress-operator t
+  (interactive
+   (let ((register (or evil-this-register (read-char))))
+     (when (eq register ?@)
+       (unless evil-last-register
+         (user-error "No previously executed keyboard macro"))
+       (setq register evil-last-register))
+     (list register)))
+  ;; this is not yet working, it doesn't seem to correctly write back
+  ;; to the original register, and evil doesn't pick up the change
+  (lexical-let ((macro (evil-get-register register t)))
+    (edit-kbd-macro
+     macro
+     nil
+     nil
+     (lambda (new-macro)
+       (evil-set-register register new-macro)))))
+
 (use-package evil
   :ensure t
   :demand t
@@ -30,7 +54,9 @@
    "C-o" 'goto-last-change           ; make c-i/c-o always stay in the
    "C-i" 'goto-last-change-reverse   ; current file
    "g ;" 'evil-jump-forward          ; make g ;/g , do what C-o/C-i did before
-   "g ," 'evil-jump-backward)
+   "g ," 'evil-jump-backward
+   "Q"   'my/edit-evil-macro
+   )
   :config
   (message "configuring evil")
   (add-to-list 'evil-insert-state-modes 'calculator-mode)
@@ -211,7 +237,6 @@
                (eq type 'line))
       (evil-first-non-blank))
     )
-
   (evil-mode 1)) ; evil-leader must be enabled before evil
 
 ;;; Make ESC quit most things
@@ -290,31 +315,5 @@ block comment prefixes when inside of a block-comment."
         (insert prefix))))
 
 (advice-add 'newline :around #'my/newline)
-
-(evil-define-command evil-edit-macro (register)
-  "Edit keyboard macro MACRO. MACRO is read from a register
-when called interactively."
-  :keep-visual t
-  :suppress-operator t
-  (interactive
-   (let ((register (or evil-this-register (read-char))))
-     (when (eq register ?@)
-       (unless evil-last-register
-         (user-error "No previously executed keyboard macro"))
-       (setq register evil-last-register))
-     (list register)))
-  (message "doing stuff with register %s" register)
-  ;; this is not yet working, it doesn't seem to correctly write back
-  ;; to the original register, and evil doesn't pick up the change
-  (lexical-let ((macro (evil-get-register register t)))
-    (edit-kbd-macro
-     macro
-     nil
-     nil
-     (lambda (macro)
-       (message "Setting register %s to %s" register macro)
-       (evil-set-register register macro)))))
-
-;; (general-nmap "g t" 'evil-edit-macro)
 
 (provide 'my-evil)
