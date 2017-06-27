@@ -33,6 +33,7 @@
 (use-package dash :ensure t :config)
 
 (require 'add-hook-x)
+(require 'help-fns+)
 
 (provide 'my-setup)
 ;;; my-setup.el ends here

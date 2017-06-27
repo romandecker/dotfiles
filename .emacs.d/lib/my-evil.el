@@ -109,7 +109,9 @@
     :general
     (:keymaps 'normal
      "d" (general-key-dispatch 'evil-delete
-           "s" 'evil-surround-delete))
+           "s" 'evil-surround-delete)
+     "y" (general-key-dispatch 'evil-yank
+           "s" 'evil-surround-edit))
     (:keymaps 'visual
      "d" 'evil-delete)
     :config
@@ -146,12 +148,11 @@
       (evil-define-key
         'normal
         evil-mc-key-map
-        "C-n"    'my/smart-c-n
-        "C-p"    'my/ctrlp-dwim
+        (kbd "C-n")    'my/smart-c-n
+        (kbd "C-p")    'my/ctrlp-dwim
         [escape] 'evil-mc-undo-all-cursors
-        "C-s"    'evil-mc-skip-and-goto-next-match
-        "C-S-p"  'evil-mc-skip-and-goto-prev-cursor
-        )
+        (kbd "C-s")    'evil-mc-skip-and-goto-next-match
+        (kbd "C-S-p")  'evil-mc-skip-and-goto-prev-cursor)
       (global-evil-mc-mode 1)
       (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode))
 
