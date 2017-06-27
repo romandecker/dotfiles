@@ -6,6 +6,7 @@
 
 (use-package bookmark+
   :ensure t
+  :demand t
   :general
   (:prefix my/leader
    :keymaps 'normal
