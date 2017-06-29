@@ -91,6 +91,7 @@
    "? F"   'describe-font
    "? k"   'describe-key
    "? m"   'describe-mode
+   "? M"   'describe-keymap
    "? v"   'describe-variable)
 
   (general-evil-define-key 'normal tabulated-list-mode-map
