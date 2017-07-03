@@ -1,7 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-(setq debug-on-quit t)
-
 (use-package evil
   :ensure t
   :demand t
@@ -111,10 +109,14 @@
      "d" (general-key-dispatch 'evil-delete
            "s" 'evil-surround-delete)
      "y" (general-key-dispatch 'evil-yank
-           "s" 'evil-surround-edit))
+           "s" 'my/evil-surround-add))
     (:keymaps 'visual
      "d" 'evil-delete)
     :config
+    (defun my/evil-surround-add ()
+      (interactive)
+      (evil-surround-setup-surround-line-operators)
+      (evil-surround-call-with-repeat 'evil-surround-region))
     (global-evil-surround-mode))
    (use-package evil-numbers
      :ensure t
