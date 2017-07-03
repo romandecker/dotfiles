@@ -9,3 +9,4 @@
 .floo
 .flooignore
 .agignore
+node_modules.*
