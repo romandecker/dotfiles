@@ -17,8 +17,8 @@
    [tab] 'org-cycle)
   (:states 'insert
    :keymaps 'org-mode-map
-    "TAB" 'org-cycle
-    [tab] 'org-cycle)
+   "TAB" 'org-cycle
+   [tab] 'org-cycle)
   (:keymaps 'normal
    "RET" 'org-open-at-point-global
    "g x" 'org-open-at-point-global)
@@ -29,7 +29,10 @@
   (:prefix my/local-leader
    :keymaps 'org-mode-map
    :states 'normal
-   "t" 'org-todo)
+   "t"   'org-todo
+   "e"   'org-export-dispatch
+   "c" 'hydra-org-global-cycle/body
+   )
   :config
   (setq
    org-directory "~/Dropbox/org"
@@ -49,7 +52,9 @@
     :general
     (:keymaps 'org-mode-map
      (kbd "<drag-n-drop>") 'org-download))
-  )
+  (defhydra hydra-org-global-cycle (:pre (org-global-cycle))
+    "org-global-cycle"
+    ("c" org-global-cycle "Cycle")))
 
 
 (defun my/org-eol-call (fun)

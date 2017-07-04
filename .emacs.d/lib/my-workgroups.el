@@ -53,5 +53,14 @@
   (when (file-exists-p my/workgroups-file)
     (wg-load my/workgroups-file)))
 
+;; (use-package persp-mode
+;;   :ensure t
+;;   :general
+;;   (:prefix my/leader
+;;    :keymaps 'normal
+;;    "p p" 'persp-switch
+;;    "p . r" 'persp-rename)
+;;   :config)
+
 (provide 'my-workgroups)
 ;;; my-workgroups.el ends here
