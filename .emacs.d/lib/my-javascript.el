@@ -155,6 +155,11 @@ given string."
 
 (use-package rjsx-mode
   :ensure t
+  :general
+  ;; rjsx-electric-lt seems to hang emacs ?!?
+  (:states 'insert
+   :keymaps 'rjsx-mode-map
+   "<" 'self-insert-command)
   :config
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode)))
 
