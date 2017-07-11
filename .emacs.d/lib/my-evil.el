@@ -98,25 +98,11 @@
   ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
 
-
-
   (setq evil-insert-state-cursor '((bar . 3) "red")
         evil-normal-state-cursor '(box "black"))
   (use-package evil-surround
     :ensure t
-    :general
-    (:keymaps 'normal
-     "d" (general-key-dispatch 'evil-delete
-           "s" 'evil-surround-delete)
-     "y" (general-key-dispatch 'evil-yank
-           "s" 'my/evil-surround-add))
-    (:keymaps 'visual
-     "d" 'evil-delete)
     :config
-    (defun my/evil-surround-add ()
-      (interactive)
-      (evil-surround-setup-surround-line-operators)
-      (evil-surround-call-with-repeat 'evil-surround-region))
     (global-evil-surround-mode))
    (use-package evil-numbers
      :ensure t
