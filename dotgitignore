@@ -10,3 +10,4 @@
 .flooignore
 .agignore
 node_modules.*
+.pupilrc
