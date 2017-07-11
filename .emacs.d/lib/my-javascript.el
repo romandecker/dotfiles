@@ -197,8 +197,7 @@ given string."
     (interactive)
     (when (projectile-project-p)
       (nvm-use-for (projectile-project-root))
-      (message "Activated node %s" nvm-current-version)
-      (exec-path-from-shell-copy-env "PATH")))
+      (message "Activated node %s" nvm-current-version)))
   (add-hook 'projectile-after-switch-project-hook #'my/nvm-use))
 
 (require 'npm)

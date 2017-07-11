@@ -87,8 +87,8 @@
          (compilation-buffer (get-buffer "*compilation*")))
     (process-send-string (get-buffer-process compilation-buffer) string)))
 
-(my/define-leader-map
- "c i"     'my/send-input-to-compilation)
+; (my/define-leader-map
+;  "c i"     'my/send-input-to-compilation)
 
 (defun my/init-compilation-mode ()
   (local-unset-key "g")
