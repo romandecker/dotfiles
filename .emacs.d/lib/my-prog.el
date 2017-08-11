@@ -80,6 +80,7 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook #'my/colorize-compilation-buffer)
 
+
 (defun my/send-input-to-compilation (input &optional nl)
   "Send INPUT to the compilation process. Interactively also sends a terminating newline."
   (interactive "MInput: \nd")
