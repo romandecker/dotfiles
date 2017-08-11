@@ -38,7 +38,35 @@ If no project is active, sets it to `bookmark-default-file'."
     (bmkp-switch-bookmark-file-create
      (if (projectile-project-p)
          (concat (projectile-project-root) my/local-bookmarks-file)
-       bookmark-default-file))))
+       bookmark-default-file)))
+
+  (defun my/projectile-switch-buffer (nav-fn)
+    (if (projectile-project-p)
+        (let* ((last-root (projectile-project-root))
+               (last-buffer (current-buffer)))
+          (while (or (not (projectile-project-buffer-p (current-buffer) last-root))
+                     (eq (current-buffer) last-buffer))
+            (funcall nav-fn)))
+      (funcall nav-fn)))
+
+  (defun my/previous-project-buffer ()
+    (interactive)
+    (my/projectile-switch-buffer 'previous-buffer))
+
+  (defun my/next-project-buffer ()
+    (interactive)
+    (my/projectile-switch-buffer 'next-buffer))
+
+  (defun my/bury-project-buffer ()
+    (interactive)
+    (if (projectile-project-p)
+        (let* ((last-root (projectile-project-root))
+               (last-buffer (current-buffer)))
+          (bury-buffer)
+          (while (or (not (projectile-project-buffer-p (current-buffer) last-root))
+                     (eq (current-buffer) last-buffer))
+            (next-buffer)))
+      (bury-buffer))))
 
 
 (defconst my/global-yas-snippet-dirs '("~/.emacs.d/snippets"))

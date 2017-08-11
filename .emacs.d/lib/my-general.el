@@ -40,16 +40,16 @@
    "a P"   'package-list-packages
    "a ~"   'multi-term
    "b b"   'helm-buffers-list
-   "b d"   'bury-buffer
+   "b d"   'my/bury-project-buffer
    "b c"   'my/switch-to-compilation
    "b m"   'my/switch-to-messages
-   "b n"   'next-buffer
-   "b p"   'previous-buffer
+   "b j"   'next-buffer
+   "b k"   'previous-buffer
    "b x"   'kill-this-buffer
    "c c"   'recompile
    "c x"   'kill-compilation
-   "j"     'previous-buffer
-   "k"     'next-buffer
+   "j"     'my/previous-project-buffer
+   "k"     'my/next-project-buffer
    "f f"   'helm-find-files
    "e :"   'helm-eval-expression
    "e l"   'eval-last-sexp

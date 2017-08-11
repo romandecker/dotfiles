@@ -42,6 +42,10 @@
       (isearch--set-state (car isearch-cmds))))
   (isearch-update))
 
+(use-package vlf
+  :ensure t
+  :config)
+
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 (define-key minibuffer-local-map (kbd "C-p") 'previous-history-element)
 (define-key minibuffer-local-map (kbd "C-n") 'next-history-element)

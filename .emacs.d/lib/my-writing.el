@@ -86,5 +86,14 @@
   :ensure t
   :config)
 
+(setq TeX-PDF-mode t
+      TeX-parse-self t
+      TeX-auto-save t)
+
+(use-package company-auctex
+  :ensure t
+  :config
+  (company-auctex-init))
+
 (provide 'my-writing)
 ;;; my-writing.el ends here
