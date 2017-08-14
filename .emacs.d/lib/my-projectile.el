@@ -44,6 +44,7 @@ If no project is active, sets it to `bookmark-default-file'."
     (if (projectile-project-p)
         (let* ((last-root (projectile-project-root))
                (last-buffer (current-buffer)))
+          (funcall nav-fn)
           (while (or (not (projectile-project-buffer-p (current-buffer) last-root))
                      (eq (current-buffer) last-buffer))
             (funcall nav-fn)))
