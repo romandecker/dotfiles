@@ -45,9 +45,11 @@ If no project is active, sets it to `bookmark-default-file'."
         (let* ((last-root (projectile-project-root))
                (last-buffer (current-buffer)))
           (funcall nav-fn)
-          (while (or (not (projectile-project-buffer-p (current-buffer) last-root))
-                     (eq (current-buffer) last-buffer))
-            (funcall nav-fn)))
+          (while (not (projectile-project-buffer-p (current-buffer) last-root))
+            (funcall nav-fn))
+          (message "Next available project buffer: %s (%s)" (current-buffer) (projectile-project-root)))
+
+      (message "Not in a project falling back to normal function")
       (funcall nav-fn)))
 
   (defun my/previous-project-buffer ()
