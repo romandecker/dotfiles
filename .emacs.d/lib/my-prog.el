@@ -107,6 +107,13 @@
 (define-key compilation-mode-map (kbd "s") 'my/toggle-compilation-scroll)
 (general-evil-define-key '(normal insert visual) 'debugger-mode-map "q" 'quit-window)
 
+(use-package expand-region
+  :ensure t
+  :general
+  (:states 'normal
+   :keymaps 'prog-mode-map
+   "RET" 'er/expand-region)
+  :config)
 
 (provide 'my-prog)
 ;;; my-prog.el ends here

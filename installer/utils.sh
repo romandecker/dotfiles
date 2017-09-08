@@ -83,7 +83,7 @@ function link_dotfile() {
 
 function clone {
     if [ -d $2 ]; then
-      echo "$fawn$2$fawn already exists"
+      echo "$fawn$2$fawn already exists$normal"
       return
     fi
 

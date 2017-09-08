@@ -53,5 +53,11 @@
   [tab] 'forward-button
   "r"   'my/reload-help)
 
+(use-package helpful
+  :ensure t
+  :general
+  :config)
+
+
 (provide 'my-elisp)
 ;;; my-elisp.el ends here
