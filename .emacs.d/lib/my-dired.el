@@ -20,21 +20,22 @@
   "!"   'dired-do-shell-command
   "DEL" 'my/dired-up-directory
   "C-j" 'my/window-down
-  "RET" 'dired-find-alternate-file
+  "RET" 'my/dired-enter
   "b"   'evil-backward-little-word-begin
   "c"   'my/dired-start-change
   "e"   'evil-forward-little-word-end
   "g g" 'evil-goto-first-line
   "G"   'evil-goto-line
   "h"   'my/dired-up-directory
-  "l"   'dired-find-alternate-file
+  "i"   'dired-toggle-read-only
+  "l"   'my/dired-enter
   "m"   'my/dired-toggle-mark
   "M"   'dired-do-rename
   "n"   'evil-search-next
   "N"   'evil-search-previous
   "o"   'my/dired-create-file
   "O"   'dired-create-directory
-  "q"   'kill-this-buffer
+  "q"   'my/quit-dired-window
   "r"   'revert-buffer
   "u"   'dired-unmark
   "U"   'dired-unmark-all-marks
@@ -57,6 +58,19 @@
   (dired-toggle-read-only)
   (call-interactively 'evil-change))
 
+(defun my/quit-dired-window ()
+  (interactive)
+  (let ((ws (get-buffer-window-list)))
+    (if (eq 1 (length ws))
+        (kill-this-buffer)
+      (quit-window))))
+
+(defun my/dired-enter ()
+  (interactive)
+  (let ((count (length (get-buffer-window-list))))
+    (if (eq 1 count)
+        (call-interactively 'dired-find-alternate-file)
+      (find-file (dired-get-file-for-visit)))))
 
 
 ;; take care not to override global leader
@@ -65,6 +79,7 @@
 (eval-after-load 'dired-aux
  '(add-to-list 'dired-compress-file-suffixes
                  '("\\.zip\\'" ".zip" "unzip")))
+
 (use-package dired-details+
   :ensure t
   :config)
@@ -78,9 +93,11 @@
 (defun my/dired-up-directory ()
   "Take dired up one directory, but behave like dired-find-alternative-file (leave no orphan buffer)"
   (interactive)
-  (let ((old (current-buffer)))
+  (let* ((old (current-buffer))
+         (count (length (get-buffer-window-list old))))
     (dired-up-directory)
-    (kill-buffer old)))
+    (when (eq 1 count)
+        (kill-buffer old)))) 
 
 (provide 'my-dired)
 ;;; my-dired.el ends here
