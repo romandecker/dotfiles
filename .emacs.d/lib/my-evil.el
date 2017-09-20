@@ -27,6 +27,8 @@
   (:keymaps 'normal
    "] p" 'evil-paste-pop
    "[ p" 'evil-paste-pop-next
+   "] P" 'helm-show-kill-ring
+   "[ P" 'helm-show-kill-ring
    "g p" 'my/evil-select-pasted
    "C-o" 'goto-last-change           ; make c-i/c-o always stay in the
    "C-i" 'goto-last-change-reverse   ; current file
@@ -35,10 +37,7 @@
    "Q"   'my/edit-evil-macro
    "="   (general-key-dispatch 'evil-indent
            "p" 'my/formatted-paste-after
-           "P" 'my/formatted-paste-before)
-   "p"   'my/formatted-paste-after
-   "P"   'my/formatted-paste-before
-   )
+           "P" 'my/formatted-paste-before))
   :config
   (message "configuring evil")
   (add-to-list 'evil-insert-state-modes 'calculator-mode)
@@ -164,13 +163,21 @@
                        "X" 'evil-exchange-cancel))
        (general-vmap "c" 'evil-change))
 
+
      ;; reinstate the normal evil-change binding so that evil-mc works
      (defun my/disable-evil-exchange ()
        (general-nmap "c" 'evil-change))
 
      (my/enable-evil-exchange)
      (add-hook 'evil-mc-before-cursors-created 'my/disable-evil-exchange)
-     (add-hook 'evil-mc-after-cursors-deleted 'my/enable-evil-exchange))
+     (add-hook 'evil-mc-after-cursors-deleted 'my/enable-evil-exchange)
+
+     ;; general-key-dispatch makes macros record keys twice, so we
+     ;; have to disable it again when recording macros
+     (advice-add 'start-kbd-macro :before (lambda (arg) (my/disable-evil-exchange)))
+     (advice-add 'end-kbd-macro :after #'my/disable-evil-exchange))
+
+
 
    (use-package evil-commentary
      :ensure t
