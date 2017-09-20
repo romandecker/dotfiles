@@ -161,7 +161,9 @@ nnoremap $ g$
 
 " save with leader s
 nmap <leader>s :w<CR>
+" open current directory with leader f d
 nmap <leader>fs :w<CR>
+nmap <leader>fd :e .<CR>
 " save with C-s (when forwarding is enabled in terminal, or in gui)
 nmap <C-s> :w<CR>
 
