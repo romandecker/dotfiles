@@ -82,12 +82,15 @@ function link_dotfile() {
 }
 
 function clone {
-    if [ -d $2 ]; then
-      cecho "$fawn$2$fawn already exists"
+    # get the last passed argument and set it to target, see https://stackoverflow.com/questions/1853946/getting-the-last-argument-passed-to-a-shell-script
+    for target; do true; done
+
+    if [ -d $target ]; then
+      cecho "$fawn$target$fawn already exists"
       return
     fi
 
-    git clone $1 $2
+    git clone $@
 }
 
 function cecho {

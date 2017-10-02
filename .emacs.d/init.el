@@ -50,6 +50,7 @@
 (require 'my-sgml)
 (require 'my-sql)
 (require 'my-typescript)
+(require 'my-rust)
 (require 'my-vimrc)     ; going full circle ;)
 (require 'my-tramp)
 (require 'my-whitespace)

@@ -78,7 +78,17 @@
   (toggle-read-only)
   (ansi-color-apply-on-region compilation-filter-start (point-max))
   (toggle-read-only))
+
+(defun my/remove-unrecognized-escapes ()
+  (toggle-read-only)
+  (save-excursion
+    (goto-char 0)
+    (while (search-forward "" (point-max) t)
+      (replace-match "")))
+  (toggle-read-only))
+
 (add-hook 'compilation-filter-hook #'my/colorize-compilation-buffer)
+;; (add-hook 'compilation-filter-hook #'my/remove-unrecognized-escapes)
 
 
 (defun my/send-input-to-compilation (input &optional nl)
