@@ -83,7 +83,7 @@ source ~/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-EXPORT SNIPPET_DIR=~/.dotfiles/snippets
+export SNIPPET_DIR=~/.dotfiles/snippets
 source ~/.dotfiles/snippets.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

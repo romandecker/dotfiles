@@ -1,0 +1,5 @@
+# to extract to the current directory:
+tar -xzvf source.tar.gz
+
+# to extract to the given target directory:
+tar -xzvf source.tar.gz -C target/
