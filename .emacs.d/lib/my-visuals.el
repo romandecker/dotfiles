@@ -64,6 +64,15 @@
    "t f" 'global-fci-mode)
   (global-fci-mode))
 
+(use-package zoom-frm
+  :ensure t
+  :config
+  (defhydra hydra-zoom ()
+    "Zoom"
+    ("+" zoom-frm-in "in")
+    ("-" zoom-frm-out "out")
+    ("0" zoom-frm-unzoom "reset")))
+
 
 (setq scroll-conservatively 10000
       scroll-margin 5)
