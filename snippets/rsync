@@ -1,0 +1,2 @@
+rsync -rP source destination    # creates a directory "destination/source"
+rsync -rP source/ destination   # copies all files in "source" directly into "destination"
