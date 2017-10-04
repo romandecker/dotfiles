@@ -1,2 +1,10 @@
+# -a => archive mode, i.e. preserve timestamps etc.
+# -r => recursive
+# -P => show progress info
+# --delete => delete files from target that are not in source
+
+rsync -arP source target
+
 rsync -rP source destination    # creates a directory "destination/source"
+
 rsync -rP source/ destination   # copies all files in "source" directly into "destination"
