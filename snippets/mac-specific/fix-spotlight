@@ -1,0 +1,14 @@
+# lang: bash
+
+# turn off spotlight
+sudo mdutil -a -i off
+
+# unload it
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+
+# load it
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+
+# Turn spotlight on again
+sudo mdutil -a -i on
+
