@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function snippet {
-    local s=$((cd $SNIPPET_DIR; find . -type f) | sed 's#\./##' | fzf --preview "{ cat $SNIPPET_DIR/{} }" --height 40% --reverse)
+    local s=$((cd $SNIPPET_DIR; find . -type f) | sed 's#\./##' | fzf --preview "{ highlight-snippet $SNIPPET_DIR/{} }" --height 40% --reverse)
 
     if [ ! -z "$s" ]; then
-      cat $SNIPPET_DIR/$s
+      highlight-snippet $SNIPPET_DIR/$s
     fi
 }
 

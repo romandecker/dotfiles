@@ -1,10 +1,11 @@
+# lang: bash
 # -a => archive mode, i.e. preserve timestamps etc.
 # -r => recursive
 # -P => show progress info
-# --delete => delete files from target that are not in source
+# --delete => delete files from dest that are not in source
 
-rsync -arP source target
+rsync -arP src dest
 
-rsync -rP source destination    # creates a directory "destination/source"
+rsync -rP src dest    # creates a directory "dest/src"
 
-rsync -rP source/ destination   # copies all files in "source" directly into "destination"
+rsync -rP src/ dest   # copies all files in "src" directly into "dest"

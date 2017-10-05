@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+# snippets may contain a shebang indicating their language,
+# additionally an emacs-style language-indicator may be present
+
+# this function checks for a shebang/emacs line in the snippet and
+# if the `source-highlight` command is available, outputs the
+# highlighted snippet
+
+# if `source-highlight` is not available, simply print the snippet
+# without highlighting
+
+# in all cases, the shebang and emacs-line will be omitted from output
+
+file=$1
+init=$(head -1 $file)
+lang=""
+skip=0
+regex="#[[:blank:]]*lang:[[:blank:]]*([[:alnum:]]+)" 
+
+if [[ $init =~ $regex ]]; then
+    lang="${BASH_REMATCH[1]}"
+    skip=1
+else
+    # default to bash
+    lang="bash"
+fi
+
+if [ $(command -v highlight) ]; then
+    tail -n +$(($skip+1)) $file | highlight --syntax $lang -O ansi
+else
+    tail -n +$skip $file
+fi

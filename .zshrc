@@ -1,9 +1,9 @@
 # 10 ms for key sequences
+export DOTFILES_DIR=~/.dotfiles
 export KEYTIMEOUT=1 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$PATH
 export LANG=en_US.UTF-8
 
-export DOTFILES_DIR=~/.dotfiles
 
 bindkey -v
 bindkey '^P' up-history
