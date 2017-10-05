@@ -1,0 +1,5 @@
+
+git filter-branch --force --index-filter \
+    'git rm --cached --ignore-unmatch path/to/file/to/del.ete' \
+    --prune-empty --tag-name-filter cat -- --all
+

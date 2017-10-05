@@ -43,6 +43,7 @@ autoload -Uz compinit
 compinit
 
 autoload -U zcalc
+autoload -Uz transfer
 
 setopt histignorealldups    # ignore duplicates
 setopt hist_ignore_space    # do not save commands starting with space to history
