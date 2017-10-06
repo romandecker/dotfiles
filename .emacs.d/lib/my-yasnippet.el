@@ -3,6 +3,14 @@
 ;;; Code:
 (use-package yasnippet
   :ensure t
+  :general
+  (:states 'normal
+   :prefix my/leader
+   "i s"     'yas-insert-snippet
+   ". s n"   'yas-new-snippet
+   ". s d"   'my/open-snippet-dir
+   "? s"     'yas-describe-tables)
+
   :config
   (setq
    yas-snippet-dirs '("~/.emacs.d/snippets"))
@@ -16,12 +24,6 @@
   (define-key yas-keymap (kbd "TAB") 'my/tab-dwim)
   (define-key yas-keymap [(control tab)] 'yas-next-field)
   (define-key yas-keymap (kbd "C-g") 'my/abort-company-or-yas)
-
-  (evil-leader/set-key
-    "i s"     'yas-insert-snippet
-    ". s n"   'yas-new-snippet
-    ". s d"   'my/open-snippet-dir
-    "? s"     'yas-describe-tables)
 
   (yas-global-mode 1)
   (use-package yatemplate

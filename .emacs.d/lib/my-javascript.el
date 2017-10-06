@@ -175,9 +175,7 @@ given string."
    "t d p" 'mocha-debug-project
    "t d f" 'mocha-debug-file
    "t d t" 'mocha-debug-at-point)
-  :config
-  (evil-leader/set-key-for-mode 'js2-mode
-    (add-hook 'mocha-compilation-mode-hook (lambda () (setq truncate-lines nil)))))
+  :config)
 
 (use-package nodejs-repl
   :ensure t

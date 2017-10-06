@@ -5,7 +5,6 @@
 (setq doc-view-continuous t)
 
 (add-to-list 'evil-emacs-state-modes 'doc-view-mode)
-(add-to-list 'evil-leader/no-prefix-mode-rx "doc-view-mode")
 
 (defun my/evil-doc-view-hook ()
   ;;(turn-off-evil-mode)
