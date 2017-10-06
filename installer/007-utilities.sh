@@ -12,3 +12,5 @@ elif [ $os == $MAC ]; then
 fi
 
 ensure moreutils vipe
+
+ensure highlight
