@@ -20,6 +20,7 @@ unzip fontawesome.zip
 # because it contains version number)
 pushd */
 
+mkdir -p ~/.fonts
 mv ./fonts/fontawesome-webfont.ttf ~/.fonts/
 
 popd

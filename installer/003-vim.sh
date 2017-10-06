@@ -28,4 +28,5 @@ if ! [ -d $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+echo "Installing plugins..."
 nvim -c PlugInstall -c qall

@@ -1,6 +1,6 @@
 [submodule "submodules/tmuxifier"]
 	path = submodules/tmuxifier
-	url = https://github.com/jimeh/tmuxifier.git
+	url = https://github.com/DeX3/tmuxifier.git
 [submodule "submodules/powerline-fonts"]
 	path = submodules/powerline-fonts
 	url = https://github.com/powerline/fonts.git

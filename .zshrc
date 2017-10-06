@@ -27,6 +27,8 @@ bindkey -a v begin-selection
 bindkey -M vicmd v edit-command-line
 bindkey '^X^E' edit-command-line
 
+export EDITOR=nvim
+
 alias vim=nvim
 alias 'new-project'='tmuxifier ns'
 alias 'edit-project'='tmuxifier es'
@@ -87,6 +89,4 @@ export NVM_DIR="$HOME/.nvm"
 export SNIPPET_DIR=~/.dotfiles/snippets
 source ~/.dotfiles/snippets.sh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-

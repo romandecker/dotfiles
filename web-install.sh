@@ -9,9 +9,13 @@ DOTFILES_PATH="$HOME/.dotfiles"
 set -e
 
 sudo='sudo'
-if ! [ -z "command -v $sudo" ]; then
+if [ ! -z "$(command -v $sudo)" ]; then
     sudo=''
 fi
+
+function cecho {
+    echo "$1$normal"
+}
 
 function ensure() {
     local package=$1
