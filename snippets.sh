@@ -4,7 +4,14 @@ function snippet {
     local s=$((cd $SNIPPET_DIR; find . -type f) | sed 's#\./##' | fzf --preview "{ highlight-snippet $SNIPPET_DIR/{} }" --height 40% --reverse)
 
     if [ ! -z "$s" ]; then
-      highlight-snippet $SNIPPET_DIR/$s
+      echo "$1"
+      if [ "$1" = "-e" ] || [ "$1" = "--eval" ]; then
+        echo "Running snippet:"
+        highlight-snippet $SNIPPET_DIR/$s
+        $SHELL $SNIPPET_DIR/$s
+      else
+        highlight-snippet $SNIPPET_DIR/$s
+      fi
     fi
 }
 
