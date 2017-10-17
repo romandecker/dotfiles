@@ -21,7 +21,7 @@
    "w"   'evil-forward-little-word-begin
    "e"   'evil-forward-little-word-end
    "b"   'evil-backward-little-word-begin)
-  (:keymaps '(normal visual)
+  (:keymaps 'normal
    ;; smart go-to-bol (toggle between true BOL and first significant character)
    "0"   'my/goto-bol-dwim)
   (:keymaps 'normal
@@ -325,8 +325,8 @@ block comment prefixes when inside of a block-comment."
 
   :general
   (:keymap 'evil-normal-state-map
-   "y" 'my/evil-yank-relative
-   "d" 'my/evil-delete-relative)
+   "y" 'my/evil-yank-relative)
+   ;;"d" 'my/evil-delete-relative) ;; breaks evil-surround :/
 
   :config
   (defmacro my/with-relative-line-numbers (fn)
