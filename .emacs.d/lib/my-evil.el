@@ -320,6 +320,39 @@ block comment prefixes when inside of a block-comment."
 
 (advice-add 'newline :around #'my/newline)
 
+(use-package linum-relative
+  :ensure t
 
+  :general
+  (:keymap 'evil-normal-state-map
+   "y" 'my/evil-yank-relative
+   "d" 'my/evil-delete-relative)
+
+  :config
+  (defmacro my/with-relative-line-numbers (fn)
+    "Show relative line numbers while performing the given command"
+    ;; if line numbers are not active, or relative line numbers are
+    ;; already active
+    `(if (or (not linum-mode) linum-relative-mode) 
+         ;; simply call the intended function without any magic
+         (call-interactively ,fn)
+
+       ;; else, temporarily enable linum-relative around the call
+       (linum-relative-on)
+       (unwind-protect
+           (progn
+             (linum-mode 1)
+             (call-interactively ,fn))
+         (linum-relative-off))))
+
+  (defun my/evil-yank-relative ()
+    "Show relative numbering temporarily when yanking"
+    (interactive)
+    (my/with-relative-line-numbers 'evil-yank))
+
+  (defun my/evil-delete-relative ()
+    "Show relative numbering temporarily when deleting"
+    (interactive)
+    (my/with-relative-line-numbers 'evil-delete)))
 
 (provide 'my-evil)
