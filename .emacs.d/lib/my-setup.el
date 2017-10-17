@@ -32,6 +32,10 @@
 ;; general-purpose list library (-map, etc...)
 (use-package dash :ensure t :config)
 
+(use-package tablist
+  :ensure t
+  :config)
+
 (require 'add-hook-x)
 (require 'help-fns+)
 

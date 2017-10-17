@@ -31,7 +31,18 @@
   "S"  'langtool-check-done)
 
 
-(add-hook 'LaTeX-mode-hook (lambda () (flyspell-mode t)))
+(defun my/setup-latex-mode ()
+  (flyspell-mode t)
+
+  ;; this will make paragraph-text-objects behave like everywhere else
+  ;; (normally the LaTeX-mode redefines them to be what LaTex would
+  ;; render as paragraphs, but this behaviour is kind of confusing
+  ;; when editing...)
+  (setq-local paragraph-start "\\|[ 	]*$")
+  (setq-local paragraph-separate "[ 	]*$"))
+
+
+(add-hook 'LaTeX-mode-hook #'my/setup-latex-mode)
 
 (general-define-key
  :prefix my/leader
@@ -94,6 +105,20 @@
   :ensure t
   :config
   (company-auctex-init))
+
+(use-package pdf-tools
+  :ensure t
+  :general
+  (:keymaps 'pdf-view-mode-map
+   :states 'normal
+   "j" 'pdf-view-next-line-or-next-page
+   "k" 'pdf-view-previous-line-or-previous-page
+   "C-d" 'pdf-view-next-page
+   "C-u" 'pdf-view-previous-page
+   "/" 'isearch-forward
+   "?" 'isearch-backward)
+  :config
+  (evil-set-initial-state 'pdf-view-mode 'normal))
 
 (provide 'my-writing)
 ;;; my-writing.el ends here
