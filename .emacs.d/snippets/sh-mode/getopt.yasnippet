@@ -4,11 +4,11 @@
 # --
 while [[ $# -gt 1 ]]
 do
-    key="$1"
+    key="\$1"
 
     case $key in
         -h|--help)
-            echo "Usage: $0 ..."
+            echo "Usage: \$0 ..."
             shift
             ;;
         -v|--version)
@@ -16,7 +16,7 @@ do
             shift
             ;;
         *)
-            echo "Unknown option: $1"
+            echo "Unknown option: \$1"
             exit 1
             ;;
     esac
