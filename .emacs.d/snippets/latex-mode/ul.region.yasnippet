@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Unordered list
+# key: ul
+# condition: (region-active-p)
+# --
+\begin{itemize}
+`(let* ((parts (mapcar 'string-trim (split-string yas-selected-text ",")))
+        (itemize (lambda (item) (concat "\\item " item))))
+      (mapconcat itemize parts "\n"))`
+\end{itemize}

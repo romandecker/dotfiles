@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Two figures side-by-side
+# key: 2fig
+# --
+\begin{figure}
+  \centering
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=.86\linewidth]{${1:figures/figure1.png}}
+    \captionof{figure}{${2:Caption 1}}
+    \label{${3:fig:label1}}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/${4:figure2.png}}
+    \captionof{figure}{${5:Caption 2}}
+    \label{${6:fig:label2}}
+  \end{minipage}%
+  \label{${7:fig:figure-1-and-figure-2}}
+\end{figure}

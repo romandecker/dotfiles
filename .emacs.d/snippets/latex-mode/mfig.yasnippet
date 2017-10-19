@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Figure with multiple subfigures
+# key: mfig
+# --
+\begin{figure*}[b!]
+  \centering
+  \begin{subfigure}[t]{.8\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{${1:figures/figure1.png}}
+    \caption{${2:Caption 1}}
+    \label{${3:fig:label-1}}
+  \end{subfigure}
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[width=1.15\linewidth]{${4:figures/figure2.png}}
+    \caption{${5:Caption 2}}
+    \label{${6:fig:label-2}}
+  \end{subfigure}
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[width=0.7\linewidth]{${7:figures/figure3.png}}
+    \caption{${8:Caption 3}}
+    \label{${9:fig:label-3}}
+  \end{subfigure}
+  \caption{${10:General caption}}
+  \label{${11:fig:general-label}}
+\end{figure*}

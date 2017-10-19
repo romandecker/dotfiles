@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Ordered list
+# key: ol
+# condition: (region-active-p)
+# --
+\begin{enumerate}
+`(let* ((parts (mapcar 'string-trim (split-string yas-selected-text ",")))
+        (itemize (lambda (item) (concat "\\item " item))))
+      (mapconcat itemize parts "\n"))`
+\end{enumerate}
