@@ -4,14 +4,12 @@
 (use-package yasnippet
   :ensure t
   :general
-  (:states 'normal
-   :prefix my/leader
+  :config
+  (my/define-leader-map
    "i s"     'yas-insert-snippet
    ". s n"   'yas-new-snippet
    ". s d"   'my/open-snippet-dir
    "? s"     'yas-describe-tables)
-
-  :config
   (setq
    yas-snippet-dirs '("~/.emacs.d/snippets"))
   (add-to-list 'auto-mode-alist '("\\.yasnippet\\'" . snippet-mode))
@@ -24,6 +22,8 @@
   (define-key yas-keymap (kbd "TAB") 'my/tab-dwim)
   (define-key yas-keymap [(control tab)] 'yas-next-field)
   (define-key yas-keymap (kbd "C-g") 'my/abort-company-or-yas)
+
+  (add-hook-x 'snippet-mode-hook (lambda () (aggressive-fill-paragraph-mode -1)))
 
   (yas-global-mode 1)
   (use-package yatemplate
