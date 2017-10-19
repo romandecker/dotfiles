@@ -1,7 +1,7 @@
 # 10 ms for key sequences
 export DOTFILES_DIR=~/.dotfiles
 export KEYTIMEOUT=1 
-export PATH=$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.fzf/bin:$PATH
 export LANG=en_US.UTF-8
 
 
