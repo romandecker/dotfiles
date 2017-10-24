@@ -7,3 +7,4 @@
 /.emacs.d/.edbi-ds-history
 /.tmux-layouts
 flycheck_*.el
+/test/workspace/

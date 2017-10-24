@@ -36,7 +36,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 fi
 
 sudo='sudo'
-if ! [ -z "$(command -v $sudo)" ]; then
+if [ -z "$(command -v $sudo)" ]; then
     sudo=''
 fi
 
