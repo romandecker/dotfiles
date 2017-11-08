@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo -u alice /home/alice/.dotfiles/installer/install.sh
+sudo -H -u alice /home/alice/.dotfiles/installer/install.sh

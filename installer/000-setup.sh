@@ -7,4 +7,5 @@ source $SCRIPT_DIR/utils.sh
 
 link_dotfile .shellrc
 
+ensure curl
 ensure git
