@@ -72,6 +72,10 @@
     (advice-add 'helm-swoop--edit
                 :after #'evil-mc-mode))
 
+  (use-package helm-dash
+    :ensure t
+    :config)
+
   (defvar my/helm-action-return-candidate
     (helm-make-actions "Select" (lambda (candidate) candidate))))
 

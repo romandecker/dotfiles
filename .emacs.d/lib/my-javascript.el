@@ -161,7 +161,10 @@ given string."
    :keymaps 'rjsx-mode-map
    "<" 'self-insert-command)
   :config
-  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode)))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+
+  (general-evil-define-key 'normal 'rjsx-mode-map
+    "K" 'helm-dash-at-point))
 
 (use-package mocha
   :ensure t
