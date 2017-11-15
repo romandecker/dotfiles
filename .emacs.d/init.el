@@ -55,6 +55,7 @@
 (require 'my-tramp)
 (require 'my-whitespace)
 (require 'my-eshell)
+(require 'my-abbrev)
 (require 'my-workgroups)
 
 ;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook
