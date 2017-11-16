@@ -11,3 +11,4 @@
 .agignore
 node_modules.*
 .pupilrc
+.emacs.abbreviations
