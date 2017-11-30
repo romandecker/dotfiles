@@ -31,6 +31,8 @@
   "S"  'langtool-check-done)
 
 
+(require 'my-company-bibtex)
+
 (defun my/setup-latex-mode ()
   (flyspell-mode t)
 
@@ -39,7 +41,12 @@
   ;; render as paragraphs, but this behaviour is kind of confusing
   ;; when editing...)
   (setq-local paragraph-start "\\|[ 	]*$")
-  (setq-local paragraph-separate "[ 	]*$"))
+  (setq-local paragraph-separate "[ 	]*$")
+
+  ;; add company-bibtex to the front of available company backends
+  (make-local-variable 'company-backends)
+  (setq company-backends (copy-tree company-backends))
+  (add-to-list 'company-backends 'company-bibtex))
 
 
 (add-hook 'LaTeX-mode-hook #'my/setup-latex-mode)
@@ -90,8 +97,6 @@
         google-translate-default-target-language "de"
         google-translate-translation-directions-alist '(("en" . "de") ("de" . "en"))))
 
-(require 'my-company-bibtex)
-(add-to-list 'company-backends 'company-bibtex)
 
 (use-package writegood-mode
   :ensure t
@@ -104,6 +109,7 @@
 (use-package company-auctex
   :ensure t
   :config
+  (setq company-bibtex-key-regex "[[:alnum:]:_-]*")
   (company-auctex-init))
 
 (use-package pdf-tools

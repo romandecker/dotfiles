@@ -3,6 +3,7 @@
 ;;; Code:
 
 (setq
+ global-abbrev-file-name "~/.emacs.d/.emacs.abbreviations"
  abbrev-file-name "~/.emacs.d/.emacs.abbreviations")
 
 (defun my/save-abbrevs ()
@@ -12,8 +13,8 @@
 
 (defun my/reload-abbrevs ()
   (interactive)
-  (message "Reloading abbrevs")
-  (quietly-read-abbrev-file)
+  (message "Reloading abbrevs from %s" global-abbrev-file-name)
+  (quietly-read-abbrev-file global-abbrev-file-name)
   (message "Loaded global abbrevs")
   (if (projectile-project-p)
       (let ((project-abbrevs-file (my/get-local-abbrev-file-name)))

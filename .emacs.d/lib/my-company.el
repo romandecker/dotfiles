@@ -11,6 +11,7 @@
     "C-n" 'company-select-next
     "C-p" 'company-select-previous
     "C-w" 'backward-kill-word
+    "C-h" 'helm-company
     [tab] 'my/tab-dwim
     "TAB" 'my/tab-dwim)
   (:keymaps 'company-mode-map
@@ -27,7 +28,10 @@
     :ensure t
     :config
     (company-quickhelp-mode 1))
-  (message "company has loaded!"))
+  (use-package helm-company
+    :ensure t
+    :config)
+  )
 
 (provide 'my-company)
 ;;; my-company.el ends here
