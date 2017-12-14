@@ -22,12 +22,16 @@
 (which-key-add-key-based-replacements
   (concat my/local-leader " m") "Merging")
 
-
 (use-package evil-magit
   :ensure t
   :demand t
   :after magit
   :general
+  (:keymaps '(magit-mode-map magit-status-mode-map magit-diff-mode-map)
+   :states 'normal
+   "C-j" 'my/window-down
+   "C-k" 'my/window-up
+   )
   :config)
 
 (use-package gitlab
