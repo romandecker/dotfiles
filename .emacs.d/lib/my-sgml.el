@@ -18,7 +18,8 @@
   
   (setq emmet-move-cursor-between-quotes t)
   (add-hook 'js2-jsx-mode-hook #'my/setup-emmet-for-jsx)
-  (add-hook 'js-jsx-mode-hook #'my/setup-emmet-for-jsx))
+  (add-hook 'js-jsx-mode-hook #'my/setup-emmet-for-jsx)
+  (add-hook 'rjsx-mode-hook #'my/setup-emmet-for-jsx))
 
 (defun my/setup-emmet-for-jsx ()
   "Setup emmet for jsx."
