@@ -57,26 +57,26 @@
     (my/indent-last-paste))
 
   (evil-define-command my/edit-evil-macro (register)
-                     "Edit keyboard macro MACRO. MACRO is read from a register
+    "Edit keyboard macro MACRO. MACRO is read from a register
                      when called interactively."
-                     :keep-visual t
-                     :suppress-operator t
-                     (interactive
-                       (let ((register (or evil-this-register (read-char))))
-                         (when (eq register ?@)
-                           (unless evil-last-register
-                             (user-error "No previously executed keyboard macro"))
-                           (setq register evil-last-register))
-                         (list register)))
-                     ;; this is not yet working, it doesn't seem to correctly write back
-                     ;; to the original register, and evil doesn't pick up the change
-                     (lexical-let ((macro (evil-get-register register t)))
-                                  (edit-kbd-macro
-                                    macro
-                                    nil
-                                    nil
-                                    (lambda (new-macro)
-                                      (evil-set-register register new-macro)))))
+    :keep-visual t
+    :suppress-operator t
+    (interactive
+     (let ((register (or evil-this-register (read-char))))
+       (when (eq register ?@)
+         (unless evil-last-register
+           (user-error "No previously executed keyboard macro"))
+         (setq register evil-last-register))
+       (list register)))
+    ;; this is not yet working, it doesn't seem to correctly write back
+    ;; to the original register, and evil doesn't pick up the change
+    (lexical-let ((macro (evil-get-register register t)))
+      (edit-kbd-macro
+       macro
+       nil
+       nil
+       (lambda (new-macro)
+         (evil-set-register register new-macro)))))
 
 
   ;; Make movement keys work like they should
@@ -103,144 +103,151 @@
     :ensure t
     :config
     (global-evil-surround-mode))
-   (use-package evil-numbers
-     :ensure t
-     :general
-     (:keymaps 'normal
-      "C-a" 'evil-numbers/inc-at-pt
-      "C-x" 'evil-numbers/dec-at-pt))
-   (use-package evil-args
-     :ensure t
-     :general
-     (:keymaps '(evil-inner-text-objects-map) "a" 'evil-inner-arg)
-     (:keymaps '(evil-outer-text-objects-map) "a" 'evil-outer-arg))
-   (use-package evil-matchit
-     :ensure t
-     :config
-     (global-evil-matchit-mode 1))
-    (use-package evil-mc
-      :ensure t
-      :demand t
-      :general
-      (:keymaps 'normal
-       "C-n" 'my/smart-c-n
-       "C-p" 'my/ctrlp-dwim)
-      (:keymaps 'visual
-       "|" 'my/place-cursors-along-region)
-      :config
-      (message "enabling global evil-mc-mode")
+  (use-package evil-numbers
+    :ensure t
+    :general
+    (:keymaps 'normal
+     "C-a" 'evil-numbers/inc-at-pt
+     "C-x" 'evil-numbers/dec-at-pt))
+  (use-package evil-args
+    :ensure t
+    :general
+    (:keymaps '(evil-inner-text-objects-map) "a" 'evil-inner-arg)
+    (:keymaps '(evil-outer-text-objects-map) "a" 'evil-outer-arg))
+  (use-package evil-matchit
+    :ensure t
+    :config
+    (global-evil-matchit-mode 1))
+  (use-package evil-mc
+    :ensure t
+    :demand t
+    :general
+    (:keymaps 'normal
+     "C-n" 'my/smart-c-n
+     "C-p" 'my/ctrlp-dwim)
+    (:keymaps 'visual
+     "|" 'my/place-cursors-along-region)
+    :config
+    (message "enabling global evil-mc-mode")
 
-      ;; for some reason, this cannot be done via general-define-key
-      ;; (causes emacs to hang?!?)
-      (evil-define-key
-        'normal
-        evil-mc-key-map
-        (kbd "C-n")    'my/smart-c-n
-        (kbd "C-p")    'my/ctrlp-dwim
-        [escape] 'evil-mc-undo-all-cursors
-        (kbd "C-s")    'evil-mc-skip-and-goto-next-match
-        (kbd "C-S-p")  'evil-mc-skip-and-goto-prev-cursor)
-      (global-evil-mc-mode 1)
-      (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode))
+    ;; for some reason, this cannot be done via general-define-key
+    ;; (causes emacs to hang?!?)
+    (evil-define-key
+      'normal
+      evil-mc-key-map
+      (kbd "C-n")    'my/smart-c-n
+      (kbd "C-p")    'my/ctrlp-dwim
+      [escape] 'evil-mc-undo-all-cursors
+      (kbd "C-s")    'evil-mc-skip-and-goto-next-match
+      (kbd "C-S-p")  'evil-mc-skip-and-goto-prev-cursor)
+    (global-evil-mc-mode 1)
+    (add-to-list 'evil-mc-incompatible-minor-modes 'delim-pad-mode))
 
-   (use-package evil-exchange
-     :ensure t
-     :config
-     (evil-exchange-install)
+  (use-package evil-exchange
+    :ensure t
+    :config
+    (evil-exchange-install)
 
-     ;; evil-exchange breaks under evil-mc, so take care to disable it
-     ;; when evil-mc is active
-     (defun my/enable-evil-exchange ()
-       "Enable c x to trigger evil-exchange. Wrapped in a function to be easily enabled for evil-mc."
-       (general-nmap "c"
-                     ;; c x should trigger evil-exchange, c <everything else> should
-                     ;; trigger evil change
-                     (general-key-dispatch 'evil-change
-                       ;; c x x and c x X should swap chars
-                       "x" (general-key-dispatch 'evil-exchange
-                             "x" 'my/swap-chars
-                             "X" 'transpose-chars)
-                       "X" 'evil-exchange-cancel))
-       (general-vmap "c" 'evil-change))
-
-
-     ;; reinstate the normal evil-change binding so that evil-mc works
-     (defun my/disable-evil-exchange ()
-       (general-nmap "c" 'evil-change))
-
-     (my/enable-evil-exchange)
-     (add-hook 'evil-mc-before-cursors-created 'my/disable-evil-exchange)
-     (add-hook 'evil-mc-after-cursors-deleted 'my/enable-evil-exchange)
-
-     ;; general-key-dispatch makes macros record keys twice, so we
-     ;; have to disable it again when recording macros
-     (advice-add 'start-kbd-macro :before (lambda (arg) (my/disable-evil-exchange)))
-     (advice-add 'end-kbd-macro :after #'my/disable-evil-exchange))
+    ;; evil-exchange breaks under evil-mc, so take care to disable it
+    ;; when evil-mc is active
+    (defun my/enable-evil-exchange ()
+      "Enable c x to trigger evil-exchange. Wrapped in a function to be easily enabled for evil-mc."
+      (general-nmap "c"
+                    ;; c x should trigger evil-exchange, c <everything else> should
+                    ;; trigger evil change
+                    (general-key-dispatch 'evil-change
+                      ;; c x x and c x X should swap chars
+                      "x" (general-key-dispatch 'evil-exchange
+                            "x" 'my/swap-chars
+                            "X" 'transpose-chars)
+                      "X" 'evil-exchange-cancel))
+      (general-vmap "c" 'evil-change))
 
 
+    ;; reinstate the normal evil-change binding so that evil-mc works
+    (defun my/disable-evil-exchange ()
+      (general-nmap "c" 'evil-change))
 
-   (use-package evil-commentary
-     :ensure t
-     :config
-     (evil-commentary-mode))
+    (my/enable-evil-exchange)
+    (add-hook 'evil-mc-before-cursors-created 'my/disable-evil-exchange)
+    (add-hook 'evil-mc-after-cursors-deleted 'my/enable-evil-exchange)
 
-   (use-package evil-goggles
-     :ensure t
-     :config
-     (evil-goggles-mode))
+    ;; general-key-dispatch makes macros record keys twice, so we
+    ;; have to disable it again when recording macros
+    (advice-add 'start-kbd-macro :before (lambda (arg) (my/disable-evil-exchange)))
+    (advice-add 'end-kbd-macro :after #'my/disable-evil-exchange))
 
-   (use-package evil-quickscope
-     :ensure t
-     :config
-     (global-evil-quickscope-mode 1))
-   (require 'evil-little-word)
 
-   (require 'delim-pad)
-   (add-hook 'prog-mode-hook (lambda () (delim-pad-mode 1)))
-   (add-hook 'help-mode-hook (lambda () (delim-pad-mode -1)))
 
-   ;; make Esc quit most things
-   (define-key evil-normal-state-map [escape] 'keyboard-quit)
-   (define-key evil-visual-state-map [escape] 'keyboard-quit)
-   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-   (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-   (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-   (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+  (use-package evil-commentary
+    :ensure t
+    :config
+    (evil-commentary-mode))
 
-   (advice-add 'evil-delete :around 'my/evil-delete)
+  (use-package evil-goggles
+    :ensure t
+    :config
+    (evil-goggles-mode))
 
-   (define-key evil-normal-state-map (kbd "m") 'my/evil-move)
+  (use-package evil-quickscope
+    :ensure t
+    :config
+    (global-evil-quickscope-mode 1))
 
-   ;; basically, this is the original, unadvised evil-delete operator
-   (evil-define-operator my/evil-move (beg end type register yank-handler)
-     "Delete and yank text from BEG to END with TYPE.
+  ;; 'x' text object for xml/html attributes
+  (use-package exato
+    :ensure t
+    :config)
+
+
+  (require 'evil-little-word)
+
+  (require 'delim-pad)
+  (add-hook 'prog-mode-hook (lambda () (delim-pad-mode 1)))
+  (add-hook 'help-mode-hook (lambda () (delim-pad-mode -1)))
+
+  ;; make Esc quit most things
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+  (advice-add 'evil-delete :around 'my/evil-delete)
+
+  (define-key evil-normal-state-map (kbd "m") 'my/evil-move)
+
+  ;; basically, this is the original, unadvised evil-delete operator
+  (evil-define-operator my/evil-move (beg end type register yank-handler)
+    "Delete and yank text from BEG to END with TYPE.
    Save in REGISTER or in the kill-ring with YANK-HANDLER."
-     (interactive "<R><x><y>")
-     (unless register
-       (let ((text (filter-buffer-substring beg end)))
-         (unless (string-match-p "\n" text)
-           ;; set the small delete register
-           (evil-set-register ?- text))))
-     (let ((evil-was-yanked-without-register nil))
-       (evil-yank beg end type register yank-handler))
-     (cond
-      ((eq type 'block)
-       (evil-apply-on-block #'delete-region beg end nil))
-      ((and (eq type 'line)
-            (= end (point-max))
-            (or (= beg end)
-                (/= (char-before end) ?\n))
-            (/= beg (point-min))
-            (=  (char-before beg) ?\n))
-       (delete-region (1- beg) end))
-      (t
-       (delete-region beg end)))
-     ;; place cursor on beginning of line
-     (when (and (evil-called-interactively-p)
-                (eq type 'line))
-       (evil-first-non-blank))
-     )
+    (interactive "<R><x><y>")
+    (unless register
+      (let ((text (filter-buffer-substring beg end)))
+        (unless (string-match-p "\n" text)
+          ;; set the small delete register
+          (evil-set-register ?- text))))
+    (let ((evil-was-yanked-without-register nil))
+      (evil-yank beg end type register yank-handler))
+    (cond
+     ((eq type 'block)
+      (evil-apply-on-block #'delete-region beg end nil))
+     ((and (eq type 'line)
+           (= end (point-max))
+           (or (= beg end)
+               (/= (char-before end) ?\n))
+           (/= beg (point-min))
+           (=  (char-before beg) ?\n))
+      (delete-region (1- beg) end))
+     (t
+      (delete-region beg end)))
+    ;; place cursor on beginning of line
+    (when (and (evil-called-interactively-p)
+               (eq type 'line))
+      (evil-first-non-blank))
+    )
   (evil-mode 1)) ; evil-leader must be enabled before evil
 
 ;;; Make ESC quit most things
@@ -292,9 +299,9 @@ interactively along the current region)."
     (goto-char start)
     (save-excursion
       (while (< (line-number-at-pos (point)) last)
-          (evil-next-visual-line)
-          (evil-mc-make-cursor-here)
-          (move-to-column col)))
+        (evil-next-visual-line)
+        (evil-mc-make-cursor-here)
+        (move-to-column col)))
     (evil-mc-resume-cursors)))
 
 (defun my/open-around (orig-fun &rest args)
@@ -316,7 +323,7 @@ block comment prefixes when inside of a block-comment."
   (let ((prefix (my/in-c-block-comment-prefix)))
     (apply orig-fun args)
     (when prefix
-        (insert prefix))))
+      (insert prefix))))
 
 (advice-add 'newline :around #'my/newline)
 
@@ -326,7 +333,7 @@ block comment prefixes when inside of a block-comment."
   :general
   (:keymap 'evil-normal-state-map
    "y" 'my/evil-yank-relative)
-   ;;"d" 'my/evil-delete-relative) ;; breaks evil-surround :/
+  ;;"d" 'my/evil-delete-relative) ;; breaks evil-surround :/
 
   :config
   (defmacro my/with-relative-line-numbers (fn)
