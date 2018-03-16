@@ -5,7 +5,7 @@
 (require 'langtool)
 
 (setq langtool-language-tool-jar
-      "~/bin/LanguageTool-3.5/languagetool-commandline.jar")
+      "~/bin/LanguageTool-4.0/languagetool-commandline.jar")
 (setq langtool-default-language "en-US")
 
 (defun langtool-autoshow-detail-popup (overlays)
