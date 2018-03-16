@@ -83,12 +83,14 @@
   (toggle-read-only)
   (save-excursion
     (goto-char 0)
-    (while (search-forward "" (point-max) t)
+    (while (search-forward "(B" (point-max) t)
       (replace-match "")))
   (toggle-read-only))
 
 (add-hook 'compilation-filter-hook #'my/colorize-compilation-buffer)
-;; (add-hook 'compilation-filter-hook #'my/remove-unrecognized-escapes)
+
+; seems to be necessary for rust:
+;(add-hook 'compilation-filter-hook #'my/remove-unrecognized-escapes)
 
 
 (defun my/send-input-to-compilation (input &optional nl)

@@ -193,7 +193,6 @@ the close with space as well."
             (define-key map (kbd "C-d") 'delim-pad-cmd)
             map)
   :group 'delim-pad
-  (message "delim-pad-mode called for buffer: " (buffer-name))
   )
 
 (defun delim-pad-promote-map ()

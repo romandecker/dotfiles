@@ -4,6 +4,7 @@
 
 (use-package emmet-mode
   :ensure t
+  :demand t
   :general
   (:states 'insert
    :keymaps 'emmet-mode-keymap
@@ -23,6 +24,7 @@
 
 (defun my/setup-emmet-for-jsx ()
   "Setup emmet for jsx."
+  (interactive)
   (setq-local emmet-expand-jsx-className? t)
   (setq-local emmet-self-closing-tag-style " /")
   (emmet-mode 1)
