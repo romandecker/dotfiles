@@ -20,16 +20,18 @@
     (find-file (projectile-project-root)))
 
   (defun my/set-yas-snippet-dirs ()
+    (interactive)
     "Make sure that yas-snippet-dirs always also contains the snippets from the
 currently active project."
     (setq
      yas-snippet-dirs
      (if (projectile-project-p)
-         (let ((full-snippet-path) (concat (projectile-project-root) my/local-snippet-dir))
+         (let ((full-snippet-path (concat (projectile-project-root) my/local-snippet-dir)))
            (if (file-exists-p full-snippet-path)
                (cons full-snippet-path my/global-yas-snippet-dirs)
              my/global-yas-snippet-dirs))
        my/global-yas-snippet-dirs))
+    (message "setting yas-snippet-dirs to %s" yas-snippet-dirs)
     (yas-reload-all))
 
   (defun my/set-bookmark-file ()
