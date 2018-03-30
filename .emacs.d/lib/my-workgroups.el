@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(defcustom projects-dir
+  "~/projects"
+  "The base directory where most of your projects are located")
+
 (use-package workgroups
   :ensure t
   :demand t
@@ -14,13 +18,37 @@
    "p c"   'wg-create-workgroup
    "p p"   'wg-switch-to-workgroup
    "p r"   'projectile-compile-project
-   "p d"   'my/find-project-root)
+   "p d"   'my/find-project-root
+   "p ."   'my/goto-dotfiles-project
+   "p SPC" 'my/goto-projects-dir
+   )
   :config
   (setq wg-morph-on nil
         wg-use-faces nil)
   ;; (add-hook 'wg-switch-hook #'my/wg-switch-hook)
   (add-hook 'kill-emacs-hook #'my/save-workgroups)
   (workgroups-mode 1)
+
+  (defun my/goto-projects-dir ()
+    (interactive)
+    (find-file projects-dir))
+
+  (defun my/create-workgroup ()
+    (interactive)
+    (call-interactively 'wg-create-workgroup)
+    (let ((project-name (wg-get-workgroup-prop 'name (wg-current-workgroup))))
+          (my/goto-project-directory project-name)))
+
+  (defun my/goto-project-directory (project-name)
+    (let ((project-dir (concat
+                         (file-name-as-directory project-dir)
+                         project-name)))
+      (when (file-exists-p project-dir)
+        (find-file project-dir))))
+
+  (defun my/goto-dotfiles-project ()
+    (interactive)
+    (wg-switch-to-workgroup (wg-get-workgroup 'name "dotfiles")))
 
   (defun my/save-workgroups ()
     (when (wg-list t)
