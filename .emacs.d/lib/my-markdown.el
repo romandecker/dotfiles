@@ -6,4 +6,7 @@
 	 ("\\.markdown\\'" . markdown-mode))
   :config)
 
+(setq livedown-open t)
+(require 'livedown)
+
 (provide 'my-markdown)
