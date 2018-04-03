@@ -13,3 +13,4 @@ workgroups
 customize.el
 **/*~
 session.*
+/last-workgroup

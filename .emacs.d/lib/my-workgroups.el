@@ -52,7 +52,9 @@
 
   (defun my/save-workgroups ()
     (when (wg-list t)
-      (wg-update-all-workgroups-and-save)))
+      (wg-update-all-workgroups-and-save))
+    (with-temp-file my/last-workgroup-file
+      (insert (wg-get-workgroup-prop 'name (wg-current-workgroup)))))
 
   (defun my/wg-switch-hook ()
     "Installed as a hook for wg-switch-hook.  When we land on an 'empty' project
@@ -79,16 +81,14 @@
   (advice-add 'wg-switch-to-workgroup :before #'my/before-switch-workgroup)
 
   (when (file-exists-p my/workgroups-file)
-    (wg-load my/workgroups-file)))
+    (wg-load my/workgroups-file))
 
-;; (use-package persp-mode
-;;   :ensure t
-;;   :general
-;;   (:prefix my/leader
-;;    :keymaps 'normal
-;;    "p p" 'persp-switch
-;;    "p . r" 'persp-rename)
-;;   :config)
+
+  (when (file-exists-p my/last-workgroup-file)
+    (with-temp-buffer
+      (insert-file-contents my/last-workgroup-file)
+      (wg-switch-to-workgroup (wg-get-workgroup 'name (buffer-string))))))
+
 
 (provide 'my-workgroups)
 ;;; my-workgroups.el ends here
