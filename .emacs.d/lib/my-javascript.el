@@ -31,7 +31,7 @@
   (js2-mode-hide-warnings-and-errors)
 
   (require 'prettier-js)
-  (setq prettier-target-modes '("js-mode" "js2-mode" "rjsx-mode" "typescript-mode"))
+  (setq prettier-target-modes '("js-mode" "js2-mode" "rjsx-mode" "typescript-mode" "scss-mode"))
   (setq prettier-args '("--print-width" "100" "--single-quote" "--jsx-bracket-same-line"))
 
   ;; make prettier available as a minor mode for easy toggling
