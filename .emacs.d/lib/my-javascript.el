@@ -169,7 +169,13 @@ given string."
 
 (use-package flycheck-flow
   :ensure t
-  :config)
+  :config
+  ;; make sure flow is at the end of the checker list
+  (setq flycheck-checkers (delete 'javascript-flow flycheck-checkers))
+  (setq flycheck-checkers (delete 'javascript-flow-coverage flycheck-checkers))
+  (add-to-list 'flycheck-checkers 'javascript-flow t)
+  (add-to-list 'flycheck-checkers 'javascript-flow-coverage t)
+  )
 
 (use-package mocha
   :ensure t
