@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (require 'dired-x)
+(require 'dired-details-plus)
 
 (setq dired-listing-switches "-alh"
       dired-dwim-target t
@@ -79,10 +80,6 @@
 (eval-after-load 'dired-aux
  '(add-to-list 'dired-compress-file-suffixes
                  '("\\.zip\\'" ".zip" "unzip")))
-
-(use-package dired-details+
-  :ensure t
-  :config)
 
 (use-package dired-subtree
   :ensure t
