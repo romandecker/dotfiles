@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: set mode based on file extension (dir-locals)
+# key: mode
+# condition: (string= (file-name-base (buffer-file-name)) ".dir-locals")
+# --
+(eval . (add-to-list 'auto-mode-alist '("\\\\.${1:ext}\\\\'" . ${2:prog-mode})))
