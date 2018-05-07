@@ -56,22 +56,13 @@
   (atomic-chrome-start-server)
   (message "atomic-chrome started!"))
 
-;; (use-package fill-column-indicator
-;;   :ensure t
-;;   :config
-;;   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
-;;   (my/define-leader-map
-;;    "t f" 'global-fci-mode)
-;;   (global-fci-mode))
+(require 'zoom-frm)
 
-(use-package zoom-frm
-  :ensure t
-  :config
-  (defhydra hydra-zoom ()
-    "Zoom"
-    ("+" zoom-frm-in "in")
-    ("-" zoom-frm-out "out")
-    ("0" zoom-frm-unzoom "reset")))
+(defhydra hydra-zoom ()
+  "Zoom"
+  ("+" zoom-frm-in "in")
+  ("-" zoom-frm-out "out")
+  ("0" zoom-frm-unzoom "reset"))
 
 
 (setq scroll-conservatively 10000
