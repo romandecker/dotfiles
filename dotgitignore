@@ -12,3 +12,5 @@
 node_modules.*
 .pupilrc
 .emacs.abbreviations
+.projectile
+.ignore
