@@ -23,8 +23,4 @@
 
   (add-hook 'js2-mode-hook 'my/setup-editorconfig-for-js))
 
-(use-package column-marker
-  :ensure t
-  :config)
-
 (provide 'my-editorconfig)
