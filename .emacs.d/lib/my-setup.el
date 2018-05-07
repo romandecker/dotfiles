@@ -11,6 +11,10 @@
 
 (setq package-enable-at-startup nil)
 
+;; prefer horizontal splits over vertical splits
+(setq split-height-threshold nil
+      split-width-threshhold 0)
+
 ;; bootstrap use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
