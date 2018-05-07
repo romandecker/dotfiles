@@ -1,6 +1,8 @@
 .emacs.desktop
 .emacs.desktop.lock
 projectile-bookmarks.eld
+projectile.cache
+network-security.data
 auto-save-list/
 persp-confs/
 elpa/
