@@ -4,18 +4,16 @@
 
 (setq bookmark-default-file "~/.emacs.d/bookmarks")
 
-(use-package bookmark+
-  :ensure t
-  :demand t
-  :general
-  (:prefix my/leader
-   :keymaps 'normal
-   "m" 'helm-bookmarks)
-  :config
-  (setq
-   bmkp-last-as-first-bookmark-file nil)
-  (which-key-add-key-based-replacements
-    (concat my/leader " m") "Bookmarks"))
+(require 'bookmark+)
+
+(my/define-leader-map
+ "m" 'helm-bookmarks)
+
+(setq
+  bmkp-last-as-first-bookmark-file nil)
+
+(which-key-add-key-based-replacements
+  (concat my/leader " m") "Bookmarks"))
 
 (provide 'my-bookmarks)
 ;;; my-bookmarks.el ends here
