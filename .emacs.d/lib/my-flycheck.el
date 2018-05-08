@@ -11,11 +11,10 @@
   :config
   (global-flycheck-mode)
 
-  (use-package flycheck-popup-tip
-    :ensure t
-    :config
-    (flycheck-popup-tip-mode)
-    )
+  (defun my/flycheck-enable-checker ()
+    (interactive)
+    (let ((current-prefix-arg 1))
+      (call-interactively 'flycheck-disable-checker)))
   )
 
 (provide 'my-flycheck)

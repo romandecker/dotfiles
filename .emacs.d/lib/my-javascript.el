@@ -175,7 +175,9 @@ given string."
   (setq flycheck-checkers (delete 'javascript-flow-coverage flycheck-checkers))
   (add-to-list 'flycheck-checkers 'javascript-flow t)
   (add-to-list 'flycheck-checkers 'javascript-flow-coverage t)
-  )
+
+  ;; make flow run after eslint
+  (flycheck-add-next-checker 'javascript-eslint 'javascript-flow))
 
 (use-package mocha
   :ensure t
