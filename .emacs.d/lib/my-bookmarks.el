@@ -13,7 +13,7 @@
   bmkp-last-as-first-bookmark-file nil)
 
 (which-key-add-key-based-replacements
-  (concat my/leader " m") "Bookmarks"))
+  (concat my/leader " m") "Bookmarks")
 
 (provide 'my-bookmarks)
 ;;; my-bookmarks.el ends here
