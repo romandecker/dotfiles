@@ -98,7 +98,15 @@
     "g s"   'tabulated-list-sort
     [tab] 'tablist-forward-column
     "S-TAB" 'tablist-backward-column
-    "q"     'quit-window))
+    "q"     'quit-window)
+
+  (general-evil-define-key 'normal profiler-report-mode-map
+    "RET" 'profiler-report-toggle-entry
+    [tab] 'profiler-report-toggle-entry
+    "q"   'quit-window
+    )
+
+  )
 
 (use-package which-key
   :ensure t
