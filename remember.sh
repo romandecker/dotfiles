@@ -84,7 +84,7 @@ function remember-setup() (
 function remember-ls {
     find $REMEMBER_BASE -type l \
         | xargs -L 1 ls -la \
-        | awk '{ $1=$2=$3=$4=$5=$6=$7=$8=""; print $0 }' \
+        | awk '{ for(i=1;i<=8;i++) $i=""; print }' \
         | sed "s# *$REMEMBER_BASE#\$REMEMBER_BASE#"
 }
 
