@@ -89,4 +89,6 @@ export NVM_DIR="$HOME/.nvm"
 export SNIPPET_DIR=~/.dotfiles/snippets
 source ~/.dotfiles/snippets.sh
 
+source ~/.dotfiles/remember.sh
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

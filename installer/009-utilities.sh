@@ -9,8 +9,10 @@ if [ $os == $LINUX ]; then
     ensure silversearcher-ag ag
 elif [ $os == $MAC ]; then
     ensure the_silver_searcher ag
+    ensure coreutils realpath
 fi
 
 ensure moreutils vipe
+ensure watch
 
 ensure highlight
