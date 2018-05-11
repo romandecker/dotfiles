@@ -8,3 +8,4 @@
 /.tmux-layouts
 flycheck_*.el
 /test/workspace/
+/vscode/workspaceStorage

@@ -8,7 +8,9 @@ source $SCRIPT_DIR/utils.sh
 VSCODE_USER_CONFIG_DIR="Library/Application Support/Code/User"
 
 if [ $os == $LINUX ]; then
-  VSCODE_USER_CONFIG_DIR=".config/Code/User"
+    VSCODE_USER_CONFIG_DIR=".config/Code/User"
+else
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 fi
 
 link_dotfile vscode "$VSCODE_USER_CONFIG_DIR"

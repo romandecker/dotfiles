@@ -1,2 +1,28 @@
 {
+    "vim.easymotion": true,
+    "vim.useCtrlKeys": true,
+    "vim.leader": " ",
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>", "Q", "R"],
+            "after": [],
+            "commands": [ {
+                "command": "workbench.action.reloadWindow"
+            }]
+        },
+        {
+            "before": ["<leader>", "f", "s"],
+            "after": [],
+            "commands": [ {
+                "command": "workbench.action.files.save"
+            }]
+        },
+        {
+            "before": ["<leader>", "g", "/"],
+            "after": [],
+            "commands": [ {
+                "command": "filesExplorer.findInWorkspace"
+            }]
+        }
+    ]
 }
