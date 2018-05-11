@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Check if directory exists
+# key: ifdir
+# --
+if [ -d "${1:$DIRECTORY}" ]; then
+    ${2:}
+fi
