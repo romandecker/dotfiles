@@ -75,10 +75,66 @@ function link_dotfile() {
     fi
 
     local absolute_source=$(abs_path "$SCRIPT_DIR/../$source")
-    local absolute_target=$(abs_path "$HOME/$target")
+      local absolute_target="$target"
+
+    if [[ "${target:0:1}" != "/" ]]; then
+      absolute_target="$HOME/$target"
+    fi
+
+
+    local target_parent=$(dirname "$absolute_target")
+
+    local REPLACE_OPTION="Replace with new link to $absolute_source" 
+    local SKIP_OPTION="Skip/Ignore"
+
+
+    if [ -L "$absolute_target" ]; then
+        local current_source=$(readlink "$absolute_target")
+        if [ "$absolute_source" = "$current_source" ]; then
+            cecho "$fawn$source$normal is already linked ($fawn$absolute_target$normal)"
+            return 0;
+        fi
+    fi
 
     cecho "Linking $fawn$absolute_target$fawn$normal to $fawn$absolute_source$fawn"
-    ln -s -i $absolute_source $absolute_target
+    if [ -d "$absolute_target" ]; then
+        cecho "$fawn$absolute_target$normal already exists, here's a glimpse:"
+        ls -ld "$absolute_target"
+        local children=$(ls -lA "$absolute_target/" | sed "s/^/  /")
+        if [ $(echo "$children" | wc -l) -gt 10 ]; then
+            echo "$children" | head -n 10
+            echo "  ..."
+        else
+            echo "$children"
+        fi
+
+        echo "What do you want to do?"
+        local options=("$REPLACE_OPTION" "$SKIP_OPTION")
+        local skip=""
+        select opt in "${options[@]}"
+        do
+            skip=""
+            case $opt in
+                "$REPLACE_OPTION")
+                    rm -rf "$absolute_target"
+                    break;
+                    ;;
+                "$SKIP_OPTION")
+                    skip="true"
+                    break;
+                    ;;
+
+                *)
+                    echo "Invalid choice"
+                    ;;
+            esac
+        done
+    fi
+
+    if [ -z "$skip" ]; then
+      mkdir -p "$target_parent"
+      ln -s "$absolute_source" "$absolute_target"
+    fi
 }
 
 function clone {
