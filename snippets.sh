@@ -10,7 +10,13 @@ function snippet {
         highlight-snippet $SNIPPET_DIR/$s
         $SHELL $SNIPPET_DIR/$s
       else
-        highlight-snippet $SNIPPET_DIR/$s
+
+        if [ -t 1 ]; then
+          highlight-snippet $SNIPPET_DIR/$s
+        else
+          cat $SNIPPET_DIR/$s
+        fi
+
       fi
     fi
 }
