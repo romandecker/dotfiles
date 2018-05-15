@@ -128,7 +128,17 @@
     (:keymaps 'visual
      "|" 'my/place-cursors-along-region)
     :config
-    (message "enabling global evil-mc-mode")
+
+    (defun my/with-case-sensitivity (orig-fn &rest args)
+      "Advice around evil-mc functions to enforce case-sensitivity. Can be disabled by using the universal argument."
+      (let ((evil-ex-search-case (if current-prefix-arg
+                                     'insensitive
+                                   'sensitive)))
+        (apply orig-fn args)))
+    (advice-add 'evil-mc-make-and-goto-next-match :around #'my/with-case-sensitivity)
+    (advice-add 'evil-mc-make-and-goto-prev-match :around #'my/with-case-sensitivity)
+    (advice-add 'evil-mc-skip-and-goto-next-match :around #'my/with-case-sensitivity)
+    (advice-add 'evil-mc-skip-and-goto-prev-match :around #'my/with-case-sensitivity)
 
     ;; for some reason, this cannot be done via general-define-key
     ;; (causes emacs to hang?!?)
