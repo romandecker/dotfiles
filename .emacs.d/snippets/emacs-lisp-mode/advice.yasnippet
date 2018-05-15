@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: advice-around
+# key: advice
+# --
+(defun ${1:advice-fn} (orig-fn &rest args)
+  (apply orig-fn args))
+(advice-add '${2:advised-fn} :around #'$1)
