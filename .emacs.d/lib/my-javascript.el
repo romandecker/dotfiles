@@ -95,27 +95,62 @@
     "Get all project files that are requirable with node's `require`."
     (-filter
      (lambda (path)
-       (string-match-p ".js\\(on\\)?$" path))
+       (string-match-p ".js\\(on\\|x\\)?$" path))
      (projectile-current-project-files)))
 
+  (defcustom my/javascript-import-aliases '()
+    "List of mappings from path to alias to use when importing files.
 
-  (defun my/process-candidate (candidate)
+Example value: ((\"src/app/action\" . \"@action\"))")
+
+  (defcustom my/javascript-import-omit-index t
+    "Whether or not to automatically omit index files when importing javascript files.")
+
+  (defcustom my/javascript-import-omit-extension nil
+    "Whether or not to automatically omit file extensions when importing javascript files.")
+
+  (defun my-javascript/process-require-candidate (candidate)
     (message "Processing %s" candidate)
-    (let* ((abspath (concat (projectile-project-root) candidate))
-           (relpath (file-relative-name
-                     abspath
-                     (file-name-directory buffer-file-name)))
-           ;; make sure that relpath starts with "./"
-           (relpath (if (string-match "^\\.\\./" relpath)
-                        relpath
-                      (concat "./" relpath))))
+    (let ((was-aliased nil))
+      (message "Checking aliases in %s" my/javascript-import-aliases)
+      (cl-loop for (prefix . replacement) in my/javascript-import-aliases do
+               (message "Checking for %s" prefix)
+               (when (string-prefix-p prefix candidate)
+                 (message "match!")
+                 (setq candidate (replace-regexp-in-string
+                                  (concat "^" (regexp-quote prefix))
+                                  replacement
+                                  candidate)
+                       was-aliased t)
+                 (message "Replaced: %s" candidate)
+                 (cl-return)))
+
+      (message "candidate after: %s" candidate)
       ;; "index.js can be left out so remove it if it's there
-      (replace-regexp-in-string "/index.js$" "" relpath)))
+      (let ((ret (if was-aliased candidate (my/javascript-relativize-candidate candidate))))
+
+        (when my/javascript-import-omit-index
+          (setq ret (replace-regexp-in-string "/index\\.jsx?$" "" ret)))
+
+        (when my/javascript-import-omit-extension
+          (setq ret (file-name-sans-extension ret)))
+
+        ret)))
+
+  (defun my/javascript-relativize-candidate (candidate)
+    (let* ((abspath (concat (projectile-project-root) candidate))
+          (relpath (file-relative-name
+                    abspath
+                    (file-name-directory buffer-file-name))))
+      ;; make sure that relpath starts with "./"
+      (if (string-match "^\\.\\./" relpath)
+          relpath
+        (concat "./" relpath))))
 
   (defvar my/helm-action-return-require-path-to-file
     (helm-make-actions
      "Select"
-     'my/process-candidate))
+     'my-javascript/process-require-candidate))
 
   (require 'helm-source)
   (defvar my-javascript/helm-source-requirable-project-files
@@ -152,7 +187,13 @@ given string."
     (helm :sources '(my-javascript/helm-source-requirable-project-files
                      my-javascript/helm-source-npm-packages
                      my-javascript/helm-source-node-builtins)
-          :input initial-input)))
+          :input initial-input))
+
+
+  (use-package xref-js2
+    :ensure t
+    :config)
+  )
 
 (use-package rjsx-mode
   :ensure t
@@ -303,6 +344,12 @@ that it behaves like in js-mode (which is correct for most cases)"
            (peer-deps (hash-table-keys (or (gethash "peerDependencies" package-json) (make-hash-table))))
            )
       (append deps dev-deps peer-deps))))
+
+(use-package company-flow
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-flow))
+
 
 
 (provide 'my-javascript)
