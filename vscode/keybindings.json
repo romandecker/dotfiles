@@ -1,11 +1,32 @@
 // Place your key bindings in this file to overwrite the defaults
 [
     {
-        "key": "ctrl+p",
+        "key": "cmd+p",
         "command": "workbench.action.quickOpen"
     },
     {
-        "key": "cmd+p",
-        "command": "-workbench.action.quickOpen"
+        "key": "ctrl+n",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "] e",
+        "command": "editor.action.marker.next",
+        "when": "editorFocus && !editorReadonly"
+    },
+    {
+        "key": "f8",
+        "command": "-editor.action.marker.next",
+        "when": "editorFocus && !editorReadonly"
+    },
+    {
+        "key": "[ e",
+        "command": "editor.action.marker.prev",
+        "when": "editorFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+f8",
+        "command": "-editor.action.marker.prev",
+        "when": "editorFocus && !editorReadonly"
     }
 ]
