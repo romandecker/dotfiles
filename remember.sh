@@ -19,7 +19,7 @@ REMEMBER_CONFIG_DIR="$HOME/.config/remember"
 REMEMBER_IDENTIFIER_FILE=$REMEMBER_CONFIG_DIR/identifier
 REMEMBER_BASE_FILE=$REMEMBER_CONFIG_DIR/base
 
-REMEMBER_BASE=$(cat $REMEMBER_BASE_FILE 2>/dev/null || echo "$HOME/Dropbox/sonst/remember")
+REMEMBER_BASE=$(cat $REMEMBER_BASE_FILE 2>/dev/null || echo "$HOME/Dropbox/remember")
 REMEMBER_IDENTIFIER=$(cat $REMEMBER_IDENTIFIER_FILE 2>/dev/null || hostname)
 
 function remember-setup() (
