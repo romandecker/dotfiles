@@ -79,16 +79,6 @@ docker-cleanup() {
   docker rmi $(docker images -q -f dangling=true)
 }
 
-code () {
-    if [[ $# = 0 ]]
-    then
-        open -a "Visual Studio Code"
-    else
-        [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
-        open -a "Visual Studio Code" --args "$F"
-    fi
-}
-
 source ~/.dotfiles/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 
