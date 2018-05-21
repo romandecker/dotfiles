@@ -69,6 +69,18 @@
                 "command": "editor.action.marker.prev"
             } ]
         },
+        {
+            "before": ["<leader>", "j"],
+            "commands": [ {
+                "command": "workbench.action.previousEditor"
+            } ]
+        },
+        {
+            "before": ["<leader>", "k"],
+            "commands": [ {
+                "command": "workbench.action.nextEditor"
+            } ]
+        },
         { "before": ["j"], "after": ["g", "j"] },
         { "before": ["k"], "after": ["g", "k"] },
         { "before": ["<C-h>"], "after": ["C-w", "h"] },
