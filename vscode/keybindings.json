@@ -10,23 +10,8 @@
         "when": "editorFocus"
     },
     {
-        "key": "] e",
-        "command": "editor.action.marker.next",
-        "when": "editorFocus && !editorReadonly"
-    },
-    {
-        "key": "f8",
-        "command": "-editor.action.marker.next",
-        "when": "editorFocus && !editorReadonly"
-    },
-    {
-        "key": "[ e",
-        "command": "editor.action.marker.prev",
-        "when": "editorFocus && !editorReadonly"
-    },
-    {
-        "key": "shift+f8",
-        "command": "-editor.action.marker.prev",
-        "when": "editorFocus && !editorReadonly"
+        "key": "ctrl+n",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     }
 ]
