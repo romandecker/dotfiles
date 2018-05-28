@@ -430,5 +430,12 @@ into the current buffer."
   (let ((uuid (shell-command-to-string "uuidgen")))
     (insert (s-trim-right (downcase uuid)))))
 
-(provide 'my-utils)
+(defun my/yank-filename ()
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (evil-set-register ?\" file-name)
+    (message "Yanked \"%s\"" file-name)))
+                     
+
+(provide 'my-utils))
 ;;; my-utils.el ends here

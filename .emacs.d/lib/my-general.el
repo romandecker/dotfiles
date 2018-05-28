@@ -60,6 +60,7 @@
    "f s"   'save-buffer
    "f d"   'dired-jump
    "i u"   'my/insert-random-uuid
+   "p y f" 'my/yank-project-filename
    "o c"   'org-capture
    "o y"   'org-store-link
    "o p"   'org-insert-link
@@ -79,6 +80,8 @@
    "w Z"   'hydra-zoom/body
    "w |"   'split-window-right
    "w -"   'split-window-below
+   "y f"   'my/yank-filename
+   "y p f" 'my/yank-project-filename
    ". e"   'my/open-dotfile
    ". r"   'my/reload-dotfile
    ". l d" 'add-dir-local-variable

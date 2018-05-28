@@ -353,6 +353,10 @@ that it behaves like in js-mode (which is correct for most cases)"
   (add-to-list 'company-backends 'company-flow))
 
 
+(use-package flow-minor-mode
+  :ensure t
+  :config
+  (require 'flow-js2-mode))
 
 (provide 'my-javascript)
 ;;; my-javascript.el ends here
