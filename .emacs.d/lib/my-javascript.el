@@ -358,5 +358,50 @@ that it behaves like in js-mode (which is correct for most cases)"
   :config
   (require 'flow-js2-mode))
 
+
+;; (defun my/fix-imports ()
+;;   (interactive)
+;;   (my/replace-imports
+;;    my/import-regexp
+;;    my/import-regexp-path-group
+;;   "/Users/romande/projects/prs/prs-medoca-pet-profile/api/lib/schema/types/input/DiaryEntryInput.js")
+;;   ;; (my/replace-imports my/require-regexp my/require-regexp-path-group)
+;;   )
+
+(defvar my/import-regexp "import.*from \\(['\"]\\)\\(\\..*\\)\\1")
+(defvar my/import-regexp-path-group 2)
+(defvar my/require-regexp "require(\s*\\(['\"]\\)\\(\\..*?\\)\\1\s*)")
+(defvar my/require-regexp-path-group 2)
+
+(defun my/replace-imports (regexp path-group old-file-path)
+  "Fix imports after a .js-file has been moved/copied to another
+directory. `REGEXP' should be a regular expression to find import
+statements in the file. The fresh file should be the active file.
+Walks through all imports/requires and replaces the path with a fixed
+version.
+
+`PATH-GROUP' should be a number indicating a
+match group within `REGEXP' that matches the imported path.
+
+`OLD_FILE_PATH' should be the original path of the file."
+  (let* ((old-directory (file-name-directory old-file-path))
+         (current-path (buffer-file-name))
+         (current-directory (file-name-directory current-path)))
+
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward regexp (point-max) t)
+        (let* ((old-import (match-string path-group))
+               (import-target (expand-file-name old-import old-directory))
+               (new-import (file-relative-name import-target current-directory)))
+          (unless (string-prefix-p "../" new-import)
+            (setq new-import (concat "./" new-import)))
+          (replace-match new-import t nil nil path-group)
+          )))
+
+    )
+  )
+
+
 (provide 'my-javascript)
 ;;; my-javascript.el ends here
