@@ -4,7 +4,8 @@
 
 (use-package yaml-mode
   :ensure t
-  :config)
+  :config
+  (setq yaml-indent-offset 2))
 
 (provide 'my-raml)
 ;;; my-raml.el ends here
