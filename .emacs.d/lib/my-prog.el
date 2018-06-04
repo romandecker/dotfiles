@@ -47,6 +47,7 @@
   (add-to-list 'afp-fill-comments-only-mode-list 'yaml-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'snippet-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'elisp-mode)
+  (add-to-list 'afp-fill-comments-only-mode-list 'graphql-mode)
   (afp-setup-recommended-hooks))
 
 (use-package dtrt-indent
@@ -83,7 +84,7 @@
   (toggle-read-only)
   (save-excursion
     (goto-char 0)
-    (while (search-forward "(B" (point-max) t)
+    (while (search-forward "" (point-max) t)
       (replace-match "")))
   (toggle-read-only))
 
