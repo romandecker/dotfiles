@@ -60,6 +60,7 @@
 (require 'my-eshell)
 (require 'my-abbrev)
 (require 'my-java)
+(require 'my-vtl)
 (require 'my-workgroups)
 
 ;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook
