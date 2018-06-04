@@ -13,7 +13,7 @@ Plug 'kana/vim-operator-user'
 Plug 'Shougo/unite.vim'         " needed by vimfiler
 
 " Motions
-Plug 'camelcasemotion'
+Plug 'bkad/camelcasemotion'
 Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'kana/vim-textobj-function' " function text-objects for C, java, vim (f)
@@ -21,7 +21,7 @@ Plug 'kana/vim-textobj-lastpat' " last search with /
 Plug 'thinca/vim-textobj-function-javascript' " JS function text-object (f)
 Plug 'glts/vim-textobj-comment' " A comment text-object
 Plug 'whatyouhide/vim-textobj-xmlattr' " XML/HTML attribute text objects (x)
-Plug 'matchit.zip' " More uses for %
+Plug 'tmhedberg/matchit' " More uses for %
 Plug 'ironhouzi/vim-stim' " Better *
 Plug 'easymotion/vim-easymotion'
 Plug 'jeetsukumaran/vim-indentwise'
@@ -100,8 +100,8 @@ call plug#end()
 " ==========
 set t_Co=256
 
-set background=dark
-colorscheme jellybeans
+set background=light
+colorscheme solarized
 " }}}
 
 " Basic settings {{{

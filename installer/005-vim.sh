@@ -22,11 +22,20 @@ link_dotfile .vimrc.abbreviations
 link_dotfile .nvimrc
 link_dotfile .vim/ftplugin
 
+mkdir -p $HOME/.vim/backup
+
+mkdir -p $HOME/.config/nvim
+ln -f -s $HOME/.nvimrc $HOME/.config/nvim/init.vim
+
 if ! [ -d $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
     echo "Installing vim-plug..."
     curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+
+pip2 install --user neovim
+
+command -v pip3 && pip3 install --user neovim
 
 echo "Installing plugins..."
 nvim -c PlugInstall -c qall
