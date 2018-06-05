@@ -358,15 +358,40 @@ that it behaves like in js-mode (which is correct for most cases)"
   :config
   (require 'flow-js2-mode))
 
+(general-define-key
+ :states 'normal
+ :keymaps 'dired-mode-map
+  "M"   'my/dired-do-rename
+  "y"   'my/dired-do-copy
+  "g Y" 'dired-do-copy
+  "g M" 'dired-do-rename)
 
-;; (defun my/fix-imports ()
-;;   (interactive)
-;;   (my/replace-imports
-;;    my/import-regexp
-;;    my/import-regexp-path-group
-;;   "/Users/romande/projects/prs/prs-medoca-pet-profile/api/lib/schema/types/input/DiaryEntryInput.js")
-;;   ;; (my/replace-imports my/require-regexp my/require-regexp-path-group)
-;;   )
+(defun my/dired-do-copy ()
+  (interactive)
+  (advice-add 'copy-file :around #'my/advice-keep-js-imports-synced)
+  (call-interactively 'dired-do-copy)
+  (advice-remove 'copy-file #'my/advice-keep-js-imports-synced))
+
+(defun my/dired-do-rename ()
+  (interactive)
+  (advice-add 'rename-file :around #'my/advice-keep-js-imports-synced)
+  (call-interactively 'dired-do-rename)
+  (advice-remove 'rename-file #'my/advice-keep-js-imports-synced))
+
+(defun my/advice-keep-js-imports-synced (orig-fn &rest args)
+  (apply orig-fn args)
+  (let ((old-path (nth 0 args))
+        (new-path (nth 1 args)))
+    (when (string-match "\\.jsx?\\'" new-path)
+      (save-excursion
+        (find-file new-path)
+        (my/fix-imports old-path)))))
+
+(defun my/fix-imports (old-file)
+  (interactive)
+  (my/replace-imports my/import-regexp my/import-regexp-path-group old-file)
+  (my/replace-imports my/require-regexp my/require-regexp-path-group old-file)
+  (save-buffer))
 
 (defvar my/import-regexp "import.*from \\(['\"]\\)\\(\\..*\\)\\1")
 (defvar my/import-regexp-path-group 2)
@@ -401,6 +426,20 @@ match group within `REGEXP' that matches the imported path.
 
     )
   )
+
+(use-package grizzl
+  :ensure t
+  :config
+  (use-package import-js
+    :ensure t
+    :config
+    :general
+    (:prefix my/local-leader
+     :states 'normal
+     :keymaps 'js2-mode-map
+     "i g" 'import-js-goto
+     "i i" 'import-js-fix)))
+
 
 
 (provide 'my-javascript)
