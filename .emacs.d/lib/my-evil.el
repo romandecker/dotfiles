@@ -168,9 +168,8 @@
               "x" (general-key-dispatch 'evil-exchange
                     "x" 'my/swap-chars
                     "X" 'transpose-chars)
-              "X" -exchange-cancel))
-      (general-evil-define-key nil evil-visual-state-map
-        "c" 'evil-change))
+              "X" 'evil-exchange-cancel))
+      (general-evil-define-key "c" 'evil-change))
 
 
     ;; reinstate the normal evil-change binding so that evil-mc works
@@ -349,17 +348,16 @@ block comment prefixes when inside of a block-comment."
     "Show relative line numbers while performing the given command"
     ;; if line numbers are not active, or relative line numbers are
     ;; already active
-    `(if (or (not linum-mode) linum-relative-mode) 
+    `(if (or (not display-line-numbers-mode) linum-relative-mode) 
          ;; simply call the intended function without any magic
          (call-interactively ,fn)
 
        ;; else, temporarily enable linum-relative around the call
-       (linum-relative-on)
-       (unwind-protect
-           (progn
-             (linum-mode 1)
-             (call-interactively ,fn))
-         (linum-relative-off))))
+       (let ((display-line-numbers-type 'relative))
+             (unwind-protect
+                 (display-line-numbers--turn-on)
+                 (call-interactively ,fn)))
+       (display-line-numbers--turn-on)))
 
   (defun my/evil-yank-relative ()
     "Show relative numbering temporarily when yanking"

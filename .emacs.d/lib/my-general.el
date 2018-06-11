@@ -66,7 +66,7 @@
    "o p"   'org-insert-link
    "r"     'revert-buffer
    "t z"   'zoom-window-zoom
-   "t n"   'linum-mode
+   "t n"   'display-line-numbers-mode
    "t g"   'my/toggle-git-gutter
    "t r"   'read-only-mode
    "t w v" 'toggle-truncate-lines
