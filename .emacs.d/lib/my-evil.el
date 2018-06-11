@@ -162,16 +162,15 @@
     ;; when evil-mc is active
     (defun my/enable-evil-exchange ()
       "Enable c x to trigger evil-exchange. Wrapped in a function to be easily enabled for evil-mc."
-      (general-nmap "c"
-                    ;; c x should trigger evil-exchange, c <everything else> should
-                    ;; trigger evil change
-                    (general-key-dispatch 'evil-change
-                      ;; c x x and c x X should swap chars
-                      "x" (general-key-dispatch 'evil-exchange
-                            "x" 'my/swap-chars
-                            "X" 'transpose-chars)
-                      "X" 'evil-exchange-cancel))
-      (general-vmap "c" 'evil-change))
+      (general-evil-define-key nil evil-normal-state-map
+        "c" (general-key-dispatch 'evil-change
+              ;; c x x and c x X should swap chars
+              "x" (general-key-dispatch 'evil-exchange
+                    "x" 'my/swap-chars
+                    "X" 'transpose-chars)
+              "X" -exchange-cancel))
+      (general-evil-define-key nil evil-visual-state-map
+        "c" 'evil-change))
 
 
     ;; reinstate the normal evil-change binding so that evil-mc works

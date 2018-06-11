@@ -432,13 +432,22 @@ match group within `REGEXP' that matches the imported path.
   :config
   (use-package import-js
     :ensure t
-    :config
     :general
     (:prefix my/local-leader
      :states 'normal
      :keymaps 'js2-mode-map
      "i g" 'import-js-goto
-     "i i" 'import-js-fix)))
+     "i i" 'import-js-fix)
+    :config
+
+    (setq json-encoding-pretty-print nil)
+    (defun my/advice-ensure-import-js-daemon-running (orig-fn &rest args)
+      (unless import-js-process
+        (run-import-js))
+      (apply orig-fn args))
+
+    (advice-add 'import-js-fix :around #'my/advice-ensure-import-js-daemon-running)
+    (advice-add 'import-js-goto :around #'my/advice-ensure-import-js-daemon-running)))
 
 
 
