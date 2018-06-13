@@ -98,7 +98,7 @@
   (setq-default evil-cross-lines t)
 
   (setq evil-insert-state-cursor '((bar . 3) "red")
-        evil-normal-state-cursor '(box "black"))
+        evil-normal-state-cursor '(box "white"))
   (use-package evil-surround
     :ensure t
     :config
@@ -169,7 +169,8 @@
                     "x" 'my/swap-chars
                     "X" 'transpose-chars)
               "X" 'evil-exchange-cancel))
-      (general-evil-define-key "c" 'evil-change))
+      (general-evil-define-key nil evil-visual-state-map
+        "c" 'evil-change))
 
 
     ;; reinstate the normal evil-change binding so that evil-mc works

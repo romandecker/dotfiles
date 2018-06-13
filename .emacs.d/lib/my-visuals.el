@@ -17,10 +17,15 @@
 ;;   :config
 ;;   (load-theme 'twilight-bright t))
 
-(use-package color-theme-sanityinc-tomorrow
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :ensure t
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-day t))
+
+(use-package zenburn-theme
   :ensure t
   :config
-  (load-theme 'sanityinc-tomorrow-day t))
+  (load-theme 'zenburn))
 
 (use-package beacon
   :ensure t
