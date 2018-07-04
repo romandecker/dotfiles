@@ -60,6 +60,7 @@
    "f s"   'save-buffer
    "f d"   'dired-jump
    "i u"   'my/insert-random-uuid
+   "i t"   'my/insert-iso8601-timestamp
    "p y f" 'my/yank-project-filename
    "o c"   'org-capture
    "o y"   'org-store-link
@@ -81,6 +82,7 @@
    "w |"   'split-window-right
    "w -"   'split-window-below
    "y f"   'my/yank-filename
+   "y g"   'my/magit-yank-head-info
    "y p f" 'my/yank-project-filename
    ". e"   'my/open-dotfile
    ". r"   'my/reload-dotfile

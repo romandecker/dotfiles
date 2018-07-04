@@ -430,6 +430,12 @@ into the current buffer."
   (let ((uuid (shell-command-to-string "uuidgen")))
     (insert (s-trim-right (downcase uuid)))))
 
+(defun my/insert-iso8601-timestamp ()
+  (interactive)
+  (insert
+    (format-time-string "%Y-%m-%dT%T.%3NZ" nil t)))
+
+
 (defun my/yank-filename ()
   (interactive)
   (let ((file-name (buffer-file-name)))
@@ -460,6 +466,22 @@ the checking happens for all pairs in my/auto-minor-mode-alist"
         (setq alist (cdr alist))))))
 
 (add-hook 'find-file-hook 'my/enable-minor-mode-based-on-extension)
+
+
+;; start of building a "switch-to-alternative-file" functionality:
+
+;; (let* ((file "/Users/romande/projects/prs/prs-medoca-pet-profile/client/src/diary/components/Diary/Diary.jsx")
+;;        (matchers '(("components/\(.*\)\.jsx?$" .
+;;                     (lambda (match)
+;;                       `(,(concat "components/" match ".jsx")
+;;                         ,(concat "components/" match ".js"))))
+;;                    ("containers/\(.*\)\.jsx?$" .
+;;                     (lambda (match)
+;;                       `(,(concat "containers/" match ".jsx")
+;;                         ,(concat "containers/" match ".js"))))))
+;;        (matcher (first matchers))
+;;        (rgx (car matcher)))
+;;   rgx)
 
 
 (provide 'my-utils)

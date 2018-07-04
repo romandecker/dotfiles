@@ -235,6 +235,13 @@ Used for automatically inserting on magit-commit."
 
 (add-hook 'git-commit-mode-hook #'my/autoinsert-gitmoji)
 
+(defun my/magit-yank-head-info ()
+  "Yank the current commit HEAD info to the default register."
+  (interactive)
+  (let ((info (magit-git-string "log" "--format=%h %s")))
+    (evil-set-register ?\" info)
+    (message "Yanked %s" info)))
+
 
 (provide 'my-magit)
 ;;; my-magit.el ends here
