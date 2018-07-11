@@ -76,10 +76,7 @@ If no project is active, sets it to `bookmark-default-file'."
 
   (defun my/yank-project-filename ()
     (interactive)
-    (let ((file-name (file-relative-name (buffer-file-name) (projectile-project-root))))
-      (evil-set-register ?\" file-name)
-      (message "Yanked \"%s\"" file-name)))
-  )
+    (my/yank-to-clipboard (file-relative-name (buffer-file-name) (projectile-project-root)))))
 
 
 (defconst my/global-yas-snippet-dirs '("~/.emacs.d/snippets"))

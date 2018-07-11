@@ -82,7 +82,8 @@
    "w |"   'split-window-right
    "w -"   'split-window-below
    "y f"   'my/yank-filename
-   "y g"   'my/magit-yank-head-info
+   "y g g" 'my/magit-yank-head-info
+   "y g s" 'my/magit-yank-head-sha
    "y p f" 'my/yank-project-filename
    ". e"   'my/open-dotfile
    ". r"   'my/reload-dotfile

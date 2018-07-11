@@ -435,12 +435,14 @@ into the current buffer."
   (insert
     (format-time-string "%Y-%m-%dT%T.%3NZ" nil t)))
 
+(defun my/yank-to-clipboard (str)
+  "Put `STR` into the defaut register and log a message saying what was yanked."
+  (evil-set-register ?\" str)
+  (message "Yanked: %s" str))
 
 (defun my/yank-filename ()
   (interactive)
-  (let ((file-name (buffer-file-name)))
-    (evil-set-register ?\" file-name)
-    (message "Yanked \"%s\"" file-name)))
+  (my/yank-to-clipboard (buffer-file-name)))
                      
 
 (defvar my/auto-minor-mode-alist ()

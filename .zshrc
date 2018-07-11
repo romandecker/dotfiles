@@ -62,6 +62,13 @@ export PATH=$PATH:$DOTFILES_DIR/submodules/tmuxifier/bin
 eval "$(tmuxifier init -)"
 export TMUXIFIER_TMUX_OPTS=-2
 
+source "${HOME}/.zgen/zgen.zsh"
+
+if ! zgen saved ; then
+  zgen load wbingli/zsh-wakatime
+  zgen save
+fi
+
 killport() {
   pid=$(lsof -i :$1 | tail -n+2 | head -1 | awk '{ print $2 }')
 
@@ -82,6 +89,7 @@ docker-cleanup() {
 source ~/.dotfiles/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
@@ -91,3 +99,10 @@ source ~/.dotfiles/snippets.sh
 source ~/.dotfiles/remember.sh
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh

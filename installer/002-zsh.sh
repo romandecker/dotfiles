@@ -22,3 +22,5 @@ if [ -z "$(grep $shell /etc/shells)" ]; then
 fi
 
 chsh -s $(which zsh)
+
+clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
