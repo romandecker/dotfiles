@@ -14,13 +14,19 @@ fi
 
 link_dotfile .zshrc
 
-echo "Setting zsh as your default shell"
 shell=$(which zsh)
-if [ -z "$(grep $shell /etc/shells)" ]; then
-    echo "$(which zsh) is not part of /etc/shells, appending..."
-    echo $(which zsh) | sudo tee -a /etc/shells
-fi
 
-chsh -s $(which zsh)
+if [ "$SHELL" != $shell ]; then
+    echo "Setting zsh as your default shell"
+
+    if [ -z "$(grep $shell /etc/shells)" ]; then
+        echo "$(which zsh) is not part of /etc/shells, appending..."
+        echo $(which zsh) | sudo tee -a /etc/shells
+    fi
+
+    chsh -s $(which zsh)
+else
+    echo "$fawn$SHELL$normal is already the default."
+fi
 
 clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
