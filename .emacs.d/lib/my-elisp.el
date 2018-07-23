@@ -29,6 +29,12 @@
       (paredit-forward-up)
       (eval-last-sexp nil))))
 
+(use-package flycheck-package
+  :ensure t
+  :config
+  (flycheck-package-setup))
+
+
 (defun my/reload-help ()
   "Use revert-buffer (without confirmation) to reload the help buffer."
   (interactive)
