@@ -21,6 +21,7 @@
    "C-d" 'helm-next-page
    "C-u" 'helm-previous-page
    "C-w" 'backward-kill-word
+   "C-o" 'helm-select-action
    "TAB" 'helm-execute-persistent-action) ; complete with tab
   (:states 'normal
    "g p" 'helm-show-kill-ring)
