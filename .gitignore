@@ -4,6 +4,7 @@
 /.emacs.d/.mc-lists.el
 /.emacs.d/emojis
 /.emacs.d/tramp
+/.emacs.d/request
 /.emacs.d/.edbi-ds-history
 /.tmux-layouts
 flycheck_*.el
