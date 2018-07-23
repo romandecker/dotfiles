@@ -1,7 +1,7 @@
 # 10 ms for key sequences
 export DOTFILES_DIR=~/.dotfiles
 export KEYTIMEOUT=1 
-export PATH=$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.fzf/bin:$PATH:$HOME/.yarn/bin
+export PATH="$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export LANG=en_US.UTF-8
 
 
@@ -99,10 +99,3 @@ source ~/.dotfiles/snippets.sh
 source ~/.dotfiles/remember.sh
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
