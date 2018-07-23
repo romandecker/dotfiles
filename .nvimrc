@@ -13,7 +13,7 @@ Plug 'kana/vim-operator-user'
 Plug 'Shougo/unite.vim'         " needed by vimfiler
 
 " Motions
-Plug 'bkad/camelcasemotion'
+Plug 'bkad/CamelCaseMotion'
 Plug 'wellle/targets.vim'   " Add additional text-objects
 Plug 'kana/vim-textobj-user'    " needed by vim-textobj-xmlattr
 Plug 'kana/vim-textobj-function' " function text-objects for C, java, vim (f)
@@ -222,9 +222,9 @@ nmap <leader>fd :e .<CR>
 nmap <C-s> :w<CR>
 
 " enable camelcasemotion
-nmap w ,w
-nmap b ,b
-nmap e ,e
+nmap <silent> w <Plug>CamelCaseMotion_w
+nmap <silent> b <Plug>CamelCaseMotion_b
+nmap <silent> e <Plug>CamelCaseMotion_e
 
 " Redirect all delete-operations to black-hole
 " Use 'm' ("move") for all cut-operations
