@@ -33,7 +33,7 @@
   (js2-mode-hide-warnings-and-errors)
 
   (require 'prettier-js)
-  (setq prettier-target-modes '("js-mode" "js2-mode" "rjsx-mode" "typescript-mode" "scss-mode"))
+  (setq prettier-target-modes '("js-mode" "js2-mode" "rjsx-mode" "typescript-mode" "scss-mode" "json-mode"))
   (setq prettier-args '("--print-width" "100" "--single-quote" "--jsx-bracket-same-line"))
 
   ;; make prettier available as a minor mode for easy toggling
@@ -361,10 +361,8 @@ that it behaves like in js-mode (which is correct for most cases)"
 (general-define-key
  :states 'normal
  :keymaps 'dired-mode-map
-  "M"   'my/dired-do-rename
-  "y"   'my/dired-do-copy
-  "g Y" 'dired-do-copy
-  "g M" 'dired-do-rename)
+  "g Y" 'my/dired-do-copy
+  "g M" 'my/dired-do-rename)
 
 (defun my/dired-do-copy ()
   (interactive)
