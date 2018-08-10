@@ -49,6 +49,8 @@
   (add-to-list 'afp-fill-comments-only-mode-list 'elisp-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'graphql-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'json-mode)
+  (add-to-list 'afp-fill-comments-only-mode-list 'groovy-mode)
+  (add-to-list 'afp-fill-comments-only-mode-list 'dockerfile-mode)
   (afp-setup-recommended-hooks))
 
 (use-package dtrt-indent
