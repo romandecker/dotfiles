@@ -62,6 +62,7 @@
 (require 'my-java)
 (require 'my-vtl)
 (require 'my-wakatime)
+(require 'my-elm)
 (require 'my-workgroups)
 
 ;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook
