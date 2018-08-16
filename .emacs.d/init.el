@@ -61,6 +61,7 @@
 (require 'my-abbrev)
 (require 'my-java)
 (require 'my-vtl)
+(require 'my-jira)
 (require 'my-wakatime)
 (require 'my-elm)
 (require 'my-workgroups)
