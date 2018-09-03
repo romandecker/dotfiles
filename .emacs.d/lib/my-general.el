@@ -84,6 +84,7 @@
    "y f"   'my/yank-filename
    "y g g" 'my/magit-yank-head-info
    "y g s" 'my/magit-yank-head-sha
+   "y g b" 'my/magit-yank-branch
    "y p f" 'my/yank-project-filename
    ". e"   'my/open-dotfile
    ". r"   'my/reload-dotfile

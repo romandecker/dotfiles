@@ -245,6 +245,10 @@ Used for automatically inserting on magit-commit."
   (interactive)
   (my/yank-to-clipboard (magit-git-string "rev-parse" "HEAD")))
 
+(defun my/magit-yank-branch ()
+  "Yank the current branch name to the default register."
+  (interactive)
+  (my/yank-to-clipboard (magit-git-string "rev-parse" "--abbrev-ref" "HEAD")))
 
 (provide 'my-magit)
 ;;; my-magit.el ends here
