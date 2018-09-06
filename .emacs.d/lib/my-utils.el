@@ -469,6 +469,16 @@ the checking happens for all pairs in my/auto-minor-mode-alist"
 
 (add-hook 'find-file-hook 'my/enable-minor-mode-based-on-extension)
 
+(defun my/mark-current-value-as-safe ()
+  "Mark the value of a selected local variable as safe.
+
+Further customization is possible with `customize-option'
+`safe-local-variable-values'.
+"
+  (interactive)
+  (let* ((var (read-file-local-variable "Choose variable:"))
+         (val (symbol-value var)))
+    (add-to-list 'safe-local-variable-values `(,var . ,val))))
 
 ;; start of building a "switch-to-alternative-file" functionality:
 

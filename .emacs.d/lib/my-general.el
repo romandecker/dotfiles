@@ -91,6 +91,7 @@
    ". l d" 'add-dir-local-variable
    ". l f" 'add-file-local-variable
    ". l r" 'my/reload-dir-locals
+   ". l s" 'my/mark-current-value-as-safe
    "? b"   'helm-descbinds
    "? c c" 'flycheck-describe-checker
    "? c s" 'flycheck-verify-setup
