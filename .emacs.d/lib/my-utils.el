@@ -444,6 +444,10 @@ into the current buffer."
   (interactive)
   (my/yank-to-clipboard (buffer-file-name)))
                      
+(defun my/yank-iso8601-timestamp ()
+  (interactive)
+  (my/yank-to-clipboard
+    (format-time-string "%Y-%m-%dT%T.%3NZ" nil t)))
 
 (defvar my/auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'
