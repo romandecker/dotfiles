@@ -45,7 +45,7 @@
 (add-hook 'messages-buffer-mode-hook (lambda ()
                                        (setq-local truncate-lines nil)))
 
-(defconst my/dotfile "~/.emacs.d/init.el")
+(defconst my/dotfile "~/.dotfiles/.emacs.d/init.el")
 (defconst my/workgroups-file (expand-file-name "~/.emacs.d/workgroups"))
 (defconst my/last-workgroup-file (expand-file-name "~/.emacs.d/last-workgroup"))
 (defconst my/local-emacs-dir ".emacs.local/")
