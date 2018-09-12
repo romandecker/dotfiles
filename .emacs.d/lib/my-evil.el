@@ -175,7 +175,7 @@
 
     ;; reinstate the normal evil-change binding so that evil-mc works
     (defun my/disable-evil-exchange ()
-      (general-nmap "c" 'evil-change))
+      (general-evil-define-key nil evil-normal-state-map "c" 'evil-change))
 
     (my/enable-evil-exchange)
     (add-hook 'evil-mc-before-cursors-created 'my/disable-evil-exchange)
