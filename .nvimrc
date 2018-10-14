@@ -101,7 +101,7 @@ call plug#end()
 set t_Co=256
 
 set background=light
-colorscheme solarized
+colorscheme dracula
 " }}}
 
 " Basic settings {{{

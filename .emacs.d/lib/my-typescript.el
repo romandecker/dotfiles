@@ -4,6 +4,7 @@
 
 (use-package tide
   :ensure t
+  :demand t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode))
@@ -32,8 +33,7 @@
   (advice-add 'tide-doc-buffer :after #'my/advice-tide-doc-buffer)
 
   (setq tide-completion-detailed t)
-
-  )
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
 
 (provide 'my-typescript)

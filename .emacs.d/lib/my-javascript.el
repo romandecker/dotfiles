@@ -97,7 +97,7 @@
     "Get all project files that are requirable with node's `require`."
     (-filter
      (lambda (path)
-       (string-match-p ".js\\(on\\|x\\)?$" path))
+       (string-match-p ".\\(json\\|jsx\\|ts\\|tsx\\)$" path))
      (projectile-current-project-files)))
 
   (defcustom my/javascript-import-aliases '()
