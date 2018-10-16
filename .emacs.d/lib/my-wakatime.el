@@ -2,10 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package wakatime-mode
-  :ensure t
-  :config
-  (global-wakatime-mode))
+;; (use-package wakatime-mode
+;;   :ensure t
+;;   :config
+;;   (global-wakatime-mode))
 
 
 (provide 'my-wakatime)

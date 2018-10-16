@@ -71,6 +71,7 @@ Plug 'Valloric/MatchTagAlways'
 " Colors
 Plug 'flazz/vim-colorschemes'   " a lot of basic colorschemes
 Plug 'dracula/vim'
+Plug 'jnurmine/zenburn'
 
 " Integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -100,8 +101,8 @@ call plug#end()
 " ==========
 set t_Co=256
 
-set background=light
-colorscheme dracula
+set background=dark
+colorscheme zenburn
 " }}}
 
 " Basic settings {{{

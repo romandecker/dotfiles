@@ -2,6 +2,16 @@
 
 Set up a better project system to not accidentally "fall" to other
 projects when killing buffers
+
+When inside a string:
+
+'the cursor is here: | here is some more text'
+
+When pressing C-' in insert mode should automatically change the
+surrounding quotes to " and insert a '
+
+
+
 * Bugs
 
 ** Macro recording bug
