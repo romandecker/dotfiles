@@ -1,0 +1,8 @@
+ignore = Name .DS_Store
+ignore = Path {Icon}
+ignore = Name {,.}*{.gsheet}
+ignore = Name {,.}*{.gdoc}
+ignore = Name {.dir-locals.el}
+ignore = Name {.dropbox}
+ignore = Name {.dropbox.cache}
+ignore = Name {,.}*{.gslides}

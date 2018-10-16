@@ -1,2 +1,2 @@
 # lang: bash
-unison ~/Dropbox ~/Drive
+unison dropbox-drive -root ~/Dropbox -root ~/Drive
