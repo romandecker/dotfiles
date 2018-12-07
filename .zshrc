@@ -93,9 +93,13 @@ source ~/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
+export YVM_DIR="$HOME/.yvm"
+[ -s /usr/local/bin/yvm ] && source /usr/local/bin/yvm
+
 export SNIPPET_DIR=~/.dotfiles/snippets
 source ~/.dotfiles/snippets.sh
 
 source ~/.dotfiles/remember.sh
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+

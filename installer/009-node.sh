@@ -11,3 +11,10 @@ clone https://github.com/creationix/nvm.git $NVM_DIR
 pushd "$NVM_DIR"
 git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
 popd
+
+if [ -x "$(command -v yvm)" ]; then
+    cecho "$fawn$command$normal is already installed"
+else
+    curl -fsSL https://raw.githubusercontent.com/tophat/yvm/master/scripts/install.sh | bash
+fi
+
