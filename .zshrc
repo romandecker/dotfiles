@@ -63,10 +63,16 @@ export PATH=$PATH:$DOTFILES_DIR/submodules/tmuxifier/bin
 eval "$(tmuxifier init -)"
 export TMUXIFIER_TMUX_OPTS=-2
 
+zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+
 source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved ; then
   zgen load wbingli/zsh-wakatime
+
+  zgen oh-my-zsh
+  zgen oh-my-zsh/plugins/gitfast
+
   zgen save
 fi
 
@@ -103,4 +109,3 @@ source ~/.dotfiles/snippets.sh
 source ~/.dotfiles/remember.sh
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
