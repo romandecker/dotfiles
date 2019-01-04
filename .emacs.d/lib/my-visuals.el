@@ -22,10 +22,17 @@
 ;;   :config
 ;;   (load-theme 'sanityinc-tomorrow-day t))
 
-(use-package zenburn-theme
+;; (use-package zenburn-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'zenburn)
+;;   (load-theme 'org-beautify))
+
+(use-package dracula-theme
   :ensure t
   :config
-  (load-theme 'zenburn))
+  (load-theme 'dracula)
+  (load-theme 'org-beautify))
 
 (use-package beacon
   :ensure t
