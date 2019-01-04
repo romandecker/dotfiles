@@ -1,78 +1,142 @@
 {
-  "BTTPresetName" : "Default",
-  "BTTPresetUUID" : "45C4FDA8-1E60-4D16-A660-468D5B050D27",
+  "BTTPresetName" : "from-dotfiles",
+  "BTTGeneralSettings" : {
+    "disableScrollingIf3" : true,
+    "BTTForceNormalClickPressure5F" : 200,
+    "disableScrollingIf2" : true,
+    "BTTDidRegisterForUpdateStats" : "2.654",
+    "BTTShowControlStrip" : true,
+    "BTTShowControlStripItem" : true,
+    "BTTForceForceClickPressure5F" : 600,
+    "oldScale" : 1,
+    "BSTSnapAreaDefaultBorderWidth" : 3,
+    "BTTThreeFingerTipTapMinSpread" : 0.029999999999999999,
+    "BTTEnableUsageLogging" : true,
+    "BTTTouchBarHapticFeedback" : 0,
+    "BTTForceNormalClickPressure" : 150,
+    "BSTSnapAreaDefaultHighlightColor" : "92.624286, 122.650411, 161.665578, 56.100000",
+    "BTTLastClamshellState" : false,
+    "BSTSnapAreaDefaultShowPictogram" : false,
+    "BTTAllowThumbIfAllFingersArePlacedSimultaneously" : true,
+    "BTTShowESCWhenControlStripHidden" : true,
+    "BTTHandleThumbsRestingOnTopEdgeAndCorners" : true,
+    "BTTFreeSpaceAfterBTT" : 20,
+    "BTTForceNormalClickPressure3F" : 150,
+    "BSTSnapAreaDefaultBorderColor" : "0.000000, 0.000000, 0.000000, 255.000000",
+    "BSTTopMissionControlTreshold" : 34,
+    "singleFingerTapRight" : 0.05000000074505806,
+    "BTTDrawingsHighlightStartPoint" : true,
+    "BSTWindowGrabPosX" : 67,
+    "BTTForceForceClickPressure4F" : 650,
+    "BTTHTTPServerListenInterface" : "127.0.0.1",
+    "BTTAutoSwitchToOldKeyboardImplementation" : true,
+    "BTTMinDrawingMovement" : 2,
+    "BSTSnapAreaDefaultBackgroundColor" : "129.988836, 201.126536, 227.013985, 104.550000",
+    "SIRIScrollSpeed" : 1,
+    "batteryWarning" : false,
+    "pluginDictionary" : {
+      "1" : {
+        "Apple Remote Plugin" : {
+          "10" : "Play\/Pause, Holding (only on aluminum remote)",
+          "2" : "Up, Holding",
+          "3" : "Down",
+          "11" : "Menu",
+          "4" : "Down, Holding",
+          "5" : "Left",
+          "12" : "Menu, Holding",
+          "6" : "Left, Holding",
+          "13" : "Center",
+          "7" : "Right",
+          "8" : "Right, Holding",
+          "14" : "Center, Holding",
+          "1" : "Up",
+          "9" : "Play\/Pause (only on aluminum remote)"
+        }
+      }
+    },
+    "BTTTouchBarFontSize" : 15,
+    "BTTSelectedKeyboardTabIndex" : 1,
+    "BSTSnapAreaDefaultDashedBorder" : false,
+    "BSTDontShowSnapAreasWhileModMoving" : 0,
+    "BTTForceForceClickPressure3F" : 700,
+    "BTRScrollSpeed" : 1,
+    "showBTTRemoteTab" : true,
+    "BSTSnapAreaDefaultInvisible" : false,
+    "BTTTouchBarKeepIconRatio" : true,
+    "BTTEnablePalmRecognition" : true,
+    "BTTFreeSpaceAfterESC" : 10,
+    "singleFingerTapLeft" : 0.44999998807907104,
+    "BTTForceForceClickPressure" : 700,
+    "BTTDefaultTBIconHeight" : 22,
+    "mmZoomRepeatDelay" : 0.10000000000000001,
+    "twoFingerDoubleTapDelay" : 0.5,
+    "BTTForceForceClickPressure2F" : 700,
+    "useAppleRemotePlugin" : false,
+    "BSTSnapAreaDefaultCornerRadius" : 20,
+    "BTTForcedHidden" : false,
+    "BSTSnapAreaDefaultAnimationDuration" : 0.30000001192092896,
+    "BTTTpThreeFingerSwipeSensitivity" : 0.29999999999999999,
+    "BSTMemorySaver" : true,
+    "BSTWindowGrabPosY" : 10,
+    "BTTTpFourFingerSwipeSensitivity" : 0.40000000000000002,
+    "showTouchBarTab" : true,
+    "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612,
+    "showOtherTriggersTab" : true,
+    "BTTDrawingStrokeWidth" : 4,
+    "BTTPathSampleSize" : 100,
+    "BTTMaxAllowedDrawingRotation" : 30,
+    "BTRMouseSpeed" : 1,
+    "BTTDrawingsRestoreMousePosition" : true,
+    "BTTCMOnTop" : true,
+    "BSTSnapAreaDefaultPictoDistanceFromLeft" : 0.10000000149011612,
+    "showTrackpadTab" : true,
+    "scrollBlockWarningShown" : true,
+    "BTTMovePastedToTop" : true,
+    "BTTShowBTTWhenControlStripHidden" : true,
+    "BTTDrawingAreaWidth" : 915,
+    "BTTCopyImgurURLToClipboard" : true,
+    "BTTForceNormalClickPressure4F" : 175,
+    "BTTScreenshotOpenImgurInBrowser" : true,
+    "BTTTwoFingerTipTapMinSpread" : 0.029999999999999999,
+    "BTTIMGURDefault" : true,
+    "BTTForceForceHapticResponse" : 13,
+    "BSTSnapAreaDefaultPictoSize" : 0.69999998807907104,
+    "showNormalMiceTab" : true,
+    "BSTDisableSnapAreas" : false,
+    "BTTForceNormalHapticResponse" : 12,
+    "showSiriRemoteTab" : true,
+    "BTTForceNormalClickPressure2F" : 140,
+    "cornerSnap" : true,
+    "BTTTouchBarSupportEnabled" : true,
+    "showDrawingsTab" : true,
+    "BTTDrawingRightMouse" : true,
+    "BSTCornerRoundness" : 40,
+    "BTTDismissIfNothingToShow" : true,
+    "BSTPreventTopMissionControl" : true,
+    "BTTNumberOfStarts" : 302,
+    "BTTHTTPServerEncrypted" : false,
+    "showKeyboardTab" : true,
+    "BTTConvertedDevices" : true,
+    "BTTTiltWheelDelay" : 0.44999998807907104,
+    "BTTDaysToKeepHistory" : 14,
+    "BTTFilterMagicMouseLeftRightEdge" : true,
+    "showMagicMouseTab" : true,
+    "BTTDefaultTBIconWidth" : 22,
+    "SIRIMouseSpeed" : 1,
+    "BTTRemoteEnabled" : true,
+    "BTTTouchBarChecked" : true,
+    "BTTDrawingAreaHeight" : 626,
+    "tpThreeFingerDoubleTapDelay" : 0.5,
+    "BTTTouchBarVisible" : true,
+    "BTTTouchBarUseMonoSpacedFont" : true
+  },
+  "BTTPresetUUID" : "F29B1370-A558-4988-8F3B-199190C71729",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.apple.finder",
       "BTTAppName" : "Finder",
       "BTTTriggers" : [
 
-      ]
-    },
-    {
-      "BTTAppBundleIdentifier" : "com.google.Chrome",
-      "BTTAppName" : "Google Chrome",
-      "BTTAppProcessMatchMode" : 2,
-      "BTTAppProcessName" : "Google Chrome",
-      "BTTAppSpecificSettings" : {
-
-      },
-      "BTTTriggers" : [
-        {
-          "BTTTriggerType" : 100,
-          "BTTTriggerTypeDescription" : "3 Finger Swipe Left",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType" : -1,
-          "BTTPredefinedActionName" : "No Action",
-          "BTTShortcutToSend" : "59,56,48",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 0
-        },
-        {
-          "BTTTriggerType" : 6,
-          "BTTTriggerTypeDescription" : "2 Finger Swipe Right",
-          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-          "BTTPredefinedActionType" : -1,
-          "BTTPredefinedActionName" : "No Action",
-          "BTTShortcutToSend" : "59,48",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 12,
-          "BTTKeySequence" : {
-
-          }
-        },
-        {
-          "BTTTriggerType" : 101,
-          "BTTTriggerTypeDescription" : "3 Finger Swipe Right",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType" : -1,
-          "BTTPredefinedActionName" : "No Action",
-          "BTTShortcutToSend" : "59,48",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 1
-        },
-        {
-          "BTTTriggerType" : 5,
-          "BTTTriggerTypeDescription" : "2 Finger Swipe Left",
-          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-          "BTTPredefinedActionType" : -1,
-          "BTTPredefinedActionName" : "No Action",
-          "BTTShortcutToSend" : "59,56,48",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 11,
-          "BTTKeySequence" : {
-
-          }
-        },
-        {
-          "BTTTriggerType" : 175,
-          "BTTTriggerTypeDescription" : "2 Finger Force Click",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType" : 2,
-          "BTTPredefinedActionName" : "CMD(⌘)+Click",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 2
-        }
       ]
     },
     {
@@ -83,341 +147,6 @@
       },
       "BTTTriggers" : [
         {
-          "BTTTriggerType" : 624,
-          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-          "BTTPredefinedActionType" : -1,
-          "BTTPredefinedActionName" : "No Action",
-          "BTTShortcutToSend" : "59,55,49",
-          "BTTTriggerOnDown" : 1,
-          "BTTEnabled" : 1,
-          "BTTShortcutKeyCode" : -1,
-          "BTTShortcutModifierKeys" : -1,
-          "BTTOrder" : 0,
-          "BTTKeySequence" : {
-            "BTTPauseBetween" : 0.29999999999999999,
-            "BTTCharactersToDeleteAfterwards" : 1,
-            "BTTKeyCount" : 6,
-            "BTTKeySequenceDownKeys" : [
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : " E",
-                "BTTKEYCode" : 14,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474496
-              }
-            ],
-            "BTTKeySequenceMixedKeys" : [
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : " E",
-                "BTTKEYCode" : 14,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474496
-              },
-              {
-                "BTTKEYCharacter" : " E",
-                "BTTKEYCode" : 14,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474496
-              }
-            ],
-            "BTTKeySequenceUpKeys" : [
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : "⇧",
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1
-              },
-              {
-                "BTTKEYCharacter" : " E",
-                "BTTKEYCode" : 14,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474496
-              }
-            ]
-          }
-        },
-        {
-          "BTTGestureNotes" : "\"joke\"",
-          "BTTTriggerType" : 624,
-          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-          "BTTPredefinedActionType" : 118,
-          "BTTPredefinedActionName" : "Insert \/ Type \/ Paste Custom Text",
-          "BTTStringToType" : "(☞ﾟヮﾟ)☞",
-          "BTTMoveCursorLeftBy" : "0",
-          "BTTTriggerOnDown" : 1,
-          "BTTEnabled" : 1,
-          "BTTShortcutKeyCode" : -1,
-          "BTTShortcutModifierKeys" : -1,
-          "BTTOrder" : 5,
-          "BTTKeySequence" : {
-            "BTTPauseBetween" : 0.29999999999999999,
-            "BTTCharactersToDeleteAfterwards" : 1,
-            "BTTKeyCount" : 6,
-            "BTTKeySequenceDownKeys" : [
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCharacter" : " J",
-                "BTTKEYCode" : 38,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              }
-            ],
-            "BTTKeySequenceMixedKeys" : [
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCharacter" : " J",
-                "BTTKEYCode" : 38,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCharacter" : " J",
-                "BTTKEYCode" : 38,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              }
-            ],
-            "BTTKeySequenceUpKeys" : [
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              },
-              {
-                "BTTKEYCharacter" : " J",
-                "BTTKEYCode" : 38,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474752
-              }
-            ]
-          }
-        },
-        {
-          "BTTTriggerType" : 20,
-          "BTTTriggerTypeDescription" : "2 Finger Click",
-          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-          "BTTPredefinedActionType" : 1,
-          "BTTPredefinedActionName" : "Middle Click",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 1
-        },
-        {
-          "BTTGestureNotes" : "\"table\"",
-          "BTTTriggerType" : 624,
-          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-          "BTTPredefinedActionType" : 118,
-          "BTTPredefinedActionName" : "Insert \/ Type \/ Paste Custom Text",
-          "BTTStringToType" : "(╯°□°）╯︵ ┻━┻",
-          "BTTMoveCursorLeftBy" : "0",
-          "BTTTriggerOnDown" : 0,
-          "BTTEnabled" : 1,
-          "BTTShortcutKeyCode" : -1,
-          "BTTShortcutModifierKeys" : -1,
-          "BTTOrder" : 6,
-          "BTTKeySequence" : {
-            "BTTPauseBetween" : 0.29999999999999999,
-            "BTTCharactersToDeleteAfterwards" : 1,
-            "BTTKeyCount" : 6,
-            "BTTKeySequenceDownKeys" : [
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCharacter" : " T",
-                "BTTKEYCode" : 17,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              }
-            ],
-            "BTTKeySequenceMixedKeys" : [
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCharacter" : " T",
-                "BTTKEYCode" : 17,
-                "BTTKEYDown" : 1,
-                "BTTKEYOrderRelevant" : 1,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCharacter" : " T",
-                "BTTKEYCode" : 17,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              }
-            ],
-            "BTTKeySequenceUpKeys" : [
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCharacter" : " T",
-                "BTTKEYCode" : 17,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              },
-              {
-                "BTTKEYCode" : 56,
-                "BTTKEYRequired" : 1,
-                "BTTKEYTime" : 550474880
-              }
-            ]
-          },
-          "BTTTriggerConfig" : {
-            "BTTTouchBarItemIconHeight" : 0,
-            "BTTTouchBarItemIconWidth" : 0
-          }
-        },
-        {
-          "BTTTriggerType" : 16,
-          "BTTTriggerTypeDescription" : "TipTap Left (1 Finger Fix)",
-          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-          "BTTPredefinedActionType" : 1,
-          "BTTPredefinedActionName" : "Middle Click",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 0
-        },
-        {
-          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-          "BTTPredefinedActionType" : -1,
-          "BTTPredefinedActionName" : "No Action",
-          "BTTShortcutToSend" : "50",
-          "BTTAdditionalConfiguration" : "524320",
-          "BTTTriggerOnDown" : 1,
-          "BTTEnabled" : 1,
-          "BTTShortcutKeyCode" : 39,
-          "BTTShortcutModifierKeys" : 524288,
-          "BTTOrder" : 1
-        },
-        {
           "BTTGestureNotes" : "\"blick\"",
           "BTTTriggerType" : 624,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -425,6 +154,8 @@
           "BTTPredefinedActionName" : "Insert \/ Type \/ Paste Custom Text",
           "BTTStringToType" : "ಠ_ಠ",
           "BTTMoveCursorLeftBy" : "0",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "CEA730AE-AD54-4635-A5A1-523A47C0CE6F",
           "BTTTriggerOnDown" : 1,
           "BTTEnabled" : 1,
           "BTTShortcutKeyCode" : -1,
@@ -519,41 +250,6 @@
           }
         },
         {
-          "BTTWidgetName" : "show currently playing spotify track",
-          "BTTTriggerType" : 639,
-          "BTTTriggerTypeDescription" : "Apple Script Widget",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchBar",
-          "BTTPredefinedActionType" : 49,
-          "BTTPredefinedActionName" : "Open Application \/ File \/ Apple Script …",
-          "BTTLaunchPath" : "file:\/\/\/Applications\/Spotify.app",
-          "BTTEnabled" : 1,
-          "BTTOrder" : 0,
-          "BTTIconData" : "iVBORw0KGgoAAAANSUhEUgAAAJgAAACYCAYAAAAYwiAhAAAMKmlDQ1BJQ0MgUHJvZmlsZQAASImVVwdYU8kWnluSkJDQAqFICb2JUqRLDS2AgHSwEZJAQokxIajYUVGBtaAiihVdFVFwLYAsNuxlEbDXhwUVZV1cxYbKmySArn7vve+d75t7\/3vmzDn\/OXdmvhkA1GM4YnEOqgFArihPEhsayExOSWWSHgECwIEasAKWHK5UHBATEwmgDL3\/Ke9uAET+vuog9\/Vz\/38VTR5fygUAiYE4nSfl5kJ8CADcjSuW5AFA6IF68+l5YoiJkCXQlkCCEFvIcaYSe8hxuhJHKmziY1kQpwGgQuVwJJkAqMl5MfO5mdCPWinEjiKeUARxM8S+XAGHB\/FniEfm5k6FWN0GYpv07\/xk\/sNn+rBPDidzGCtzUYhKkFAqzuHM\/D\/L8b8lN0c2FMMcNqpAEhYrz1let+ypEXJMhfi8KD0qGmItiK8JeQp7OX4qkIUlDNp\/4EpZsGaAAQBK5XGCIiA2hNhMlBMVOaj3zRCGsCGGtUfjhXnseOVYlCeZGjvoH53BlwbHDWGORBFLblMsy04IGPS5WcBnD\/lsKhDEJyl5om35wsQoiNUgvifNjosYtHlRIGBFDdlIZLFyzvCfYyBDEhKrtMEscqVDeWFeAiE7ahBH5gniw5RjsclcjoKbHsRZfGly5BBPHj8oWJkXVsgXJQzyx8rEeYGxg\/Y7xDkxg\/ZYMz8nVK43g7hVmh83NLY3D042Zb44EOfFxCu54dpZnPAYJQfcDkQCFggCTCCDLR1MBVlA2NrT0AO\/lD0hgAMkIBPwgcOgZmhEkqJHBJ9xoAD8CREfSIfHBSp6+SAf6r8Ma5VPB5Ch6M1XjMgGTyHOBREgB37LFKNEw9ESwROoEf4UnQu55sAm7\/tJx1Qf0hGDiUHEMGII0RY3wH1xbzwSPv1hc8Y9cM8hXt\/sCU8J7YRHhOuETsLtKcJCyQ\/MmWAc6IQcQwazS\/8+O9wKenXFA3Ef6B\/6xhm4AXDAx8BIAbgfjO0Ktd9zlQ1n\/K2Wg77IjmSUrEv2J9v8yEDNTs112Iu8Ut\/XQskrfbharOGeH\/NgfVc\/HnxH\/GiJLcUOYuewk9gFrBlrAEzsONaIXcaOyvHw3HiimBtD0WIVfLKhH+FP8TiDMeVVkzrWOHY7fh7sA3n8GXnyxcKaKp4pEWYK8pgBcLfmM9ki7qiRTGdHJ7iLyvd+5dbyhqHY0xHGxW+6wrcA+PAGBgaav+ki4Zo8tBgAytNvOutjcDnrAnC+hCuT5Ct1uPxBABSgDleKPjCGe5cNzMgZuAFv4A+CQTiIBvEgBUyGdRbAeSoB08FssAAUgRKwEqwFG8AWsB3sBvvAAdAAmsFJcBZcAm3gOrgL50oXeAl6wTvQjyAICaEhdEQfMUEsEXvEGfFAfJFgJBKJRVKQNCQTESEyZDayEClBypANyDakGvkNOYKcRC4g7cht5CHSjfyNfEIxlIpqo0aoFToa9UAD0Ag0Hp2EZqLT0AJ0EbocrUCr0L1oPXoSvYReRzvRl2gfBjBVjIGZYg6YB8bCorFULAOTYHOxYqwcq8JqsSb4p69inVgP9hEn4nSciTvA+RqGJ+BcfBo+Fy\/FN+C78Xr8NH4Vf4j34l8JNIIhwZ7gRWATkgmZhOmEIkI5YSfhMOEMXDtdhHdEIpFBtCa6w7WXQswiziKWEjcR64gniO3Ex8Q+EomkT7In+ZCiSRxSHqmItJ60l3Sc1EHqIn1QUVUxUXFWCVFJVRGpFKqUq+xROabSofJMpZ+sQbYke5GjyTzyTPIK8g5yE\/kKuYvcT9GkWFN8KPGULMoCSgWllnKGco\/yRlVV1UzVU3W8qlB1vmqF6n7V86oPVT9Stah2VBZ1IlVGXU7dRT1BvU19Q6PRrGj+tFRaHm05rZp2ivaA9kGNrjZKja3GU5unVqlWr9ah9kqdrG6pHqA+Wb1AvVz9oPoV9R4NsoaVBkuDozFXo1LjiMZNjT5NuqaTZrRmrmap5h7NC5rPtUhaVlrBWjytRVrbtU5pPaZjdHM6i86lL6TvoJ+hd2kTta212dpZ2iXa+7RbtXt1tHTG6CTqzNCp1Dmq08nAGFYMNiOHsYJxgHGD8UnXSDdAl6+7TLdWt0P3vd4IPX89vl6xXp3edb1P+kz9YP1s\/VX6Dfr3DXADO4PxBtMNNhucMegZoT3CewR3RPGIAyPuGKKGdoaxhrMMtxteNuwzMjYKNRIbrTc6ZdRjzDD2N84yXmN8zLjbhG7iayI0WWNy3OQFU4cZwMxhVjBPM3tNDU3DTGWm20xbTfvNrM0SzArN6szum1PMPcwzzNeYt5j3WphYjLOYbVFjcceSbOlhKbBcZ3nO8r2VtVWS1RKrBqvn1nrWbOsC6xrrezY0Gz+baTZVNtdsibYettm2m2zb7FA7VzuBXaXdFXvU3s1eaL\/Jvn0kYaTnSNHIqpE3HagOAQ75DjUOD0cxRkWOKhzVMOrVaIvRqaNXjT43+qujq2OO4w7Hu05aTuFOhU5NTn872zlznSudr7nQXEJc5rk0urweYz+GP2bzmFuudNdxrktcW1y\/uLm7Sdxq3brdLdzT3De63\/TQ9ojxKPU470nwDPSc59ns+dHLzSvP64DXX94O3tnee7yfj7Ueyx+7Y+xjHzMfjs82n05fpm+a71bfTj9TP45fld8jf3N\/nv9O\/2cBtgFZAXsDXgU6BkoCDwe+Z3mx5rBOBGFBoUHFQa3BWsEJwRuCH4SYhWSG1IT0hrqGzgo9EUYIiwhbFXaTbcTmsqvZveHu4XPCT0dQI+IiNkQ8irSLlEQ2jUPHhY9bPe5elGWUKKohGkSzo1dH34+xjpkW8\/t44viY8ZXjn8Y6xc6OPRdHj5sStyfuXXxg\/Ir4uwk2CbKElkT1xImJ1Ynvk4KSypI6k0cnz0m+lGKQIkxpTCWlJqbuTO2bEDxh7YSuia4TiybemGQ9acakC5MNJudMPjpFfQpnysE0QlpS2p60z5xoThWnL52dvjG9l8viruO+5Pnz1vC6+T78Mv6zDJ+MsoznmT6ZqzO7BX6CckGPkCXcIHydFZa1Jet9dnT2ruyBnKSculyV3LTcIyItUbbo9FTjqTOmtovtxUXizmle09ZO65VESHZKEekkaWOeNjxkX5bZyBbLHub75lfmf5ieOP3gDM0ZohmXZ9rNXDbzWUFIwa+z8FncWS2zTWcvmP1wTsCcbXORuelzW+aZz1s0r2t+6PzdCygLshf8UehYWFb4dmHSwqZFRovmL3q8OHRxTZFakaTo5hLvJVuW4kuFS1uXuSxbv+xrMa\/4YoljSXnJ51Ju6cVfnH6p+GVgecby1hVuKzavJK4Urbyxym\/V7jLNsoKyx6vHra5fw1xTvObt2ilrL5SPKd+yjrJOtq6zIrKicb3F+pXrP28QbLheGVhZt9Fw47KN7zfxNnVs9t9cu8VoS8mWT1uFW29tC91WX2VVVb6duD1\/+9MdiTvO\/erxa\/VOg50lO7\/sEu3q3B27+3S1e3X1HsM9K2rQGllN996Je9v2Be1rrHWo3VbHqCvZD\/bL9r\/4Le23GwciDrQc9DhYe8jy0MbD9MPF9Uj9zPreBkFDZ2NKY\/uR8CMtTd5Nh38f9fuuZtPmyqM6R1ccoxxbdGzgeMHxvhPiEz0nM08+bpnScvdU8qlrp8efbj0Tceb82ZCzp84FnDt+3ud88wWvC0cuelxsuOR2qf6y6+XDf7j+cbjVrbX+ivuVxjbPtqb2se3HOvw6Tl4Nunr2GvvapetR19tvJNy4dXPizc5bvFvPb+fcfn0n\/07\/3fn3CPeK72vcL39g+KDqX7b\/qut06zz6MOjh5Udxj+4+5j5++UT65HPXoqe0p+XPTJ5VP3d+3twd0t32YsKLrpfil\/09RX9q\/rnxlc2rQ3\/5\/3W5N7m367Xk9cDfpW\/03+x6O+ZtS19M34N3ue\/63xd\/0P+w+6PHx3Ofkj4965\/+mfS54ovtl6avEV\/vDeQODIg5Eo7iKIDBhmZkAPD3LgBoKQDQ2+D5YYLybqYQRHmfVCDwn7Dy\/qYQNwBq4Ut+DGedAGA\/bFbzoW9\/AORH8Hh\/gLq4DLdBkWa4OCt9UeGNhfBhYOCNEQCkJgC+SAYG+jcNDHzZAcneBuDENOWdUC7yO+hWRznqMDkIfpR\/A6KtcRSue81AAAAACXBIWXMAABYlAAAWJQFJUiTwAAAv5klEQVR4Ae19B3xc1ZnvmT6jMupWseQil+BCcQNMMOBAkoUNoWRJsuRnFjAtgbw83uZt9m0272V\/eWGTl7pZ0khCzYYQEuJgAyEBU2yMC+5NtmXLktWLJY1mpKl33v9\/Zo48FtJougpzfrq6d2455Tv\/+33f+b7vnCtENmUpkKVAlgJZCmQpkKVAlgJZCmQpkKVAlgJZCmQpkKVAlgJZCmQpkKVAlgJZCiRFAV1ST0\/Dh2\/b9rDNbvXOEJZAsQgY8oNa0KoP6ow6ndBrRv0wvfR+LRjUC03Tgn6dXuc2GIXT2x8429OtdW688bHBaUiahJo0TLCEnp7CD63ftr44YDOWmAzm2UGduFQEdUsAlwoAqTAoRIleLwq1oC7PYNAbdAa9AIiEDheZgkHcwb0WFMGAJgIBLYBLLuTRh5PduNyn0+k7hS5wOKAFdwpdsNHv1nc\/fdmPe+SDH6B\/HxiA3fnGnVZdoX250RD4SFAYFulE8BL08zydXm+R4FHMCeggfgieUAr9HgsTIcyFyBgCIe5UQCQAsYHXeXXB4CkAc68mtGM6Tf+a40THnuc\/\/fzQWPlOl\/PTGmB37vxChdEsrtAbDFejk2\/QBUWVwWLK0YMjBXwBdL4mwZTuziTeAGRhMBmEBo6n+fxDqE8buNxfggH\/XzVNv\/3x5Y+2prseE5H\/tAPYHTsehNjTLteZTbfrdcHL9EbDPIo4jYAiZ+K\/CU4UtQSdHoCTItYfaECVdml+8fRgwLPj2ZWPdU9wFVNW\/LQB2B077l1otlnu0uv0nwCgllJcSR0pQ1wq0R5R3E3VFxzuqAhoG\/2a76knlv\/8SKL5TpbnpjzA7tz9xTVms+4ucKZPGS1GO0EV8GuThb5x18NgDA0o\/F6\/Ew+\/4Pf5H39i+U\/fijujSfLAVAWYfv2eB9caTPovQdBcZ7AYbAEvReDEi79U9SvFqMFsEACaG530pt\/v\/8Hj3+x6XTz\/fCBVZWQinykHsPV7H\/ow9OV\/0hkMn9Ab9XoN3Go6AWtkpxNoaKcAJwtiJPqyPyi+\/8TFj24eed9k\/T1lAHbP\/nvmCmEmsO40moxWOQqcPgxrXHxQV+Mo1O\/x+4ROPK55A9\/91Yqf1I\/74ATfMOkBtu7Vdbm2qsL1UK2+YrKaqgJevxwNTjDdJqx4JTp9bl8HDGw\/7O\/tePT5tc9TX5uUaVIDbP2+By7V6c3fMZoMV0mDJUaE2RSigJ6eBdrz\/IGt3iHvPz+16mfvTEbaTEqAXfP1a4wLP3XhF0CwrxvMxiI\/FPhsGp0CRgwEAj6\/QwuI\/9PSIn76yg3\/6Rn9zok5O+kAdveBz9ca9MZvGwzGv6PVezor8KnqcjkQMOhonnlZ0\/u\/9Kslk0c306eqkanI585dD96gDxo2Q4kHuKaX2SEV9BkrD76EfBlhB7xBF9BvvnvPQ58c695Mn580HGz9\/oe+DCPjv+n1+pypbCjNdAeOLI9+VjjEPNDNvtlf1\/EIHOoTql9MOMA4SrSU53\/XYDI9MFl8hSM7bar9ViLT79Me62xwfvnFmx4fmKg2TCjAbt\/y+aK8QuPjUORvDviy+lYqQaAMtLAXbnK6dPc8e\/l\/dKQy\/1jzmjCA3bXzCzVw8fyXyWZaA+NhrPXN3hcnBTjK9Lt9e+BKu+3xVT89FefjSd8+IQC74737ZllM5t8ZbebLsuBKug\/HzSBsytjrHfDd+uTqn50e94EU3pBxgN2xFeAqtDyPkeKlWftWCntynKwkJ\/MGDmhe\/6cy6WLKqJnijm0PzDTnW54zmk1ZcI0DiFRf5ssMkF2kMxo2rN+zfnaq8x8rv4wB7La\/3ldgyTU9A53r8qxYHKs70nueIIM\/d4nekPNrRv6mt7RQ7hkB2PUvf9FSUGZ5zGgzrc2CKxPdOnYZiC8TRqvxSpNF90uaiMa+MzVXMgKwqirxCBr1aUZCZNPEUyDMyW42VxT+ALVJKwbSmjlJee++hx4wmQ3\/LRQYOPHEzdYgRAHND53MZLh3\/d4vPJBOmqR1FHn3vi9caTCaXkZkST5mQKezHdm8E6AAQ34wdW\/Q69dufnLZj\/+aQBbjPpI2DsYRo8Fo+JnBoMuCa9xumJgb+NJjWl+O0aB\/FA7yqnTUIl0A0xlzjN+AOWJJ1nGdjm5LXZ7sH4wsF+pN4t\/v+\/l9ptTlHMopLQC7Z9\/nP2c0Gu7KKvWp7q705MeRPeLv7ghcarw31SWkXAf7h\/fum2exWN\/CRNKZWb0r1d2VvvwY5oPZ793+gPfqVE74TSkHY6izyWT+fwaLMQuu9GEhLTnLgEWrsdRgMH1b3HabIVWFpBRgcz6x9BaDEaE3WXtXqvono\/kwZAoLxXzirv9V9ulUFZwygN325\/XFJrPu6zq90E+jCdapovOUyIeh11wjA6PKf1v3zroZqah0ygBmr8y9HzHhiyfjqFEuMIJ\/MggPBKT9hzpH5MY1ISJ\/y+PwvXwutKWC5JM7j5CoNC0wWvP\/ZypqmhIlf92Oe+Zabbbt6JQZmVTsCRysvBVa702C4P0kITelF4FiO+Dl2lzcAvKchnn4XD5JzlyiHRj5EUgCwOKbzCn7elNoXS+DGXsE7\/E31\/oKlX1+eZJz45\/cC7U\/\/56p8IsvoBbUzvqd3jVPXJ7cCj\/GFDRYZ7FY\/hHca0Y647uGwcSOxxQtJi4f4HV6hc\/FzSeGzrqFu2cQG\/a9Q8LTh\/NOj\/ANeEVgEDPCCS6uvENQBYg8zMaRc3lxHAaYAqwEmhFAQ1lyI9gsRmHMNQkTN7tFmAsswlZsFdZiGzarsBRa5TUzrhtzsAGQTKFlpAg4FsI1yuRu0v4jkzBaTMWaRXsYlUzKdBHqqSSaetf2+xcjSmIbLMIFqeRe7GACiZyEyidXz\/H0u8VAi1M4GvvFwBmHcOHY2+sWvrNDwg8QaQCRIHBGS1IZCDc33lbLLMP5jjW5nADMAQDtZmEqsgpzoUXkVOSJvJl5Ir\/GLvJn2oWtxCoQJi7XmGC7NNQ1U6ssjkaSaOdI\/2BQc\/j87qufXPaLfdHujXYtaQ6msxrvN1pNBclyL3IoJXr4hnsHPMLRNCD6T\/eK3hO9wlHfKwYbB4QGbkVORCBJpZQPkqMRNOg0uUVrccLXWABSlAG8Bi7q5dbsFE40ojdcNx3Ap7MahKU8V+TOsgv7vEJRWFso8qryAbx8hs9Ikct2S243CVgcaQsuZocaQQ72oGx7Av\/CVEvgSTxy+5a7a3MKc98xGAwVVA4TTeFVYwAoh+g52iO693WI\/mM9wts9JLR+AApg0plQVYlC7hMtaYKeCzM\/KRv5YrA9AJwBYtZSZhP2BcWiZEmJKFpYAtDlCStELZMU5xOoy0kuFgj0O13ey5+94rG6RKiXFAez5tk+a7KYKhINIiReiJamt5vEyReOCydAFegNL61AbsTrVKpT7iFLhFRJPKNeCDYY7ZLtAegCfW4xCF1xsO6saN9YL\/T5JmGFOC34UImYcckMUXZhmbCV2jhjW4rTZF7iRGovuRikU64WvB\/PUx+LO6mmx\/3gzX+8ubB0Ts170CnmJdJwBa6jvzks6h8\/ILQhv6AoSZ+Ii7uJmX+AIU3gbjJB7JsweCi8pEzMWFEhyi4uF\/aafGlKoQRNhOaJNIjmGoy8T\/c1O1Y\/\/7dPtsebR8IcrKim8ia9STePSmoiiRVv+EuDOPGL\/XI0pwuPuBLJa9o8M0KH5OCl66+nRdfrjcJQZBP5i4rFzCtrRPnycpFfbZcagxwopFFnI5BhopmTX5HzN6Dzk\/HSOiGArbhvhQmjxtswI5sr7sVbJgijE+4+jzj+68N4YwFQgC2bRqGABBxGFWFx2re1RXA7XpkjipeVi+qPzBEzLpohrDCXpHVmPPoLppp\/QA2fwRbXWhcJich176xfCv1rBxZAy0nk5aHVnHrX3q9twagJVU6oFqN0yAfllBKl0E9zMCKtWjtbzPnYHJEHs0g6xCcZAjily+MYuPaZNU\/siIfMCXEwk9V6Pb+YQUNnIokr89GOJY2dfEuzKT4KRIhSDhDqj58VTX86ISqunS3mfrxWFAF0BFqqbGxU9s05plzNZ1uLisYFsPhl0zXXGGEkvCk+ioxyN75AlU0poAC4GFUMb4dLND59SGz90mti1\/d3it6TvdKuSLdPKhIniejNhr+bf\/31lnjyi2I2HD2b25+5bhlME\/+EelsSEY\/MlSNIN4bo7W82Sf0ipSISb25ITlBxwUZxErlJnxDvYU2Ywh3A3fA5HuMHf3NTIikyHx4PJzwczmb4VKYPpJ6kF0GMxgcOdYvmNxuFo8sl8mcVCBsGCOe1LZG6hehQVHmp+dUDT+xriTWLuEWk2WJcDnZpT0S5V5XiyKdsaZkww4rtgdsnbiVfdjz+hRqtsg3ZmGDANOaZhQE2JfoNDfAJmvDblG\/BHudo4IRdiY5rum3oZ+SIlq6bYbGC+tEpTvdUwBPAQMYnAkMB+DVhpYeHwT+I39xcfumi4nHQDXUhEnSUDXyTmLjPFADD4jPg8IqW3x0TnVubxZxbLxDzb5wnsGxDwuYNiknQzGayWq5Hi2IWk\/ECDKHbxr+hOyOZxMraYONZcPticehb29ExyC2asA4DKojoB6JKD9eKnoApMAsbLN951fkiF26XHLhickpscDib4WyGXxD3caNPk5ERwx1OJDGncZqh8KGekytdw1kuozMwevaDW\/i4wT3khknBBTHlasfWMiDcOPZhpEwfaZAA9MF6T5cWt0wALgw0X8egOPHobtG2pUks\/\/Jl0M+KEgYZdWfYKleJJUvM4vBhryTiOP\/ieq9ueeqWkpKLqw+isyoJkmSS6ryDj+8XDU\/jm0+MciDxSRiJI\/yjiMM5HTiNpSJX2D9ULArmF4mCufDjYcRkK4VTGWBih6n8WCdZNfwLVTFUzySrO9zUc+WEyxytbNwdAACHegC6zhDo+hv6heNknxg83Sd88FYEwR2DaLMEHcJ\/0s3hWJ5tfqG44ltrRT5eykQCE+RoUgv0dJ\/sXrnhlt+eHiZKlIO4OFhOddEKRKwWR8kv5kvscHbWhXdfIuxzCsWpDSeEq\/4snNmw6ANUptJckbewSJTCzlMKcVow2y5DYOi3ZFIhMCFChUAUc+FJ3HgOqOcDeGSWjBvLq0QkRYRBlCKX3K4fIKPPte\/YWTFwqld4EBUiRSwzSROHoyF76HifqHvuiFj18KUjqxvTbzIVrKFbYrPbavHA6VgeigtgxnzTGhhXLYmaJ0ZWKNRZQTH3Y7Wi+sPVYqDVKUUNv6OYB46VMyMHch9+OLzpIbGML6klaBoZWXa6f7NtkstjAXuV9Igvs8AoWr6sQlSuqpKBj0MINxpoHhDdh7pE1552vGTgcN2DIX0OIimV4lSHoMmud1qE83aXyIM6kQgXo75qzjevRZs2q3ZF28cDML3RaFrAAlLdycyPijf1Ax1EIJPkUOilZAYT0Ro+EdfUC0X7H10w5OA2xI5RHy2\/eIbQPrsIYHOK7iNdom17q+jb2yH8CKIU1D2lDplkraF++LqGhBMvcj6463mDklizRqUxdWxFrLfHbKa45rvXlBTXlv8j7CrlIW4SaxGx38c3Xom+UGfE\/uxUvZPtVO1mG6wAXDHCdqrX1MBCP0tYMNLG+AB62xBMEGFuSD010YQBWsU1NaIA5otE+hEiEhIlOJRbZH6uaWsT0B89gQfHluyzykr0hmBtprz4sdVq+t1F+pKjE3S55Xli0WcWizXfXis+\/KOPilnrlggLAhbl4Ic+XAAvroT7KSatsIsl+gLTOwA9fFb5mrnzYik7ZhFpzc0pR8RpntQrYsk5e0\/SFCCtqSLoIWeKESNWsqhUDH56kWh5p1k0vlQvnHATCUb30pofS4Iua5tfjIFHfkLci0WwTljUptBsNVTGUmTsALMb5zOkmbNwpkqijqPG\/\/I4dOI8k8ZYbRl+w3EQOg6xi+HzYz2YhvMsU9IdEpKTTBbcvFDMvm62aN7SjNE3AjVhuZdcLRrQWH3gcNb1tTJiNlE9mnUxwmxkNFtSCzC9xXRRuH\/SQMLEs1QgUgCiRV7VU00W8bsxZQ2cgFZ5mgqGp6tRyqh4NjxEO0\/Iso89lGpa+0lMQ9hgi084Y8JGiFvITqfBGQc8DqXIY3UutXs58sPIlAbkeTfMEzVX1Ygzb58R9c8dRWRsL8wcKI8EUGoa68YKYmBRdesCMR\/gpF8xmUQuptNrtSyJuUfLKxYOJjPB6HHWcM9FyzHN1wgCOdsIo1m+1QSPD7OJ6MJxwWrtandi7xQeTl2Ddd3n8IiAG9Z3t09onBeJLQgCK44QgY6QkZcA5XQ1I+ZAci4kRrd6gExvMwoLY+gxM8gKb0HODJhROIkDezNmEimvAUORmHe6AwGJGU60Yf1qr58nKi+rEg2vnBINLxwTPngTgp6QpKHOZUR9Z92yQCz++yUQb1DSk\/XE4HlE01yArqbjO6qiHwvAiFAb3uyyNGNn1OwZDUAXBYFABdgDwPSf6hN92Byn+4WTbhkQ1I9RljaIN5OU5xYpySXTiXirVUnyLZf\/wmfI0uQffsPXyP9sfbhDhj8ry\/wklwDY4ZLiNDULbHacpmafg5h6zBiyzy4QOYinl35OvgzII1XhMyh9OJGbUNwR\/Ivhept93RzReaBTOGFbY5mcREJDNWcv8Xey4GLBzAf9MnfNN9cUbfnqlrbhyoxyEAvABCJYYZUT9vPe9lEyS9UpxaWY3yCMjv1wiJ+F5bsHuoYT7hYfIjEYNRAEN5KulkjrNzuenDtmA0xkrfFcJN7UJeY\/RtLgZ\/TAOu9pdIh+iKF2cAw5YwguLBti6IugmBdfUCIK5hTITjYBkCGwUZymTqRKoMFeZgO3qv3Y3OGuIjloqE7p6J8vsEEUFc6dQa9O8gDLn1uWB8InFL06Rr+MeZpvPMVdy7YW0fZui3Ac75WxTuxIAi\/kSsHjOGZHTnhinYg\/clrOfiIHZASGe0gM4OVwvNcumtAmA5RzW3WeKFpSJipWVsqgQM4INwKQqQx3JtCSnaM6Hk2JL6Hp86355pBVPMoDMXGwnApLPjo3d\/i1iJJhMpeoH3SBS+370U7hOowhOFixjLJg50HhnhKJYCPiwnsdq41mBOAScmKep3NflzgDhdwMS3rBohJRfmmlBFxOaY6M+JBuMdmDk7u1MCgg9sdQMF4tYwKYyWrLQUbW8TJL5jp1LWebU+z+921i6ERfiDtFEU3JlJXxZwk2cjq0USUv3DWdmGjc9UaTOAZdrXj5DDHzqlmhSRw0hOLlSofOpspPdo+AZAMGPsRF1BQTwIJ6zQLrrSmdLxbNC\/UbT4gh6FiTQvRFJVsKLiquDO7m6xwU7ZtOiY5XG4UVg4SKNdUwP8wShfDLMnqEZoV00j7B1mABcT1CZaOnmAAmEACK2T\/IL3pmiV7ly01zQ+eOVrzoaSok0cql+7kwd5MqAMDmxuj4NCIqmv5wXBRhatps2LoqV1bIIMrJJD6hMukwxBoXP+PeQPrC+8\/80khqePlhy\/JjuaXERn9xVA2deC7hh\/o93LzwwfDvc3en\/Yhl0iQDvY0LqfS8dUacxUDn+OISUXvTQlF9ZXUo7JnhS5OApel148\/ciQlgBg+0AZhQ0qdmYyUXGDK59JEXNq2EkwRLGDQ8ph7DjgjbxCJNGvJ4ZCQpBxV8hpG0w3vkgz4ffsGUXigBiH\/pAiL1NWycN8qBwYGD3aIeEb1zb1ogZjHKwm6dUNEJuga1gIxhj9pd4wFMki8QDPgx9dJP8ZWOF4d50hJegjUYXLB36QwxQpmAABgIIhkvThsU3Tuc5MGF4UpypOWdC8UhSA6TPhDHz8XhGKePEStHeBifSgIhp5BiDWMu3Ul+cFRGn3oRU0+ziQejQDdis3zYuCaZBpEucB9tcbJ8cniCj8BIZWJ2dE+hgoN1PeIwHNynoavO\/8wiUbNmlnRlTcSypTqOQUCe8Zo6HsDk8z633wPb7biZjVdY1OsAyfxPLpBT2bywQr\/PLEEEhDmMNF1AlNAFYkNkQA6s1XbEN+XBsJlflYtY\/Ryps0i\/JJXp8MbylaSP9qLwnuHrOJAjOuyl+wfiyd3vEUMwObgw6nW2DogBGFkHMcnDjZGhDBAMc0BZT2aWCtARaBSfSK5DPWJ\/3TbRtLpBLFp3oZyhpeoob8jEP6wLCJdbVDcRqzEewNithoF25yCoPChf+WGlJbWtoAy2Y+miFV9dLQ78aLdc0kiVIDkEOJMFhsocuGBK4PoogV6SB\/eHBWKVEz\/IwSSRwYFC4GDVCZSwyEvOvyvzkkt3grvS\/8hJJ1wXguDlmq++IVjzMVXMBZCdxUzrXsTbOxv6hAe+0QDWOJMilhyOgCNYkklhh3vvlhaxfV+nqIbYXHrnhQIfe02JKyiWqkFA+jwDXnrP2JoQsUd5cDyAyUd6TvW6oAsMqbd\/lHxScorujArEqxd871px5q0muIY6MTUsIDkTly8qrC2QnavARCQRTHyOM3TSnULAZSnng5Z0wSqPsoMJPFrqWTFOLma8PQHXtbtd9EP8++GE1xDZkZKlqgA0Lhva+Mxh4YFjf+WXL5cRIHyp0pnY3qCmH3I7vA6UkzTAdM1b6geDD10BDsa80puoT1ixvunCWxBWApHJzuTbL0EFIElnbcREivTWJrbcQ\/0ZAjvrq9af4UTXsqVWKcIWYBRIv2onVm\/s2Nkqevd3hQY0FKfJ6G4U\/+DuHX9uEI14OeffuCDlcyZGpUIw0O9o60V8UHR+HAsH0zlPOocQgsLMMpJCIDr3Fso3cpKBKhZCsN6RAy26g+YhtGbuR+diRWys\/XWwSzS\/0Sh6Ieb8mIwhdTXqa4m8x2DgZ14\/jVV25spwpnQyMaoFYAQd9a8c6QMdotY2FoCxp32aN9AZC1Gz94xNAQKOjmgKAsbFz\/7IHDHr6lmIFnGIth0t4syrp8UgFi2RYdAY5UbvuhHl4HZP16DwQg9k1Gs6xSQB5h\/y1Xfv7qZNKWmAsSU6t8tTbytJ+zfER1Btev5UIpVxXAQbQ3kK5xaIeTfOF+3Q1Ro21Yu+Xe2hybixAg0cjHod516mk3tJMMB+6HV5TuKYqw+eEzWjdFcsHEw+5mx3HS2qGTc6Y5QisqeiUYBgkNG1uIn2uVlXzxZVl80Unfs7xYnf14k+6GsyOnUcoDGfPMyQZ+BhOrkX20InvMcRYBwYx+ZJA4wZBAdaHa3whflhATem+w1BeR\/IRLqSq5ELVSGMh2uxtu1qEyd+d1T0I65MTuwI28LOIxBMPAa7SXJAaTYZ38B+3uPx\/OCAy+\/2+TwuT0wqUywcTAKs91RPLxrfZTKasfBJ+k0C8TR6tHspeqgeyD3+Re7Pe0HO+xHOKfRw6BmckrfgX8iYyXvUiDF8f4p3LI+jaVajevVMUQEPByd2HMcCc0P4KIVMHHniPnI\/PbwTi764AoCskM+luDrnZScVfE+wrX37mSZcIJWJjzFTrADTnfzz0Z7ld686YbHrK7XwhIIxc83QBXaANGDiIIyJ4ZIZJeob5LeKfHD5YI+IWD\/W8MLbJ91AXHqJLiEuCaXirmR+EEVy7TC6nLi2mFoGCsd0N5mx7hiXh2JwpErDAGSHyx\/qSnJ7BTQaeDnyLEd0RT2WyuyAA9yLUSgXWMmFWJx\/60JEXFTKdiRX4vhPS4AFAu37frGrFXcTYFFTLABjBsGh5qH+gNvfgA69KmqOaboYAhCAhBGMtKijHK7N5XW4pQV9ECMo5boZwpJJ7m74DfFtIw2GWoyApXFT+g1pkA37L5UT\/H1V5gCOBdJkgM7lzBx+CMuAEG2uTcZJHjZY83PxHSJ6HziRlR\/D4sjQBKc9gUHOQrClAm8SaBCd\/ALIResvFp7bLkC7PVKpVxNLMumPhPH7NGhGNxG5V0o4GGWiNnh28DBWvJGxO6kgHPKMmmQfY\/oYRRO5jQdg4uLBfQhKdGAJJCc\/hoVgPb7NGjiV1FEicySTCSEzdJbH3PBZGvwfP4XJx6WVAtywGCMR4z6Fj3FFPK3jzCICDK4rO0aDnIFdjMiHXExro+LOMlMRy0XAUkczkZtCLDLJcxnwYqjmsi8GmvvfYdHYxtWVYuVgzF9\/ZuuJbUXzip1GkzF\/HODy\/qQSQ6gJqmZM\/ujB0kZ9cLe40LFcGjIIIg+DiVyGaOGeWyqTyi4SpCxsRLAHOaO3zSU\/guXY0SaaIboMWK4zpxbrmy0LfRKmCN8j4ko6TOwkaUxOsK6p4ozxFk8ywO\/q7zrafYjNiNjGzCpWgEmkvvfkoZaln1t5WmcxXShjpsbMNrkLFE9DWAVw9\/d2iJ4tZ+QwPTKWKy1gSqbKBCKprwAO0gcQ5jMAm5ZjZ5s4DW5jxnpnJYi7r7yiWpQuLpVLfcroDAz5MyENkmmeehYf38AUvaHjp7eeov4lpZq6NtY+HoAFRJ\/bOdjpeiNnYe6FKZ1nN0rtDj2xX3S\/1iiXz5xyMfoEHDkdRTEkGWeSezDBoxUThVtfrBc2LAFadlklAgdnC3I2Diomadz9eT3DKYUep29f65unlYmCXCxqihVgzISZefsbe\/cVzi0O4IU1pOPNk7OLEOLS8dYZqVzHpixFbePEXyR3o1gNmxZoamjCdgbLhpbA3jXr43OlKcKMgMhU6GrpaDCb4HN7AwNt\/buQPy345GDjAmyENhG1anwvzRqkV83q2TfgY5WF1AVSnfiW9EHXOvMyPBFUXtmyZJKsIv5xP3KTJOK1yC1c2Mh75WnUJcnqyOcJNG4wkdD32IaXqQWilNXhuq4WRORONlMj1RYMMLq3f\/vNR7CgMZ3cDEClJT9qioeDsf1aw6bjbasfXrPHarfOGT\/7qGWPepEKMIfj+KoE1qaP40NbEhD4F2GCkHobFG4dpn7puIftimE\/0twAs4M0P7CjI3QnaRPDghQcNWpYH1\/zwtQQCIdGcy0ubNQ\/z9MJEwUdn0PdCHwVDn0K382shV2L4pNun8kiOinGXV0D7zRubqR4JLDGBRc7OB6AsQvZ44HOw60v5Vfk3coMUp04uuJ3rguxZqnUwUYuDxABJFk2wYG3S64igzgyMyaxcvUbC8wGXAGHe36s3VqAD7ZjZBcynJpgpIQ9DUor7WrDXAl5yxEaAMQoVY5ifVj1mnH57r4h+bH5IXx03oURoxuxXR6s5sMIBrm0JVkOX0ECllwXfzEn3ht2AQ2dOCsOf3uHaHzlpPgQFjOpurxaLhmVSTvXaPUO+APBsyfPbsY1rFAswcWeGDfFCzCJ3BMbjuyrXj3npDXPOg8Fj1tIvDdQD7vogWViJ6JBnPu6Q9wCmbDzyYUYiy9Xs2EsPuxOXMmG37\/mwh\/ySx6wPdHSTm5F8SclIICrjnEwXCVeG04SGyFDLr6RKC32Ni7vQQDzWhjM1JPkF0DgFRjCJBB+pL4XwOCy5IP4zricGUVup+xwfC7WFAYaZxLtObJFnL5iJuLul0rbWroHVmNVUa4XMuhpPP7HunfD97DTIyk31qNxvWfMhIDMwWb9zEvrHimaV7qehr90JDZqCFyCHy09ezgEMs50LsSoi0sSEUwWuG7Y6RSrchtucmos6GO1i2ALpXPAYz0Y6zUIw6+jqV9GQ3TDTDEE8GkOGIGZ6F4afjZ0Kup\/tgdg1uOLJosfWiHm\/e381K6SE7Xwcxc5u7yvofep317\/5D\/jLCIjBePAYtJf4mkuS+Q7SWth7iVfvOLSleuXPw8xY0uHsi8LQ6ex42gvYuIxO1dxpHSVKwtL4J\/kcvgnQY8qB7x+eB36RcfedtGGdVU5JU9+cCFS74ulHOiE+kKT+PAPr5MrUGeSk1G51zTNe\/i5A59995tvbUV1CS66iagQjJviGUWqzAhKU\/vOM65Ff3\/RUluBdb4CgLohVXsFJJWf1I\/Irc6Ta+rq5NirOrOO9JnSXTQDE1aqsXR4McJvNKyWyDmWGmYaySRROU7dkY824BPG8hz5EYdMtt8I5R6fxHn3ta+89ovAoIfg8mCLWWwlCjA+Fyy7sFwrmlN0PVBOzpZNo1BAiW+KGTt8ldVX1ogKfNXEVJEjBqG\/+QE2Od8T3DlqwotlqykQVVdURb0tlReJfXCvYOvulh8c+92B3cibbwW3mLgX65IIwCivCChzy+6OrkW3LroS8xIrSchsik4BBTYrzA\/kajX4Qq0Vk4WdGIn6MJFXdttYQIOYLF8LcCLmK1O0xnLlCDDwHNz4xQ3fCzh8nANJ\/Yu6V8ydnQjnYeYsxOftGRjoONj+X5NYYqGaky\/RFCOjIhBXNv\/GheJq6FYX\/PeVwlKDz7tw9DnyZcU5Y5lNVK2uzlhjyL0wING6jnQ86212YTVALFobJ7hY2UQ4GJ8LFY9xUfexju55N3xotSXXUpGpN4sVmC6JNOMHvzhLvALi0w+D8ABCkahzSaCBcxmxsvWiB5eLmZfPzNgokmaeob6ho6\/9j03fwZocjE4i9yLIYhaP7KNEAcZnmYwo3FexrMprn2X\/OHSxcRSJ0EPZ\/++nAAdKdBHxK2ylyyuFqRwGYwQzlmNwsOTeSwCuaojGuPr2\/YXEcQZjYdGy68x3Dj29fyce46iRW0ymichikgEEwckV7uyiKLdk3Z8++5O8cvuV6V6ANrLy0\/WY3CM0GkVcPpeYQsqkaYIjR1fX4O4X73zh3r76rg4UrzhY3ABLRAeTDWabsZFlekSvq\/\/4n4\/\/3O8JYP2KZDCrsv5g7+kWIqAIMu4zCS52H76P5Du1ueExgKsHPaFGjjGbJiJ7LxmAKWVf2kV2PLJlZ29T30Y6RbNp6lKA5pT+ZseLW\/\/3X95GKwgqJRpjHjlGtj4ZgDEfxcWkjN79y52\/cve72+nmyaapRwH2Gz4q0bXvqT2\/Qu2V3kUplRC4SIFkkaC4GCvja9hQV9+6p\/knHBllJSXJO3WS7C9dMNixv\/Vnx587eBw1p2hU3Cvh0UWyACMFFRfjMDbw6v0vbnC0OTaR1WbT1KEATSXOdudbb\/7rqy+g1lTmEzJLjGxxqlCgWCjz0zk6B4\/VXDFrrdlmKsjaxkaSfPL9pmh0O9wt2\/9z21fb321pRg0JLsZ9kYupvsVh\/ClVAIss2dR\/sseFyQxni+aXrsWoMh1lRJaXPU6CAhSNsK8FGt889Y33vr9tG7KizkW3EAdvCYtGPCtTqjufaKedwnT6ryebZl9bm5dfnr8sy8VCxJ6M\/6nK9Bzv\/s1Ld7\/wJOpHjkVwkXtRTCbFvfB80pZ85qGSqgz31O0MTW+fOjTvhgVLbIU5NZm05agKZffRKSANqh0D77788Mb\/6+keojGV4TjcCLSkuRfySCnAmB+T4mIGLDwSdPa6D1Wvqr7MlGMuznKyEIEmw39yLs+Ap3Xb99\/5StvbjdS7OGIkuKh\/pQRcyCctAGO+qoLG3mPdA5Zic33pwhlrMFLBNycVo+Nt2TQRFKBSH\/D4eo\/8\/uC\/HnjsvX2oA\/WthMJxxqt\/qnUwlqcQpDiZueWdM+32OUUtxfOKr0Hj0vrVtvEa\/EG\/zgk1mAo3eOr1U9\/Y8rXXN4MeVOopHql38VgxBxwmn9IBMFUrAmwYZI2vn2wsX1bhsFcXXoFGpmVWuCo4ux+dAvQT09XYvKvpB395cNMfcRcVeXKulOpdkaWnG2DqbZAjy\/pNx+pmXFLlKKgpWI2JEfqstIzsivQek3MJXTDQvrftx5vufOFplKbARYBR\/6LfUUkfHKYmpRNgqoYEmeJkpvpNdUfLV1QM2GdKTgbnhLotu08XBcIRLlrr7rb\/2HjH80+iHIKJwFLgSsrfiHzGTOkGGOGjNlaCnMx44sVjR8pXVjoLqgtWIt4JiwpnUUbipCNRoUdkrK9ld+ujL935+ydRRiS4lDsobR2QboCRZgpgai\/F5Yk\/1R0qvqC4Lb+66HLYY8xZEwZJldrEwEXE\/rua3j39vVfu2fAb5E5pQn2LnCtlxlTkNWbKBMBYuALXeeLy1Cv1J7CazMmi2uLl+FJYXrrmV47Z+ml8gUZU72Cg68TLdV\/f\/PArL6OpinMpgyrFIs+lNWUKYGyEApnaS07W9GZDozDrDhUvKF1iybeWZDLuPK2UnaDM6VskuDDdrGHfr3f\/6\/ZH3uZ6EopzRZoj0g4ukiCTAGN5ClxsHBvNhFniLV1te9venrlqZqWlwFYrHbC8M5viogCVeepcjhbH5s1fe+1rx3578BgyGI1zKdrHlX8iN2caYKyjAhkbyY2\/ja62AffBDce2Vq+q8uSU5i6FK8OU1ctAmRgTXT+BgObFPNVfbrjnDz\/sOyzj6ZURlZxLKfSK5jHmnNxtEwEw1liBTHEy\/sYXlvzBY384vFdvMewrml+yECKzNAuy6B1MrmXEYnpDvUN1R\/5w+Buvf+mlDZrLr6JRCSwq9ApcGRGLkTWeKICpOigupt4qacZo3dHc1nawc2v5kjKbtdC2EG+nPgs0RbJzezm9TQv6+xr7Nm7+l5e+WffsoaO4ypdVjRQVuFISenOu5NiPJhpgJIYCmeJmrL3e1eJwH372wLa8mrwT+ZX2OZiUWkrSZU1mMCaSa0GRx8fpT538y7FvvXTXC884m538vHGkdZ4gUzH1pPOEJHKMyZBYD4Kdn6\/gAnfc+HFKCzZdweKSkqv+5dpby5eUfs6Uay2Q3xj6ACKNwOK0QI\/T6zh7vOu3236w5Q+dO1o7QSMmFW5D+xZFIsUkX9oJAxfKlpZ17idDIsi4mbERWApknD1uxKZfesfF85fefsm6\/Cr7ddA7LPzg1QfBCyBHhzSaev0+V4frjYO\/3f\/UwV\/trgNNCB5yLQKKHIt7bjyn1A4cTlyaLBwskgIyGhYnCDSCS3E0rqzIa\/rlX7p82aKbltyeW5Z7mcFitE1XjqY4ls\/j9w52Od89+dLx3+z43lbGbykAkWuRY43kWgTXpEiTEWAkDOtFMFFkkpspoHFP4PG6cdWX11w876O1n8wpy7\/Wkmuy0RMwHUKzacvi6ohet8+NL6tsbni9YeP2b725F22m2GPiXnErgosBgwTdhItE1OG8NFkBpioZyc3IwQgwbjwm+CgiTBfevXzBwk8uurGgpnCNOcdUxVm\/\/JxeMh+cQr4ZTQynUatie13eNmebY1vdproXD\/z8PRpLCSjSgntyLQUuAoubAtaE6luox\/vSZAcYK6y4GfUwpZ8poJG7EWi8JzjzmtqqJZ9avLLswsobbIXmhWYMCPghg5CPM70rT6P8uBLeAaTQkulcr9876Ha6ez11nUc6\/1z3+4M7mzY3tMgbQi8RDaYEkgIXjwk2np8UuhbqMWqaCgBTFWddOdJUQCMXI8DUXgGN95mW3r9qfs2lMy8pWVC2Ft9WXIBP3+TTIBkC3MR84Yyg4nJMtLpjBRvUxe\/EWhAneo93vdG8q\/ngvp\/souJO0JATcVPAUuAiwAisSSkOUa\/3pakEMFV5qejjhwJaJMjI4bjxGt9sGIyEdfbHF5Qv\/tTS1faZBYuxKvYFiNyYpTfi0+syyhMkgMmDhlyOSFNh\/ZBAwr\/h\/FERKbL9mt\/n9jVz5UBXu+No3YYj2+s3HmsDXCjyCCi2jeAZCSyCKhJYk0aJR72ipqkIMDaI9ebGDiGYyL0UuAg4bgpoyphMPcVQfPGMkhlLy0uqVsysLV1QeonJbqkxmk3FJquhTGc0FJDLcfQmwca1UsOIGw14BJJMYTCp57g+vt+rOTBzp0vz+ns8Tn9rz4nuve17muo7D3Wf7drTxnW3CCTWncBSHEkBiRwrUgzyuhKFvH\/KJEWiKVPhUSqqOJoSn5FgI8j4mxs7U4FNtZudZixYUFxQc9XsCntVYZG1yGLHROFCi91aYs4zVRjwVTmDSW\/DQu34wJEOH+TGkU6nBSlr8SmjgD84GPD7+\/AN7U5Pv6drqA9fNTo7OOBod\/Y2bz3V3l93ll8mI0BYT4KDZbNcbjzPjcAi11IAG8mteO+UTIrQU7LyIyrNtnBTQFKcTQFM7XmeGzucgFM0YOcr7qCuca\/yVffh1HBSz3BPEESO5tRzvJnXeS0SVJHAIri4KcBF5oPTUzeNRrSp25pQzVWbIkGiQEVAkaspbsfz6pjP8XgsUKl8cct5SYEyEmwKINyPBBaBxHMKUDwmsAi+yDzwc+qnsYg29Vt2rgVsI0GjNgUiBSzu1RYJSvUc94pOao9Tw9wuEhSKi3GvjhWAFNC4VxufVcDC4fRLkQSbfq17f4sUWNRegY57nosEGJ9W5yPpxGMCQ6WRAFPgUuBRv9Wez6lnVB7Tdh9JuGnbyCgNU+2P3CtQ8TGeV9fUb+6ZRoKM5wgippF7nou8n78\/ECmSeB+IBifQyFho9IEETwK0zD6SpUCWAlkKZCmQpUCWAiEK\/H\/hU2Zv2rCvHgAAAABJRU5ErkJggg==",
-          "BTTTriggerConfig" : {
-            "BTTTouchBarItemIconHeight" : 22,
-            "BTTTouchBarItemIconWidth" : 22,
-            "BTTTouchBarItemPadding" : 0,
-            "BTTTouchBarFreeSpaceAfterButton" : "5.000000",
-            "BTTTouchBarButtonColor" : "75.323769, 75.323769, 75.323769, 255.000000",
-            "BTTTouchBarAlwaysShowButton" : "0",
-            "BTTTouchBarAppleScriptString" : "-- This script can be used in conjunction with Better Touch Tool to display the currently playing track on the MacBook Pro TouchBar\r-- More info here: https:\/\/lucatnt.com\/2017\/02\/display-the-currently-playing-track-in-itunesspotify-on-the-touch-bar\r\rif application \"Spotify\" is running then\r\ttell application \"Spotify\"\r\t\tif player state is playing then\r\t\t\treturn (get artist of current track) & \" - \" & (get name of current track)\r\t\telse\r\t\t\treturn \"\"\r\t\tend if\r\tend tell\relse\r\treturn \"\"\rend if",
-            "BTTTouchBarAlternateBackgroundColor" : "128.829533, 128.829533, 128.829533, 255.000000",
-            "BTTTouchBarScriptUpdateInterval" : 5
-          }
-        },
-        {
-          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-          "BTTPredefinedActionType" : -1,
-          "BTTPredefinedActionName" : "No Action",
-          "BTTShortcutToSend" : "56,50",
-          "BTTAdditionalConfiguration" : "655360",
-          "BTTTriggerOnDown" : 1,
-          "BTTEnabled" : 1,
-          "BTTShortcutKeyCode" : 39,
-          "BTTShortcutModifierKeys" : 655360,
-          "BTTOrder" : 2
-        },
-        {
           "BTTGestureNotes" : "\"whatever\"",
           "BTTTriggerType" : 624,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -561,6 +257,8 @@
           "BTTPredefinedActionName" : "Insert \/ Type \/ Paste Custom Text",
           "BTTStringToType" : "¯\\_(ツ)_\/¯",
           "BTTMoveCursorLeftBy" : "0",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "E6FE9FC0-13D1-482C-8AF3-CD5680D4139E",
           "BTTTriggerOnDown" : 1,
           "BTTEnabled" : 1,
           "BTTShortcutKeyCode" : -1,
@@ -653,6 +351,506 @@
               }
             ]
           }
+        },
+        {
+          "BTTTriggerType" : 20,
+          "BTTTriggerTypeDescription" : "2 Finger Click",
+          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
+          "BTTPredefinedActionType" : 1,
+          "BTTPredefinedActionName" : "Middle Click",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "FB94C966-66E3-45D4-8DD2-C6CFFE2ECBE4",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 1
+        },
+        {
+          "BTTTriggerType" : 624,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "59,55,49",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "57B962FA-E1AA-4136-B0DD-11C79C6D9325",
+          "BTTTriggerOnDown" : 1,
+          "BTTEnabled" : 1,
+          "BTTShortcutKeyCode" : -1,
+          "BTTShortcutModifierKeys" : -1,
+          "BTTOrder" : 0,
+          "BTTKeySequence" : {
+            "BTTPauseBetween" : 0.29999999999999999,
+            "BTTCharactersToDeleteAfterwards" : 1,
+            "BTTKeyCount" : 6,
+            "BTTKeySequenceDownKeys" : [
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : " E",
+                "BTTKEYCode" : 14,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474496
+              }
+            ],
+            "BTTKeySequenceMixedKeys" : [
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : " E",
+                "BTTKEYCode" : 14,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474496
+              },
+              {
+                "BTTKEYCharacter" : " E",
+                "BTTKEYCode" : 14,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474496
+              }
+            ],
+            "BTTKeySequenceUpKeys" : [
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : "⇧",
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1
+              },
+              {
+                "BTTKEYCharacter" : " E",
+                "BTTKEYCode" : 14,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474496
+              }
+            ]
+          }
+        },
+        {
+          "BTTGestureNotes" : "\"table\"",
+          "BTTTriggerType" : 624,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : 118,
+          "BTTPredefinedActionName" : "Insert \/ Type \/ Paste Custom Text",
+          "BTTStringToType" : "(╯°□°）╯︵ ┻━┻",
+          "BTTMoveCursorLeftBy" : "0",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "BDD3B102-9B9E-4477-A417-9D5652310A18",
+          "BTTTriggerOnDown" : 0,
+          "BTTEnabled" : 1,
+          "BTTShortcutKeyCode" : -1,
+          "BTTShortcutModifierKeys" : -1,
+          "BTTOrder" : 6,
+          "BTTKeySequence" : {
+            "BTTPauseBetween" : 0.29999999999999999,
+            "BTTCharactersToDeleteAfterwards" : 1,
+            "BTTKeyCount" : 6,
+            "BTTKeySequenceDownKeys" : [
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCharacter" : " T",
+                "BTTKEYCode" : 17,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              }
+            ],
+            "BTTKeySequenceMixedKeys" : [
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCharacter" : " T",
+                "BTTKEYCode" : 17,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCharacter" : " T",
+                "BTTKEYCode" : 17,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              }
+            ],
+            "BTTKeySequenceUpKeys" : [
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCharacter" : " T",
+                "BTTKEYCode" : 17,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474880
+              }
+            ]
+          }
+        },
+        {
+          "BTTTriggerType" : 16,
+          "BTTTriggerTypeDescription" : "TipTap Left (1 Finger Fix)",
+          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
+          "BTTPredefinedActionType" : 1,
+          "BTTPredefinedActionName" : "Middle Click",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "37105235-B361-4674-AEE7-4FD829B90377",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 0
+        },
+        {
+          "BTTTriggerType" : -1,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "56,50",
+          "BTTAdditionalConfiguration" : "655360",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "7225B54B-780D-477F-B716-A0D5C1D18933",
+          "BTTTriggerOnDown" : 1,
+          "BTTEnabled" : 1,
+          "BTTShortcutKeyCode" : 39,
+          "BTTShortcutModifierKeys" : 655360,
+          "BTTOrder" : 2
+        },
+        {
+          "BTTTriggerType" : -1,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "50",
+          "BTTAdditionalConfiguration" : "524320",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "E6BE69AA-4E47-4EFB-BD6B-871752F0AE19",
+          "BTTTriggerOnDown" : 1,
+          "BTTEnabled" : 1,
+          "BTTShortcutKeyCode" : 39,
+          "BTTShortcutModifierKeys" : 524288,
+          "BTTOrder" : 1
+        },
+        {
+          "BTTGestureNotes" : "\"joke\"",
+          "BTTTriggerType" : 624,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : 118,
+          "BTTPredefinedActionName" : "Insert \/ Type \/ Paste Custom Text",
+          "BTTStringToType" : "(☞ﾟヮﾟ)☞",
+          "BTTMoveCursorLeftBy" : "0",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "8A4C99E6-1440-4EDA-ACE0-05A20A78FBAF",
+          "BTTTriggerOnDown" : 1,
+          "BTTEnabled" : 1,
+          "BTTShortcutKeyCode" : -1,
+          "BTTShortcutModifierKeys" : -1,
+          "BTTOrder" : 5,
+          "BTTKeySequence" : {
+            "BTTPauseBetween" : 0.29999999999999999,
+            "BTTCharactersToDeleteAfterwards" : 1,
+            "BTTKeyCount" : 6,
+            "BTTKeySequenceDownKeys" : [
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCharacter" : " J",
+                "BTTKEYCode" : 38,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              }
+            ],
+            "BTTKeySequenceMixedKeys" : [
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCharacter" : " J",
+                "BTTKEYCode" : 38,
+                "BTTKEYDown" : 1,
+                "BTTKEYOrderRelevant" : 1,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCharacter" : " J",
+                "BTTKEYCode" : 38,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              }
+            ],
+            "BTTKeySequenceUpKeys" : [
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCode" : 56,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              },
+              {
+                "BTTKEYCharacter" : " J",
+                "BTTKEYCode" : 38,
+                "BTTKEYRequired" : 1,
+                "BTTKEYTime" : 550474752
+              }
+            ]
+          }
+        },
+        {
+          "BTTWidgetName" : "show currently playing spotify track",
+          "BTTTriggerType" : 639,
+          "BTTTriggerTypeDescription" : "Apple Script Widget",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchBar",
+          "BTTPredefinedActionType" : 49,
+          "BTTPredefinedActionName" : "Launch Application \/ Open File \/ Start Apple Script …",
+          "BTTLaunchPath" : "file:\/\/\/Applications\/Spotify.app",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "5309CE9D-E7AE-448C-B3C4-6553173C5734",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 0,
+          "BTTIconData" : "iVBORw0KGgoAAAANSUhEUgAAAJgAAACYCAYAAAAYwiAhAAAMKmlDQ1BJQ0MgUHJvZmlsZQAASImVVwdYU8kWnluSkJDQAqFICb2JUqRLDS2AgHSwEZJAQokxIajYUVGBtaAiihVdFVFwLYAsNuxlEbDXhwUVZV1cxYbKmySArn7vve+d75t7_3vmzDn_OXdmvhkA1GM4YnEOqgFArihPEhsayExOSWWSHgECwIEasAKWHK5UHBATEwmgDL3_Ke9uAET+vuog9_Vz_38VTR5fygUAiYE4nSfl5kJ8CADcjSuW5AFA6IF68+l5YoiJkCXQlkCCEFvIcaYSe8hxuhJHKmziY1kQpwGgQuVwJJkAqMl5MfO5mdCPWinEjiKeUARxM8S+XAGHB_FniEfm5k6FWN0GYpv07_xk_sNn+rBPDidzGCtzUYhKkFAqzuHM_D_L8b8lN0c2FMMcNqpAEhYrz1let+ypEXJMhfi8KD0qGmItiK8JeQp7OX4qkIUlDNp_4EpZsGaAAQBK5XGCIiA2hNhMlBMVOaj3zRCGsCGGtUfjhXnseOVYlCeZGjvoH53BlwbHDWGORBFLblMsy04IGPS5WcBnD_lsKhDEJyl5om35wsQoiNUgvifNjosYtHlRIGBFDdlIZLFyzvCfYyBDEhKrtMEscqVDeWFeAiE7ahBH5gniw5RjsclcjoKbHsRZfGly5BBPHj8oWJkXVsgXJQzyx8rEeYGxg_Y7xDkxg_ZYMz8nVK43g7hVmh83NLY3D042Zb44EOfFxCu54dpZnPAYJQfcDkQCFggCTCCDLR1MBVlA2NrT0AO_lD0hgAMkIBPwgcOgZmhEkqJHBJ9xoAD8CREfSIfHBSp6+SAf6r8Ma5VPB5Ch6M1XjMgGTyHOBREgB37LFKNEw9ESwROoEf4UnQu55sAm7_tJx1Qf0hGDiUHEMGII0RY3wH1xbzwSPv1hc8Y9cM8hXt_sCU8J7YRHhOuETsLtKcJCyQ_MmWAc6IQcQwazS_8+O9wKenXFA3Ef6B_6xhm4AXDAx8BIAbgfjO0Ktd9zlQ1n_K2Wg77IjmSUrEv2J9v8yEDNTs112Iu8Ut_XQskrfbharOGeH_NgfVc_HnxH_GiJLcUOYuewk9gFrBlrAEzsONaIXcaOyvHw3HiimBtD0WIVfLKhH+FP8TiDMeVVkzrWOHY7fh7sA3n8GXnyxcKaKp4pEWYK8pgBcLfmM9ki7qiRTGdHJ7iLyvd+5dbyhqHY0xHGxW+6wrcA+PAGBgaav+ki4Zo8tBgAytNvOutjcDnrAnC+hCuT5Ct1uPxBABSgDleKPjCGe5cNzMgZuAFv4A+CQTiIBvEgBUyGdRbAeSoB08FssAAUgRKwEqwFG8AWsB3sBvvAAdAAmsFJcBZcAm3gOrgL50oXeAl6wTvQjyAICaEhdEQfMUEsEXvEGfFAfJFgJBKJRVKQNCQTESEyZDayEClBypANyDakGvkNOYKcRC4g7cht5CHSjfyNfEIxlIpqo0aoFToa9UAD0Ag0Hp2EZqLT0AJ0EbocrUCr0L1oPXoSvYReRzvRl2gfBjBVjIGZYg6YB8bCorFULAOTYHOxYqwcq8JqsSb4p69inVgP9hEn4nSciTvA+RqGJ+BcfBo+Fy_FN+C78Xr8NH4Vf4j34l8JNIIhwZ7gRWATkgmZhOmEIkI5YSfhMOEMXDtdhHdEIpFBtCa6w7WXQswiziKWEjcR64gniO3Ex8Q+EomkT7In+ZCiSRxSHqmItJ60l3Sc1EHqIn1QUVUxUXFWCVFJVRGpFKqUq+xROabSofJMpZ+sQbYke5GjyTzyTPIK8g5yE_kKuYvcT9GkWFN8KPGULMoCSgWllnKGco_yRlVV1UzVU3W8qlB1vmqF6n7V86oPVT9Stah2VBZ1IlVGXU7dRT1BvU19Q6PRrGj+tFRaHm05rZp2ivaA9kGNrjZKja3GU5unVqlWr9ah9kqdrG6pHqA+Wb1AvVz9oPoV9R4NsoaVBkuDozFXo1LjiMZNjT5NuqaTZrRmrmap5h7NC5rPtUhaVlrBWjytRVrbtU5pPaZjdHM6i86lL6TvoJ+hd2kTta212dpZ2iXa+7RbtXt1tHTG6CTqzNCp1Dmq08nAGFYMNiOHsYJxgHGD8UnXSDdAl6+7TLdWt0P3vd4IPX89vl6xXp3edb1P+kz9YP1s_VX6Dfr3DXADO4PxBtMNNhucMegZoT3CewR3RPGIAyPuGKKGdoaxhrMMtxteNuwzMjYKNRIbrTc6ZdRjzDD2N84yXmN8zLjbhG7iayI0WWNy3OQFU4cZwMxhVjBPM3tNDU3DTGWm20xbTfvNrM0SzArN6szum1PMPcwzzNeYt5j3WphYjLOYbVFjcceSbOlhKbBcZ3nO8r2VtVWS1RKrBqvn1nrWbOsC6xrrezY0Gz+baTZVNtdsibYettm2m2zb7FA7VzuBXaXdFXvU3s1eaL_Jvn0kYaTnSNHIqpE3HagOAQ75DjUOD0cxRkWOKhzVMOrVaIvRqaNXjT43+qujq2OO4w7Hu05aTuFOhU5NTn872zlznSudr7nQXEJc5rk0urweYz+GP2bzmFuudNdxrktcW1y_uLm7Sdxq3brdLdzT3De63_TQ9ojxKPU470nwDPSc59ns+dHLzSvP64DXX94O3tnee7yfj7Ueyx+7Y+xjHzMfjs82n05fpm+a71bfTj9TP45fld8jf3N_nv9O_2cBtgFZAXsDXgU6BkoCDwe+Z3mx5rBOBGFBoUHFQa3BWsEJwRuCH4SYhWSG1IT0hrqGzgo9EUYIiwhbFXaTbcTmsqvZveHu4XPCT0dQI+IiNkQ8irSLlEQ2jUPHhY9bPe5elGWUKKohGkSzo1dH34+xjpkW8_t44viY8ZXjn8Y6xc6OPRdHj5sStyfuXXxg_Ir4uwk2CbKElkT1xImJ1Ynvk4KSypI6k0cnz0m+lGKQIkxpTCWlJqbuTO2bEDxh7YSuia4TiybemGQ9acakC5MNJudMPjpFfQpnysE0QlpS2p60z5xoThWnL52dvjG9l8viruO+5Pnz1vC6+T78Mv6zDJ+MsoznmT6ZqzO7BX6CckGPkCXcIHydFZa1Jet9dnT2ruyBnKSculyV3LTcIyItUbbo9FTjqTOmtovtxUXizmle09ZO65VESHZKEekkaWOeNjxkX5bZyBbLHub75lfmf5ieOP3gDM0ZohmXZ9rNXDbzWUFIwa+z8FncWS2zTWcvmP1wTsCcbXORuelzW+aZz1s0r2t+6PzdCygLshf8UehYWFb4dmHSwqZFRovmL3q8OHRxTZFakaTo5hLvJVuW4kuFS1uXuSxbv+xrMa_4YoljSXnJ51Ju6cVfnH6p+GVgecby1hVuKzavJK4Urbyxym_V7jLNsoKyx6vHra5fw1xTvObt2ilrL5SPKd+yjrJOtq6zIrKicb3F+pXrP28QbLheGVhZt9Fw47KN7zfxNnVs9t9cu8VoS8mWT1uFW29tC91WX2VVVb6duD1_+9MdiTvO_erxa_VOg50lO7_sEu3q3B27+3S1e3X1HsM9K2rQGllN996Je9v2Be1rrHWo3VbHqCvZD_bL9r_4Le23GwciDrQc9DhYe8jy0MbD9MPF9Uj9zPreBkFDZ2NKY_uR8CMtTd5Nh38f9fuuZtPmyqM6R1ccoxxbdGzgeMHxvhPiEz0nM08+bpnScvdU8qlrp8efbj0Tceb82ZCzp84FnDt+3ud88wWvC0cuelxsuOR2qf6y6+XDf7j+cbjVrbX+ivuVxjbPtqb2se3HOvw6Tl4Nunr2GvvapetR19tvJNy4dXPizc5bvFvPb+fcfn0n_07_3fn3CPeK72vcL39g+KDqX7b_qut06zz6MOjh5Udxj+4+5j5++UT65HPXoqe0p+XPTJ5VP3d+3twd0t32YsKLrpfil_09RX9q_rnxlc2rQ3_5_3W5N7m367Xk9cDfpW_03+x6O+ZtS19M34N3ue_63xd_0P+w+6PHx3Ofkj4965_+mfS54ovtl6avEV_vDeQODIg5Eo7iKIDBhmZkAPD3LgBoKQDQ2+D5YYLybqYQRHmfVCDwn7Dy_qYQNwBq4Ut+DGedAGA_bFbzoW9_AORH8Hh_gLq4DLdBkWa4OCt9UeGNhfBhYOCNEQCkJgC+SAYG+jcNDHzZAcneBuDENOWdUC7yO+hWRznqMDkIfpR_A6KtcRSue81AAAAACXBIWXMAABYlAAAWJQFJUiTwAAAv5klEQVR4Ae19B3xc1ZnvmT6jMupWseQil+BCcQNMMOBAkoUNoWRJsuRnFjAtgbw83uZt9m0272V_eWGTl7pZ0khCzYYQEuJgAyEBU2yMC+5NtmXLktWLJY1mpKl33v9_Zo48FtJougpzfrq6d2455Tv_+33f+b7vnCtENmUpkKVAlgJZCmQpkKVAlgJZCmQpkKVAlgJZCmQpkKVAlgJZCmQpkKVAlgJZCiRFAV1ST0_Dh2_b9rDNbvXOEJZAsQgY8oNa0KoP6ow6ndBrRv0wvfR+LRjUC03Tgn6dXuc2GIXT2x8429OtdW688bHBaUiahJo0TLCEnp7CD63ftr44YDOWmAzm2UGduFQEdUsAlwoAqTAoRIleLwq1oC7PYNAbdAa9AIiEDheZgkHcwb0WFMGAJgIBLYBLLuTRh5PduNyn0+k7hS5wOKAFdwpdsNHv1nc_fdmPe+SDH6B_HxiA3fnGnVZdoX250RD4SFAYFulE8BL08zydXm+R4FHMCeggfgieUAr9HgsTIcyFyBgCIe5UQCQAsYHXeXXB4CkAc68mtGM6Tf+a40THnuc__fzQWPlOl_PTGmB37vxChdEsrtAbDFejk2_QBUWVwWLK0YMjBXwBdL4mwZTuziTeAGRhMBmEBo6n+fxDqE8buNxfggH_XzVNv_3x5Y+2prseE5H_tAPYHTsehNjTLteZTbfrdcHL9EbDPIo4jYAiZ+K_CU4UtQSdHoCTItYfaECVdml+8fRgwLPj2ZWPdU9wFVNW_LQB2B077l1otlnu0uv0nwCgllJcSR0pQ1wq0R5R3E3VFxzuqAhoG_2a76knlv_8SKL5TpbnpjzA7tz9xTVms+4ucKZPGS1GO0EV8GuThb5x18NgDA0o_F6_Ew+_4Pf5H39i+U_fijujSfLAVAWYfv2eB9caTPovQdBcZ7AYbAEvReDEi79U9SvFqMFsEACaG530pt_v_8Hj3+x6XTz_fCBVZWQinykHsPV7H_ow9OV_0hkMn9Ab9XoN3Go6AWtkpxNoaKcAJwtiJPqyPyi+_8TFj24eed9k_T1lAHbP_nvmCmEmsO40moxWOQqcPgxrXHxQV+Mo1O_x+4ROPK55A9_91Yqf1I_74ATfMOkBtu7Vdbm2qsL1UK2+YrKaqgJevxwNTjDdJqx4JTp9bl8HDGw_7O_tePT5tc9TX5uUaVIDbP2+By7V6c3fMZoMV0mDJUaE2RSigJ6eBdrz_IGt3iHvPz+16mfvTEbaTEqAXfP1a4wLP3XhF0CwrxvMxiI_FPhsGp0CRgwEAj6_QwuI_9PSIn76yg3_6Rn9zok5O+kAdveBz9ca9MZvGwzGv6PVezor8KnqcjkQMOhonnlZ0_u_9Kslk0c306eqkanI585dD96gDxo2Q4kHuKaX2SEV9BkrD76EfBlhB7xBF9BvvnvPQ58c695Mn580HGz9_oe+DCPjv+n1+pypbCjNdAeOLI9+VjjEPNDNvtlf1_EIHOoTql9MOMA4SrSU53_XYDI9MFl8hSM7bar9ViLT79Me62xwfvnFmx4fmKg2TCjAbt_y+aK8QuPjUORvDviy+lYqQaAMtLAXbnK6dPc8e_l_dKQy_1jzmjCA3bXzCzVw8fyXyWZaA+NhrPXN3hcnBTjK9Lt9e+BKu+3xVT89FefjSd8+IQC74737ZllM5t8ZbebLsuBKug_HzSBsytjrHfDd+uTqn50e94EU3pBxgN2xFeAqtDyPkeKlWftWCntynKwkJ_MGDmhe_6cy6WLKqJnijm0PzDTnW54zmk1ZcI0DiFRf5ssMkF2kMxo2rN+zfnaq8x8rv4wB7La_3ldgyTU9A53r8qxYHKs70nueIIM_d4nekPNrRv6mt7RQ7hkB2PUvf9FSUGZ5zGgzrc2CKxPdOnYZiC8TRqvxSpNF90uaiMa+MzVXMgKwqirxCBr1aUZCZNPEUyDMyW42VxT+ALVJKwbSmjlJee++hx4wmQ3_LRQYOPHEzdYgRAHND53MZLh3_d4vPJBOmqR1FHn3vi9caTCaXkZkST5mQKezHdm8E6AAQ34wdW_Q69dufnLZj_+aQBbjPpI2DsYRo8Fo+JnBoMuCa9xumJgb+NJjWl+O0aB_FA7yqnTUIl0A0xlzjN+AOWJJ1nGdjm5LXZ7sH4wsF+pN4t_v+_l9ptTlHMopLQC7Z9_nP2c0Gu7KKvWp7q705MeRPeLv7ghcarw31SWkXAf7h_fum2exWN_CRNKZWb0r1d2VvvwY5oPZ793+gPfqVE74TSkHY6izyWT+fwaLMQuu9GEhLTnLgEWrsdRgMH1b3HabIVWFpBRgcz6x9BaDEaE3WXtXqvono_kwZAoLxXzirv9V9ulUFZwygN325_XFJrPu6zq90E+jCdapovOUyIeh11wjA6PKf1v3zroZqah0ygBmr8y9HzHhiyfjqFEuMIJ_MggPBKT9hzpH5MY1ISJ_y+PwvXwutKWC5JM7j5CoNC0wWvP_ZypqmhIlf92Oe+Zabbbt6JQZmVTsCRysvBVa702C4P0kITelF4FiO+Dl2lzcAvKchnn4XD5JzlyiHRj5EUgCwOKbzCn7elNoXS+DGXsE7_E31_oKlX1+eZJz45_cC7U__56p8IsvoBbUzvqd3jVPXJ7cCj_GFDRYZ7FY_hHca0Y647uGwcSOxxQtJi4f4HV6hc_FzSeGzrqFu2cQG_a9Q8LTh_NOj_ANeEVgEDPCCS6uvENQBYg8zMaRc3lxHAaYAqwEmhFAQ1lyI9gsRmHMNQkTN7tFmAsswlZsFdZiGzarsBRa5TUzrhtzsAGQTKFlpAg4FsI1yuRu0v4jkzBaTMWaRXsYlUzKdBHqqSSaetf2+xcjSmIbLMIFqeRe7GACiZyEyidXz_H0u8VAi1M4GvvFwBmHcOHY2+sWvrNDwg8QaQCRIHBGS1IZCDc33lbLLMP5jjW5nADMAQDtZmEqsgpzoUXkVOSJvJl5Ir_GLvJn2oWtxCoQJi7XmGC7NNQ1U6ssjkaSaOdI_2BQc_j87qufXPaLfdHujXYtaQ6msxrvN1pNBclyL3IoJXr4hnsHPMLRNCD6T_eK3hO9wlHfKwYbB4QGbkVORCBJpZQPkqMRNOg0uUVrccLXWABSlAG8Bi7q5dbsFE40ojdcNx3Ap7MahKU8V+TOsgv7vEJRWFso8qryAbx8hs9Ikct2S243CVgcaQsuZocaQQ72oGx7Av_CVEvgSTxy+5a7a3MKc98xGAwVVA4TTeFVYwAoh+g52iO693WI_mM9wts9JLR+AApg0plQVYlC7hMtaYKeCzM_KRv5YrA9AJwBYtZSZhP2BcWiZEmJKFpYAtDlCStELZMU5xOoy0kuFgj0O13ey5+94rG6RKiXFAez5tk+a7KYKhINIiReiJamt5vEyReOCydAFegNL61AbsTrVKpT7iFLhFRJPKNeCDYY7ZLtAegCfW4xCF1xsO6saN9YL_T5JmGFOC34UImYcckMUXZhmbCV2jhjW4rTZF7iRGovuRikU64WvB_PUx+LO6mmx_3gzX+8ubB0Ts170CnmJdJwBa6jvzks6h8_ILQhv6AoSZ+Ii7uJmX+AIU3gbjJB7JsweCi8pEzMWFEhyi4uF_aafGlKoQRNhOaJNIjmGoy8T_c1O1Y__7dPtsebR8IcrKim8ia9STePSmoiiRVv+EuDOPGL_XI0pwuPuBLJa9o8M0KH5OCl66+nRdfrjcJQZBP5i4rFzCtrRPnycpFfbZcagxwopFFnI5BhopmTX5HzN6Dzk_HSOiGArbhvhQmjxtswI5sr7sVbJgijE+4+jzj+68N4YwFQgC2bRqGABBxGFWFx2re1RXA7XpkjipeVi+qPzBEzLpohrDCXpHVmPPoLppp_QA2fwRbXWhcJich176xfCv1rBxZAy0nk5aHVnHrX3q9twagJVU6oFqN0yAfllBKl0E9zMCKtWjtbzPnYHJEHs0g6xCcZAjily+MYuPaZNU_siIfMCXEwk9V6Pb+YQUNnIokr89GOJY2dfEuzKT4KRIhSDhDqj58VTX86ISqunS3mfrxWFAF0BFqqbGxU9s05plzNZ1uLisYFsPhl0zXXGGEkvCk+ioxyN75AlU0poAC4GFUMb4dLND59SGz90mti1_d3it6TvdKuSLdPKhIniejNhr+bf_31lnjyi2I2HD2b25+5bhlME_+EelsSEY_MlSNIN4bo7W82Sf0ipSISb25ITlBxwUZxErlJnxDvYU2Ywh3A3fA5HuMHf3NTIikyHx4PJzwczmb4VKYPpJ6kF0GMxgcOdYvmNxuFo8sl8mcVCBsGCOe1LZG6hehQVHmp+dUDT+xriTWLuEWk2WJcDnZpT0S5V5XiyKdsaZkww4rtgdsnbiVfdjz+hRqtsg3ZmGDANOaZhQE2JfoNDfAJmvDblG_BHudo4IRdiY5rum3oZ+SIlq6bYbGC+tEpTvdUwBPAQMYnAkMB+DVhpYeHwT+I39xcfumi4nHQDXUhEnSUDXyTmLjPFADD4jPg8IqW3x0TnVubxZxbLxDzb5wnsGxDwuYNiknQzGayWq5Hi2IWk_ECDKHbxr+hOyOZxMraYONZcPticehb29ExyC2asA4DKojoB6JKD9eKnoApMAsbLN951fkiF26XHLhickpscDib4WyGXxD3caNPk5ERwx1OJDGncZqh8KGekytdw1kuozMwevaDW_i4wT3khknBBTHlasfWMiDcOPZhpEwfaZAA9MF6T5cWt0wALgw0X8egOPHobtG2pUks__Jl0M+KEgYZdWfYKleJJUvM4vBhryTiOP_ieq9ueeqWkpKLqw+isyoJkmSS6ryDj+8XDU_jm0+MciDxSRiJI_yjiMM5HTiNpSJX2D9ULArmF4mCufDjYcRkK4VTGWBih6n8WCdZNfwLVTFUzySrO9zUc+WEyxytbNwdAACHegC6zhDo+hv6heNknxg83Sd88FYEwR2DaLMEHcJ_0s3hWJ5tfqG44ltrRT5eykQCE+RoUgv0dJ_sXrnhlt+eHiZKlIO4OFhOddEKRKwWR8kv5kvscHbWhXdfIuxzCsWpDSeEq_4snNmw6ANUptJckbewSJTCzlMKcVow2y5DYOi3ZFIhMCFChUAUc+FJ3HgOqOcDeGSWjBvLq0QkRYRBlCKX3K4fIKPPte_YWTFwqld4EBUiRSwzSROHoyF76HifqHvuiFj18KUjqxvTbzIVrKFbYrPbavHA6VgeigtgxnzTGhhXLYmaJ0ZWKNRZQTH3Y7Wi+sPVYqDVKUUNv6OYB46VMyMHch9+OLzpIbGML6klaBoZWXa6f7NtkstjAXuV9Igvs8AoWr6sQlSuqpKBj0MINxpoHhDdh7pE1552vGTgcN2DIX0OIimV4lSHoMmud1qE83aXyIM6kQgXo75qzjevRZs2q3ZF28cDML3RaFrAAlLdycyPijf1Ax1EIJPkUOilZAYT0Ro+EdfUC0X7H10w5OA2xI5RHy2_eIbQPrsIYHOK7iNdom17q+jb2yH8CKIU1D2lDplkraF++LqGhBMvcj6463mDklizRqUxdWxFrLfHbKa45rvXlBTXlv8j7CrlIW4SaxGx38c3Xom+UGfE_uxUvZPtVO1mG6wAXDHCdqrX1MBCP0tYMNLG+AB62xBMEGFuSD010YQBWsU1NaIA5otE+hEiEhIlOJRbZH6uaWsT0B89gQfHluyzykr0hmBtprz4sdVq+t1F+pKjE3S55Xli0WcWizXfXis+_KOPilnrlggLAhbl4Ic+XAAvroT7KSatsIsl+gLTOwA9fFb5mrnzYik7ZhFpzc0pR8RpntQrYsk5e0_SFCCtqSLoIWeKESNWsqhUDH56kWh5p1k0vlQvnHATCUb30pofS4Iua5tfjIFHfkLci0WwTljUptBsNVTGUmTsALMb5zOkmbNwpkqijqPG__I4dOI8k8ZYbRl+w3EQOg6xi+HzYz2YhvMsU9IdEpKTTBbcvFDMvm62aN7SjNE3AjVhuZdcLRrQWH3gcNb1tTJiNlE9mnUxwmxkNFtSCzC9xXRRuH_SQMLEs1QgUgCiRV7VU00W8bsxZQ2cgFZ5mgqGp6tRyqh4NjxEO0_Iso89lGpa+0lMQ9hgi084Y8JGiFvITqfBGQc8DqXIY3UutXs58sPIlAbkeTfMEzVX1Ygzb58R9c8dRWRsL8wcKI8EUGoa68YKYmBRdesCMR_gpF8xmUQuptNrtSyJuUfLKxYOJjPB6HHWcM9FyzHN1wgCOdsIo1m+1QSPD7OJ6MJxwWrtandi7xQeTl2Ddd3n8IiAG9Z3t09onBeJLQgCK44QgY6QkZcA5XQ1I+ZAci4kRrd6gExvMwoLY+gxM8gKb0HODJhROIkDezNmEimvAUORmHe6AwGJGU60Yf1qr58nKi+rEg2vnBINLxwTPngTgp6QpKHOZUR9Z92yQCz++yUQb1DSk_XE4HlE01yArqbjO6qiHwvAiFAb3uyyNGNn1OwZDUAXBYFABdgDwPSf6hN92Byn+4WTbhkQ1I9RljaIN5OU5xYpySXTiXirVUnyLZf_wmfI0uQffsPXyP9sfbhDhj8ry_wklwDY4ZLiNDULbHacpmafg5h6zBiyzy4QOYinl35OvgzII1XhMyh9OJGbUNwR_Ivhept93RzReaBTOGFbY5mcREJDNWcv8Xey4GLBzAf9MnfNN9cUbfnqlrbhyoxyEAvABCJYYZUT9vPe9lEyS9UpxaWY3yCMjv1wiJ+F5bsHuoYT7hYfIjEYNRAEN5KulkjrNzuenDtmA0xkrfFcJN7UJeY_RtLgZ_TAOu9pdIh+iKF2cAw5YwguLBti6IugmBdfUCIK5hTITjYBkCGwUZymTqRKoMFeZgO3qv3Y3OGuIjloqE7p6J8vsEEUFc6dQa9O8gDLn1uWB8InFL06Rr+MeZpvPMVdy7YW0fZui3Ac75WxTuxIAi_kSsHjOGZHTnhinYg_clrOfiIHZASGe0gM4OVwvNcumtAmA5RzW3WeKFpSJipWVsqgQM4INwKQqQx3JtCSnaM6Hk2JL6Hp86355pBVPMoDMXGwnApLPjo3d_i1iJJhMpeoH3SBS+370U7hOowhOFixjLJg50HhnhKJYCPiwnsdq41mBOAScmKep3NflzgDhdwMS3rBohJRfmmlBFxOaY6M+JBuMdmDk7u1MCgg9sdQMF4tYwKYyWrLQUbW8TJL5jp1LWebU+z+921i6ERfiDtFEU3JlJXxZwk2cjq0USUv3DWdmGjc9UaTOAZdrXj5DDHzqlmhSRw0hOLlSofOpspPdo+AZAMGPsRF1BQTwIJ6zQLrrSmdLxbNC_UbT4gh6FiTQvRFJVsKLiquDO7m6xwU7ZtOiY5XG4UVg4SKNdUwP8wShfDLMnqEZoV00j7B1mABcT1CZaOnmAAmEACK2T_IL3pmiV7ly01zQ+eOVrzoaSok0cql+7kwd5MqAMDmxuj4NCIqmv5wXBRhatps2LoqV1bIIMrJJD6hMukwxBoXP+PeQPrC+8_80khqePlhy_JjuaXERn9xVA2deC7hh_o93LzwwfDvc3en_Yhl0iQDvY0LqfS8dUacxUDn+OISUXvTQlF9ZXUo7JnhS5OApel148_ciQlgBg+0AZhQ0qdmYyUXGDK59JEXNq2EkwRLGDQ8ph7DjgjbxCJNGvJ4ZCQpBxV8hpG0w3vkgz4ffsGUXigBiH_pAiL1NWycN8qBwYGD3aIeEb1zb1ogZjHKwm6dUNEJuga1gIxhj9pd4wFMki8QDPgx9dJP8ZWOF4d50hJegjUYXLB36QwxQpmAABgIIhkvThsU3Tuc5MGF4UpypOWdC8UhSA6TPhDHz8XhGKePEStHeBifSgIhp5BiDWMu3Ul+cFRGn3oRU0+ziQejQDdis3zYuCaZBpEucB9tcbJ8cniCj8BIZWJ2dE+hgoN1PeIwHNynoavO_8wiUbNmlnRlTcSypTqOQUCe8Zo6HsDk8z633wPb7biZjVdY1OsAyfxPLpBT2bywQr_PLEEEhDmMNF1AlNAFYkNkQA6s1XbEN+XBsJlflYtY_Ryps0i_JJXp8MbylaSP9qLwnuHrOJAjOuyl+wfiyd3vEUMwObgw6nW2DogBGFkHMcnDjZGhDBAMc0BZT2aWCtARaBSfSK5DPWJ_3TbRtLpBLFp3oZyhpeoob8jEP6wLCJdbVDcRqzEewNithoF25yCoPChf+WGlJbWtoAy2Y+miFV9dLQ78aLdc0kiVIDkEOJMFhsocuGBK4PoogV6SB_eHBWKVEz_IwSSRwYFC4GDVCZSwyEvOvyvzkkt3grvS_8hJJ1wXguDlmq++IVjzMVXMBZCdxUzrXsTbOxv6hAe+0QDWOJMilhyOgCNYkklhh3vvlhaxfV+nqIbYXHrnhQIfe02JKyiWqkFA+jwDXnrP2JoQsUd5cDyAyUd6TvW6oAsMqbd_lHxScorujArEqxd871px5q0muIY6MTUsIDkTly8qrC2QnavARCQRTHyOM3TSnULAZSnng5Z0wSqPsoMJPFrqWTFOLma8PQHXtbtd9EP8++GE1xDZkZKlqgA0Lhva+Mxh4YFjf+WXL5cRIHyp0pnY3qCmH3I7vA6UkzTAdM1b6geDD10BDsa80puoT1ixvunCWxBWApHJzuTbL0EFIElnbcREivTWJrbcQ_0ZAjvrq9af4UTXsqVWKcIWYBRIv2onVm_s2Nkqevd3hQY0FKfJ6G4U_+DuHX9uEI14OeffuCDlcyZGpUIw0O9o60V8UHR+HAsH0zlPOocQgsLMMpJCIDr3Fso3cpKBKhZCsN6RAy26g+YhtGbuR+diRWys_XWwSzS_0Sh6Ieb8mIwhdTXqa4m8x2DgZ14_jVV25spwpnQyMaoFYAQd9a8c6QMdotY2FoCxp32aN9AZC1Gz94xNAQKOjmgKAsbFz_7IHDHr6lmIFnGIth0t4syrp8UgFi2RYdAY5UbvuhHl4HZP16DwQg9k1Gs6xSQB5h_y1Xfv7qZNKWmAsSU6t8tTbytJ+zfER1Btev5UIpVxXAQbQ3kK5xaIeTfOF+3Q1Ro21Yu+Xe2hybixAg0cjHod516mk3tJMMB+6HV5TuKYqw+eEzWjdFcsHEw+5mx3HS2qGTc6Y5QisqeiUYBgkNG1uIn2uVlXzxZVl80Unfs7xYnf14k+6GsyOnUcoDGfPMyQZ+BhOrkX20InvMcRYBwYx+ZJA4wZBAdaHa3whflhATem+w1BeR_IRLqSq5ELVSGMh2uxtu1qEyd+d1T0I65MTuwI28LOIxBMPAa7SXJAaTYZ38B+3uPx_OCAy+_2+TwuT0wqUywcTAKs91RPLxrfZTKasfBJ+k0C8TR6tHspeqgeyD3+Re7Pe0HO+xHOKfRw6BmckrfgX8iYyXvUiDF8f4p3LI+jaVajevVMUQEPByd2HMcCc0P4KIVMHHniPnI_PbwTi764AoCskM+luDrnZScVfE+wrX37mSZcIJWJjzFTrADTnfzz0Z7ld686YbHrK7XwhIIxc83QBXaANGDiIIyJ4ZIZJeob5LeKfHD5YI+IWD_W8MLbJ91AXHqJLiEuCaXirmR+EEVy7TC6nLi2mFoGCsd0N5mx7hiXh2JwpErDAGSHyx_qSnJ7BTQaeDnyLEd0RT2WyuyAA9yLUSgXWMmFWJx_60JEXFTKdiRX4vhPS4AFAu37frGrFXcTYFFTLABjBsGh5qH+gNvfgA69KmqOaboYAhCAhBGMtKijHK7N5XW4pQV9ECMo5boZwpJJ7m74DfFtIw2GWoyApXFT+g1pkA37L5UT_H1V5gCOBdJkgM7lzBx+CMuAEG2uTcZJHjZY83PxHSJ6HziRlR_D4sjQBKc9gUHOQrClAm8SaBCd_ALIResvFp7bLkC7PVKpVxNLMumPhPH7NGhGNxG5V0o4GGWiNnh28DBWvJGxO6kgHPKMmmQfY_oYRRO5jQdg4uLBfQhKdGAJJCc_hoVgPb7NGjiV1FEicySTCSEzdJbH3PBZGvwfP4XJx6WVAtywGCMR4z6Fj3FFPK3jzCICDK4rO0aDnIFdjMiHXExro+LOMlMRy0XAUkczkZtCLDLJcxnwYqjmsi8GmvvfYdHYxtWVYuVgzF9_ZuuJbUXzip1GkzF_HODy_qQSQ6gJqmZM_ujB0kZ9cLe40LFcGjIIIg+DiVyGaOGeWyqTyi4SpCxsRLAHOaO3zSU_guXY0SaaIboMWK4zpxbrmy0LfRKmCN8j4ko6TOwkaUxOsK6p4ozxFk8ywO_q7zrafYjNiNjGzCpWgEmkvvfkoZaln1t5WmcxXShjpsbMNrkLFE9DWAVw9_d2iJ4tZ+QwPTKWKy1gSqbKBCKprwAO0gcQ5jMAm5ZjZ5s4DW5jxnpnJYi7r7yiWpQuLpVLfcroDAz5MyENkmmeehYf38AUvaHjp7eeov4lpZq6NtY+HoAFRJ_bOdjpeiNnYe6FKZ1nN0rtDj2xX3S_1iiXz5xyMfoEHDkdRTEkGWeSezDBoxUThVtfrBc2LAFadlklAgdnC3I2Diomadz9eT3DKYUep29f65unlYmCXCxqihVgzISZefsbe_cVzi0O4IU1pOPNk7OLEOLS8dYZqVzHpixFbePEXyR3o1gNmxZoamjCdgbLhpbA3jXr43OlKcKMgMhU6GrpaDCb4HN7AwNt_buQPy345GDjAmyENhG1anwvzRqkV83q2TfgY5WF1AVSnfiW9EHXOvMyPBFUXtmyZJKsIv5xP3KTJOK1yC1c2Mh75WnUJcnqyOcJNG4wkdD32IaXqQWilNXhuq4WRORONlMj1RYMMLq3f_vNR7CgMZ3cDEClJT9qioeDsf1aw6bjbasfXrPHarfOGT_7qGWPepEKMIfj+KoE1qaP40NbEhD4F2GCkHobFG4dpn7puIftimE_0twAs4M0P7CjI3QnaRPDghQcNWpYH1_zwtQQCIdGcy0ubNQ_z9MJEwUdn0PdCHwVDn0K382shV2L4pNun8kiOinGXV0D7zRubqR4JLDGBRc7OB6AsQvZ44HOw60v5Vfk3coMUp04uuJ3rguxZqnUwUYuDxABJFk2wYG3S64igzgyMyaxcvUbC8wGXAGHe36s3VqAD7ZjZBcynJpgpIQ9DUor7WrDXAl5yxEaAMQoVY5ifVj1mnH57r4h+bH5IXx03oURoxuxXR6s5sMIBrm0JVkOX0ECllwXfzEn3ht2AQ2dOCsOf3uHaHzlpPgQFjOpurxaLhmVSTvXaPUO+APBsyfPbsY1rFAswcWeGDfFCzCJ3BMbjuyrXj3npDXPOg8Fj1tIvDdQD7vogWViJ6JBnPu6Q9wCmbDzyYUYiy9Xs2EsPuxOXMmG37_mwh_ySx6wPdHSTm5F8SclIICrjnEwXCVeG04SGyFDLr6RKC32Ni7vQQDzWhjM1JPkF0DgFRjCJBB+pL4XwOCy5IP4zricGUVup+xwfC7WFAYaZxLtObJFnL5iJuLul0rbWroHVmNVUa4XMuhpPP7HunfD97DTIyk31qNxvWfMhIDMwWb9zEvrHimaV7qehr90JDZqCFyCHy09ezgEMs50LsSoi0sSEUwWuG7Y6RSrchtucmos6GO1i2ALpXPAYz0Y6zUIw6+jqV9GQ3TDTDEE8GkOGIGZ6F4afjZ0Kup_tgdg1uOLJosfWiHm_e381K6SE7Xwcxc5u7yvofep317_5D_jLCIjBePAYtJf4mkuS+Q7SWth7iVfvOLSleuXPw8xY0uHsi8LQ6ex42gvYuIxO1dxpHSVKwtL4J_kcvgnQY8qB7x+eB36RcfedtGGdVU5JU9+cCFS74ulHOiE+kKT+PAPr5MrUGeSk1G51zTNe_i5A59995tvbUV1CS66iagQjJviGUWqzAhKU_vOM65Ff3_RUluBdb4CgLohVXsFJJWf1I_Irc6Ta+rq5NirOrOO9JnSXTQDE1aqsXR4McJvNKyWyDmWGmYaySRROU7dkY824BPG8hz5EYdMtt8I5R6fxHn3ta+89ovAoIfg8mCLWWwlCjA+Fyy7sFwrmlN0PVBOzpZNo1BAiW+KGTt8ldVX1ogKfNXEVJEjBqG_+QE2Od8T3DlqwotlqykQVVdURb0tlReJfXCvYOvulh8c+92B3cibbwW3mLgX65IIwCivCChzy+6OrkW3LroS8xIrSchsik4BBTYrzA_kajX4Qq0Vk4WdGIn6MJFXdttYQIOYLF8LcCLmK1O0xnLlCDDwHNz4xQ3fCzh8nANJ_Yu6V8ydnQjnYeYsxOftGRjoONj+X5NYYqGaky_RFCOjIhBXNv_GheJq6FYX_PeVwlKDz7tw9DnyZcU5Y5lNVK2uzlhjyL0wING6jnQ86212YTVALFobJ7hY2UQ4GJ8LFY9xUfexju55N3xotSXXUpGpN4sVmC6JNOMHvzhLvALi0w+D8ABCkahzSaCBcxmxsvWiB5eLmZfPzNgokmaeob6ho6_9j03fwZocjE4i9yLIYhaP7KNEAcZnmYwo3FexrMprn2X_OHSxcRSJ0EPZ_++nAAdKdBHxK2ylyyuFqRwGYwQzlmNwsOTeSwCuaojGuPr2_YXEcQZjYdGy68x3Dj29fyce46iRW0ymichikgEEwckV7uyiKLdk3Z8++5O8cvuV6V6ANrLy0_WY3CM0GkVcPpeYQsqkaYIjR1fX4O4X73zh3r76rg4UrzhY3ABLRAeTDWabsZFlekSvq__4n4__3O8JYP2KZDCrsv5g7+kWIqAIMu4zCS52H76P5Du1ueExgKsHPaFGjjGbJiJ7LxmAKWVf2kV2PLJlZ29T30Y6RbNp6lKA5pT+ZseLW__3X95GKwgqJRpjHjlGtj4ZgDEfxcWkjN79y52_cve72+nmyaapRwH2Gz4q0bXvqT2_Qu2V3kUplRC4SIFkkaC4GCvja9hQV9+6p_knHBllJSXJO3WS7C9dMNixv_Vnx587eBw1p2hU3Cvh0UWyACMFFRfjMDbw6v0vbnC0OTaR1WbT1KEATSXOdudbb_7rqy+g1lTmEzJLjGxxqlCgWCjz0zk6B4_VXDFrrdlmKsjaxkaSfPL9pmh0O9wt2_9z21fb321pRg0JLsZ9kYupvsVh_ClVAIss2dR_sseFyQxni+aXrsWoMh1lRJaXPU6CAhSNsK8FGt889Y33vr9tG7KizkW3EAdvCYtGPCtTqjufaKedwnT6ryebZl9bm5dfnr8sy8VCxJ6M_6nK9Bzv_s1Ld7_wJOpHjkVwkXtRTCbFvfB80pZ85qGSqgz31O0MTW+fOjTvhgVLbIU5NZm05agKZffRKSANqh0D77788Mb_6+keojGV4TjcCLSkuRfySCnAmB+T4mIGLDwSdPa6D1Wvqr7MlGMuznKyEIEmw39yLs+Ap3Xb99_5StvbjdS7OGIkuKh_pQRcyCctAGO+qoLG3mPdA5Zic33pwhlrMFLBNycVo+Nt2TQRFKBSH_D4eo_8_uC_HnjsvX2oA_WthMJxxqt_qnUwlqcQpDiZueWdM+32OUUtxfOKr0Hj0vrVtvEa_EG_zgk1mAo3eOr1U9_Y8rXXN4MeVOopHql38VgxBxwmn9IBMFUrAmwYZI2vn2wsX1bhsFcXXoFGpmVWuCo4ux+dAvQT09XYvKvpB395cNMfcRcVeXKulOpdkaWnG2DqbZAjy_pNx+pmXFLlKKgpWI2JEfqstIzsivQek3MJXTDQvrftx5vufOFplKbARYBR_6LfUUkfHKYmpRNgqoYEmeJkpvpNdUfLV1QM2GdKTgbnhLotu08XBcIRLlrr7rb_2HjH80+iHIKJwFLgSsrfiHzGTOkGGOGjNlaCnMx44sVjR8pXVjoLqgtWIt4JiwpnUUbipCNRoUdkrK9ld+ujL935+ydRRiS4lDsobR2QboCRZgpgai_F5Yk_1R0qvqC4Lb+66HLYY8xZEwZJldrEwEXE_rua3j39vVfu2fAb5E5pQn2LnCtlxlTkNWbKBMBYuALXeeLy1Cv1J7CazMmi2uLl+FJYXrrmV47Z+ml8gUZU72Cg68TLdV_f_PArL6OpinMpgyrFIs+lNWUKYGyEApnaS07W9GZDozDrDhUvKF1iybeWZDLuPK2UnaDM6VskuDDdrGHfr3f_6_ZH3uZ6EopzRZoj0g4ukiCTAGN5ClxsHBvNhFniLV1te9venrlqZqWlwFYrHbC8M5viogCVeepcjhbH5s1fe+1rx3578BgyGI1zKdrHlX8iN2caYKyjAhkbyY2_ja62AffBDce2Vq+q8uSU5i6FK8OU1ctAmRgTXT+BgObFPNVfbrjnDz_sOyzj6ZURlZxLKfSK5jHmnNxtEwEw1liBTHEy_sYXlvzBY384vFdvMewrml+yECKzNAuy6B1MrmXEYnpDvUN1R_5w+Buvf+mlDZrLr6JRCSwq9ApcGRGLkTWeKICpOigupt4qacZo3dHc1nawc2v5kjKbtdC2EG+nPgs0RbJzezm9TQv6+xr7Nm7+l5e+WffsoaO4ypdVjRQVuFISenOu5NiPJhpgJIYCmeJmrL3e1eJwH372wLa8mrwT+ZX2OZiUWkrSZU1mMCaSa0GRx8fpT538y7FvvXTXC884m538vHGkdZ4gUzH1pPOEJHKMyZBYD4Kdn6_gAnfc+HFKCzZdweKSkqv+5dpby5eUfs6Uay2Q3xj6ACKNwOK0QI_T6zh7vOu3236w5Q+dO1o7QSMmFW5D+xZFIsUkX9oJAxfKlpZ17idDIsi4mbERWApknD1uxKZfesfF85fefsm6_Cr7ddA7LPzg1QfBCyBHhzSaev0+V4frjYO_3f_UwV_trgNNCB5yLQKKHIt7bjyn1A4cTlyaLBwskgIyGhYnCDSCS3E0rqzIa_rlX7p82aKbltyeW5Z7mcFitE1XjqY4ls_j9w52Od89+dLx3+z43lbGbykAkWuRY43kWgTXpEiTEWAkDOtFMFFkkpspoHFP4PG6cdWX11w876O1n8wpy7_Wkmuy0RMwHUKzacvi6ohet8+NL6tsbni9YeP2b725F22m2GPiXnErgosBgwTdhItE1OG8NFkBpioZyc3IwQgwbjwm+CgiTBfevXzBwk8uurGgpnCNOcdUxVm__JxeMh+cQr4ZTQynUatie13eNmebY1vdproXD_z8PRpLCSjSgntyLQUuAoubAtaE6luox_vSZAcYK6y4GfUwpZ8poJG7EWi8JzjzmtqqJZ9avLLswsobbIXmhWYMCPghg5CPM70rT6P8uBLeAaTQkulcr9876Ha6ez11nUc6_1z3+4M7mzY3tMgbQi8RDaYEkgIXjwk2np8UuhbqMWqaCgBTFWddOdJUQCMXI8DUXgGN95mW3r9qfs2lMy8pWVC2Ft9WXIBP3+TTIBkC3MR84Yyg4nJMtLpjBRvUxe_EWhAneo93vdG8q_ngvp_souJO0JATcVPAUuAiwAisSSkOUa_3pakEMFV5qejjhwJaJMjI4bjxGt9sGIyEdfbHF5Qv_tTS1faZBYuxKvYFiNyYpTfi0+syyhMkgMmDhlyOSFNh_ZBAwr_h_FERKbL9mt_n9jVz5UBXu+No3YYj2+s3HmsDXCjyCCi2jeAZCSyCKhJYk0aJR72ipqkIMDaI9ebGDiGYyL0UuAg4bgpoyphMPcVQfPGMkhlLy0uqVsysLV1QeonJbqkxmk3FJquhTGc0FJDLcfQmwca1UsOIGw14BJJMYTCp57g+vt+rOTBzp0vz+ns8Tn9rz4nuve17muo7D3Wf7drTxnW3CCTWncBSHEkBiRwrUgzyuhKFvH_KJEWiKVPhUSqqOJoSn5FgI8j4mxs7U4FNtZudZixYUFxQc9XsCntVYZG1yGLHROFCi91aYs4zVRjwVTmDSW_DQu34wJEOH+TGkU6nBSlr8SmjgD84GPD7+_AN7U5Pv6drqA9fNTo7OOBod_Y2bz3V3l93ll8mI0BYT4KDZbNcbjzPjcAi11IAG8mteO+UTIrQU7LyIyrNtnBTQFKcTQFM7XmeGzucgFM0YOcr7qCuca_yVffh1HBSz3BPEESO5tRzvJnXeS0SVJHAIri4KcBF5oPTUzeNRrSp25pQzVWbIkGiQEVAkaspbsfz6pjP8XgsUKl8cct5SYEyEmwKINyPBBaBxHMKUDwmsAi+yDzwc+qnsYg29Vt2rgVsI0GjNgUiBSzu1RYJSvUc94pOao9Tw9wuEhSKi3GvjhWAFNC4VxufVcDC4fRLkQSbfq17f4sUWNRegY57nosEGJ9W5yPpxGMCQ6WRAFPgUuBRv9Wez6lnVB7Tdh9JuGnbyCgNU+2P3CtQ8TGeV9fUb+6ZRoKM5wgippF7nou8n78_ECmSeB+IBifQyFho9IEETwK0zD6SpUCWAlkKZCmQpUCWAiEK_H_hU2Zv2rCvHgAAAABJRU5ErkJggg==",
+          "BTTTriggerConfig" : {
+            "BTTTouchBarAppleScriptUsePath" : 0,
+            "BTTTouchBarScriptUpdateInterval" : 5,
+            "BTTTouchBarFreeSpaceAfterButton" : "5.000000",
+            "BTTTouchBarAlwaysShowButton" : "0",
+            "BTTTouchBarItemPadding" : 0,
+            "BTTTouchBarAppleScriptString" : "-- This script can be used in conjunction with Better Touch Tool to display the currently playing track on the MacBook Pro TouchBar\r-- More info here: https:\/\/lucatnt.com\/2017\/02\/display-the-currently-playing-track-in-itunesspotify-on-the-touch-bar\r\rif application \"Spotify\" is running then\r\ttell application \"Spotify\"\r\t\tif player state is playing then\r\t\t\treturn (get artist of current track) & \" - \" & (get name of current track)\r\t\telse\r\t\t\treturn \"\"\r\t\tend if\r\tend tell\relse\r\treturn \"\"\rend if",
+            "BTTTouchBarButtonColor" : "75.323769, 75.323769, 75.323769, 255.000000",
+            "BTTTouchBarItemIconWidth" : 22,
+            "BTTTouchBarAlternateBackgroundColor" : "128.829533, 128.829533, 128.829533, 255.000000",
+            "BTTTouchBarItemIconHeight" : 22
+          }
+        }
+      ]
+    },
+    {
+      "BTTAppBundleIdentifier" : "com.google.Chrome",
+      "BTTAppName" : "Google Chrome",
+      "BTTAppProcessMatchMode" : 2,
+      "BTTAppProcessName" : "Google Chrome",
+      "BTTAppSpecificSettings" : {
+
+      },
+      "BTTTriggers" : [
+        {
+          "BTTTriggerType" : 101,
+          "BTTTriggerTypeDescription" : "3 Finger Swipe Right",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "59,48",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "FB34F055-8AF3-47CB-85FD-43EBF4F113D1",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 1,
+          "BTTAdditionalActions" : [
+            {
+              "BTTTriggerType" : -1,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTPredefinedActionType" : 255,
+              "BTTPredefinedActionName" : "Perform Haptic Feedback on Trackpad",
+              "BTTHapticFeedbackAction" : 2,
+              "BTTEnabled2" : 1,
+              "BTTUUID" : "1E115237-A076-4FC9-95DA-50F5E992AEF5",
+              "BTTEnabled" : 1,
+              "BTTOrder" : 15
+            }
+          ]
+        },
+        {
+          "BTTTriggerType" : 203,
+          "BTTTriggerTypeDescription" : "Single Finger FORCE Click",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTPredefinedActionType" : 2,
+          "BTTPredefinedActionName" : "CMD(⌘)+Click",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "2DADC68F-C01B-4EDE-B1C1-6A48E4939F76",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 2,
+          "BTTAdditionalActions" : [
+            {
+              "BTTTriggerType" : -1,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTPredefinedActionType" : 255,
+              "BTTPredefinedActionName" : "Perform Haptic Feedback on Trackpad",
+              "BTTHapticFeedbackAction" : 2,
+              "BTTEnabled2" : 1,
+              "BTTUUID" : "62FE4750-0D83-4421-A999-DC2EF2AE5221",
+              "BTTEnabled" : 1,
+              "BTTOrder" : 16
+            }
+          ]
+        },
+        {
+          "BTTTriggerType" : 5,
+          "BTTTriggerTypeDescription" : "2 Finger Swipe Left",
+          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "59,56,48",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "B794013C-32A7-419B-A09A-102F37346EDB",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 11,
+          "BTTKeySequence" : {
+
+          }
+        },
+        {
+          "BTTTriggerType" : 6,
+          "BTTTriggerTypeDescription" : "2 Finger Swipe Right",
+          "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "59,48",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "74F4CF13-89D2-47D7-B400-F3B6E8B61CD4",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 12,
+          "BTTKeySequence" : {
+
+          }
+        },
+        {
+          "BTTTriggerType" : 100,
+          "BTTTriggerTypeDescription" : "3 Finger Swipe Left",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "59,56,48",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "AB4349B4-D8DB-4689-A14E-2C0E8C042AE5",
+          "BTTEnabled" : 1,
+          "BTTOrder" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTTriggerType" : -1,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTPredefinedActionType" : 255,
+              "BTTPredefinedActionName" : "Perform Haptic Feedback on Trackpad",
+              "BTTHapticFeedbackAction" : 2,
+              "BTTEnabled2" : 1,
+              "BTTUUID" : "3D6DC533-318B-4727-B944-39AA2B9A5843",
+              "BTTEnabled" : 1,
+              "BTTOrder" : 14
+            }
+          ]
         }
       ]
     }
