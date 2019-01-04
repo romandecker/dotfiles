@@ -482,7 +482,11 @@ Further customization is possible with `customize-option'
   (interactive)
   (let* ((var (read-file-local-variable "Choose variable:"))
          (val (symbol-value var)))
-    (add-to-list 'safe-local-variable-values `(,var . ,val))))
+    (customize-set-variable 'safe-local-variable-values
+                            (append safe-local-variable-values
+                                    `((,var ,val)))))
+  (customize-save-customized))
+
 
 ;; start of building a "switch-to-alternative-file" functionality:
 
