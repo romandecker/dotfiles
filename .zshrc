@@ -35,6 +35,7 @@ alias 'edit-project'='tmuxifier es'
 alias 'list-projects'='tmuxifier ls'
 alias 'grep-projects'='tmuxifier ls | grep -i'
 alias project='tmuxifier s'
+alias gen='HYGEN_TMPLS=~/.dotfiles/hygen-templates npx hygen'
 
 fpath=($fpath $DOTFILES_DIR/.zfunctions/)
 
