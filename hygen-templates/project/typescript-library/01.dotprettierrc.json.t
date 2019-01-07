@@ -1,4 +1,5 @@
 ---
+message: "Generated prettier config"
 to: <%= projectName %>/.prettierrc.json
 ---
 {

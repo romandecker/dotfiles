@@ -1,4 +1,5 @@
 ---
+message: "Generated typescript project configuration"
 to: <%= projectName %>/tsconfig.json
 ---
 {
@@ -15,7 +16,12 @@ to: <%= projectName %>/tsconfig.json
     "outDir": "./lib",
     "rootDir": "./src",
     "skipLibCheck": true,
-    "lib": ["es7"]
+    "lib": [
+      "es7",
+      <%_ if( locals.targets.includes('browser') ) { _%>
+      "dom",
+      <%_ } _%>
+  ]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

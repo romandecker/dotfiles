@@ -10,8 +10,6 @@ When inside a string:
 When pressing C-' in insert mode should automatically change the
 surrounding quotes to " and insert a '
 
-
-
 * Bugs
 
 ** Macro recording bug
