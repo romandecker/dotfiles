@@ -96,6 +96,7 @@ docker-cleanup() {
 source ~/.dotfiles/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+source ~/.dotfiles/z/z.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
