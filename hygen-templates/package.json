@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "find-up": "^3.0.0",
+    "npm-which": "^3.0.1",
     "validate-npm-package-license": "^3.0.4"
   }
 }
