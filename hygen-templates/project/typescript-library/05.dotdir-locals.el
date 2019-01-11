@@ -1,5 +1,5 @@
 ---
-to: <%= cwd %>/<%= projectName %>/.dir-locals.el %>
+to: <%= cwd %>/<%= projectName %>/.dir-locals.el
 ---
 <%
 const rootDir = `${cwd}/${projectName}`;
