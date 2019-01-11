@@ -23,6 +23,14 @@ module.exports = {
       initial: ['js', 'ts', 'jsx', 'json']
     });
 
+    await promptIfEmpty({
+      type: 'input',
+      name: 'tabWidth',
+      message: "Tab width",
+      initial: '2',
+      validate: (input) => !isNaN(parseInt(input, 10)) || 'Please enter a number'
+    })
+
     return {
       ...answers,
       customHelpers: {
