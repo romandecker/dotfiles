@@ -5,6 +5,11 @@
 (use-package exec-path-from-shell
   :ensure t
   :config
+
+  ; signal to subshell that we're in emacs, so that sourcing .zshrc
+  ; can directly set PATH correctly instead of lazy-loading
+  (setenv "LOAD_NODE" "1")
+
   (exec-path-from-shell-initialize))
 
 (use-package restart-emacs
