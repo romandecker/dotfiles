@@ -25,7 +25,8 @@ sh: >
     "compile": "tsc -p tsconfig.json",
     "build": "run-s clean compile",
     "clean": "rimraf lib/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint -p tsconfig.json"
   },
   "author": "<%= locals.author %>",
   "license": "<%= locals.license %>"
