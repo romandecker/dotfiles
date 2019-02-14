@@ -59,6 +59,7 @@
 (use-package recentf
   :ensure t
   :config
+  (setq recentf-max-saved-items 1000)
   (recentf-mode 1))
 
 (use-package atomic-chrome
