@@ -64,6 +64,7 @@
 (require 'my-jira)
 (require 'my-wakatime)
 (require 'my-elm)
+(require 'my-haskell)
 (require 'my-workgroups)
 
 ;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook
