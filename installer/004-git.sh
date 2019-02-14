@@ -9,3 +9,6 @@ link_dotfile dotgitignore .gitignore
 
 echo "Configuring global git excludesfile"
 git config --global core.excludesfile $HOME/.gitignore
+
+
+git config --global alias.co '!git checkout $(git branch | fzf)'

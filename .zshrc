@@ -78,10 +78,3 @@ for f in $HOME/.dotfiles/zsh-lib/*.sh; do
 done
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/romande/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
