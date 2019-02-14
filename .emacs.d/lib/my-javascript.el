@@ -24,6 +24,9 @@
 
 (setq js-indent-level 2)
 
+
+(put 'flycheck-javascript-eslint-executable 'risky-local-variable nil)
+
 (use-package js2-mode
   :ensure t
   :demand t
@@ -199,6 +202,7 @@ given string."
 
 (use-package rjsx-mode
   :ensure t
+  :demand t
   :general
   ;; rjsx-electric-lt seems to hang emacs ?!?
   (:states 'insert
@@ -206,6 +210,7 @@ given string."
    "<" 'self-insert-command)
   :config
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
 
   (general-evil-define-key 'normal 'rjsx-mode-map
     "K" 'helm-dash-at-point))

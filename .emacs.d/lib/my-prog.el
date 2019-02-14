@@ -52,6 +52,7 @@
   (add-to-list 'afp-fill-comments-only-mode-list 'groovy-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'dockerfile-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'elm-mode)
+  (add-to-list 'afp-fill-comments-only-mode-list 'haskell-mode)
   (afp-setup-recommended-hooks))
 
 (use-package dtrt-indent
