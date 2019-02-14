@@ -6,7 +6,7 @@ to: <%= projectName %>/tsconfig.json
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
-    "noImplicitAny": true,
+    "strict": true,
     "removeComments": false,
     "noLib": false,
     "emitDecoratorMetadata": true,
