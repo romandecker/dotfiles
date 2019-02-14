@@ -25,7 +25,6 @@
   :config
   (setq wg-morph-on nil
         wg-use-faces nil)
-  ;; (add-hook 'wg-switch-hook #'my/wg-switch-hook)
   (add-hook 'kill-emacs-hook #'my/save-workgroups)
   (workgroups-mode 1)
 
