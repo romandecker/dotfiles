@@ -262,6 +262,9 @@ nnoremap <esc>^[ <esc>^[
 nmap <leader>ws :split<CR>
 nmap <leader>w<S-s> :vsplit<CR>
 nmap <leader>wq <C-w>q
+nmap <leader>w- :split<CR>
+nmap <leader>w\| :vsplit<CR>
+nmap <leader>wo :only<CR>
 
 " Toggle NERDTree with leader w t
 nmap <leader>wt :NERDTreeToggle<CR>
