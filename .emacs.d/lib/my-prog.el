@@ -53,6 +53,10 @@
   (add-to-list 'afp-fill-comments-only-mode-list 'dockerfile-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'elm-mode)
   (add-to-list 'afp-fill-comments-only-mode-list 'haskell-mode)
+
+  ;; only fill with space, this fixes a problem that deleted preceding
+  ;; spaces when inserting a `.'
+  (setq afp-fill-keys '(?\ ))
   (afp-setup-recommended-hooks))
 
 (use-package dtrt-indent
