@@ -1,8 +1,10 @@
 # 10 ms for key sequences
 export DOTFILES_DIR=~/.dotfiles
-export KEYTIMEOUT=1 
-export PATH="$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export KEYTIMEOUT=1
+export GO_PATH=$HOME/go
+export PATH="$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$GO_PATH/bin:$PATH"
 export LANG=en_US.UTF-8
+
 
 
 bindkey -v
