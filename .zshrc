@@ -27,6 +27,8 @@ bindkey -a v begin-selection
 bindkey -M vicmd v edit-command-line
 bindkey '^X^E' edit-command-line
 
+bindkey -a 'u' undo
+
 
 export EDITOR=nvim
 
