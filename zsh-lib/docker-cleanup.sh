@@ -2,6 +2,7 @@ docker-cleanup() {
 
     local interactive=""
     local force=""
+    local containers=""
 
     while [[ $# -gt 0 ]]
     do
@@ -11,6 +12,11 @@ docker-cleanup() {
             -h|--help)
                 echo "Usage: $0 ..."
                 ;;
+
+            -c|--containers)
+                containers=1
+                ;;
+
             -i|--interactive)
                 interactive=1
                 ;;
@@ -26,11 +32,21 @@ docker-cleanup() {
         shift
     done
 
-
-
     if [ -z "$interactive" ]; then
-        docker rmi $force $(docker images -q -f dangling=true)
+
+        if [ -z "$containers" ]; then
+            docker rmi $force $(docker images -q -f dangling=true)
+        else
+            docker rm $(docker ps --filter "status=exited" | grep 'weeks ago' | awk '{print $1}')
+        fi
+
     else
+
+        if [ ! -z "$containers" ]; then
+            echo "-i/--interactive mode is not compatible with -c/--containers"
+            exit 1
+        fi
+
         local images=$(docker images \
                            | tail -n +2 \
                            | fzf -m \
@@ -43,5 +59,6 @@ docker-cleanup() {
             echo docker rmi $force $image
             docker rmi $force $image
         done
+
     fi
 }
