@@ -453,6 +453,9 @@ match group within `REGEXP' that matches the imported path.
     (advice-add 'import-js-goto :around #'my/advice-ensure-import-js-daemon-running)))
 
 
+(use-package jest
+  :ensure t
+  :config)
 
 (provide 'my-javascript)
 ;;; my-javascript.el ends here
