@@ -14,3 +14,4 @@ node_modules.*
 .emacs.abbreviations
 .projectile
 .ignore
+flycheck_*
