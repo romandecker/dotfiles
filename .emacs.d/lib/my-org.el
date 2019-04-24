@@ -34,6 +34,13 @@
    "c" 'hydra-org-global-cycle/body
    )
   :config
+  (my/define-leader-map
+   "o c"   'org-capture
+   "o y"   'org-store-link
+   "o p"   'org-insert-link
+   "o f"   'my/org-find-file
+   "o o"   'my/org-open-notes-directory
+   )
   (setq
    org-directory "~/Dropbox/org"
    org-default-notes-file "~/Dropbox/org/notes.org"
@@ -55,6 +62,35 @@
   (defhydra hydra-org-global-cycle (:pre (org-global-cycle))
     "org-global-cycle"
     ("c" org-global-cycle "Cycle")))
+
+
+(defvar my-org/helm-source-org-notes
+  (helm-build-in-buffer-source "org Notes"
+    :data (lambda ()
+            (mapcar (lambda (path)
+                      (file-relative-name path org-directory))
+                      (directory-files-recursively org-directory ".*")))
+    :action 'my/org-open-note
+    )
+  "Helm source definition for files within `org-directory'")
+
+
+(defun my/org-find-file (&optional initial-input)
+  (interactive)
+  "Start helm to search for org notes in org-directory.
+If INITIAL-INPUT is given, helm will initially be filled with the
+given string."
+  (helm :sources '(my-org/helm-source-org-notes)
+        :input ""))
+
+(defun my/org-open-note (relative-path)
+  "Open the note at the given `RELATIVE-PATH' (relative to `org-diretory')."
+  (find-file (concat (file-name-as-directory org-directory) relative-path)))
+
+
+(defun my/org-open-notes-directory ()
+  (interactive)
+  (find-file org-directory))
 
 
 (defun my/org-eol-call (fun)

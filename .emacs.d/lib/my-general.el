@@ -62,9 +62,6 @@
    "i u"   'my/insert-random-uuid
    "i t"   'my/insert-iso8601-timestamp
    "p y f" 'my/yank-project-filename
-   "o c"   'org-capture
-   "o y"   'org-store-link
-   "o p"   'org-insert-link
    "r"     'revert-buffer
    "t z"   'zoom-window-zoom
    "t n"   'display-line-numbers-mode
