@@ -57,7 +57,12 @@
 
   (setq tide-completion-detailed t
         tide-always-show-documentation t
-        tide-jump-to-definition-reuse-window nil))
+        tide-jump-to-definition-reuse-window nil
+        tide-user-preferences '(
+                                :includeCompletionsForModuleExports t
+                                :includeCompletionsWithInsertText t
+                                :allowTextChangesInNewFiles t
+                                :importModuleSpecifierPreference "relative")))
 
 
 (provide 'my-typescript)
