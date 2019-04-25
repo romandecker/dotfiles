@@ -1,5 +1,13 @@
-killport() {
-  pid=$(lsof -i :$1 | tail -n+2 | head -1 | awk '{ print $2 }')
+killport() (
+    local array=( $@ )
+    local len=${#array[@]}
+    local port=${array[$len]}
+    local options=${array[@]:0:$len-1}
 
-  kill -9 $pid
-}
+    local pid=$(lsof -sTCP:Listen -ti:$port)
+
+    local cmd="kill $options $pid"
+
+    echo "$cmd"
+    eval $cmd
+)
