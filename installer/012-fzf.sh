@@ -7,4 +7,4 @@ source $SCRIPT_DIR/utils.sh
 
 clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 
-$HOME/.fzf/install --bin
+$HOME/.fzf/install --no-update-rc --completion --key-bindings

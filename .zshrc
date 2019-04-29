@@ -2,10 +2,8 @@
 export DOTFILES_DIR=~/.dotfiles
 export KEYTIMEOUT=1
 export GO_PATH=$HOME/go
-export PATH="$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$GO_PATH/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$GO_PATH/bin:$PATH"
 export LANG=en_US.UTF-8
-
-
 
 bindkey -v
 bindkey '^P' up-history
@@ -63,6 +61,7 @@ source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved ; then
   zgen load wbingli/zsh-wakatime
+  zgen load buonomo/yarn-completion
 
   zgen oh-my-zsh
   zgen oh-my-zsh/plugins/gitfast
@@ -70,6 +69,7 @@ if ! zgen saved ; then
   zgen save
 fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source $HOME/.dotfiles/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
