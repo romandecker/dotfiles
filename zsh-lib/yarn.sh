@@ -17,6 +17,8 @@ findconfig() {
 
 y() {
     local packageJson=$(findconfig "package.json")
-    local script=$(jq -r '.scripts | keys []' $packageJson | fzf --header "yarn run <what?>")
+    local script=$(jq -r '.scripts | keys []' $packageJson \
+                       | fzf --header "yarn run <what?>" \
+                             --preview="jq '.scripts[\"{}\"]' $packageJson" --height="40%")
     print -z yarn $script
 }
