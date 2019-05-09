@@ -1,5 +1,7 @@
 {
     "editor.snippetSuggestions": "top",
+    "editor.acceptSuggestionOnCommitCharacter": true,
+    "workbench.editor.showTabs": false,
     "vim.easymotion": true,
     "vim.useCtrlKeys": true,
     "vim.leader": " ",
@@ -19,9 +21,7 @@
         }
         // TODO ctrl+l to delete one char
     ],
-    "vim.otherModesKeyBindings": [
-    ],
-    "vim.otherModesKeyBindingsNonRecursive": [
+    "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": ["<leader>", "Q", "R"],
             "after": [],
@@ -48,6 +48,13 @@
             "after": [],
             "commands": [ {
                 "command": "workbench.action.splitEditor"
+            }]
+        },
+        {
+            "before": ["<leader>", "w", "-"],
+            "after": [],
+            "commands": [ {
+                "command": "workbench.action.splitEditorOrthogonal"
             }]
         },
         {
@@ -87,13 +94,15 @@
         { "before": ["<C-l>"], "after": ["C-w", "l"] },
         { "before": ["<C-j>"], "after": ["C-w", "j"] },
         { "before": ["<C-k>"], "after": ["C-w", "k"] },
+        { "before": ["d"], "after": ["\"", "_", "d"] },
         { "before": ["m"], "after": ["d"] },
-        { "before": ["m", "m"], "after": ["d", "d"] }
+    ],
+    "vim.normalModeKeyBindings": [
+        { "before": ["m", "m"], "after": ["d", "d"]},
     ],
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
     },
-    "gitlens.historyExplorer.enabled": true,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "gitlens.views.fileHistory.enabled": true,

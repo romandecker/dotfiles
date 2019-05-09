@@ -23,6 +23,7 @@ while [ ! -x "$(command -v code)" ]; do
 done
 
 code \
+    --force \
     --install-extension CoenraadS.bracket-pair-colorizer \
     --install-extension SirTori.indenticator \
     --install-extension WallabyJs.quokka-vscode \
