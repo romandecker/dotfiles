@@ -47,7 +47,6 @@ autoload -Uz transfer
 
 setopt histignorealldups    # ignore duplicates
 setopt hist_ignore_space    # do not save commands starting with space to history
-setopt inc_append_history
 setopt share_history
 
 export HISTSIZE=1000
