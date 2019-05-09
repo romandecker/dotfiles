@@ -83,6 +83,7 @@
    "y g s" 'my/magit-yank-head-sha
    "y g b" 'my/magit-yank-branch
    "y p f" 'my/yank-project-filename
+   "y P"   'my/yank-package-filename
    "y t"   'my/yank-iso8601-timestamp
    ". e"   'my/open-dotfile
    ". r"   'my/reload-dotfile

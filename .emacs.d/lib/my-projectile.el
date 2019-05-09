@@ -76,7 +76,16 @@ If no project is active, sets it to `bookmark-default-file'."
 
   (defun my/yank-project-filename ()
     (interactive)
-    (my/yank-to-clipboard (file-relative-name (buffer-file-name) (projectile-project-root)))))
+    (my/yank-to-clipboard (file-relative-name (buffer-file-name) (projectile-project-root))))
+
+
+
+  (defun my/yank-package-filename ()
+    (interactive)
+    (let* ((nearest-package-json (my/file-search-upward default-directory "package.json"))
+           (package-directory (file-name-directory nearest-package-json))
+           (path (file-relative-name (buffer-file-name) package-directory)))
+      (my/yank-to-clipboard path))))
 
 
 (defconst my/global-yas-snippet-dirs '("~/.emacs.d/snippets"))
