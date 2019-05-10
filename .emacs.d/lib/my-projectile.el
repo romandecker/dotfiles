@@ -82,7 +82,7 @@ If no project is active, sets it to `bookmark-default-file'."
 
   (defun my/yank-package-filename ()
     (interactive)
-    (let* ((nearest-package-json (my/file-search-upward default-directory "package.json"))
+    (let* ((nearest-package-json (my/search-file-upward default-directory "package.json"))
            (package-directory (file-name-directory nearest-package-json))
            (path (file-relative-name (buffer-file-name) package-directory)))
       (my/yank-to-clipboard path))))

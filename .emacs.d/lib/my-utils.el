@@ -488,7 +488,7 @@ Further customization is possible with `customize-option'
   (customize-save-customized))
 
 
-(defun my/file-search-upward (directory file)
+(defun my/search-file-upward (directory file)
   "Search DIRECTORY for FILE and return its full path if found, or NIL if not.
 
 If FILE is not found in DIRECTORY, the parent of DIRECTORY will be searched."
@@ -500,7 +500,7 @@ If FILE is not found in DIRECTORY, the parent of DIRECTORY will be searched."
         current-path
         (when (and (not (string= (file-truename directory) parent-dir))
                    (< (length parent-dir) (length (file-truename directory))))
-          (sodaware/file-search-upward parent-dir file)))))
+          (my/search-file-upward parent-dir file)))))
 
 
 ;; start of building a "switch-to-alternative-file" functionality:
