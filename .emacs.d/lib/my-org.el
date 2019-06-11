@@ -40,6 +40,8 @@
    "o p"   'org-insert-link
    "o f"   'my/org-find-file
    "o o"   'my/org-open-notes-directory
+   "o n"   'my/org-new-note
+   "o /"   'my/org-search-notes
    )
   (setq
    org-directory "~/Dropbox/org"
@@ -89,8 +91,19 @@ given string."
 
 
 (defun my/org-open-notes-directory ()
+  "Open `org-directory' in a dired buffer."
   (interactive)
   (find-file org-directory))
+
+(defun my/org-new-note (name)
+  "Create a new note with `NAME'."
+  (interactive (list
+                (read-string
+                 (format "Note name (in %s): " org-directory)
+                 (format-time-string "%Y-%m-%d-" nil t))))
+  (my/org-open-note (if (string-match "\\.org\\'" name)
+                        name
+                      (concat name ".org"))))
 
 
 (defun my/org-eol-call (fun)
@@ -99,6 +112,11 @@ FUN function callback"
   (end-of-line)
   (funcall fun)
   (evil-append nil))
+
+(defun my/org-search-notes ()
+  (interactive)
+  (helm-do-ag org-directory))
+
 
 (defun my/org-insert-item-dwim ()
   "Clever insertion of org item."
