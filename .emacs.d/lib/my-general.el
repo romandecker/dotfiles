@@ -82,6 +82,7 @@
    "y g g" 'my/magit-yank-head-info
    "y g s" 'my/magit-yank-head-sha
    "y g b" 'my/magit-yank-branch
+   "y g l" 'my/magit-yank-line-link
    "y p f" 'my/yank-project-filename
    "y P"   'my/yank-package-filename
    "y t"   'my/yank-iso8601-timestamp
