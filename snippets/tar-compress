@@ -1,1 +1,2 @@
+# lang: bash
 tar -czf target.tar.gz source/
