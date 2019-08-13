@@ -35,6 +35,7 @@
    "TAB"   'my/switch-to-last-buffer
    "a . ." 'my/open-current-file-with
    "a . d" 'my/open-current-dir-in-explorer
+   "a . l" 'my/magit-open-current-line-in-browser
    "a c"   'calculator
    "a p"   'helm-top
    "a P"   'package-list-packages

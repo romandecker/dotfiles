@@ -250,7 +250,7 @@ Used for automatically inserting on magit-commit."
   (interactive)
   (my/yank-to-clipboard (magit-git-string "rev-parse" "--abbrev-ref" "HEAD")))
 
-(defvar git-hosting-provider 'github)
+(defvar git-hosting-provider nil)
 (defvar bitbucket-baseurl nil)
 (defvar bitbucket-project nil)
 (defvar bitbucket-repo nil)
@@ -333,6 +333,10 @@ Used for automatically inserting on magit-commit."
 (defun my/magit-yank-line-link ()
   (interactive)
   (my/yank-to-clipboard (my/magit-get-line-link)))
+
+(defun my/magit-open-current-line-in-browser ()
+  (interactive)
+  (browse-url (my/magit-get-line-link)))
 
 (provide 'my-magit)
 ;;; my-magit.el ends here
