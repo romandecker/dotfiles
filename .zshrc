@@ -34,6 +34,9 @@ export EDITOR=nvim
 
 alias vim=nvim
 
+# convert a text in javascript object notation (from stdin) to json notation
+alias js2json='node -e '"'"'console.log(JSON.stringify(eval(`x=${require(`fs`).readFileSync(0,`utf-8`)}`),null,2))'"'";
+
 fpath=($fpath $DOTFILES_DIR/.zfunctions/)
 
 autoload -U promptinit; promptinit
