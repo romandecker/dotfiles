@@ -15,6 +15,12 @@
    "K" 'tide-documentation-at-point
    "g d" 'tide-jump-to-definition
    )
+  (:states 'insert
+   :keymaps 'typescript-mode-map
+  ;; this removes the possibility to auto-convert to template
+  ;; literals, but makes evil-mc work properly when inserting quotes
+   "'" 'self-insert-command)
+
   (:prefix my/local-leader
    :states 'normal
    :keymaps 'typescript-mode-map
