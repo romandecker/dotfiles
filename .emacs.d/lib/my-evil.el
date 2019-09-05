@@ -124,6 +124,7 @@
     :general
     (:keymaps 'normal
      "C-n" 'my/smart-c-n
+     "C-S-n" 'evil-mc-skip-and-goto-prev-cursor
      "C-p" 'my/ctrlp-dwim)
     (:keymaps 'visual
      "|" 'my/place-cursors-along-region)
