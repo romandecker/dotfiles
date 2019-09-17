@@ -30,78 +30,100 @@
 
   ;; leader keymaps
   (my/define-leader-map
-   ":"     'helm-M-x
-   "~"     'my/toggle-project-term
-   "TAB"   'my/switch-to-last-buffer
-   "a . ." 'my/open-current-file-with
-   "a . d" 'my/open-current-dir-in-explorer
-   "a . l" 'my/magit-open-current-line-in-browser
-   "a c"   'calculator
-   "a p"   'helm-top
-   "a P"   'package-list-packages
-   "a ~"   'multi-term
-   "b b"   'helm-buffers-list
-   "b d"   'my/bury-project-buffer
-   "b c"   'my/switch-to-compilation
-   "b m"   'my/switch-to-messages
-   "b j"   'next-buffer
-   "b k"   'previous-buffer
-   "b x"   'kill-this-buffer
-   "c c"   'recompile
-   "c x"   'kill-compilation
-   "j"     'my/previous-project-buffer
-   "k"     'my/next-project-buffer
-   "f f"   'helm-find-files
-   "e :"   'helm-eval-expression
-   "e l"   'eval-last-sexp
-   "e b"   'eval-buffer
-   "e f"   'eval-defun
-   "e r"   'eval-region
-   "f r"   'helm-recentf
-   "f s"   'save-buffer
-   "f d"   'dired-jump
-   "i u"   'my/insert-random-uuid
-   "i t"   'my/insert-iso8601-timestamp
-   "p y f" 'my/yank-project-filename
-   "r"     'revert-buffer
-   "t z"   'zoom-window-zoom
-   "t n"   'display-line-numbers-mode
-   "t g"   'my/toggle-git-gutter
-   "t r"   'read-only-mode
-   "t w v" 'toggle-truncate-lines
-   "t w w" 'aggressive-fill-paragraph-mode
-   "u"     'universal-argument
-   "w u"   'winner-undo
-   "w C-r" 'winner-redo
-   "w o"   'delete-other-windows
-   "w q"   'evil-window-delete
-   "w z"   'zoom-window-zoom
-   "w Z"   'hydra-zoom/body
-   "w |"   'split-window-right
-   "w -"   'split-window-below
-   "y f"   'my/yank-filename
-   "y g g" 'my/magit-yank-head-info
-   "y g s" 'my/magit-yank-head-sha
-   "y g b" 'my/magit-yank-branch
-   "y g l" 'my/magit-yank-line-link
-   "y p f" 'my/yank-project-filename
-   "y P"   'my/yank-package-filename
-   "y t"   'my/yank-iso8601-timestamp
-   ". e"   'my/open-dotfile
-   ". r"   'my/reload-dotfile
-   ". l d" 'add-dir-local-variable
-   ". l f" 'add-file-local-variable
-   ". l r" 'my/reload-dir-locals
-   ". l s" 'my/mark-current-value-as-safe
-   "? b"   'helm-descbinds
-   "? c c" 'flycheck-describe-checker
-   "? c s" 'flycheck-verify-setup
-   "? f"   'describe-function
-   "? F"   'describe-font
-   "? k"   'describe-key
-   "? m"   'describe-mode
-   "? M"   'describe-keymap
-   "? v"   'describe-variable)
+   ":"       'helm-M-x
+   "~"       'my/toggle-project-term
+   "TAB"     'my/switch-to-last-buffer
+   "a . ."   'my/open-current-file-with
+   "a . d"   'my/open-current-dir-in-explorer
+   "a . l"   'my/magit-open-current-line-in-browser
+   "a c"     'calculator
+   "a p"     'helm-top
+   "a P"     'package-list-packages
+   "a ~"     'multi-term
+   "b b"     'helm-buffers-list
+   "b d"     'my/bury-project-buffer
+   "b c"     'my/switch-to-compilation
+   "b m"     'my/switch-to-messages
+   "b j"     'next-buffer
+   "b k"     'previous-buffer
+   "b x"     'kill-this-buffer
+   "c c"     'recompile
+   "c x"     'kill-compilation
+   "j"       'my/previous-project-buffer
+   "k"       'my/next-project-buffer
+   "f f"     'helm-find-files
+   "e :"     'helm-eval-expression
+   "e l"     'eval-last-sexp
+   "e b"     'eval-buffer
+   "e f"     'eval-defun
+   "e r"     'eval-region
+   "f r"     'helm-recentf
+   "f s"     'save-buffer
+   "f d"     'dired-jump
+   "i u"     'my/insert-random-uuid
+   "i t"     'my/insert-iso8601-timestamp
+   "i a S-t" 'my/insert-box-inverse-t
+   "i a e"   'my/insert-box-E
+   "i a S-e" 'my/insert-box-3
+   "i a 3"   'my/insert-box-3
+   "i a +"   'my/insert-box-+
+   "i a -"   'my/insert-box-dash
+   "i a |"   'my/insert-box-pipe
+   "i a t l" 'my/insert-box-top-left
+   "i a r"   'my/insert-box-top-left
+   "i a t r" 'my/insert-box-top-right
+   "i a S-r" 'my/insert-box-top-right
+   "i a b l" 'my/insert-box-bottom-left
+   "i a l"   'my/insert-box-bottom-left
+   "i a b r" 'my/insert-box-bottom-right
+   "i a j"   'my/insert-box-bottom-right
+   "i a k"   'my/insert-box-arrow-up
+   "i a j"   'my/insert-box-arrow-down
+   "i a >"   'my/insert-box-arrow-right
+   "i a <"   'my/insert-box-arrow-left
+   "i a t t" 'my/insert-box-t
+   "i a b"   'my/insert-box
+   "i a c"   'my/insert-cylinder
+   "p y f"   'my/yank-project-filename
+   "r"       'revert-buffer
+   "t z"     'zoom-window-zoom
+   "t n"     'display-line-numbers-mode
+   "t g"     'my/toggle-git-gutter
+   "t r"     'read-only-mode
+   "t w v"   'toggle-truncate-lines
+   "t w w"   'aggressive-fill-paragraph-mode
+   "u"       'universal-argument
+   "w u"     'winner-undo
+   "w C-r"   'winner-redo
+   "w o"     'delete-other-windows
+   "w q"     'evil-window-delete
+   "w z"     'zoom-window-zoom
+   "w Z"     'hydra-zoom/body
+   "w |"     'split-window-right
+   "w -"     'split-window-below
+   "y f"     'my/yank-filename
+   "y g g"   'my/magit-yank-head-info
+   "y g s"   'my/magit-yank-head-sha
+   "y g b"   'my/magit-yank-branch
+   "y g l"   'my/magit-yank-line-link
+   "y p f"   'my/yank-project-filename
+   "y P"     'my/yank-package-filename
+   "y t"     'my/yank-iso8601-timestamp
+   ". e"     'my/open-dotfile
+   ". r"     'my/reload-dotfile
+   ". l d"   'add-dir-local-variable
+   ". l f"   'add-file-local-variable
+   ". l r"   'my/reload-dir-locals
+   ". l s"   'my/mark-current-value-as-safe
+   "? b"     'helm-descbinds
+   "? c c"   'flycheck-describe-checker
+   "? c s"   'flycheck-verify-setup
+   "? f"     'describe-function
+   "? F"     'describe-font
+   "? k"     'describe-key
+   "? m"     'describe-mode
+   "? M"     'describe-keymap
+   "? v"     'describe-variable)
 
   (general-evil-define-key 'normal tabulated-list-mode-map
     "g s"   'tabulated-list-sort

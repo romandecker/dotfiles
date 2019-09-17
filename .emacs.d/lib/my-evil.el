@@ -298,6 +298,8 @@ to the appropriate digraph-group by pressing `:`."
   (insert "ß"))
 
 
+
+
 (defun my/place-cursors-along-region (start end)
   "Place cursors along the given region given by START and END (or
 interactively along the current region)."

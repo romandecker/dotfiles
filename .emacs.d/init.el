@@ -67,6 +67,7 @@
 (require 'my-haskell)
 (require 'my-terraform)
 (require 'my-carbon)
+(require 'my-ascii-art)
 (require 'my-workgroups)
 
 ;; change-major-mode-after-body-hook prog-mode-hook js-mode-hook
