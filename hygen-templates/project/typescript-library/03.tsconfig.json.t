@@ -11,6 +11,7 @@ to: <%= projectName %>/tsconfig.json
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "target": "es6",
     "sourceMap": true,
     "outDir": "./lib",
