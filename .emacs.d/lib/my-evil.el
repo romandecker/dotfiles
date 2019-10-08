@@ -14,7 +14,8 @@
    "M-u" 'my/quick-digraph
    "M-s" 'my/insert-sharp-s
 
-   "C-x C-l" 'hippie-expand)
+   "C-x C-l" 'hippie-expand
+   "C-r" 'evil-paste-from-register)
 
   (:keymaps '(normal visual operator)
    "C-u" 'evil-scroll-up

@@ -62,28 +62,6 @@
    "f d"     'dired-jump
    "i u"     'my/insert-random-uuid
    "i t"     'my/insert-iso8601-timestamp
-   "i a S-t" 'my/insert-box-inverse-t
-   "i a e"   'my/insert-box-E
-   "i a S-e" 'my/insert-box-3
-   "i a 3"   'my/insert-box-3
-   "i a +"   'my/insert-box-+
-   "i a -"   'my/insert-box-dash
-   "i a |"   'my/insert-box-pipe
-   "i a t l" 'my/insert-box-top-left
-   "i a r"   'my/insert-box-top-left
-   "i a t r" 'my/insert-box-top-right
-   "i a S-r" 'my/insert-box-top-right
-   "i a b l" 'my/insert-box-bottom-left
-   "i a l"   'my/insert-box-bottom-left
-   "i a b r" 'my/insert-box-bottom-right
-   "i a j"   'my/insert-box-bottom-right
-   "i a k"   'my/insert-box-arrow-up
-   "i a j"   'my/insert-box-arrow-down
-   "i a >"   'my/insert-box-arrow-right
-   "i a <"   'my/insert-box-arrow-left
-   "i a t t" 'my/insert-box-t
-   "i a b"   'my/insert-box
-   "i a c"   'my/insert-cylinder
    "p y f"   'my/yank-project-filename
    "r"       'revert-buffer
    "t z"     'zoom-window-zoom
