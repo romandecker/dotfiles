@@ -37,7 +37,7 @@
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-one)
+  (load-theme 'doom-opera)
   (load-theme 'org-beautify))
 
 (use-package beacon
