@@ -6,7 +6,13 @@
 	 ("\\.markdown\\'" . markdown-mode))
   :config)
 
-(setq livedown-open t)
-(require 'livedown)
+(use-package grip-mode
+  :ensure t
+  :general
+  (:prefix my/local-leader
+   :states 'normal
+   :keymaps 'markdown-mode-map
+   "p" 'grip-mode)
+  :config)
 
 (provide 'my-markdown)
