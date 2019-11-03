@@ -8,5 +8,5 @@ source $SCRIPT_DIR/utils.sh
 if [ -x "$(command -v grip)" ]; then
         cecho "$fawn""grip""$normal is already installed"
 else
-    pip3 install grip
+    python3 -m pip install grip
 fi
