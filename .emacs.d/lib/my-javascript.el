@@ -215,18 +215,6 @@ given string."
   (general-evil-define-key 'normal 'rjsx-mode-map
     "K" 'helm-dash-at-point))
 
-(use-package flycheck-flow
-  :ensure t
-  :config
-  ;; make sure flow is at the end of the checker list
-  (setq flycheck-checkers (delete 'javascript-flow flycheck-checkers))
-  (setq flycheck-checkers (delete 'javascript-flow-coverage flycheck-checkers))
-  (add-to-list 'flycheck-checkers 'javascript-flow t)
-  (add-to-list 'flycheck-checkers 'javascript-flow-coverage t)
-
-  ;; make flow run after eslint
-  (flycheck-add-next-checker 'javascript-eslint 'javascript-flow))
-
 (use-package mocha
   :ensure t
   :general
@@ -352,16 +340,29 @@ that it behaves like in js-mode (which is correct for most cases)"
            )
       (append deps dev-deps peer-deps))))
 
-(use-package company-flow
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'company-flow))
+;; (use-package flycheck-flow
+;;   :ensure t
+;;   :config
+;;   ;; make sure flow is at the end of the checker list
+;;   (setq flycheck-checkers (delete 'javascript-flow flycheck-checkers))
+;;   (setq flycheck-checkers (delete 'javascript-flow-coverage flycheck-checkers))
+;;   (add-to-list 'flycheck-checkers 'javascript-flow t)
+;;   (add-to-list 'flycheck-checkers 'javascript-flow-coverage t)
+
+;;   ;; make flow run after eslint
+;;   (flycheck-add-next-checker 'javascript-eslint 'javascript-flow))
 
 
-(use-package flow-minor-mode
-  :ensure t
-  :config
-  (require 'flow-js2-mode))
+;; (use-package company-flow
+;;   :ensure t
+;;   :config
+;;   (add-to-list 'company-backends 'company-flow))
+
+
+;; (use-package flow-minor-mode
+;;   :ensure t
+;;   :config
+;;   (require 'flow-js2-mode))
 
 (general-define-key
  :states 'normal
