@@ -7,6 +7,11 @@
   (interactive)
   (insert "┬"))
 
+(defun my/insert-box-dash ()
+  "Helper to insert the box-drawing character ─"
+  (interactive)
+  (insert "─"))
+
 (defun my/insert-box-inverse-t ()
   "Helper to insert the box-drawing character ┴"
   (interactive)
@@ -26,11 +31,6 @@
   "Helper to insert the box-drawing character ┼"
   (interactive)
   (insert "┼"))
-
-(defun my/insert-box-dash ()
-  "Helper to insert the box-drawing character ─"
-  (interactive)
-  (insert "─"))
 
 (defun my/insert-box-pipe ()
   "Helper to insert the box-drawing character ─"
@@ -124,18 +124,18 @@
   "i a +"   'my/insert-box-+
   "i a -"   'my/insert-box-dash
   "i a |"   'my/insert-box-pipe
-  "i a t l" 'my/insert-box-top-left
-  "i a r"   'my/insert-box-top-left
-  "i a t r" 'my/insert-box-top-right
-  "i a S-r" 'my/insert-box-top-right
-  "i a b l" 'my/insert-box-bottom-left
-  "i a l"   'my/insert-box-bottom-left
-  "i a b r" 'my/insert-box-bottom-right
-  "i a j"   'my/insert-box-bottom-right
-  "i a k"   'my/insert-box-arrow-up
-  "i a j"   'my/insert-box-arrow-down
-  "i a >"   'my/insert-box-arrow-right
-  "i a <"   'my/insert-box-arrow-left
+  "i a k h" 'my/insert-box-top-left
+  "i a h k" 'my/insert-box-top-left
+  "i a l k" 'my/insert-box-top-right
+  "i a k l" 'my/insert-box-top-right
+  "i a j h" 'my/insert-box-bottom-left
+  "i a h j" 'my/insert-box-bottom-left
+  "i a j l" 'my/insert-box-bottom-right
+  "i a l j" 'my/insert-box-bottom-right
+  "i a k k"  'my/insert-box-arrow-up
+  "i a j j"  'my/insert-box-arrow-down
+  "i a > >"  'my/insert-box-arrow-right
+  "i a < M"  'my/insert-box-arrow-left
   "i a t t" 'my/insert-box-t
   "i a T"   'my/insert-box-inverse-t
   "i a b b" 'my/insert-box
