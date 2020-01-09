@@ -52,8 +52,8 @@ setopt histignorealldups    # ignore duplicates
 setopt hist_ignore_space    # do not save commands starting with space to history
 setopt share_history
 
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=10000
+export SAVEHIST=10000
 export HISTFILE=$HOME/.zsh_history
 
 
