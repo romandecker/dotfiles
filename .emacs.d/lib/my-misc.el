@@ -9,7 +9,7 @@
   ; signal to subshell that we're in emacs, so that sourcing .zshrc
   ; can directly set PATH correctly instead of lazy-loading
   (setenv "LOAD_NODE" "1")
-
+  (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
 (use-package restart-emacs
