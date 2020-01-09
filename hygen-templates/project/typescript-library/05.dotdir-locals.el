@@ -10,6 +10,7 @@ const tabWidth = locals.tabWidth || 2;
 ((nil
      (fill-column . 100)
      (create-lockfiles nil)
+     (prettier-command . "<%= rootDir %>/node_modules/.bin/prettier"))
      (prettier-args "--config" "<%= rootDir %>/.prettierrc.json"))
      (evil-shift-width . <%= tabWidth %>)
      (js-indent-level . <%= tabWidth %>)
