@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: it.each
+# key: it.each
+# condition: (looking-back "\\(^\\|\s\\)it\\.each")
+# --
+it.each\`
+  a      |  b
+  \${"a"} | \${"b"}
+'`('it should do X when a=$a and b=$b', ({a, b}) => {
+${1:}
+});
