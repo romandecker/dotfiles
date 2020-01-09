@@ -13,6 +13,7 @@
    :states 'normal
    :keymaps 'markdown-mode-map
    "p" 'grip-mode)
-  :config)
+  :config
+  (setq grip-github-user "DeX3"))
 
 (provide 'my-markdown)
