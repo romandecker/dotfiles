@@ -10,4 +10,5 @@
 flycheck_*.el
 /test/workspace/
 /vscode/workspaceStorage
+/vscode/globalStorage
 /z
