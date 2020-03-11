@@ -15,6 +15,10 @@
 (setq split-height-threshold nil
       split-width-threshhold 0)
 
+(setq large-file-warning-threshold
+      (* 1024 100) ; 100 KiB is already a huge file
+      )
+
 ;; bootstrap use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
