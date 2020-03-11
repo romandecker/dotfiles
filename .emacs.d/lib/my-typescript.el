@@ -32,7 +32,7 @@
    "c" 'tide-jsdoc-template
    "?" 'tide-verify-setup
    "i" 'tide-organize-imports
-   "l" 'tide-add-tslint-disable-next-line
+   "l" 'my/add-eslint-disable-next-line
    "f" 'tide-fix)
   (:keymaps 'tide-references-mode-map
    "q" 'quit-window)
@@ -43,6 +43,8 @@
   (flycheck-add-mode 'typescript-tide 'rjsx-mode)
   (flycheck-add-mode 'typescript-tslint 'rjsx-mode)
   (flycheck-add-mode 'jsx-tide 'rjsx-mode)
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'typescript-tide)
 
   (put 'flycheck-tslint-args 'risky-local-variable nil)
   (put 'flycheck-typescript-tslint-executable 'risky-local-variable nil)
@@ -69,6 +71,47 @@
                                 :includeCompletionsWithInsertText t
                                 :allowTextChangesInNewFiles t
                                 :importModuleSpecifierPreference "relative")))
+
+(defconst my/eslint-disable-next-line-regexp
+  "\/\/\s*eslint-disable-next-line\s+\\(.*\\)"
+  "Regexp matching an eslint flag disabling rules on the next line.")
+
+(defun my/add-eslint-disable-next-line ()
+  "Add an eslint flag to disable rules generating errors at point.
+
+This function adds or modifies a flag of this form to the
+previous line:
+
+  // eslint-disable-next-line [rule1] [rule2] [...]
+
+The line will be indented according to the current indentation
+settings.  This function generates rule1, rule2 to cover all the
+errors present at point.
+
+If the previous line does not already contain a disable-next-line
+flag, a new line is added to hold the new flag.  If the previous
+line already contains a disable-next-line flag, the rule is added
+to the flag.  Note that this function does not preserve the
+formatting of the already existing flag.  The resulting flag will
+always be formatted as described above."
+  (interactive)
+  (let ((error-ids (delq nil (tide-get-flycheck-errors-ids-at-point)))
+        (start (point)))
+    (when error-ids
+      (save-excursion
+        (if (and (eq 0 (forward-line -1))
+                 (looking-at tide-tslint-disable-next-line-regexp))
+            ;; We'll update the old flag.
+            (let ((old-list (split-string (match-string 1))))
+              (delete-region (point) (point-at-eol))
+              (setq error-ids (append old-list error-ids)))
+          ;; We'll create a new flag.
+          (goto-char start)
+          (beginning-of-line)
+          (open-line 1))
+        (insert "// eslint-disable-next-line "
+                (string-join error-ids " "))
+        (typescript-indent-line)))))
 
 
 (provide 'my-typescript)

@@ -18,4 +18,5 @@ const tabWidth = locals.tabWidth || 2;
      (tab-width . <%= tabWidth %>)
     (typescript-mode
      (flycheck-typescript-tslint-executable . "<%= rootDir %>/node_modules/.bin/tslint")
+     (flycheck-javascript-eslint-executable . "<%= rootDir %>/node_modules/.bin/eslint.js")
      (flycheck-tslint-args . ("--project" "<%= rootDir %>/tsconfig.json"))))
