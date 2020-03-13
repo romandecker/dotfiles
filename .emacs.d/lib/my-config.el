@@ -46,8 +46,8 @@
                                        (setq-local truncate-lines nil)))
 
 (defconst my/dotfile "~/.dotfiles/.emacs.d/init.el")
-(defconst my/workgroups-file (expand-file-name "~/.emacs.d/workgroups"))
-(defconst my/last-workgroup-file (expand-file-name "~/.emacs.d/last-workgroup"))
+(defconst my/workgroups-file (expand-file-name "~/.dotfiles/.emacs.d/workgroups"))
+(defconst my/last-workgroup-file (expand-file-name "~/.dotfiles/.emacs.d/last-workgroup"))
 (defconst my/local-emacs-dir ".emacs.local/")
 
 (provide 'my-config)

@@ -7,10 +7,10 @@
 (require 'package)
 
 ;; make sure emacs finds all my-*.el files
-(add-to-list 'load-path "~/.emacs.d/lib")
+(add-to-list 'load-path "~/.dotfiles/.emacs.d/lib")
 
 ;; and all 3rd party libs
-(add-to-list 'load-path "~/.emacs.d/third-party")
+(add-to-list 'load-path "~/.dotfiles/.emacs.d/third-party")
 
 (require 'my-setup)            ; initial setup, libraries and basic stuff
 (require 'my-config)           ; Some basic configuration settings
