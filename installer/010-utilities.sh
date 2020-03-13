@@ -12,6 +12,7 @@ elif [ $os == $MAC ]; then
     ensure coreutils realpath
 fi
 
+ensure ripgrep
 ensure moreutils vipe
 ensure watch
 
