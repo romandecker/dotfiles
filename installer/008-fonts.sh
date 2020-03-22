@@ -5,7 +5,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $SCRIPT_DIR/utils.sh
 
-push QR$SCRIPT_DIR/../submodules/powerline-fonts
+pushd $SCRIPT_DIR/../submodules/powerline-fonts
 ./install.sh
 popd
 
