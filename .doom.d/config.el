@@ -61,9 +61,11 @@
 (map! :n "M-s" #'evil-mc-skip-and-goto-next-match)
 (map! :n "M-S" #'evil-mc-skip-and-goto-prev-match)
 
-(map! :n "m" #'evil-delete)
+(map! :i "C-l" #'evil-delete-char)
 
 (map! :leader "w o" #'delete-other-windows)
+
+(global-subword-mode)
 
 (let ((local-config "~/.emacs.local.el"))
   (when (file-readable-p local-config)

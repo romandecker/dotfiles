@@ -1,6 +1,12 @@
 ;;; lang/typescript/config.el -*- lexical-binding: t; -*-
 
 
+;; (use-package! lsp-mode
+;;   :after typescript-mode
+;;   :hook ((typescript-mode . lsp-mode)
+;;          (typescript-mode . lsp-ui-mode)
+;;          (typescript-mode . lsp)))
+
 (use-package! tide
   :demand t
   :after (typescript-mode company flycheck)
@@ -36,6 +42,8 @@
   ;;  "q" 'quit-window)
 
   :config
+  (map! :localleader :mode tide-mode "f" #'tide-fix)
+  (add-to-list '+company-backend-alist '(typescript-mode company-tide))
 
   (flycheck-add-mode 'typescript-tide 'rjsx-mode)
   (flycheck-add-mode 'typescript-tslint 'rjsx-mode)
@@ -64,7 +72,7 @@
         tide-always-show-documentation t
         tide-jump-to-definition-reuse-window nil
         tide-user-preferences '(
-                                :includecompletionsformoduleexports t
-                                :includecompletionswithinserttext t
-                                :allowtextchangesinnewfiles t
-                                :importmodulespecifierpreference "relative")))
+                                :includeCompletionsForModuleExports t
+                                :includeCompletionsWithInsertText t
+                                :allowTextChangesInNewfiles t
+                                :importModuleSpecifierPreference "relative")))
