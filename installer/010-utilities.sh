@@ -10,9 +10,11 @@ if [ $os == $LINUX ]; then
 elif [ $os == $MAC ]; then
     ensure the_silver_searcher ag
     ensure coreutils realpath
+
+    ln -fs `which greadlink` /usr/local/bin/readlink
 fi
 
-ensure ripgrep
+ensure ripgrep rg
 ensure moreutils vipe
 ensure watch
 
