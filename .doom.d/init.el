@@ -63,6 +63,8 @@
        snippets          ; my elves. They type so I don't have to
        ;;word-wrap         ; soft wrapping with language-aware indent
        evil-move
+       quick-digraph     ; quickly enter digraphs like everywhere in osx
+       ++evil
 
        :emacs
        dired             ; making dired pretty [functional]
