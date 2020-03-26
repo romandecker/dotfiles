@@ -67,6 +67,8 @@
 
 (global-subword-mode)
 
+(setq org-directory "~/Dropbox/org")
+
 (let ((local-config "~/.emacs.local.el"))
   (when (file-readable-p local-config)
     (load-file local-config)))
