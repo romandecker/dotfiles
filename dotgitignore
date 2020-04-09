@@ -16,3 +16,4 @@ node_modules.*
 .ignore
 flycheck_*
 .log
+todo.org
