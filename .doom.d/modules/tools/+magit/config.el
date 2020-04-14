@@ -44,9 +44,9 @@
     "Build a bitbucket-web-link for the given ref, path and line"
     (let* ((baseurl (or bitbucket-baseurl (+magit/guess-bitbucket-url)))
            (project (or bitbucket-project (+magit/guess-bitbucket-project)))
-           (repo (or bitbucket-repo (+magit/guess-bitbucket-repo))))
-      (format "%s/projects/%s/repos/%s/browse/%s?at=%s#%s" baseurl project repo path ref line)))
-
+           (repo (or bitbucket-repo (+magit/guess-bitbucket-repo)))
+           (query-string (if ref (format "?at=%s" ref) "")))
+      (format "%s/projects/%s/repos/%s/browse/%s%s#%s" baseurl project repo path query-string line)))
 
   (defun +magit/guess-github-user ()
     "Guess the github user based on the configured origin url."
@@ -66,14 +66,14 @@
     "Build a github-web-link for the given ref, path an line"
     (let* ((user (or github-user (+magit/guess-github-user)))
            (repo (or github-repo (+magit/guess-github-repo))))
-      (format "%s/%s/%s/blob/%s/%s#L%d" github-baseurl user repo ref path line)))
+      (format "%s/%s/%s/blob/%s/%s#L%d" github-baseurl user repo (or ref "master") path line)))
 
   (defvar git-hosting-providers
     '((bitbucket . ((build-line-link . +magit/build-bitbucket-line-link)))
       (github    . ((build-line-link . +magit/build-github-line-link)))))
 
-  (defun +magit/get-line-link ()
-    (let* ((ref (magit-git-string "rev-parse" "--abbrev-ref" "HEAD"))
+  (defun +magit/get-line-link (&optional omit-ref)
+    (let* ((ref (if omit-ref nil (magit-git-string "rev-parse" "--abbrev-ref" "HEAD")))
            (provider (or git-hosting-provider (+magit/guess-provider)))
            (hosting-provider-config (alist-get provider git-hosting-providers))
            (build-line-link-fn (alist-get 'build-line-link hosting-provider-config))
@@ -81,6 +81,7 @@
            (line-number (line-number-at-pos (point))))
       (funcall build-line-link-fn ref path line-number)))
 
-  (defun +magit/open-current-line-in-browser ()
-    (interactive)
-    (browse-url (+magit/get-line-link))))
+  (defun +magit/open-current-line-in-browser (omit-branch)
+    (interactive "P")
+    (browse-url (+magit/get-line-link omit-branch))))
+
