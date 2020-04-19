@@ -12,3 +12,4 @@ flycheck_*.el
 /vscode/workspaceStorage
 /vscode/globalStorage
 /z
+/doom-emacs
