@@ -169,6 +169,7 @@
        ;;terra             ; Earth and Moon in alignment for performance.
        ;;web               ; the tubes
        (typescript +lsp)
+       mermaid             ; draw graphs using markdown-like syntax
 
        :email
        ;;(mu4e +gmail)
