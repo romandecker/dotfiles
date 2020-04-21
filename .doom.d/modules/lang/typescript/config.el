@@ -12,6 +12,7 @@
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
+         (typescript-mode . rainbow-mode)
          (rjsx-mode . tide-setup))
   :general
   ;; (:states 'normal
