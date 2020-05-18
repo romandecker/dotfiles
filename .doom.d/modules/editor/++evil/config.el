@@ -12,3 +12,10 @@
        (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
 
 (define-and-bind-text-object "e" "\\`\\s-*" "\\s-*\\'")
+
+(map! :n "C-u" #'evil-scroll-up)
+
+(use-package evil-numbers
+  :config
+  (map! :n "C-a" #'evil-numbers/inc-at-pt)
+  (map! :n "C-s" #'evil-numbers/dec-at-pt))
