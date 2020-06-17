@@ -13,36 +13,12 @@
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
          (typescript-mode . rainbow-mode)
+         (typescript-mode . emmet-mode)
          (rjsx-mode . tide-setup))
   :general
-  ;; (:states 'normal
-  ;;  :keymaps 'typescript-mode-map
-  ;;  "K" 'tide-documentation-at-point
-  ;;  "g d" 'tide-jump-to-definition
-  ;;  )
-  ;; (:states 'insert
-  ;;  :keymaps 'typescript-mode-map
-  ;; ;; this removes the possibility to auto-convert to template
-  ;; ;; literals, but makes evil-mc work properly when inserting quotes
-  ;;  "'" 'self-insert-command)
-
-  ;; (:prefix my/local-leader
-  ;;  :states 'normal
-  ;;  :keymaps 'typescript-mode-map
-  ;;  "*" 'tide-references
-  ;;  "e" 'tide-project-errors
-  ;;  "r" 'tide-rename-symbol
-  ;;  "R" 'tide-refactor
-  ;;  "f" 'tide-format
-  ;;  "c" 'tide-jsdoc-template
-  ;;  "?" 'tide-verify-setup
-  ;;  "i" 'tide-organize-imports
-  ;;  "l" 'my/add-eslint-disable-next-line
-  ;;  "f" 'tide-fix)
-  ;; (:keymaps 'tide-references-mode-map
-  ;;  "q" 'quit-window)
-
   :config
+  (setq-hook! 'typescript-mode-hook
+    emmet-expand-jsx-className? t)
   (map! :localleader :mode tide-mode "f" #'tide-fix)
   (add-to-list '+company-backend-alist '(typescript-mode company-tide))
 
