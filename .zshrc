@@ -51,6 +51,7 @@ autoload -Uz transfer
 setopt histignorealldups    # ignore duplicates
 setopt hist_ignore_space    # do not save commands starting with space to history
 setopt share_history
+setopt interactivecomments  # enable comments in REPL
 
 export HISTSIZE=10000
 export SAVEHIST=10000

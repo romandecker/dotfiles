@@ -1,3 +1,0 @@
-# make a user's screen setup the one to use in the login screen
-ln -s ~/.config/monitors.xml /var/lib/lightdm/.config/monitors.xml
-chown -h lightdm:lightdm /var/lib/lightdm/.config/monitors.xml

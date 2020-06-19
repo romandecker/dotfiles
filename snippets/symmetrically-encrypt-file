@@ -1,3 +1,0 @@
-# lang: bash
-# output will be path/to/file.gpg
-gpg --symmetric path/to/file

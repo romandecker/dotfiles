@@ -1,0 +1,167 @@
+[[snippets]]
+  description = "Create SSH tunnel"
+  command = "ssh -L <localport>:<targethost>:<targetport> <connection>"
+  tag = ["shell", "ssh"]
+
+[[snippets]]
+  description = "Verify AWS ssh key fingerprint"
+  command = "ssh-keygen -ef <privateKey=~/.ssh/id_rsa> -m PEM | openssl rsa -RSAPublicKey_in -outform DER | openssl md5 -c"
+  tag = ["shell", "ssh", "aws"]
+  output = ""
+
+[[snippets]]
+  description = "Show certificate info"
+  command = "ssh-keygen -Lf <certificateFile>"
+  tag = ["shell", "ssh", "aws"]
+  output = ""
+
+[[snippets]]
+  description = "tar extract (to current directory)"
+  command = "tar -xzvf <archive=source.tar.gz>"
+  tag = ["shell", "tar"]
+  output = ""
+
+[[snippets]]
+  description = "tar extract (to target directory)"
+  command = "tar -xzvf <archive=source.tar.gz> -C <targetDir>"
+  tag = ["shell", "tar"]
+  output = ""
+
+[[snippets]]
+  description = "tar compress"
+  command = "tar -czf <targetArchive=target.tar.gz> <sourceDir=source/>"
+  tag = ["shell", "tar"]
+  output = ""
+
+[[snippets]]
+  description = "Symmetrically encrpyt file"
+  command = "gpg --symmetric <targetfile>"
+  tag = ["shell", "gpg"]
+  output = ""
+
+[[snippets]]
+  description = "Decrypt file"
+  command = "gpg --decrypt <encryptedFile>"
+  tag = ["shell", "gpg"]
+  output = ""
+
+[[snippets]]
+  description = "Format JSON logs"
+  command = "<executable> | jq -R 'fromjson?'"
+  tag = ["shell", "json", "logs"]
+  output = ""
+
+[[snippets]]
+  description = "Delete downloads older than 30 days"
+  command = "find ~/Downloads -type f -mtime +30 -delete -print && find ~/Downloads -type d ! -path ~/Downloads -empty -delete -print"
+  tag = ["shell", "gpg"]
+  output = ""
+
+[[snippets]]
+  description = "[MAC] Fix spotlight"
+  command = """
+# turn off spotlight
+sudo mdutil -a -i off
+
+# unload it
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+
+# load it
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+
+# Turn spotlight on again
+sudo mdutil -a -i on
+"""
+  tag = ["shell", "mac"]
+  output = ""
+
+[[snippets]]
+  description = "[MAC] Show Wi-Fi IP Address"
+  command = "ipconfig getifaddr en0"
+  tag = ["shell", "network", "mac"]
+  output = ""
+
+[[snippets]]
+  description = "[LINUX] Delete ubuntu crash reports"
+  command = "sudo rm /var/crash/*"
+  tag = ["shell", "linux"]
+  output = ""
+
+
+[[snippets]]
+  description = "[MAC] Show Wi-Fi IP Address"
+  command = """
+# make a user's screen setup the one to use in the login screen
+ln -s ~/.config/monitors.xml /var/lib/lightdm/.config/monitors.xml
+chown -h lightdm:lightdm /var/lib/lightdm/.config/monitors.xml
+"""
+  tag = ["shell", "linux", "lightdm"]
+  output = ""
+
+[[snippets]]
+  description = "Filter branch: Delete file from history"
+  command = """
+git filter-branch --force --index-filter \
+    'git rm --cached --ignore-unmatch <filePathToDelete>' \
+    --prune-empty --tag-name-filter cat -- --all
+"""
+  tag = ["shell", "git"]
+  output = ""
+
+[[snippets]]
+  description = "POST json payload"
+  command = "curl -X POST -H 'Content-Type: application/json' -d '{\"foo\": \"bar\"}'"
+  tag = ["shell", "network", "curl"]
+  output = ""
+
+[[snippets]]
+  description = "Share file via transfer.sh"
+  command = "curl --upload-file <targetFile> https://transfer.sh/<targetFile>"
+  tag = ["shell", "network"]
+  output = ""
+
+[[snippets]]
+  description = "SSH config entry"
+  command = """
+Host alias
+    hostname 1.2.3.4
+    user username
+    port 22
+"""
+  tag = ["ssh"]
+
+[[snippets]]
+  description = "[BASH] Get script directory"
+  command = """DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" """
+  tag = ["bash"]
+
+[[snippets]]
+  description = "Bash process getopt-like options"
+  command = """
+while [[ $# -gt 1 ]]
+do
+    key="$1"
+
+    case $key in
+        -h|--help)
+            echo "Usage: $0 ..."
+            shift
+            ;;
+        -v|--version)
+            echo "v0.0.0"
+            shift
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+    shift
+done
+"""
+  tag = ["bash"]
+
+[[snippets]]
+  description = "Dump postgres database to local file"
+  command = ""
+  tag = ["shell", "postgres"]

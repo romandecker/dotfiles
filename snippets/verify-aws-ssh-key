@@ -1,2 +1,0 @@
-# lang: bash
-ssh-keygen -ef ~/.ssh/id_rsa -m PEM | openssl rsa -RSAPublicKey_in -outform DER | openssl md5 -c
