@@ -163,5 +163,5 @@ done
 
 [[snippets]]
   description = "Dump postgres database to local file"
-  command = ""
+  command = "pg_dump -h <host> -U <user=postgres> -d <dbName=postgres> > <dumpfile=dump.sql>"
   tag = ["shell", "postgres"]
