@@ -8,8 +8,16 @@
 deletes to black-hole"
     (evil-delete beg end type ?_ nil))
 
+  (evil-define-operator evil-overwrite (beg end type)
+  "Change text from BEG to END with TYPE. Works just like evil-change except it
+does not put anything in a register."
+    (evil-change beg end type ?_ nil #'evil-delete))
+
   (map! :n "d" #'evil-destroy)
+  (map! :n "c" #'evil-overwrite)
+
   (map! :n "m" #'evil-delete))
 
 (after! evil-surround
-  (add-to-list 'evil-surround-operator-alist '(evil-destroy . delete)))
+  (add-to-list 'evil-surround-operator-alist '(evil-destroy . delete))
+  (add-to-list 'evil-surround-operator-alist '(evil-overwrite . change)))
