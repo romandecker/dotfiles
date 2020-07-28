@@ -55,6 +55,15 @@
 
 (map! :leader "p /" #'+default/search-project)
 
+;; automatically set the search pattern after doing a project-wide search, so
+;; you can continue searching in the opened file by just pressing `n'
+(defun ++default/search-project-advice (orig-fun &rest args)
+  (let* ((result (apply orig-fun args))
+         (last-search (substring-no-properties (car counsel-git-grep-history))))
+    (setq evil-ex-search-pattern `(,last-search t t))
+    result))
+(advice-add '+default/search-project :around #'++default/search-project-advice)
+
 (map! :n "g z s" #'evil-mc-skip-and-goto-next-match)
 (map! :n "M-n" #'evil-mc-make-and-goto-next-match)
 (map! :n "M-N" #'evil-mc-make-and-goto-prev-match)
