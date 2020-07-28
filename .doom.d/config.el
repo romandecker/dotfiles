@@ -78,6 +78,8 @@
 
 (setq org-directory "~/Dropbox/org")
 
+(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+
 (let ((local-config "~/.emacs.local.el"))
   (when (file-readable-p local-config)
     (load-file local-config)))
