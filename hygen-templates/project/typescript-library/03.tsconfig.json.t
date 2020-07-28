@@ -14,7 +14,7 @@ to: <%= projectName %>/tsconfig.json
     "esModuleInterop": true,
     "target": "es6",
     "sourceMap": true,
-    "outDir": "./lib",
+    "outDir": "./dist",
     "rootDir": "./src",
     "skipLibCheck": true,
     "lib": [

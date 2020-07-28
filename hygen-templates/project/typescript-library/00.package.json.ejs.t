@@ -3,15 +3,19 @@ message: "Generated package.json and added devDependencies"
 to: <%= projectName %>/package.json
 sh: >
       cd <%= cwd %>/<%= projectName %> &&
-      yarn add -D typescript \
-                  prettier \
-                  jest \
-                  ts-jest \
-                  ts-node \
-                  tslint \
-                  tslint-config-prettier \
-                  npm-run-all \
-                  rimraf
+      npm install --save-dev typescript \
+                             prettier \
+                             jest \
+                             ts-jest \
+                             ts-node \
+                             eslint \
+                             @typescript-eslint/parser \
+                             @typescript-eslint/eslint-plugin \
+                             eslint-config-prettier \
+                             eslint-plugin-prettier \
+                             eslint-plugin-jest \
+                             npm-run-all \
+                             rimraf
 ---
 {
   "name": "<%= projectName %>",
@@ -24,9 +28,9 @@ sh: >
   "scripts": {
     "compile": "tsc -p tsconfig.json",
     "build": "run-s clean compile",
-    "clean": "rimraf lib/",
+    "clean": "rimraf dist/",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "eslint src/**/*.{ts,tsx,js,jsx}"
   },
   "author": "<%= locals.author %>",
   "license": "<%= locals.license %>"
