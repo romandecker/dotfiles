@@ -114,6 +114,7 @@
        ;;upload            ; map local to remote projects via ssh/ftp
        quick-yank
        insert-things
+       +safe-local-variables
 
        :lang
        ;;agda              ; types of types of types of types...

@@ -1,5 +1,5 @@
 ---
-to: <%= projectName %>/tslint.json
+to: <%= projectName %>/.eslintrc.js
 ---
 module.exports = {
     root: true,

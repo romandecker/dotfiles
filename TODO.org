@@ -12,11 +12,6 @@ surrounding quotes to " and insert a '
 
 * Bugs
 
-** Macro recording bug
-
-Recording a macro that contains `c w` will record the `w` twice (view
-the last recorded macro using `kmacro-edit-macro`).
-
 ** Cannot cancel `kmacro-edit-macro` with evil
 
 Is normally cancelled with `C-x k RET` but that doesn't work with evil.
