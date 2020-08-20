@@ -57,6 +57,9 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=$HOME/.zsh_history
 
+export NVM_COMPLETION=true
+export NVM_LAZY_LOAD=true
+
 
 zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 
@@ -65,6 +68,8 @@ source "${HOME}/.zgen/zgen.zsh"
 if ! zgen saved ; then
   zgen load wbingli/zsh-wakatime
   zgen load buonomo/yarn-completion
+  
+  zgen load lukechilds/zsh-nvm
 
   zgen oh-my-zsh
   zgen oh-my-zsh/plugins/gitfast
@@ -85,3 +90,6 @@ for f in $HOME/.dotfiles/zsh-lib/*.sh; do
 done
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+export YVM_DIR=/Users/romande/.yvm
+[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
