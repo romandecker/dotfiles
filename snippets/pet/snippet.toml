@@ -16,6 +16,11 @@
   output = ""
 
 [[snippets]]
+  description = "Remove line from known_hosts based on line number"
+  command = "sed -i.bak '<linenumber>d' ~/.ssh/known_hosts"
+  tag = ["shell", "ssh", "known_hosts"]
+
+[[snippets]]
   description = "tar extract (to current directory)"
   command = "tar -xzvf <archive=source.tar.gz>"
   tag = ["shell", "tar"]
@@ -165,3 +170,4 @@ done
   description = "Dump postgres database to local file"
   command = "pg_dump -h <host> -U <user=postgres> -d <dbName=postgres> > <dumpfile=dump.sql>"
   tag = ["shell", "postgres"]
+
