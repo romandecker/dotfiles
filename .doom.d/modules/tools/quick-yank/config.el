@@ -22,7 +22,13 @@
       (quick-yank/yank-to-clipboard path)))
 
 
-(map! :leader "y P" #'quick-yank/yank-package-filename)
+(map! :leader "y P" #'quick-yank/yank-package-filename
+      :desc "File name relative to package")
+
+(which-key-add-key-based-replacements
+  "SPC y" "Yank stuff"
+  "SPC y g" "Git"
+  "SPC y p" "Project")
 
 (defun quick-yank/search-file-upward (directory file)
   "Search DIRECTORY for FILE and return its full path if found, or NIL if not.
@@ -38,6 +44,7 @@ If FILE is not found in DIRECTORY, the parent of DIRECTORY will be searched."
         (quick-yank/search-file-upward parent-dir file)))))
 
 (after! magit
+
 
   (map! :leader "y g g" #'quick-yank/magit-yank-head-info)
   (map! :leader "y g b" #'quick-yank/magit-yank-branch)
