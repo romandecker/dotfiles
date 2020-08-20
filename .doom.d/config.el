@@ -80,6 +80,11 @@
 
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 
+;; First element in `counsel-projectile-switch-project-action' signifies
+;; the index of the default action to take after switching projects,
+;; set it to 13, which is to invoke magit
+(setcar counsel-projectile-switch-project-action 13)
+
 (let ((local-config "~/.emacs.local.el"))
   (when (file-readable-p local-config)
     (load-file local-config)))
