@@ -85,6 +85,9 @@
 ;; set it to 13, which is to invoke magit
 (setcar counsel-projectile-switch-project-action 13)
 
+(add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
+
+
 (let ((local-config "~/.emacs.local.el"))
   (when (file-readable-p local-config)
     (load-file local-config)))
