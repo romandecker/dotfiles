@@ -15,10 +15,18 @@ findconfig() {
 }
 
 
-y() {
+pm() {
     local packageJson=$(findconfig "package.json")
     local script=$(jq -r '.scripts | keys []' $packageJson \
-                       | fzf --header "yarn run <what?>" \
+                       | fzf --header "$1 <what?>" \
                              --preview="jq '.scripts[\"{}\"]' $packageJson" --height="40%")
-    print -z yarn $script
+    print -z $1 $script
+}
+
+np() {
+  pm "npm run"
+}
+
+y() {
+  pm "yarn"
 }
