@@ -101,7 +101,6 @@
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
        ;; lsp           ; Does not yet work with relative imports!
-       macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        +magit
        ;;make              ; run make tasks from Emacs
@@ -189,6 +188,10 @@
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
+
+
+       :os
+       macos             ; MacOS-specific commands
 
        :config
        ;;literate

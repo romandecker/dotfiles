@@ -5,7 +5,7 @@
   (customize-save-variable 'safe-local-variable-values safe-local-variable-values))
 
 (defun +safe-local-variables/counsel-make-variable-value-safe ()
-  "Read a variable and mark it's current value as safe for this session"
+  "Read a variable and mark it's current value as safe via customize"
   (interactive)
   (let ((enable-recursive-minibuffers t))
     (ivy-read "Variable: " obarray
@@ -16,9 +16,9 @@
               :preselect (ivy-thing-at-point)
               :action (lambda (x)
                         (funcall '+safe-local-variables/counsel-make-variable-value-safe-function (intern x)))
-              :caller '+counsel-make-variable-value-safe)))
+              :caller '+safe-local-variables/counsel-make-variable-value-safe)))
 
 (defun +safe-local-variables/counsel-make-variable-value-safe-function (variable)
   (let* ((variable-value (symbol-value variable)))
     (message "Setting %s to %s" variable variable-value)
-    (+make-variable-value-safe variable variable-value)))
+    (+safe-local-variables/make-variable-value-safe variable variable-value)))
