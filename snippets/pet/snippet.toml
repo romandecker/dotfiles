@@ -141,6 +141,11 @@ Host alias
   tag = ["bash"]
 
 [[snippets]]
+  description = "[BASH] Get timestamp in ISO8601 format"
+  command = """date '+%Y-%m-%dT%H:%M:%SZ'"""
+  tag = ["bash"]
+
+[[snippets]]
   description = "Bash process getopt-like options"
   command = """
 while [[ $# -gt 1 ]]
@@ -165,6 +170,7 @@ do
 done
 """
   tag = ["bash"]
+
 
 [[snippets]]
   description = "Dump postgres database to local file"
