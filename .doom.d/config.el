@@ -82,8 +82,8 @@
 
 ;; First element in `counsel-projectile-switch-project-action' signifies
 ;; the index of the default action to take after switching projects,
-;; set it to 13, which is to invoke magit
-(setcar counsel-projectile-switch-project-action 13)
+;; set it to 14, which is to invoke magit
+(setcar counsel-projectile-switch-project-action 14)
 
 (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
 

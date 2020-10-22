@@ -17,6 +17,8 @@
          (rjsx-mode . tide-setup))
   :general
   :config
+  ;; (when (featurep! +lsp)
+  ;;   (add-hook typescript-mode-hook #'lsp))
   (setq-hook! 'typescript-mode-hook
     emmet-expand-jsx-className? t)
   (map! :localleader :mode tide-mode "f" #'tide-fix)
