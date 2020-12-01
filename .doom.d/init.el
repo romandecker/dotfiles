@@ -178,6 +178,7 @@
        web               ; the tubes
        (typescript +lsp)
        mermaid             ; draw graphs using markdown-like syntax
+       yaml
 
        :email
        ;;(mu4e +gmail)
