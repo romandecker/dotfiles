@@ -15,12 +15,16 @@
          (typescript-mode . rainbow-mode)
          (typescript-mode . emmet-mode)
          (rjsx-mode . tide-setup))
-  :general
   :config
   ;; (when (featurep! +lsp)
   ;;   (add-hook typescript-mode-hook #'lsp))
   (setq-hook! 'typescript-mode-hook
     emmet-expand-jsx-className? t)
+
+  (when (featurep! :tools lookup)
+    (set-lookup-handlers! 'tide-mode
+      :definition '(tide-jump-to-definition :async t)))
+
   (map! :localleader :mode tide-mode "f" #'tide-fix)
   (add-to-list '+company-backend-alist '(typescript-mode company-tide))
 
@@ -49,7 +53,7 @@
 
   (setq tide-completion-detailed t
         tide-always-show-documentation t
-        tide-jump-to-definition-reuse-window nil
+        tide-jump-to-definition-reuse-window t
         tide-user-preferences '(
                                 :includeCompletionsForModuleExports t
                                 :includeCompletionsWithInsertText t
