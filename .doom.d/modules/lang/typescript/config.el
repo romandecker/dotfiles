@@ -51,6 +51,8 @@
 
   (advice-add 'tide-references :after #'my/advice-tide-references-buffer)
 
+  (set-file-template! "\\.tsx$" :trigger "__react-fc")
+
   (setq tide-completion-detailed t
         tide-always-show-documentation t
         tide-jump-to-definition-reuse-window t
