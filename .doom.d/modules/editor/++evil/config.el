@@ -18,3 +18,28 @@
   :config
   (map! :n "C-a" #'evil-numbers/inc-at-pt)
   (map! :n "C-s" #'evil-numbers/dec-at-pt))
+
+
+(when (featurep! :editor multiple-cursors)
+
+  (defun +evil/place-cursors-along-region (start end)
+    "Place cursors along the given region given by START and END (or
+interactively along the current region)."
+    (interactive "r")
+    (let ((col (save-excursion
+                 (goto-char start)
+                 (current-column)))
+          (last (line-number-at-pos end)))
+      (evil-normal-state)
+      (evil-mc-pause-cursors)
+      (goto-char start)
+      (save-excursion
+        (while (< (line-number-at-pos (point)) last)
+          (evil-next-visual-line)
+          (evil-mc-make-cursor-here)
+          (move-to-column col)))
+      (evil-mc-resume-cursors)))
+
+  (after! evil-mc
+    (map! :v "|" #'+evil/place-cursors-along-region))
+  )
