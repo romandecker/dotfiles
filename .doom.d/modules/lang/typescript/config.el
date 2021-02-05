@@ -51,7 +51,9 @@
 
   (advice-add 'tide-references :after #'my/advice-tide-references-buffer)
 
-  (set-file-template! "\\.tsx$" :trigger "__react-fc")
+  (set-file-templates!
+   '("\\.tsx$" :trigger "__react-fc")
+   '("\\.(test|spec).tsx?$" :trigger "__jest"))
 
   (setq tide-completion-detailed t
         tide-always-show-documentation t

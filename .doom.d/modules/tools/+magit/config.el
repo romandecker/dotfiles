@@ -16,7 +16,7 @@
        ((string-match-p "github.com" origin-url) 'github)
        ((string-match-p "gitlab.com" origin-url) 'gitlab)
        (t (error
-           "Cannot guess git hosting provider from configured origin url (%s), please set bitbucket-provider manually"
+           "Cannot guess git hosting provider from configured origin url (%s), please set git-hosting-provider manually"
            origin-url)))))
 
   (defun +magit/guess-bitbucket-url ()
