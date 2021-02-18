@@ -28,7 +28,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Dropbox/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -76,9 +76,9 @@
 
 (global-subword-mode)
 
-(setq org-directory "~/Dropbox/org")
-
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+
+(setq fill-column 100)
 
 ;; First element in `counsel-projectile-switch-project-action' signifies
 ;; the index of the default action to take after switching projects,
