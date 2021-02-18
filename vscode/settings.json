@@ -6,242 +6,156 @@
     "vim.useCtrlKeys": true,
     "vim.leader": " ",
     "vim.useSystemClipboard": true,
+    "vim.camelCaseMotion.enable": true,
     "vim.insertModeKeyBindings": [
         {
-            "before": [
-                "C-a"
-            ],
-            "commands": [
-                {
-                    "command": "cursorHome"
-                }
-            ]
+            "before": ["C-a"],
+            "commands": [ { "command": "cursorHome" } ]
         },
         {
-            "before": [
-                "C-e"
-            ],
-            "commands": [
-                {
-                    "command": "cursorEnd"
-                }
-            ]
+            "before": [ "C-e" ],
+            "commands": [ { "command": "cursorEnd" } ]
+        },
+        {
+            "before": ["<C-n>"],
+            "commands": [ { "command": "showNextParameterHint"} ],
         }
         // TODO ctrl+l to delete one char
     ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["m"],
+            "after": ["d"]
+        },
+        {
+            "before": [ "d" ],
+            "after": [ "\"", "_", "d" ]
+        },
+
+        // make camelcasemotion the default
+        { "before": ["w"], "after": ["<leader>", "w"] },
+        { "before": ["e"], "after": ["<leader>", "e"] },
+        { "before": ["b"], "after": ["<leader>", "b"] },
+    ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": [
-                "<leader>",
-                "Q",
-                "R"
-            ],
+            "before": [ "<leader>", "Q", "R" ],
             "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.reloadWindow"
-                }
-            ]
+            "commands": [ { "command": "workbench.action.reloadWindow" } ]
         },
         {
-            "before": [
-                "<leader>",
-                "f",
-                "s"
-            ],
+            "before": [ "<leader>", "f", "s" ],
             "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.files.save"
-                }
-            ]
+            "commands": [ { "command": "workbench.action.files.save" } ]
         },
         {
-            "before": [
-                "<leader>",
-                "g",
-                "/"
-            ],
+            "before": [ "<leader>", "g", "/" ],
             "after": [],
-            "commands": [
-                {
-                    "command": "filesExplorer.findInWorkspace"
-                }
-            ]
+            "commands": [ { "command": "filesExplorer.findInWorkspace" } ]
         },
         {
-            "before": [
-                "<leader>",
-                "w",
-                "|"
-            ],
+            "before": ["<leader>", "`"],
             "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.splitEditor"
-                }
-            ]
+            "commands": [ { "command": "workbench.action.quickOpenLeastRecentlyUsedEditor" } ]
         },
         {
-            "before": [
-                "<leader>",
-                "w",
-                "-"
-            ],
+            "before": [ "<leader>", "w", "|" ],
             "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.splitEditorOrthogonal"
-                }
-            ]
+            "commands": [ { "command": "workbench.action.splitEditor" } ]
         },
         {
-            "before": [
-                "<leader>",
-                ".",
-                "e"
-            ],
+            "before": [ "<leader>", "w", "-" ],
             "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.openSettings"
-                }
-            ]
+            "commands": [ { "command": "workbench.action.splitEditorOrthogonal" } ]
         },
         {
-            "before": [
-                "]",
-                "e"
-            ],
-            "commands": [
-                {
-                    "command": "editor.action.marker.next"
-                }
-            ]
+            "before": [ "<leader>", ".", "e" ],
+            "after": [],
+            "commands": [ { "command": "workbench.action.openSettings" } ]
         },
         {
-            "before": [
-                "[",
-                "e"
-            ],
-            "commands": [
-                {
-                    "command": "editor.action.marker.prev"
-                }
-            ]
+            "before": [ "]", "e" ],
+            "commands": [ { "command": "editor.action.marker.next" } ]
         },
         {
-            "before": [
-                "<leader>",
-                "j"
-            ],
-            "commands": [
-                {
-                    "command": "workbench.action.previousEditor"
-                }
-            ]
+            "before": [ "[", "e" ],
+            "commands": [ { "command": "editor.action.marker.prev" } ]
         },
         {
-            "before": [
-                "<leader>",
-                "k"
-            ],
-            "commands": [
-                {
-                    "command": "workbench.action.nextEditor"
-                }
-            ]
+            "before": [ "<leader>", "j" ],
+            "commands": [ { "command": "workbench.action.previousEditor" } ]
         },
         {
-            "before": [
-                "j"
-            ],
-            "after": [
-                "g",
-                "j"
-            ]
+            "before": [ "<leader>", "k" ],
+            "commands": [ { "command": "workbench.action.nextEditor" } ]
         },
         {
-            "before": [
-                "k"
-            ],
-            "after": [
-                "g",
-                "k"
-            ]
+            "before": [ "j" ],
+            "after": [ "g", "j" ]
         },
         {
-            "before": [
-                "<C-h>"
-            ],
-            "after": [
-                "C-w",
-                "h"
-            ]
+            "before": [ "k" ],
+            "after": [ "g", "k" ]
         },
         {
-            "before": [
-                "<C-l>"
-            ],
-            "after": [
-                "C-w",
-                "l"
-            ]
+            "before": [ "<C-h>" ],
+            "after": [ "C-w", "h" ]
         },
         {
-            "before": [
-                "<C-j>"
-            ],
-            "after": [
-                "C-w",
-                "j"
-            ]
+            "before": [ "<C-l>" ],
+            "after": [ "C-w", "l" ]
         },
         {
-            "before": [
-                "<C-k>"
-            ],
-            "after": [
-                "C-w",
-                "k"
-            ]
+            "before": [ "<C-j>" ],
+            "after": [ "C-w", "j" ]
         },
         {
-            "before": [
-                "d"
-            ],
-            "after": [
-                "\"",
-                "_",
-                "d"
-            ]
+            "before": [ "<C-k>" ],
+            "after": [ "C-w", "k" ]
         },
         {
-            "before": [
-                "m"
-            ],
-            "after": [
-                "d"
-            ]
+            "before": [ "d" ],
+            "after": [ "\"", "_", "d" ]
         },
         {
-            "before": [
-                "m",
-                "m"
-            ],
-            "after": [
-                "d",
-                "d"
-            ]
+            "before": [ "m" ],
+            "after": [ "d" ]
         },
+        {
+            "before": [ "m", "m" ],
+            "after": [ "d", "d" ]
+        },
+        {
+            "before": ["g", "d"],
+            "commands": [ { "command": "editor.action.goToTypeDefinition" } ]
+        },
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": [ { "command": "workbench.action.quickOpen" } ]
+        },
+
+        // make camelcasemotion the default
+        { "before": ["w"], "after": ["<leader>", "w"] },
+        { "before": ["e"], "after": ["<leader>", "e"] },
+        { "before": ["b"], "after": ["<leader>", "b"] },
     ],
-    "gitlens.advanced.messages": {
-        "suppressShowKeyBindingsNotice": true
-    },
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "gitlens.views.fileHistory.enabled": true,
-    "gitlens.views.lineHistory.enabled": true,
     "editor.formatOnSave": true,
-    "vscode-neovim.neovimPath": "/usr/local/bin/nvim"
+    "projectManager.git.baseFolders": [
+        "~/projects"
+    ],
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.autorefresh": true,
+    "yaml.schemas": {
+        "file:///Users/romande/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "git.autofetch": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "debug.onTaskErrors": "showErrors",
 }
