@@ -37,6 +37,8 @@ alias vim=nvim
 # convert a text in javascript object notation (from stdin) to json notation
 alias js2json='node -e '"'"'console.log(JSON.stringify(eval(`x=${require(`fs`).readFileSync(0,`utf-8`)}`),null,2))'"'";
 
+alias magit='emacs --eval "(after! magit (progn (magit-status \"$(pwd)\") (delete-other-windows)))" 2>/dev/null &!'
+
 fpath=($fpath $DOTFILES_DIR/.zfunctions/)
 
 autoload -U promptinit; promptinit
