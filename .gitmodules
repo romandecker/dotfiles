@@ -16,3 +16,6 @@
 [submodule "submodules/chemacs"]
 	path = submodules/chemacs
 	url = git@github.com:plexus/chemacs.git
+[submodule "submodules/tfenv"]
+	path = submodules/tfenv
+	url = git@github.com:tfutils/tfenv.git

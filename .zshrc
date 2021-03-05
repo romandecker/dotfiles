@@ -2,7 +2,7 @@
 export DOTFILES_DIR=~/.dotfiles
 export KEYTIMEOUT=1
 export GO_PATH=$HOME/go
-export PATH="$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$GO_PATH/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:$DOTFILES_DIR/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$GO_PATH/bin:$DOTFILES_DIR/submodules/tfenv/bin:$PATH"
 export LANG=en_US.UTF-8
 
 bindkey -v
