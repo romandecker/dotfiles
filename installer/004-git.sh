@@ -12,3 +12,5 @@ git config --global core.excludesfile $HOME/.gitignore
 
 
 git config --global alias.co '!git checkout $(git branch | fzf)'
+
+(ensure git-delta delta && git config --global core.pager delta) || true
