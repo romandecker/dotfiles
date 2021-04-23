@@ -65,16 +65,18 @@ export NVM_LAZY_LOAD=true
 
 zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 
+ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
 source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved ; then
-  zgen load wbingli/zsh-wakatime
   zgen load buonomo/yarn-completion
   
   zgen load lukechilds/zsh-nvm
 
   zgen oh-my-zsh
-  zgen oh-my-zsh/plugins/gitfast
+  zgen oh-my-zsh plugins/gitfast
+
+  zgen load jeffreytse/zsh-vi-mode
 
   zgen save
 fi
