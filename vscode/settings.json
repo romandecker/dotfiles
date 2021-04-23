@@ -160,4 +160,14 @@
     "debug.onTaskErrors": "showErrors",
     "javascript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.importModuleSpecifier": "relative",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cSpell.userWords": [
+        "Cloudinary",
+        "Styleguide",
+        "contentful",
+        "unprefixable",
+        "zooplus"
+    ],
 }
