@@ -18,7 +18,11 @@
    ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
  '(safe-local-variable-values
    (quote
-    ((flycheck-javascript-eslint-executable . "/Users/romande/projects/prs-cli/node_modules/.bin/eslint")
+    ((flycheck-javascript-eslint-executable . "/Users/romande/projects/ox/node_modules/.bin/eslint")
+     (eval puthash
+           (quote prettier)
+           "/Users/romande/projects/ox/node_modules/.bin/prettier" format-all--executable-table)
+     (flycheck-javascript-eslint-executable . "/Users/romande/projects/prs-cli/node_modules/.bin/eslint")
      (js2-basic-offset . 4)
      (eval puthash
            (quote prettier)
