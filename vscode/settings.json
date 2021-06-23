@@ -1,5 +1,5 @@
 {
-    "editor.snippetSuggestions": "top",
+    "editor.snippetSuggestions": "bottom",
     "editor.acceptSuggestionOnCommitCharacter": true,
     "workbench.editor.showTabs": false,
     "vim.easymotion": true,
@@ -165,9 +165,32 @@
     },
     "cSpell.userWords": [
         "Cloudinary",
+        "HYGEN",
         "Styleguide",
+        "TMPLS",
+        "backsync",
         "contentful",
+        "cosmiconfig",
+        "keychain",
+        "keycloak",
+        "mkdirs",
+        "nestjs",
+        "noindex",
+        "ormconfig",
+        "oxrc",
+        "signup",
+        "tildify",
         "unprefixable",
         "zooplus"
     ],
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.tabSize": 8,
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.wordWrap": "off",
+    "editor.suggest.localityBonus": true
 }
