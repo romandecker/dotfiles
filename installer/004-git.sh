@@ -13,4 +13,9 @@ git config --global core.excludesfile $HOME/.gitignore
 
 git config --global alias.co '!git checkout $(git branch | fzf)'
 
-(ensure git-delta delta && git config --global core.pager delta) || true
+(ensure git-delta delta \
+    && git config --global alias.side-by-side-diff '!git -c delta.side-by-side=true diff' \
+    && git config --global core.pager delta \
+    && git config --global delta.features "line-numbers decorations" \
+    && git config --global delta.line-numbers true \
+    ) || true
