@@ -92,6 +92,9 @@
   (when (file-readable-p local-config)
     (load-file local-config)))
 
+;; for some reason, this gets overwritten with ivy-scroll-up...
+(map! :n "C-u" #'evil-scroll-up)
+
 
 ;; TO get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
