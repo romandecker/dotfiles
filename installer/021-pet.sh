@@ -18,7 +18,7 @@ fi
 
 if [ ! -L "$HOME/.config/pet/snippet.toml" ]; then
     echo "Removing regular snippet file"
-    rm $HOME/.config/pet/snippet.toml
+    rm -f $HOME/.config/pet/snippet.toml
 fi
 
 link_dotfile snippets/pet/snippet.toml .config/pet/snippet.toml

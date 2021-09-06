@@ -33,7 +33,7 @@ if ! [ -d $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-pip2 install --user neovim
+command -v pip2 && pip2 install --user neovim
 
 command -v pip3 && pip3 install --user neovim
 

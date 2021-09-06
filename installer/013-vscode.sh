@@ -27,18 +27,23 @@ code \
     --install-extension CoenraadS.bracket-pair-colorizer \
     --install-extension SirTori.indenticator \
     --install-extension WallabyJs.quokka-vscode \
+    --install-extension aaron-bond.better-comments \
+    --install-extension alefragnani.project-manager \
     --install-extension christian-kohler.npm-intellisense \
     --install-extension christian-kohler.path-intellisense \
     --install-extension dbaeumer.vscode-eslint \
     --install-extension eamodio.gitlens \
     --install-extension esbenp.prettier-vscode \
     --install-extension flowtype.flow-for-vscode \
+    --install-extension formulahendry.auto-rename-tag \
     --install-extension jpoissonnier.vscode-styled-components \
     --install-extension kumar-harsh.graphql-for-vscode \
     --install-extension msjsdiag.debugger-for-chrome \
     --install-extension naumovs.color-highlight \
+    --install-extension romandecker.open-in-git-web-provider \
     --install-extension streetsidesoftware.code-spell-checker \
     --install-extension vscodevim.vim \
     --install-extension wayou.vscode-todo-highlight \
+    --install-extension wix.vscode-import-cost \
     --install-extension wix.vscode-import-cost \
     --log info
