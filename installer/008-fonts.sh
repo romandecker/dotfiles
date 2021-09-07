@@ -12,7 +12,7 @@ popd
 TMPFILE=$(mktemp)
 
 # Download and unzip FiraCode
-curl -L https://github.com/tonsky/FiraCode/releases/latest/download/FiraCode_2.zip -o $TMPFILE
+curl -L https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip -o $TMPFILE
 TMPDIR=$(mktemp -d)
 unzip $TMPFILE -d $TMPDIR
 
