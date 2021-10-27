@@ -6,7 +6,7 @@ alias gen='HYGEN_TMPLS=~/.dotfiles/hygen-templates npx hygen'
 
 project() {
     if [ -z "$1" ]; then
-        tmuxifier s $(tmuxifier ls | fzf)
+        print -z "project $(tmuxifier ls | fzf)"
     else
         tmuxifier s $1
     fi
