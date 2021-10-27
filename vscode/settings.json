@@ -164,13 +164,12 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "cSpell.userWords": [
-        "Cloudinary",
-        "HYGEN",
-        "Styleguide",
-        "TMPLS",
         "backsync",
+        "chronos",
+        "Cloudinary",
         "contentful",
         "cosmiconfig",
+        "HYGEN",
         "keychain",
         "keycloak",
         "mkdirs",
@@ -179,19 +178,26 @@
         "ormconfig",
         "oxrc",
         "signup",
+        "Styleguide",
         "tildify",
+        "TMPLS",
         "unprefixable",
         "zooplus"
     ],
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.tabSize": 8,
     "editor.cursorStyle": "line",
-    "editor.insertSpaces": false,
     "editor.lineNumbers": "on",
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
     "editor.wordWrap": "off",
     "editor.suggest.localityBonus": true,
-    "aws.telemetry": false
+    "aws.telemetry": false,
+    "editor.insertSpaces": false,
+    "gitlens.remotes": [{
+        "domain": "src.private.zooplus.net",
+        "type": "BitbucketServer",
+        "name": "Zooplus",
+        "protocol": "https"
+    }]
 }
