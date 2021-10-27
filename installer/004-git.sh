@@ -13,6 +13,12 @@ git config --global core.excludesfile $HOME/.gitignore
 
 git config --global alias.co '!git checkout $(git branch | fzf)'
 
+# allow doing `git push -u` without explicitly having to type branch-name
+git config --global push.default current
+
+# Always show 3-way diff
+git config --global merge.conflictstyle diff3
+
 (ensure git-delta delta \
     && git config --global alias.side-by-side-diff '!git -c delta.side-by-side=true diff' \
     && git config --global core.pager delta \
