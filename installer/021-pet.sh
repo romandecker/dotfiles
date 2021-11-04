@@ -6,7 +6,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $SCRIPT_DIR/utils.sh
 
 
-if [ -z "$(command -v pet)" ]; then
+if [ -x "$(command -v pet)" ]; then
     cecho "$fawn" "pet" "$normal is already installed"
 else
     if [ "$(uname)" == "Darwin" ]; then
