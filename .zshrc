@@ -75,6 +75,8 @@ if ! zgen saved ; then
 
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/gitfast
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/docker-compose
 
   zgen load jeffreytse/zsh-vi-mode
 
