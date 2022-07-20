@@ -10,6 +10,12 @@
   output = ""
 
 [[snippets]]
+  description = "Fully delete a secret from AWS secrets manager"
+  command = "aws secretsmanager delete-secret --force-delete-without-recovery --secret-id <secret-arn>"
+  tag = ["shell", "aws"]
+  output = ""
+
+[[snippets]]
   description = "Show certificate info"
   command = "ssh-keygen -Lf <certificateFile>"
   tag = ["shell", "ssh", "aws"]
@@ -176,6 +182,17 @@ done
   description = "Dump postgres database to local file"
   command = "pg_dump -h <host> -U <user=postgres> -d <dbName=postgres> > <dumpfile=dump.sql>"
   tag = ["shell", "postgres"]
+
+[[snippets]]
+  description = "Recover docker disk space"
+  command = "docker system prune --volumes"
+  tag = ["shell", "postgres"]
+
+[[snippets]]
+  description = "Forward a port from a k8s pod"
+  command = "kubectl -n <namespace> port-forward svc/<service-name> <remote-port=5432>:<local-port=5432>"
+  tag = ["shell", "k8s"]
+
 
 [[snippets]]
   description = "See all active connections in postgres"

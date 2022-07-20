@@ -1,203 +1,255 @@
 {
-    "editor.snippetSuggestions": "bottom",
-    "editor.acceptSuggestionOnCommitCharacter": true,
-    "workbench.editor.showTabs": false,
-    "vim.easymotion": true,
-    "vim.useCtrlKeys": true,
-    "vim.leader": " ",
-    "vim.useSystemClipboard": true,
-    "vim.camelCaseMotion.enable": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["C-a"],
-            "commands": [ { "command": "cursorHome" } ]
-        },
-        {
-            "before": [ "C-e" ],
-            "commands": [ { "command": "cursorEnd" } ]
-        },
-        {
-            "before": ["<C-n>"],
-            "commands": [ { "command": "showNextParameterHint"} ],
-        }
-        // TODO ctrl+l to delete one char
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": ["m"],
-            "after": ["d"]
-        },
-        {
-            "before": [ "d" ],
-            "after": [ "\"", "_", "d" ]
-        },
+  "editor.snippetSuggestions": "bottom",
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "workbench.editor.showTabs": false,
+  "vim.easymotion": true,
+  "vim.useCtrlKeys": true,
+  "vim.leader": " ",
+  "vim.useSystemClipboard": true,
+  "vim.camelCaseMotion.enable": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["C-a"],
+      "commands": [{ "command": "cursorHome" }]
+    },
+    {
+      "before": ["C-e"],
+      "commands": [{ "command": "cursorEnd" }]
+    },
+    {
+      "before": ["<C-n>"],
+      "commands": [{ "command": "showNextParameterHint" }]
+    }
+    // TODO ctrl+l to delete one char
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["m"],
+      "after": ["d"]
+    },
+    {
+      "before": ["d"],
+      "after": ["\"", "_", "d"]
+    },
+    {
+      "before": ["p"],
+      "after": ["\"", "_", "d", "P"]
+    },
 
-        // make camelcasemotion the default
-        { "before": ["w"], "after": ["<leader>", "w"] },
-        { "before": ["e"], "after": ["<leader>", "e"] },
-        { "before": ["b"], "after": ["<leader>", "b"] },
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [ "<leader>", "Q", "R" ],
-            "after": [],
-            "commands": [ { "command": "workbench.action.reloadWindow" } ]
-        },
-        {
-            "before": [ "<leader>", "f", "s" ],
-            "after": [],
-            "commands": [ { "command": "workbench.action.files.save" } ]
-        },
-        {
-            "before": [ "<leader>", "g", "/" ],
-            "after": [],
-            "commands": [ { "command": "filesExplorer.findInWorkspace" } ]
-        },
-        {
-            "before": ["<leader>", "`"],
-            "after": [],
-            "commands": [ { "command": "workbench.action.quickOpenLeastRecentlyUsedEditor" } ]
-        },
-        {
-            "before": [ "<leader>", "w", "|" ],
-            "after": [],
-            "commands": [ { "command": "workbench.action.splitEditor" } ]
-        },
-        {
-            "before": [ "<leader>", "w", "-" ],
-            "after": [],
-            "commands": [ { "command": "workbench.action.splitEditorOrthogonal" } ]
-        },
-        {
-            "before": [ "<leader>", ".", "e" ],
-            "after": [],
-            "commands": [ { "command": "workbench.action.openSettings" } ]
-        },
-        {
-            "before": [ "]", "e" ],
-            "commands": [ { "command": "editor.action.marker.next" } ]
-        },
-        {
-            "before": [ "[", "e" ],
-            "commands": [ { "command": "editor.action.marker.prev" } ]
-        },
-        {
-            "before": [ "<leader>", "j" ],
-            "commands": [ { "command": "workbench.action.previousEditor" } ]
-        },
-        {
-            "before": [ "<leader>", "k" ],
-            "commands": [ { "command": "workbench.action.nextEditor" } ]
-        },
-        {
-            "before": [ "j" ],
-            "after": [ "g", "j" ]
-        },
-        {
-            "before": [ "k" ],
-            "after": [ "g", "k" ]
-        },
-        {
-            "before": [ "<C-h>" ],
-            "after": [ "C-w", "h" ]
-        },
-        {
-            "before": [ "<C-l>" ],
-            "after": [ "C-w", "l" ]
-        },
-        {
-            "before": [ "<C-j>" ],
-            "after": [ "C-w", "j" ]
-        },
-        {
-            "before": [ "<C-k>" ],
-            "after": [ "C-w", "k" ]
-        },
-        {
-            "before": [ "d" ],
-            "after": [ "\"", "_", "d" ]
-        },
-        {
-            "before": [ "m" ],
-            "after": [ "d" ]
-        },
-        {
-            "before": [ "m", "m" ],
-            "after": [ "d", "d" ]
-        },
-        {
-            "before": ["g", "d"],
-            "commands": [ { "command": "editor.action.goToTypeDefinition" } ]
-        },
-        {
-            "before": ["<leader>", "<leader>"],
-            "commands": [ { "command": "workbench.action.quickOpen" } ]
-        },
+    // make camelcasemotion the default
+    { "before": ["w"], "after": ["<leader>", "w"] },
+    { "before": ["e"], "after": ["<leader>", "e"] },
+    { "before": ["b"], "after": ["<leader>", "b"] },
+    {
+      "before": ["<leader>", "w", "|"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.splitEditor" }]
+    },
+    {
+      "before": ["<leader>", "w", "-"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.splitEditorOrthogonal" }]
+    },
+    {
+      "before": ["<leader>", "w", "o"],
+      "commands": [{ "command": "workbench.action.editorLayoutSingle" }]
+    },
+    {
+      "before": ["<C-h>"],
+      "after": ["C-w", "h"]
+    },
+    {
+      "before": ["<C-l>"],
+      "after": ["C-w", "l"]
+    },
+    {
+      "before": ["<C-j>"],
+      "after": ["C-w", "j"]
+    },
+    {
+      "before": ["<C-k>"],
+      "after": ["C-w", "k"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "Q", "R"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.reloadWindow" }]
+    },
+    {
+      "before": ["<leader>", "f", "s"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.files.save" }]
+    },
+    {
+      "before": ["<leader>", "g", "/"],
+      "after": [],
+      "commands": [{ "command": "filesExplorer.findInWorkspace" }]
+    },
+    {
+      "before": ["<leader>", "`"],
+      "after": [],
+      "commands": [
+        { "command": "workbench.action.quickOpenLeastRecentlyUsedEditor" }
+      ]
+    },
+    {
+      "before": ["<leader>", "w", "|"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.splitEditor" }]
+    },
+    {
+      "before": ["<leader>", "w", "-"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.splitEditorOrthogonal" }]
+    },
+    {
+      "before": ["<leader>", "w", "o"],
+      "commands": [{ "command": "workbench.action.editorLayoutSingle" }]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "commands": [{ "command": "workbench.action.previousEditor" }]
+    },
+    {
+      "before": ["<leader>", "k"],
+      "commands": [{ "command": "workbench.action.nextEditor" }]
+    },
+    {
+      "before": ["<leader>", ".", "e"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.openSettings" }]
+    },
+    {
+      "before": ["]", "e"],
+      "commands": [{ "command": "editor.action.marker.next" }]
+    },
+    {
+      "before": ["[", "e"],
+      "commands": [{ "command": "editor.action.marker.prev" }]
+    },
+    {
+      "before": ["j"],
+      "after": ["g", "j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g", "k"]
+    },
+    {
+      "before": ["<C-h>"],
+      "after": ["C-w", "h"]
+    },
+    {
+      "before": ["<C-l>"],
+      "after": ["C-w", "l"]
+    },
+    {
+      "before": ["<C-j>"],
+      "after": ["C-w", "j"]
+    },
+    {
+      "before": ["<C-k>"],
+      "after": ["C-w", "k"]
+    },
+    {
+      "before": ["d"],
+      "after": ["\"", "_", "d"]
+    },
+    {
+      "before": ["m"],
+      "after": ["d"]
+    },
+    {
+      "before": ["m", "m"],
+      "after": ["d", "d"]
+    },
+    {
+      "before": ["g", "d"],
+      "commands": [{ "command": "editor.action.goToTypeDefinition" }]
+    },
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": [{ "command": "workbench.action.quickOpen" }]
+    },
 
-        // make camelcasemotion the default
-        { "before": ["w"], "after": ["<leader>", "w"] },
-        { "before": ["e"], "after": ["<leader>", "e"] },
-        { "before": ["b"], "after": ["<leader>", "b"] },
-    ],
-    "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false,
-    "editor.formatOnSave": true,
-    "projectManager.git.baseFolders": [
-        "~/projects"
-    ],
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "git.autorefresh": true,
-    "yaml.schemas": {
-        "file:///Users/romande/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-    },
-    "git.autofetch": true,
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "debug.onTaskErrors": "showErrors",
-    "javascript.preferences.importModuleSpecifier": "relative",
-    "typescript.preferences.importModuleSpecifier": "relative",
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "cSpell.userWords": [
-        "backsync",
-        "chronos",
-        "Cloudinary",
-        "contentful",
-        "cosmiconfig",
-        "HYGEN",
-        "keychain",
-        "keycloak",
-        "mkdirs",
-        "nestjs",
-        "noindex",
-        "ormconfig",
-        "oxrc",
-        "signup",
-        "Styleguide",
-        "tildify",
-        "TMPLS",
-        "unprefixable",
-        "zooplus"
-    ],
-    "[javascriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "editor.cursorStyle": "line",
-    "editor.lineNumbers": "on",
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-    "editor.wordWrap": "off",
-    "editor.suggest.localityBonus": true,
-    "aws.telemetry": false,
-    "editor.insertSpaces": false,
-    "gitlens.remotes": [{
-        "domain": "src.private.zooplus.net",
-        "type": "BitbucketServer",
-        "name": "Zooplus",
-        "protocol": "https"
-    }]
+    // make camelcasemotion the default
+    { "before": ["w"], "after": ["<leader>", "w"] },
+    { "before": ["e"], "after": ["<leader>", "e"] },
+    { "before": ["b"], "after": ["<leader>", "b"] }
+  ],
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.formatOnSave": true,
+  "projectManager.git.baseFolders": ["~/projects"],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.autorefresh": true,
+  "yaml.schemas": {
+    "file:///Users/romande/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "git.autofetch": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "debug.onTaskErrors": "showErrors",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.userWords": [
+    "backsync",
+    "chronos",
+    "Cloudinary",
+    "contentful",
+    "cosmiconfig",
+    "dtos",
+    "HYGEN",
+    "keychain",
+    "keycloak",
+    "mkdirs",
+    "nestjs",
+    "noindex",
+    "ormconfig",
+    "oxrc",
+    "signup",
+    "Styleguide",
+    "tildify",
+    "TMPLS",
+    "unprefixable",
+    "zooplus"
+  ],
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.cursorStyle": "line",
+  "editor.lineNumbers": "on",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "editor.suggest.localityBonus": true,
+  "aws.telemetry": false,
+  "editor.insertSpaces": false,
+  "gitlens.remotes": [
+    {
+      "domain": "src.private.zooplus.net",
+      "type": "BitbucketServer",
+      "name": "Zooplus",
+      "protocol": "https"
+    }
+  ],
+  "bracketPairColorizer.depreciation-notice": false,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "npm.keybindingsChangedWarningShown": true,
+  "git.path": "/usr/local/bin/git"
 }
