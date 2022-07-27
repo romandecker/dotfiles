@@ -25,3 +25,5 @@ git config --global merge.conflictstyle diff3
     && git config --global delta.features "line-numbers decorations" \
     && git config --global delta.line-numbers true \
     ) || true
+
+ensure git-extras git-summary
