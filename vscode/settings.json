@@ -189,22 +189,30 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "git.autorefresh": true,
-  "yaml.schemas": {
-    "file:///Users/romande/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.autorefresh": true,
   "git.autofetch": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "debug.onTaskErrors": "showErrors",
   "javascript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifier": "relative",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "cSpell.userWords": [
-    "backsync",
-    "chronos",
     "Cloudinary",
+    "HYGEN",
+    "Styleguide",
+    "TMPLS",
+    "backsync",
     "contentful",
     "cosmiconfig",
     "dtos",
@@ -218,30 +226,20 @@
     "ormconfig",
     "oxrc",
     "signup",
-    "Styleguide",
     "tildify",
-    "TMPLS",
     "unprefixable",
-    "zooplus"
+    "zooplus",
+    "backsync",
+    "chronos",
+    "dtos"
   ],
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "editor.cursorStyle": "line",
   "editor.lineNumbers": "on",
   "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
   "editor.wordWrap": "off",
-  "editor.suggest.localityBonus": true,
   "aws.telemetry": false,
   "editor.insertSpaces": false,
-  "gitlens.remotes": [
-    {
-      "domain": "src.private.zooplus.net",
-      "type": "BitbucketServer",
-      "name": "Zooplus",
-      "protocol": "https"
-    }
-  ],
+  "editor.suggest.localityBonus": true,
   "bracketPairColorizer.depreciation-notice": false,
   "terminal.integrated.defaultProfile.osx": "zsh",
   "javascript.updateImportsOnFileMove.enabled": "always",

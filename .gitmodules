@@ -19,3 +19,6 @@
 [submodule "submodules/tfenv"]
 	path = submodules/tfenv
 	url = git@github.com:tfutils/tfenv.git
+[submodule "z"]
+	path = z
+	url = git@github.com:rupa/z.git
