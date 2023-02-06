@@ -184,6 +184,16 @@ done
   tag = ["shell", "postgres"]
 
 [[snippets]]
+  description = "Dump postgres database to local file so that can be restored to a different database name"
+  command = "pg_dump -h <host> -U <user=postgres> -d <dbName=postgres> -F custom > <dumpfile=dump.pg_dump>"
+  tag = ["shell", "postgres"]
+
+[[snippets]]
+  description = "Restore a custom postgres dump to a different database name"
+  command = "(export PGHOST=<host=localhost>; export PGUSER=<user=postgres>; export PGDATABASE=<dbName=postgres>; dropdb --if-exists $PGDATABASE && createdb -T template0 && pg_restore -d $PGDATABASE <dump-file-name=dump.pg_dump>)"
+  tag = ["shell", "postgres"]
+
+[[snippets]]
   description = "Recover docker disk space"
   command = "docker system prune --volumes"
   tag = ["shell", "postgres"]

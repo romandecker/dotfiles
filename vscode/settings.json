@@ -208,6 +208,7 @@
     "contentful",
     "cosmiconfig",
     "dtos",
+    "HASHIDS",
     "HYGEN",
     "keychain",
     "keycloak",
@@ -251,5 +252,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "npm.keybindingsChangedWarningShown": true,
-  "git.path": "/usr/local/bin/git"
+  "git.path": "/usr/local/bin/git",
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": true
+  }
 }
