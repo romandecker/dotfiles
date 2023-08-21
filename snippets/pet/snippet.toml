@@ -232,3 +232,36 @@ ORDER BY
     pid;
 """
   tag = ["postgres"]
+
+
+[[snippets]]
+  description = "Obtain keycloak token as test user"
+  command = """
+(function login(user_name, password, site_id = '1') {
+	const url = new URL('https://keycloak-proxy.dev.zooplus.net/v1/token');
+	Object.entries({
+		realm: 'zooplus',
+		client_id: 'blueprint-frontend',
+		user_name,
+		password,
+		site_id,
+		client_secret: '',
+	}).forEach((entry) => url.searchParams.append(entry[0], entry[1]));
+
+	fetch(url)
+		.then((response) => {
+			if (response.ok) {
+				response.json().then((data) => {
+					console.table(JSON.parse(atob(data.access_token.split('.')[1])));
+					console.log(data.access_token);
+				});
+			} else {
+				console.error('Failed authorization', response);
+			}
+		}).catch((error) => {
+			console.error('Error while running authorization', error);
+		});
+})('<email=tester20@zooplus.com>', '<password>');
+"""
+  tag = ["js", "zooplus"]
+  output = ""
