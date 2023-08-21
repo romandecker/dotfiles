@@ -263,5 +263,6 @@
   },
   "application.shellEnvironmentResolutionTimeout": 30,
   "editor.guides.bracketPairs": true,
-  "editor.accessibilitySupport": "off"
+  "editor.accessibilitySupport": "off",
+  "workbench.colorTheme": "Catppuccin Mocha"
 }
