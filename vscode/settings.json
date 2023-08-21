@@ -257,5 +257,11 @@
     "yaml": false,
     "plaintext": false,
     "markdown": true
-  }
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "application.shellEnvironmentResolutionTimeout": 30,
+  "editor.guides.bracketPairs": true,
+  "editor.accessibilitySupport": "off"
 }
