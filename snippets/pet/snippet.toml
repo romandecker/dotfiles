@@ -265,3 +265,15 @@ ORDER BY
 """
   tag = ["js", "zooplus"]
   output = ""
+
+[[snippets]]
+  description = "Assume an IAM role and immediately re-export credentials"
+  command = """
+export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" \
+  $(aws sts assume-role \
+    --role-arn <role_arn> \
+    --role-session-name <session_name=test> \
+    --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" \
+    --output text))
+"""
+  tag = ["shell", "aws"]
