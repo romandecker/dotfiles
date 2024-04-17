@@ -77,8 +77,11 @@ if ! zgen saved ; then
   zgen oh-my-zsh plugins/gitfast
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/docker-compose
+  zgen oh-my-zsh plugins/git
 
+  zgen load zsh-users/zsh-autosuggestions
   zgen load jeffreytse/zsh-vi-mode
+  zgen load agkozak/zsh-z
 
   zgen save
 fi
@@ -86,8 +89,6 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source $HOME/.dotfiles/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.dotfiles/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOME/.dotfiles/z/z.sh
 
 export SNIPPET_DIR=~/.dotfiles/snippets
 
@@ -99,3 +100,7 @@ done
 
 export YVM_DIR=/Users/romande/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

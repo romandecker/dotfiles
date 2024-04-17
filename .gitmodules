@@ -1,24 +1,18 @@
-[submodule "submodules/tmuxifier"]
-	path = submodules/tmuxifier
-	url = https://github.com/DeX3/tmuxifier.git
 [submodule "submodules/powerline-fonts"]
 	path = submodules/powerline-fonts
-	url = https://github.com/powerline/fonts.git
+	url = git@github.com/powerline/fonts.git
 [submodule "submodules/pure-prompt"]
 	path = submodules/pure-prompt
-	url = https://github.com/sindresorhus/pure
+	url = git@github.com/sindresorhus/pure
 [submodule "submodules/zsh-syntax-highlighting"]
 	path = submodules/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
-[submodule "submodules/zsh-autosuggestions"]
-	path = submodules/zsh-autosuggestions
-	url = git://github.com/zsh-users/zsh-autosuggestions
 [submodule "submodules/chemacs"]
 	path = submodules/chemacs
 	url = git@github.com:plexus/chemacs.git
 [submodule "submodules/tfenv"]
 	path = submodules/tfenv
 	url = git@github.com:tfutils/tfenv.git
-[submodule "z"]
-	path = z
-	url = git@github.com:rupa/z.git
+[submodule "submodules/tmuxifier"]
+	path = submodules/tmuxifier
+	url = git@github.com:romandecker/tmuxifier.git

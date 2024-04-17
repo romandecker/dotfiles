@@ -14,7 +14,7 @@ if [ $os == $LINUX ]; then
     $sudo apt-get update
     ensure neovim nvim
 elif [ $os == $MAC ]; then
-    ensure neovim/neovim/neovim nvim
+    ensure neovim nvim
 fi
 
 link_dotfile .vimrc
