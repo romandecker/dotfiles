@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+#########################################################################################################################
+# Usage: git checkout-pr https://src.private.zooplus.net/projects/NDBPLS/repos/nbs-storefront/pull-requests/1010/overview
+# To immediately check out the branch of this pr
+#
+# This requires the `atlassian` package to be installed:
+# $ pip3 install atlassian-python-api
+#########################################################################################################################
+
+import argparse
+import re
+from atlassian import Bitbucket
+import os
+import sys
+import subprocess
+
+parser = argparse.ArgumentParser()
+parser.add_argument("url", help="BitBucket URL of the PR to check out")
+
+args = parser.parse_args()
+
+match = re.search(
+    "^(https?://[^/]+)/projects/([^/]+)/repos/([^/]+)/pull-requests/(\d+)", args.url
+)
+
+if not match:
+    print("Invalid BitBucket PR URL")
+    sys.exit(1)
+
+host, project, repo, prId = match.groups()
+
+BITBUCKET_TOKEN = os.getenv("BITBUCKET_TOKEN")
+
+if not BITBUCKET_TOKEN:
+    print(
+        "Error: Missing required environment variable BITBUCKET_TOKEN, please create one at %s/account"
+        % host
+    )
+    sys.exit(1)
+
+bitbucket = Bitbucket(url=host, token=BITBUCKET_TOKEN)
+resp = bitbucket.get_pull_request(project, repo, prId)
+branch = resp["fromRef"]["id"].removeprefix("refs/heads/")
+
+print(subprocess.check_output(["git", "checkout", branch]).decode("utf-8"))

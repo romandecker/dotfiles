@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+#########################################################################################################################
+# Try to open the current branch's PR in a web browser
+# Only works with bitbucket for now
+# Usage: git browse-pr
+#
+# This requires the `atlassian` package to be installed:
+# $ pip3 install atlassian-python-api
+#########################################################################################################################
+
+import re
+from atlassian import Bitbucket
+import os
+import sys
+import subprocess
+import webbrowser
+
+origin = subprocess.check_output(["git", "ls-remote", "--get-url", "origin"]).decode(
+    "utf-8"
+)
+
+match = re.search(":\/\/(?:.*?@)?([^\/]+).*\/([^\/]+)\/([^\/]+)\.git$", origin)
+
+
+if not match:
+    print("Unable to parse remote 'origin': %s" % origin)
+    sys.exit(1)
+
+host, project, repo = match.groups()
+
+# TODO: Check for host === github.com here and implement proper flow for github
+
+BITBUCKET_TOKEN = os.getenv("BITBUCKET_TOKEN")
+
+if not BITBUCKET_TOKEN:
+    print(
+        "Error: Missing required environment variable BITBUCKET_TOKEN, please create one at %s/account"
+        % host
+    )
+    sys.exit(1)
+
+branch = (
+    subprocess.check_output(
+        ["git", "rev-parse", "--symbolic-full-name", "--abbrev-ref", "HEAD"]
+    )
+    .decode("utf-8")
+    .strip()
+)
+
+bitbucket = Bitbucket(url="https://%s" % host, token=BITBUCKET_TOKEN)
+prs = bitbucket.get_pull_requests(project, repo)
+
+pr = next((pr for pr in prs if pr["fromRef"]["id"] == "refs/heads/%s" % branch), None)
+
+
+if not pr:
+    print("No PR found matching current branch '%s'" % branch)
+    sys.exit(2)
+
+prUrl = pr["links"]["self"][0]["href"]
+print("Opening %s in web browser..." % prUrl)
+webbrowser.open(prUrl)
