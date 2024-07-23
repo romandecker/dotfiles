@@ -277,3 +277,18 @@ export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN
     --output text))
 """
   tag = ["shell", "aws"]
+
+[[snippets]]
+  description = "Port-forward to a kubectl service"
+  command = """
+kubectl port-forward services/$(kubectl get services --no-headers | fzf | awk '{print $1;}') 54321:5432
+"""
+  tag = ["shell", "k8s", "kubectl"]
+
+
+[[snippets]]
+  description = "Switch k8s context"
+  command = """
+kubectl config use-context $(kubectl config get-contexts --no-headers | sed 's/^[ *]*//g' | fzf | awk '{print $1;}')
+"""
+  tag = ["shell", "k8s", "kubectl"]

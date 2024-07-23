@@ -88,7 +88,6 @@ Plug 'danielbmarques/vim-dialect' " file-local spellcheck-ignores
 " Misc
 Plug 'benekastah/neomake'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 Plug 'sjl/gundo.vim'    " the undo-tree
 Plug 'SirVer/ultisnips'
 Plug 'moll/vim-bbye'    " close buffers without messing up window layout

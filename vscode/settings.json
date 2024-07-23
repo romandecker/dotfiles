@@ -1,7 +1,7 @@
 {
   "editor.snippetSuggestions": "bottom",
   "editor.acceptSuggestionOnCommitCharacter": true,
-  "workbench.editor.showTabs": false,
+  "workbench.editor.showTabs": "single",
   "vim.easymotion": true,
   "vim.useCtrlKeys": true,
   "vim.leader": " ",
@@ -259,10 +259,13 @@
     "markdown": true
   },
   "[python]": {
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "application.shellEnvironmentResolutionTimeout": 30,
   "editor.guides.bracketPairs": true,
   "editor.accessibilitySupport": "off",
-  "workbench.colorTheme": "Catppuccin Mocha"
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "camel.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-22.0.2.jdk",
+  "python.defaultInterpreterPath": "python3"
 }
