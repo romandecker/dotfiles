@@ -27,6 +27,10 @@ np() {
   pm "npm run"
 }
 
+pnp() {
+  pm "pnpm run"
+}
+
 y() {
   pm "yarn"
 }

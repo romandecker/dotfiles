@@ -33,6 +33,14 @@
     },
     {
       "before": ["p"],
+      "after": ["\"", "_", "p"]
+    },
+    {
+      "before": ["c"],
+      "after": ["\"", "_", "c"]
+    },
+    {
+      "before": ["p"],
       "after": ["\"", "_", "d", "P"]
     },
 
@@ -158,6 +166,10 @@
       "after": ["\"", "_", "d"]
     },
     {
+      "before": ["c"],
+      "after": ["\"", "_", "c"]
+    },
+    {
       "before": ["m"],
       "after": ["d"]
     },
@@ -265,7 +277,9 @@
   "application.shellEnvironmentResolutionTimeout": 30,
   "editor.guides.bracketPairs": true,
   "editor.accessibilitySupport": "off",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.colorTheme": "Default Light Modern",
   "camel.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-22.0.2.jdk",
-  "python.defaultInterpreterPath": "python3"
+  "python.defaultInterpreterPath": "python3",
+  "git.blame.editorDecoration.enabled": true,
+  "git.blame.statusBarItem.enabled": false
 }
