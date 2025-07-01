@@ -101,7 +101,7 @@ call plug#end()
 set t_Co=256
 
 set background=dark
-colorscheme zenburn
+colorscheme aurora
 " }}}
 
 " Basic settings {{{
@@ -182,7 +182,9 @@ set foldlevel=99
 let mapleader = " "
 let maplocalleader = "\\"
 
-set pastetoggle=<F2>
+" Toggle paste mode with F2, and show status
+nnoremap <silent> <F2> :set invpaste<Bar>echo 'Paste '.(&paste? 'ON':'OFF')<CR>
+
 
 nmap <leader>vpp :source $MYVIMRC<CR>
 nmap <leader>vpi :PlugInstall<CR>
