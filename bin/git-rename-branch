@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# git-rename-branch: rename the current branch without altering index or working tree
+#
+set -euo pipefail
+
+# ensure we’re in a Git repo
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Error: not a git repository" >&2
+  exit 1
+fi
+
+# usage
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $(basename "$0") <new-branch-name>" >&2
+  exit 1
+fi
+
+new_branch="$1"
+
+# find current branch (will be empty on detached HEAD)
+current_branch=$(git symbolic-ref --quiet --short HEAD) || {
+  echo "Error: HEAD is detached; cannot rename a detached HEAD" >&2
+  exit 1
+}
+
+# if new name is the same, nothing to do
+if [ "$new_branch" = "$current_branch" ]; then
+  echo "Branch is already named '$new_branch'" 
+  exit 0
+fi
+
+# guard against accidentally clobbering an existing branch
+if git show-ref --verify --quiet "refs/heads/$new_branch"; then
+  echo "Error: branch '$new_branch' already exists" >&2
+  exit 1
+fi
+
+# do the rename
+git branch -m "$new_branch"
+
+echo "✔ renamed branch '$current_branch' → '$new_branch'"
