@@ -24,6 +24,8 @@ git config --global merge.conflictstyle diff3
     && git config --global core.pager delta \
     && git config --global delta.features "line-numbers decorations" \
     && git config --global delta.line-numbers true \
+    && git config --global delta.file-decoration-style none \
+    && git config --global delta.hunk-header-decoration-style none \
     ) || true
 
 ensure git-extras git-summary
