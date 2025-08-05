@@ -29,6 +29,7 @@ bindkey '^X^E' edit-command-line
 
 bindkey -a 'u' undo
 
+bindkey '^X^F' zle_format_command # provided by zsh-lib/format-sh.sh
 
 export EDITOR=nvim
 

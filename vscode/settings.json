@@ -220,11 +220,9 @@
   "javascript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifier": "relative",
   "cSpell.userWords": [
-    "Cloudinary",
-    "HYGEN",
-    "Styleguide",
-    "TMPLS",
     "backsync",
+    "chronos",
+    "Cloudinary",
     "contentful",
     "cosmiconfig",
     "dtos",
@@ -238,12 +236,13 @@
     "ormconfig",
     "oxrc",
     "signup",
+    "stringbool",
+    "Styleguide",
     "tildify",
+    "TMPLS",
     "unprefixable",
-    "zooplus",
-    "backsync",
-    "chronos",
-    "dtos"
+    "unvalidated",
+    "zooplus"
   ],
   "editor.cursorStyle": "line",
   "editor.lineNumbers": "on",
@@ -281,5 +280,23 @@
   "camel.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-22.0.2.jdk",
   "python.defaultInterpreterPath": "python3",
   "git.blame.editorDecoration.enabled": true,
-  "git.blame.statusBarItem.enabled": false
+  "git.blame.statusBarItem.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "yaml.schemas": {
+    "file:///Users/romande/.vscode/extensions/atlassian.atlascode-3.8.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "atlascode.jira.enabled": false,
+  "atlascode.bitbucket.enabled": false,
+  "githubinator.providers.bitbucket.hostnames": [
+    "bitbucket.org",
+    "src.private.zooplus.net"
+  ],
+  "gitViewOnline.providers": [
+    {
+      "remoteUrl": "^(ssh://git@|https://)(src\\.private\\.zooplus\\.net)(:|/)(.*)(\\.git)$",
+      "baseUrl": "https://$2",
+      "repoPath": "$4",
+      "repoType": "Bitbucket"
+    }
+  ]
 }
