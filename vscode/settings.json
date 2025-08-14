@@ -279,7 +279,7 @@
   "workbench.colorTheme": "Default Light Modern",
   "camel.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-22.0.2.jdk",
   "python.defaultInterpreterPath": "python3",
-  "git.blame.editorDecoration.enabled": true,
+  "git.blame.editorDecoration.enabled": false,
   "git.blame.statusBarItem.enabled": false,
   "github.copilot.nextEditSuggestions.enabled": true,
   "yaml.schemas": {

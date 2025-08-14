@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+"""
+kubelogs --deployment-prefix <prefix> [--exclude-pattern REGEX] <url>
+
+Example:
+  kubelogs --deployment-prefix catalog-frontend- \
+    --exclude-pattern istio \
+    https://feature-mag-3120.k8s.www.zooplus.de/info/ob/own-brands?mode=edit
+
+Behavior:
+- Parses <url>, extracts everything before ".k8s.www.zooplus.*" (e.g. "feature-mag-3120").
+- If --deployment-prefix is provided, prepends it to form the deployment name.
+- If --exclude-pattern is omitted:
+    streams logs from all containers of the deployment using a single kubectl call.
+- If --exclude-pattern is provided:
+    resolves pods via the deployment's label selector and streams logs from each
+    container whose name DOES NOT match the regex (case-sensitive).
+"""
+import argparse
+import json
+import re
+import shutil
+import subprocess
+import sys
+import threading
+from urllib.parse import urlparse
+
+# Accept any suffix after ".k8s.www.zooplus."
+ANCHOR_RE = re.compile(r'^(?P<slug>.+)\.k8s\.www\.zooplus\..+$', re.IGNORECASE)
+
+def parse_args():
+    p = argparse.ArgumentParser(
+        prog="kubelogs",
+        description="Stream logs of all pods/containers in a deployment inferred from a zooplus URL."
+    )
+    p.add_argument("-p", "--deployment-prefix", default="", help="Optional deployment name prefix (e.g. 'catalog-frontend-').")
+    p.add_argument("-x", "--exclude-pattern", default=None,
+                   help="Regex to exclude container names from the logs (case-sensitive).")
+    p.add_argument("url", help="A URL like https://feature-xyz.k8s.www.zooplus.de/...")
+    return p.parse_args()
+
+def normalize_url(u: str) -> str:
+    return u if "://" in u else f"https://{u}"
+
+def extract_slug(u: str) -> str:
+    parsed = urlparse(normalize_url(u))
+    host = parsed.hostname or ""
+    m = ANCHOR_RE.match(host)
+    if not m:
+        raise ValueError(f"Host '{host}' does not match '*.k8s.www.zooplus.*'")
+    return m.group("slug")
+
+def run_json(cmd):
+    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if res.returncode != 0:
+        raise RuntimeError(res.stderr.strip() or res.stdout.strip() or f"Command failed: {' '.join(cmd)}")
+    try:
+        return json.loads(res.stdout)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"Failed to parse JSON from: {' '.join(cmd)}\n{e}\nOutput:\n{res.stdout}")
+
+def selector_from_deployment(dep_json) -> tuple[str, str]:
+    """Return (namespace, label_selector_string) derived from deployment's spec.selector."""
+    ns = dep_json.get("metadata", {}).get("namespace") or "default"
+    sel = dep_json.get("spec", {}).get("selector", {}) or {}
+    parts = []
+    # matchLabels -> key=value
+    for k, v in (sel.get("matchLabels") or {}).items():
+        parts.append(f"{k}={v}")
+    # matchExpressions -> key in (...), key notin (...), key, !key
+    for expr in (sel.get("matchExpressions") or []):
+        key = expr.get("key")
+        op = expr.get("operator")
+        vals = expr.get("values") or []
+        if op == "In" and vals:
+            parts.append(f"{key} in ({','.join(vals)})")
+        elif op == "NotIn" and vals:
+            parts.append(f"{key} notin ({','.join(vals)})")
+        elif op == "Exists":
+            parts.append(f"{key}")
+        elif op == "DoesNotExist":
+            parts.append(f"!{key}")
+        # Other operators are rare; ignoring would just make the selector looser.
+    selector = ",".join(parts) if parts else ""
+    return ns, selector
+
+def stream_proc(proc):
+    try:
+        for line in iter(proc.stdout.readline, ''):
+            if not line:
+                break
+            # Already prefixed by kubectl's --prefix
+            sys.stdout.write(line)
+            sys.stdout.flush()
+    finally:
+        proc.stdout.close()
+
+def main():
+    args = parse_args()
+
+    if shutil.which("kubectl") is None:
+        print("Error: 'kubectl' not found in PATH.", file=sys.stderr)
+        sys.exit(127)
+
+    try:
+        slug = extract_slug(args.url)
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(2)
+
+    deployment = f"{args.deployment_prefix}{slug}"
+
+    # Verify deployment exists & get its JSON (also gives us namespace + selector)
+    try:
+        dep_json = run_json(["kubectl", "get", "deployment", deployment, "-o", "json"])
+    except RuntimeError as e:
+        print(str(e), file=sys.stderr)
+        print(f"Error: deployment '{deployment}' not found (check your kubectl context/namespace).", file=sys.stderr)
+        sys.exit(1)
+
+    # Fast path if no exclude-pattern: one kubectl logs call
+    if not args.exclude_pattern:
+        cmd = [
+            "kubectl", "logs", "-f", f"deployment/{deployment}",
+            "--all-containers=true",
+            "--prefix",
+            "--max-log-requests=50",
+        ]
+        print(f"Streaming logs for deployment '{deployment}' ...\n", file=sys.stderr)
+        try:
+            sys.exit(subprocess.call(cmd))
+        except KeyboardInterrupt:
+            sys.exit(130)
+
+    # Exclusion path: resolve pods via deployment selector, then stream per-container (filtered)
+    try:
+        ns, selector = selector_from_deployment(dep_json)
+        if not selector:
+            raise RuntimeError("Deployment has an empty/unsupported selector; cannot resolve pods.")
+        pods_json = run_json(["kubectl", "get", "pods", "-n", ns, "-l", selector, "-o", "json"])
+        items = pods_json.get("items", [])
+        if not items:
+            print(f"No pods found for deployment '{deployment}' in namespace '{ns}'.", file=sys.stderr)
+            sys.exit(1)
+
+        exclude_re = re.compile(args.exclude_pattern)
+        targets = []  # list of (pod_name, container_name)
+        for pod in items:
+            pod_name = pod.get("metadata", {}).get("name")
+            for c in (pod.get("spec", {}).get("containers") or []):
+                cname = c.get("name")
+                if cname and not exclude_re.search(cname):
+                    targets.append((pod_name, cname))
+
+        if not targets:
+            print(f"All containers were excluded by pattern '{args.exclude_pattern}'. Nothing to stream.", file=sys.stderr)
+            sys.exit(0)
+
+        print(
+            f"Streaming logs for deployment '{deployment}' in ns '{ns}', "
+            f"excluding containers matching /{args.exclude_pattern}/ ...\n",
+            file=sys.stderr
+        )
+
+        procs = []
+        threads = []
+        try:
+            for pod_name, cname in targets:
+                cmd = [
+                    "kubectl", "logs", "-f", "-n", ns, pod_name,
+                    "-c", cname,
+                    "--prefix"
+                ]
+                proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+                procs.append(proc)
+                t = threading.Thread(target=stream_proc, args=(proc,), daemon=True)
+                t.start()
+                threads.append(t)
+
+            # Wait for any proc to exit with non-zero, or until Ctrl-C
+            # We'll just join threads; if you Ctrl-C, we handle KeyboardInterrupt and terminate procs.
+            for t in threads:
+                t.join()
+            # When all streams end, exit with 0
+            sys.exit(0)
+        except KeyboardInterrupt:
+            for p in procs:
+                with contextlib.suppress(Exception):
+                    p.terminate()
+            sys.exit(130)
+    except RuntimeError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    import contextlib
+    main()

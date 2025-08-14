@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+import sys, json, re, argparse
+
+PREFIX_RE = re.compile(r'^\s*(\[[^\]]+\])\s*(.*)$')
+REQ_RE = re.compile(r'^\s*(\S+)\s+(\S+)')
+
+def parse_prefix(line: str):
+    m = PREFIX_RE.match(line)
+    if not m:
+        return None, None, None, line
+    prefix, body = m.group(1), m.group(2)
+    container = pod = None
+    if prefix.startswith('[pod/'):
+        inner = prefix[1:-1]  # strip [ ]
+        parts = inner.split('/', 2)  # 'pod', '<podname>', '<container>'
+        if len(parts) >= 3:
+            _, pod, container = parts
+    return prefix, pod, container, body
+
+def make_formatter(color_mode='auto', show_container=True, show_stack=False, max_msg_len=1000):
+    use_color = (color_mode == 'always') or (color_mode == 'auto' and sys.stdout.isatty())
+    def c(s, code): return f"\x1b[{code}m{s}\x1b[0m" if use_color else str(s)
+
+    def status_col(s):
+        try:
+            code = int(s)
+        except Exception:
+            return str(s)
+        if   200 <= code < 300: return c(code, "32")    # green
+        elif 300 <= code < 400: return c(code, "36")    # cyan
+        elif 400 <= code < 500: return c(code, "33")    # yellow
+        elif 500 <= code < 600: return c(code, "31")    # red
+        else:                   return c(code, "90")    # dim
+
+    def method_col(m):
+        mm = (m or "").upper()
+        return {
+            'GET':'34','POST':'35','PUT':'33','DELETE':'31','PATCH':'36','HEAD':'90','OPTIONS':'90'
+        }.get(mm, '37')  # white default
+
+    def sev_col(sev):
+        s = (sev or "").upper()
+        if s in ("FATAL","CRITICAL"): return c(s, "1;31")
+        if s in ("ERROR","ERR"):      return c(s, "31")
+        if s in ("WARN","WARNING"):   return c(s, "33")
+        if s in ("INFO",):            return c(s, "34")
+        if s in ("DEBUG","TRACE"):    return c(s, "90")
+        return s or ""
+
+    def trunc(s, n):
+        if s is None: return None
+        return s if len(s) <= n else s[: n-3] + "..."
+
+    def humanize_access(obj, pod=None, container=None):
+        ts     = obj.get('@timestamp') or obj.get('timestamp') or obj.get('time')
+        status = obj.get('status_code') or obj.get('status') or obj.get('code')
+        method = obj.get('request_command') or obj.get('method')
+        path   = obj.get('request_uri') or obj.get('path')
+        req    = obj.get('request')
+        if (not method or not path) and isinstance(req, str):
+            m = REQ_RE.match(req)
+            if m:
+                method = method or m.group(1)
+                path   = path   or m.group(2)
+        rt     = obj.get('response_time') or obj.get('response_ms') or obj.get('duration_ms') or obj.get('duration')
+        ua     = obj.get('user_agent') or obj.get('user-agent')
+        remote = obj.get('remote_host') or obj.get('client_ip') or obj.get('remote_addr') or obj.get('x_real_ip') or obj.get('x_forwarded_for')
+        logt   = obj.get('log_type')
+
+        out = []
+        if ts: out.append(c(ts, "90"))
+        if show_container and container: out.append(c(container, "90"))
+        if status is not None: out.append(status_col(status))
+        if method: out.append(c(method, method_col(method)))
+        if path: out.append(path)
+        if rt is not None: out.append(f"rt={rt}ms" if isinstance(rt,(int,float)) else f"rt={rt}")
+        if remote: out.append(f"remote={remote}")
+        if ua:
+            out.append("ua=" + trunc(ua, 120))
+        if logt and logt not in ("webapp_access",): out.append(f"type={logt}")
+        return " ".join(map(str, out)) or None
+
+    def humanize_app(obj, pod=None, container=None):
+        ts   = obj.get('@timestamp') or obj.get('timestamp') or obj.get('time')
+        sev  = obj.get('severity') or obj.get('level') or obj.get('loglevel')
+        msg  = obj.get('description') or obj.get('message') or obj.get('msg') or obj.get('error')
+        st   = obj.get('stacktrace') or obj.get('stack') or obj.get('trace')
+
+        head = []
+        if ts: head.append(c(ts, "90"))
+        if show_container and container: head.append(c(container, "90"))
+        if sev: head.append(sev_col(sev))
+        if msg: head.append(trunc(str(msg), max_msg_len))
+        base = " ".join(map(str, head)) if head else None
+
+        if not st:
+            return base or None
+
+        lines = str(st).splitlines()
+        if show_stack:
+            # Multi-line output: base line + indented stack lines
+            pref = "  "
+            stack_block = "\n".join(pref + l for l in lines)
+            return (base + "\n" + stack_block) if base else stack_block
+        else:
+            # Single line summary: first line + number of extra lines
+            summary = lines[0] if lines else ""
+            extra = len(lines) - 1
+            tail = f"stack={trunc(summary, 300)}"
+            if extra > 0:
+                tail += f" (+{extra} lines)"
+            return (base + " " + tail) if base else tail
+
+    def humanize(obj, pod=None, container=None):
+        logt = (obj.get('log_type') or "").lower()
+        if logt == "webapp_access":
+            return humanize_access(obj, pod, container)
+        if logt == "application_log":
+            return humanize_app(obj, pod, container)
+
+        # Heuristics if no/unknown log_type
+        if 'status_code' in obj or 'request' in obj or 'request_uri' in obj:
+            return humanize_access(obj, pod, container)
+        if any(k in obj for k in ('severity','level','message','stacktrace','stack')):
+            return humanize_app(obj, pod, container)
+        # Fallback: keep JSON as-is by returning None (caller will passthrough)
+        return None
+
+    return humanize
+
+def main():
+    ap = argparse.ArgumentParser(description="Pretty-print JSON log lines from stdin; passthrough non-JSON.")
+    ap.add_argument("--color", choices=["auto","always","never"], default="auto",
+                    help="Color output (default: auto)")
+    ap.add_argument("--no-prefix", action="store_true", help="Hide container name from [pod/.../container] prefix")
+    ap.add_argument("--stack", action="store_true", help="Print full stacktraces for application logs (multi-line)")
+    ap.add_argument("--max-msg-len", type=int, default=1000, help="Truncate very long messages (default: 1000)")
+    args = ap.parse_args()
+
+    humanize = make_formatter(args.color, show_container=not args.no_prefix,
+                              show_stack=args.stack, max_msg_len=args.max_msg_len)
+
+    for raw in sys.stdin:
+        line = raw.rstrip("\n")
+        _, pod, container, body = parse_prefix(line)
+        try:
+            obj = json.loads(body)
+            if isinstance(obj, dict):
+                pretty = humanize(obj, pod, container)
+                print(pretty if pretty else line)
+            else:
+                print(line)
+        except Exception:
+            # passthrough on invalid JSON
+            print(line)
+
+if __name__ == "__main__":
+    main()
