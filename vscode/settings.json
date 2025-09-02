@@ -298,5 +298,11 @@
       "repoPath": "$4",
       "repoType": "Bitbucket"
     }
-  ]
+  ],
+  "search.exclude": {
+    "**/.history": true
+  },
+  "files.exclude": {
+    "**/.history": true
+  }
 }

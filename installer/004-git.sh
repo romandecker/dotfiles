@@ -19,6 +19,10 @@ git config --global push.default current
 # Always show 3-way diff
 git config --global merge.conflictstyle diff3
 
+# Set up remote branches automatically
+git config --global branch.autoSetupMerge always
+git config --global push.autoSetupRemote true
+
 (ensure git-delta delta \
     && git config --global alias.side-by-side-diff '!git -c delta.side-by-side=true diff' \
     && git config --global core.pager delta \
@@ -27,5 +31,6 @@ git config --global merge.conflictstyle diff3
     && git config --global delta.file-decoration-style none \
     && git config --global delta.hunk-header-decoration-style none \
     ) || true
+
 
 ensure git-extras git-summary
