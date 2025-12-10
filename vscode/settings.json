@@ -181,15 +181,15 @@
       "before": ["g", "d"],
       "commands": [{ "command": "editor.action.goToTypeDefinition" }]
     },
-    {
-      "before": ["<leader>", "<leader>"],
-      "commands": [{ "command": "workbench.action.quickOpen" }]
-    },
 
     // make camelcasemotion the default
     { "before": ["w"], "after": ["<leader>", "w"] },
     { "before": ["e"], "after": ["<leader>", "e"] },
-    { "before": ["b"], "after": ["<leader>", "b"] }
+    { "before": ["b"], "after": ["<leader>", "b"] },
+    {
+      "before": ["]", "p"],
+      "after": ["<A-y>"]
+    }
   ],
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -313,5 +313,9 @@
   },
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+  "task.allowAutomaticTasks": "on",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:claude-sonnet-4.5"
 }
