@@ -94,4 +94,4 @@ Add a new dotfile to management: `chezmoi add ~/.somerc`.
 ## What isn't managed yet
 
 See [MIGRATION.md](MIGRATION.md) for the tracked backlog (GUI-app config, macOS
-`defaults`, the emacs configs pending a cull, etc.).
+`defaults`, etc.).

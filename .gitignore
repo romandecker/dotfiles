@@ -1,16 +1,6 @@
 # editor Local History extension snapshots (junk)
 /.history
 
-# emacs runtime state (emacs configs still live at repo root, pending cull)
-/.emacs.d/bookmarks
-/.emacs.d/url/cookies
-/.emacs.d/.mc-lists.el
-/.emacs.d/emojis
-/.emacs.d/tramp
-/.emacs.d/request
-/.emacs.d/.edbi-ds-history
-flycheck_*.el
-
 # work-specific tmuxifier sessions
 /.tmux-layouts
 

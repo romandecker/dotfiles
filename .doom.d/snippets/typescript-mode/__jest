@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: __jest
-# key: __jest
-# --
-describe('${1:`(file-name-base (file-name-base (buffer-file-name)))`}', () => {
-    it('should ${2:}', () => {
-        $0
-    });
-});

@@ -29,13 +29,6 @@ left, the judgment calls made along the way, and what was intentionally dropped.
   `defaults write` script (keyboard repeat, Finder, Dock…) is a fresh capability
   to add in `run_onchange_after_50-macos-defaults.sh.tmpl`.
 
-### Editor sprawl — needs a cull decision (yours)
-Left untouched at the repo root, **not** managed by chezmoi:
-- `.doom.d`, `.emacs.d`, `.emacs-profiles.el`, `.spacemacs` — doom + spacemacs +
-  a bespoke emacs config + chemacs. Decide which (if any) survive, then migrate
-  the winner. chemacs/doom install steps were dropped for now.
-- `.vrapperrc` — Eclipse vim bindings; likely dead.
-
 ### Other unmigrated dotfiles
 - `.unison/dropbox-drive.prf` — unison sync profile (unison is in the Brewfile).
 - `.tmux-layouts/` — gitignored, work-specific tmuxifier sessions.
@@ -47,6 +40,13 @@ The old installer force-installed ~20 extensions. Re-add as either a
 `vscode "..."` block in the Brewfile.
 
 ## 🗑️ Intentionally dropped
+- All emacs configs: `.doom.d`, `.emacs.d`, `.spacemacs`, `.emacs-profiles.el`
+  (doom + spacemacs + bespoke config + chemacs). Emacs is no longer used, so
+  nothing was migrated. Last-good state is tagged `before-emacs-retirement`.
+  Also dropped the emacs-based `magit` zsh alias, both `.dir-locals.el` hygen
+  generators (`project/dir-locals` + the TS-library template), and the root
+  `.gitignore` emacs-runtime block.
+- `.vrapperrc` — Eclipse Vrapper (vim bindings); dead, no longer on Eclipse.
 - Linux-desktop config: `.i3config`, `.i3blocks.conf`, `xkb-keyboard-layouts/`.
 - Server flavor: `web-install-server.sh`, `server.vimrc`.
 - `web-install.sh` (replaced by the chezmoi bootstrap one-liner).
