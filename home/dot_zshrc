@@ -59,8 +59,15 @@ fpath=($fpath ~/.zfunctions/)
 autoload -U promptinit; promptinit
 prompt pure
 
+# Rebuild the completion dump at most once a day; use the fast cached path
+# (-C skips the compaudit security scan) when the dump is fresh. Recovers ~1s
+# of startup. Force a rebuild anytime with: rm ~/.zcompdump; compinit
 autoload -Uz compinit
-compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh-24) ]]; then
+    compinit -C
+else
+    compinit
+fi
 
 autoload -U zcalc
 autoload -Uz transfer
@@ -116,7 +123,7 @@ done
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # nvm — managed by the zgen plugin lukechilds/zsh-nvm (lazy loaded, see above),
-# which installs nvm into ~/.nvm. Source it directly too, matching prior setup.
+# plus the node() wrapper in ~/.zsh-lib/node.sh. We deliberately do NOT source
+# nvm.sh directly here: doing so runs nvm_auto on every startup (~1.5s) and
+# defeats the lazy load. NVM_DIR is exported for the plugin/wrapper to find nvm.
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
