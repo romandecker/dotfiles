@@ -15,13 +15,23 @@ left, the judgment calls made along the way, and what was intentionally dropped.
 - Claude statusline (scripts + settings merge).
 - `run_*` scripts for git config, fzf, neovim plugins, macOS press-and-hold.
 
+## ✅ Done (post-Phase-1)
+
+- **VSCode** — the old installer symlinked the *entire* `~/Library/Application
+  Support/Code/User` dir at the repo root (`vscode/`), so VSCode wrote 668 MB of
+  runtime state (History, globalStorage, workspaceStorage) into the repo. Now:
+  the User dir is a real directory again (runtime state stays local, unmanaged);
+  chezmoi manages only `settings.json`, `keybindings.json`, and `snippets/*.json`
+  (mac path, symlink mode); the 31 extensions are captured as `vscode "…"` entries
+  in the Brewfile so `brew bundle` reinstalls them. Dropped empty `mcp.json` /
+  `chatLanguageModels.json` / `agent-sessions.code-workspace` and a stale
+  `atlascode` schema path. Mac-only by design (GUI app; Linux is CLI-only).
+
 ## ⏳ Deferred (still to migrate)
 
 ### GUI-app config
 - `better-touch-tool-preset.json` — BetterTouchTool preset (manual import today).
 - `iterm-color-themes/` — iTerm color scheme.
-- `vscode/` — VSCode settings/keybindings/snippets. The extension list from the
-  old `installer/013-vscode.sh` is **not** migrated (see below).
 - `flycut` — installed via Brewfile; preferences not managed.
 
 ### macOS system defaults
@@ -33,11 +43,6 @@ left, the judgment calls made along the way, and what was intentionally dropped.
 - `.unison/dropbox-drive.prf` — unison sync profile (unison is in the Brewfile).
 - `.tmux-layouts/` — gitignored, work-specific tmuxifier sessions.
 - `test256colors.py`, `TODO.org` — utility/notes, left at root.
-
-### VSCode extensions
-The old installer force-installed ~20 extensions. Re-add as either a
-`run_once_after_*.sh` calling `code --install-extension`, or (cleaner) a
-`vscode "..."` block in the Brewfile.
 
 ## 🗑️ Intentionally dropped
 - All emacs configs: `.doom.d`, `.emacs.d`, `.spacemacs`, `.emacs-profiles.el`

@@ -52,8 +52,43 @@ brew "jakehilborn/jakehilborn/displayplacer"
 # --- casks (GUI) ------------------------------------------------------------
 cask "flycut"                   # clipboard history
 cask "qlstephen"                # QuickLook for extensionless files
-cask "visual-studio-code"       # editor (settings sync is deferred — see MIGRATION.md)
+cask "visual-studio-code"       # editor (User config managed by chezmoi; see below)
 
 # --- fonts (were submodules/powerline-fonts + manual zip downloads) ---------
 cask "font-fira-code"
 cask "font-agave-nerd-font"
+
+# --- VSCode extensions ------------------------------------------------------
+# `brew bundle` installs these via `code --install-extension`. Regenerate the
+# list with: code --list-extensions | sort | sed 's/.*/vscode "&"/'
+vscode "aaron-bond.better-comments"
+vscode "alefragnani.project-manager"
+vscode "anthropic.claude-code"
+vscode "christian-kohler.npm-intellisense"
+vscode "christian-kohler.path-intellisense"
+vscode "codeandstuff.package-json-upgrade"
+vscode "dbaeumer.vscode-eslint"
+vscode "eamodio.gitlens"
+vscode "editorconfig.editorconfig"
+vscode "esbenp.prettier-vscode"
+vscode "formulahendry.auto-rename-tag"
+vscode "hashicorp.terraform"
+vscode "kumar-harsh.graphql-for-vscode"
+vscode "metalbear.mirrord"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "naumovs.color-highlight"
+vscode "nicoespeon.abracadabra"
+vscode "orta.vscode-jest"
+vscode "r.paste-markdown"
+vscode "redhat.vscode-yaml"
+vscode "romandecker.open-closest"
+vscode "romandecker.open-in-git-web-provider"
+vscode "sirtori.indenticator"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "stylelint.vscode-stylelint"
+vscode "unifiedjs.vscode-mdx"
+vscode "vscodevim.vim"
+vscode "wayou.vscode-todo-highlight"
+vscode "wix.vscode-import-cost"
+vscode "xyz.local-history"
+vscode "yoavbls.pretty-ts-errors"

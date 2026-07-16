@@ -276,9 +276,6 @@
   "git.blame.editorDecoration.enabled": false,
   "git.blame.statusBarItem.enabled": false,
   "github.copilot.nextEditSuggestions.enabled": true,
-  "yaml.schemas": {
-    "file:///Users/romande/.vscode/extensions/atlassian.atlascode-3.8.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
-  },
   "atlascode.jira.enabled": false,
   "atlascode.bitbucket.enabled": false,
   "githubinator.providers.bitbucket.hostnames": [

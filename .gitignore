@@ -6,8 +6,3 @@
 
 # chezmoi Linux bootstrap test staging
 /test/workspace/
-
-# VSCode local state (config migration is deferred — see MIGRATION.md)
-/vscode/workspaceStorage
-/vscode/globalStorage
-/vscode/History
