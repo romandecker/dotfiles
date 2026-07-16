@@ -19,3 +19,5 @@ flycheck_*
 todo.org
 .#*
 .history/
+
+**/.claude/settings.local.json

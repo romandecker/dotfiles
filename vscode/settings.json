@@ -196,22 +196,22 @@
   "editor.formatOnSave": true,
   "projectManager.git.baseFolders": ["~/projects"],
   "[typescript]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[json]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[javascript]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "git.autorefresh": true,
   "git.autofetch": true,
@@ -270,7 +270,7 @@
   "application.shellEnvironmentResolutionTimeout": 30,
   "editor.guides.bracketPairs": true,
   "editor.accessibilitySupport": "off",
-  "workbench.colorTheme": "Default Light Modern",
+  "workbench.colorTheme": "Light Modern",
   "camel.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-22.0.2.jdk",
   "python.defaultInterpreterPath": "python3",
   "git.blame.editorDecoration.enabled": false,
@@ -312,4 +312,5 @@
   "task.allowAutomaticTasks": "on",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:claude-sonnet-4.5",
+  "claudeCode.preferredLocation": "panel",
 }

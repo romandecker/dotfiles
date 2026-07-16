@@ -292,3 +292,31 @@ kubectl port-forward services/$(kubectl get services --no-headers | fzf | awk '{
 kubectl config use-context $(kubectl config get-contexts --no-headers | sed 's/^[ *]*//g' | fzf | awk '{print $1;}')
 """
   tag = ["shell", "k8s", "kubectl"]
+
+
+[[snippets]]
+  description = "Keep portfolio-performance file in sync with google drive"
+  command = """
+REMOTE="drive:finance/portfolio-performance.portfolio"; \
+LOCAL="$HOME/Downloads/portfolio-performance.portfolio"; \
+rclone copyto "$REMOTE" "$LOCAL" && \
+echo "Downloaded to: $LOCAL" && \
+LAST_HASH="$(shasum -a 256 "$LOCAL" | awk '{print $1}')" && \
+echo "Watching for changes..." && \
+while true; do \
+  sleep 2; \
+  if [ -f "$LOCAL" ]; then \
+    NEW_HASH="$(shasum -a 256 "$LOCAL" | awk '{print $1}')"; \
+    if [ "$NEW_HASH" != "$LAST_HASH" ]; then \
+      echo "Change detected, uploading..."; \
+      if rclone copyto "$LOCAL" "$REMOTE"; then \
+        LAST_HASH="$NEW_HASH"; \
+        echo "Upload complete: $(date)"; \
+      else \
+        echo "Upload failed: $(date)" >&2; \
+      fi; \
+    fi; \
+  fi; \
+done
+"""
+  tag = ["google", "drive", "portfolio-performance"]
