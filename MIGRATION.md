@@ -70,10 +70,14 @@ The old installer force-installed ~20 extensions. Re-add as either a
   `force` is baked into the Brewfile.
 
 ## 📝 Known caveats (verify when you next use them)
-- **tmuxifier layout path**: managed window-layouts/templates land in
-  `~/.tmuxifier/` (tmuxifier's default dir), while `TMUXIFIER_LAYOUT_PATH` still
-  points at `~/.tmux-layouts` (your gitignored session files) as before. This
-  mirrors the pre-migration wiring; confirm session vs window layouts resolve.
+- **tmuxifier layout path** (resolved on the first migrated machine):
+  `TMUXIFIER_LAYOUT_PATH` is `~/.tmux-layouts`. tmuxifier wants BOTH `*.session.sh`
+  and `*.window.sh` in that one dir, so work sessions were moved there from
+  `~/.dotfiles/.tmux-layouts` and the generic `*.window.sh` layouts copied in
+  alongside. The canonical window layouts still live in the repo
+  (`home/dot_tmuxifier/layouts/` → `~/.tmuxifier/`); the copies in `~/.tmux-layouts`
+  are what tmuxifier actually reads, so edit the repo copy and re-copy on change.
+  A fresh machine starts with an empty `~/.tmux-layouts` (sessions are machine-local).
 
 ## ⚠️ Judgment calls to review before you `chezmoi apply`
 - **zsh decoupling**: `.zshrc` was rewritten to source from `$HOME` locations and
