@@ -61,6 +61,14 @@ The old installer force-installed ~20 extensions. Re-add as either a
 - `wakatime` installer (was a self-defeating no-op) and `grip`/`mermaid.cli`
   (manual/deprecated) — re-add deliberately if still wanted.
 
+## 📝 First-apply gotchas (this machine only)
+- **Font casks vs. legacy manual fonts**: the old `installer/008-fonts.sh` dropped
+  FiraCode/Agave TTFs into `~/Library/Fonts` by hand. `brew bundle` can't adopt
+  files whose bytes differ, so `font-fira-code`/`font-agave-nerd-font` failed on
+  first apply. Resolved once with `brew install --cask --force font-fira-code
+  font-agave-nerd-font` (brew now owns them). Fresh machines don't hit this — no
+  `force` is baked into the Brewfile.
+
 ## 📝 Known caveats (verify when you next use them)
 - **tmuxifier layout path**: managed window-layouts/templates land in
   `~/.tmuxifier/` (tmuxifier's default dir), while `TMUXIFIER_LAYOUT_PATH` still
