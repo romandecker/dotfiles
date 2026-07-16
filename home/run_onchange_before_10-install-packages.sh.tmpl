@@ -23,13 +23,17 @@ brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
 {{ else if eq .chezmoi.os "linux" -}}
 # Best-effort CLI parity on Linux (apt). GUI/mac-only packages are intentionally
 # omitted. Note the apt package name for the silver searcher differs from macOS.
+# Packages are installed one-by-one and failures are tolerated, so a package that
+# isn't in this distro's repos (e.g. `fpp`) doesn't abort the whole bootstrap.
 if command -v apt-get >/dev/null 2>&1; then
     SUDO=""
     [ "$(id -u)" -ne 0 ] && SUDO="sudo"
     $SUDO apt-get update
-    $SUDO apt-get install -y \
-        curl git tmux neovim jq gnupg unison \
-        silversearcher-ag ripgrep moreutils watch highlight fzf fpp \
-        git-delta git-extras zsh
+    for pkg in curl git tmux neovim jq gnupg unison \
+               silversearcher-ag ripgrep moreutils watch highlight fzf \
+               git-delta git-extras zsh; do
+        $SUDO apt-get install -y "$pkg" \
+            || echo "chezmoi: skipping unavailable apt package: $pkg"
+    done
 fi
 {{ end -}}
