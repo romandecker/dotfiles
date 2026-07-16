@@ -1,0 +1,24 @@
+# Third-party code that isn't in Homebrew, auto-cloned + refreshed by chezmoi.
+# Replaces the old git submodules and the `clone`/curl calls in installer/.
+# refreshPeriod = "168h" -> chezmoi re-pulls at most weekly (or on `chezmoi update -R`).
+
+[".tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm.git"
+    refreshPeriod = "168h"
+
+[".zgen"]
+    type = "git-repo"
+    url = "https://github.com/tarjoilija/zgen.git"
+    refreshPeriod = "168h"
+
+[".local/share/tmuxifier"]
+    type = "git-repo"
+    url = "https://github.com/romandecker/tmuxifier.git"
+    refreshPeriod = "168h"
+
+# vim-plug for neovim (was curl'd in installer/006-vim.sh)
+[".local/share/nvim/site/autoload/plug.vim"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    refreshPeriod = "168h"

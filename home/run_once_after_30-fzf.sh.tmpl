@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Install fzf key-bindings + completion (~/.fzf.zsh), sourced by .zshrc.
+# fzf itself comes from the Brewfile; its installer ships in the keg.
+set -eu
+
+{{ if eq .chezmoi.os "darwin" -}}
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+FZF_INSTALL="$(brew --prefix)/opt/fzf/install"
+if [[ -x "$FZF_INSTALL" ]]; then
+    "$FZF_INSTALL" --no-update-rc --completion --key-bindings
+fi
+{{ end -}}

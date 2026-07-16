@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Installs packages. Re-runs automatically whenever the Brewfile (hash below)
+# or this script changes. Replaces installer/*.sh `ensure` calls.
+set -eu
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Brewfile hash: {{ include "Brewfile" | sha256sum }}
+
+# Bootstrap Homebrew if missing.
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing Homebrew..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+echo "Running brew bundle..."
+brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
+
+{{ else if eq .chezmoi.os "linux" -}}
+# Best-effort CLI parity on Linux (apt). GUI/mac-only packages are intentionally
+# omitted. Note the apt package name for the silver searcher differs from macOS.
+if command -v apt-get >/dev/null 2>&1; then
+    SUDO=""
+    [ "$(id -u)" -ne 0 ] && SUDO="sudo"
+    $SUDO apt-get update
+    $SUDO apt-get install -y \
+        curl git tmux neovim jq gnupg unison \
+        silversearcher-ag ripgrep moreutils watch highlight fzf fpp \
+        git-delta git-extras zsh
+fi
+{{ end -}}

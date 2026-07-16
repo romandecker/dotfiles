@@ -1,0 +1,124 @@
+# NOTE: managed by chezmoi (symlink mode) — this file is a live symlink into the
+# dotfiles repo, so edits here are edits to the repo. Per-OS differences use
+# runtime shell conditionals (not chezmoi templates) so the symlink stays live.
+
+# --- Homebrew (sets PATH/MANPATH; provides pure, zsh-syntax-highlighting, tfenv…)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+BREW_PREFIX="${HOMEBREW_PREFIX:-}"
+
+# 10 ms for key sequences
+export KEYTIMEOUT=1
+export GO_PATH=$HOME/go
+# ~/.local/bin holds the managed bin/ scripts; ~/bin kept for anything local.
+export PATH="$HOME/.local/bin:$HOME/bin:$GO_PATH/bin:$PATH"
+export LANG=en_US.UTF-8
+
+bindkey -v
+bindkey '^P' up-history
+bindkey '^N' down-history
+
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^[[3~' delete-char
+bindkey '^w' backward-kill-word
+
+bindkey '^r' history-incremental-search-backward
+
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '\e.' insert-last-word
+
+autoload edit-command-line
+zle -N edit-command-line
+
+bindkey -a v begin-selection
+bindkey -M vicmd v edit-command-line
+bindkey '^X^E' edit-command-line
+
+bindkey -a 'u' undo
+
+bindkey '^X^F' zle_format_command # provided by ~/.zsh-lib/format-sh.sh
+
+export EDITOR=nvim
+
+alias vim=nvim
+
+# convert a text in javascript object notation (from stdin) to json notation
+alias js2json='node -e '"'"'console.log(JSON.stringify(eval(`x=${require(`fs`).readFileSync(0,`utf-8`)}`),null,2))'"'";
+
+alias magit='emacs --eval "(after! magit (progn (magit-status \"$(pwd)\") (delete-other-windows)))" 2>/dev/null &!'
+
+# --- prompt: pure (installed via brew) ---
+if [[ -n "$BREW_PREFIX" ]]; then
+    fpath=("$BREW_PREFIX/share/zsh/site-functions" $fpath)
+fi
+fpath=($fpath ~/.zfunctions/)
+
+autoload -U promptinit; promptinit
+prompt pure
+
+autoload -Uz compinit
+compinit
+
+autoload -U zcalc
+autoload -Uz transfer
+
+setopt histignorealldups    # ignore duplicates
+setopt hist_ignore_space    # do not save commands starting with space to history
+setopt share_history
+setopt interactivecomments  # enable comments in REPL
+
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=$HOME/.zsh_history
+
+export NVM_COMPLETION=true
+export NVM_LAZY_LOAD=true
+
+zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+
+# --- zgen plugin manager (installed via .chezmoiexternal.toml -> ~/.zgen) ---
+ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
+if [[ -f "${HOME}/.zgen/zgen.zsh" ]]; then
+    source "${HOME}/.zgen/zgen.zsh"
+
+    if ! zgen saved ; then
+        zgen load buonomo/yarn-completion
+        zgen load lukechilds/zsh-nvm
+
+        zgen oh-my-zsh
+        zgen oh-my-zsh plugins/gitfast
+        zgen oh-my-zsh plugins/git
+
+        zgen load zsh-users/zsh-autosuggestions
+        zgen load jeffreytse/zsh-vi-mode
+        zgen load agkozak/zsh-z
+
+        zgen save
+    fi
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# zsh-syntax-highlighting (installed via brew)
+if [[ -n "$BREW_PREFIX" && -f "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
+export SNIPPET_DIR=~/.config/pet
+
+for f in ~/.zsh-lib/*.sh; do
+    source $f
+done
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# nvm — managed by the zgen plugin lukechilds/zsh-nvm (lazy loaded, see above),
+# which installs nvm into ~/.nvm. Source it directly too, matching prior setup.
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"

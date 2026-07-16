@@ -1,0 +1,59 @@
+# Brewfile — the single source of truth for macOS packages.
+#
+# Applied by run_onchange_before_10-install-packages.sh.tmpl via `brew bundle`,
+# which is idempotent: re-running only installs what's missing. This replaces the
+# old installer/*.sh `ensure` calls.
+#
+# Linux gets a deliberately smaller apt list in the same run script (best-effort
+# CLI parity — see the migration plan). brew bundle only runs on macOS.
+
+# --- taps -------------------------------------------------------------------
+tap "knqyf263/pet"          # pet snippet manager
+tap "jakehilborn/jakehilborn" # displayplacer
+
+# --- core CLI ---------------------------------------------------------------
+brew "curl"
+brew "git"
+brew "git-delta"            # better git diffs (delta)
+brew "git-extras"           # git-summary et al
+brew "tmux"
+brew "reattach-to-user-namespace" # tmux + macOS clipboard
+brew "neovim"
+brew "jq"
+brew "gnupg"                # gpg
+brew "unison"               # file sync
+
+# --- search / text utilities ------------------------------------------------
+brew "the_silver_searcher" # ag  (Linux: silversearcher-ag)
+brew "ripgrep"             # rg
+brew "moreutils"          # vipe et al
+brew "watch"
+brew "highlight"
+brew "coreutils"          # greadlink/realpath (GNU tools on macOS)
+brew "fzf"                # fuzzy finder (replaces the ~/.fzf git clone)
+brew "fpp"                # PathPicker
+
+# --- shell / prompt (were git submodules, now brew) -------------------------
+brew "pure"                     # pure-prompt
+brew "zsh-syntax-highlighting"  # was submodules/zsh-syntax-highlighting
+brew "tfenv"                    # was submodules/tfenv
+# NOTE: directory-jumping (`z`) comes from the zgen plugin agkozak/zsh-z, so the
+# vendored rupa/z copy is simply retired, not replaced by a brew formula.
+# NOTE: node version management stays on zsh-nvm (zgen) + ~/.nvm, as before —
+# not brew nvm, to avoid a conflicting double nvm setup. yvm is dropped.
+
+# --- languages --------------------------------------------------------------
+brew "python@3.12"
+
+# --- tapped tools -----------------------------------------------------------
+brew "knqyf263/pet/pet"
+brew "jakehilborn/jakehilborn/displayplacer"
+
+# --- casks (GUI) ------------------------------------------------------------
+cask "flycut"                   # clipboard history
+cask "qlstephen"                # QuickLook for extensionless files
+cask "visual-studio-code"       # editor (settings sync is deferred — see MIGRATION.md)
+
+# --- fonts (were submodules/powerline-fonts + manual zip downloads) ---------
+cask "font-fira-code"
+cask "font-agave-nerd-font"

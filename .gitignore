@@ -1,4 +1,7 @@
-/installer/node_modules
+# editor Local History extension snapshots (junk)
+/.history
+
+# emacs runtime state (emacs configs still live at repo root, pending cull)
 /.emacs.d/bookmarks
 /.emacs.d/url/cookies
 /.emacs.d/.mc-lists.el
@@ -6,9 +9,15 @@
 /.emacs.d/tramp
 /.emacs.d/request
 /.emacs.d/.edbi-ds-history
-/.tmux-layouts
 flycheck_*.el
+
+# work-specific tmuxifier sessions
+/.tmux-layouts
+
+# chezmoi Linux bootstrap test staging
 /test/workspace/
+
+# VSCode local state (config migration is deferred — see MIGRATION.md)
 /vscode/workspaceStorage
 /vscode/globalStorage
-/doom-emacs
+/vscode/History

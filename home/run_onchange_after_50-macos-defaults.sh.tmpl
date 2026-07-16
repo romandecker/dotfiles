@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# macOS system defaults. Only the VSCode press-and-hold tweak is migrated from
+# the old installers; broader `defaults write` management is deferred (MIGRATION.md).
+set -eu
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Enable key-repeat (vim mode) instead of the accent popup in VSCode.
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+{{ end -}}

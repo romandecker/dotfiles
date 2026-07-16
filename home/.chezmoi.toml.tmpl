@@ -1,0 +1,9 @@
+# Generated into ~/.config/chezmoi/chezmoi.toml on `chezmoi init`.
+#
+# mode = "symlink": chezmoi creates symlinks from $HOME back into the source
+# directory for every managed regular file, so editing e.g. ~/.vimrc edits the
+# repo copy live (the old link_dotfile behaviour). Files that CAN'T be symlinked
+# — templates (*.tmpl), executables, and private files — are written as real
+# files instead. This is why the per-OS files (tmux) are templates: they render
+# to real files, everything else stays a live symlink.
+mode = "symlink"
