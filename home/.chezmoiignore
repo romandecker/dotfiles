@@ -3,3 +3,7 @@
 # The Brewfile is read by the package-install script via `include "Brewfile"`
 # (so its hash triggers re-runs), but it is not itself a dotfile.
 Brewfile
+
+# iTerm color-scheme sources. Read by run_onchange_after_55-iterm.sh.tmpl (which
+# globs + merges them into iTerm's "Custom Color Presets"); not themselves dotfiles.
+iterm-color-themes

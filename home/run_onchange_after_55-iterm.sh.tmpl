@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# iTerm2 setup (macOS only). Two jobs:
+#   1. Make our Dynamic Profile the boot default (sets "Default Bookmark Guid" to
+#      the profile's own GUID, read straight out of the JSON — single source).
+#   2. Merge every home/iterm-color-themes/*.itermcolors into iTerm's
+#      "Custom Color Presets" so they're selectable in Preferences -> Colors.
+#
+# The profile itself is a Dynamic Profile JSON symlinked into
+# ~/Library/Application Support/iTerm2/DynamicProfiles/ (chezmoi applies it; iTerm
+# reads it natively) so it is NOT rewritten here. Its GUID is deliberately
+# distinct from any built-in profile — a Dynamic Profile that reuses a
+# non-dynamic profile's GUID makes iTerm raise a "conflicts with non-dynamic
+# profile" error.
+#
+# GOTCHA: this writes com.googlecode.iterm2's prefs and then flushes cfprefsd.
+# iTerm rewrites that plist on quit, so if iTerm is running while this applies it
+# can clobber the merge. Safest to `chezmoi apply` with iTerm closed.
+set -eu
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Re-runs whenever this script, the profile JSON, or any theme file changes:
+#   profile hash: {{ include (joinPath .chezmoi.sourceDir "private_Library/private_Application Support/iTerm2/DynamicProfiles/default.json") | sha256sum }}
+#   themes hash: {{ range (glob (joinPath .chezmoi.sourceDir "iterm-color-themes" "*.itermcolors")) }}{{ include . | sha256sum }} {{ end }}
+PROFILE_JSON="{{ .chezmoi.sourceDir }}/private_Library/private_Application Support/iTerm2/DynamicProfiles/default.json"
+THEME_DIR="{{ .chezmoi.sourceDir }}/iterm-color-themes"
+
+python3 - "$PROFILE_JSON" "$THEME_DIR" <<'PY'
+import glob, json, os, plistlib, sys
+
+profile_json, theme_dir = sys.argv[1], sys.argv[2]
+plist = os.path.expanduser("~/Library/Preferences/com.googlecode.iterm2.plist")
+
+# iTerm may never have launched on a fresh machine, so the prefs file can be
+# absent; start from an empty domain in that case rather than aborting.
+try:
+    with open(plist, "rb") as f:
+        d = plistlib.load(f)
+except FileNotFoundError:
+    d = {}
+
+# 1. boot default -> our Dynamic Profile (GUID read from the profile itself)
+guid = json.load(open(profile_json))["Profiles"][0]["Guid"]
+d["Default Bookmark Guid"] = guid
+
+# 2. merge color presets (name = filename stem)
+presets = d.setdefault("Custom Color Presets", {})
+added = []
+for path in sorted(glob.glob(os.path.join(theme_dir, "*.itermcolors"))):
+    name = os.path.splitext(os.path.basename(path))[0]
+    with open(path, "rb") as f:
+        presets[name] = plistlib.load(f)
+    added.append(name)
+
+with open(plist, "wb") as f:
+    plistlib.dump(d, f, fmt=plistlib.FMT_BINARY)  # iTerm stores this domain as binary
+
+print(f"iTerm: default profile -> {guid}; presets merged: {', '.join(added) or '(none)'}")
+PY
+
+# Flush the prefs cache so iTerm picks up the on-disk changes on next launch.
+killall cfprefsd 2>/dev/null || true
+{{ end -}}

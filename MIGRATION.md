@@ -27,12 +27,35 @@ left, the judgment calls made along the way, and what was intentionally dropped.
   `chatLanguageModels.json` / `agent-sessions.code-workspace` and a stale
   `atlascode` schema path. Mac-only by design (GUI app; Linux is CLI-only).
 
-## ⏳ Deferred (still to migrate)
+- **iTerm2** — the whole default profile is now reproducible, not just colors:
+  - **Profile** captured as a Dynamic Profile JSON
+    (`private_Library/private_Application Support/iTerm2/DynamicProfiles/default.json`,
+    symlinked into `~/Library/Application Support/iTerm2/`). iTerm reads it
+    natively, so it's a plain managed file — no run-script fighting iTerm's plist.
+    Two machine-dependent values were scrubbed: `Working Directory`
+    (`/Users/romande`, and inert anyway since `Custom Directory = No`) was dropped,
+    and `Normal Font` was switched from the hand-installed `DejaVuSansMonoPowerline`
+    to `Agave Nerd Font 12` (already a Brewfile cask, keeps powerline/nerd glyphs).
+  - **Color presets**: `iterm-color-themes/*.itermcolors` (currently `Alabaster`,
+    exported from the live plist; the stale 2019 `material` was retired) are merged
+    into the plist's "Custom Color Presets" so they stay selectable in
+    Preferences → Colors. Sources live source-only (in `.chezmoiignore`).
+  - The Dynamic Profile is given its **own fresh GUID**
+    (`B510869E-…`), deliberately *not* the captured profile's original GUID
+    (`A5A03B86-…`). iTerm refuses a Dynamic Profile whose GUID matches an existing
+    non-dynamic profile ("conflicts with non-dynamic profile with same Guid"), so
+    reusing the captured GUID is a hard error, not a cosmetic one.
+  - `run_onchange_after_55-iterm.sh.tmpl` (macOS-only) sets `Default Bookmark Guid`
+    to the profile's GUID (read out of the JSON, so there's one source of truth)
+    and does the preset merge; it re-runs when the profile JSON or any theme file
+    changes, and tolerates a missing prefs file (fresh machine, iTerm never
+    launched). ⚠️ It writes iTerm's prefs then flushes `cfprefsd` — iTerm rewrites
+    that plist on quit, so apply with **iTerm closed**. On the *capture* machine
+    the original non-dynamic "Default" profile (`A5A03B86-…`) lingers alongside the
+    new dynamic one; it's redundant and can be deleted by hand in iTerm's prefs. A
+    fresh machine never has it.
 
-### GUI-app config
-- `better-touch-tool-preset.json` — BetterTouchTool preset (manual import today).
-- `iterm-color-themes/` — iTerm color scheme.
-- `flycut` — installed via Brewfile; preferences not managed.
+## ⏳ Deferred (still to migrate)
 
 ### macOS system defaults
 - Only the VSCode `ApplePressAndHoldEnabled` tweak was migrated. A broader
@@ -45,6 +68,10 @@ left, the judgment calls made along the way, and what was intentionally dropped.
 - `test256colors.py`, `TODO.org` — utility/notes, left at root.
 
 ## 🗑️ Intentionally dropped
+- **BetterTouchTool** (`better-touch-tool-preset.json`) and **flycut** (was a
+  Brewfile cask) — both no longer used, so neither the preset nor the cask is
+  managed anymore. `brew bundle` won't reinstall flycut on a fresh machine; it is
+  not auto-uninstalled from machines that already have it.
 - All emacs configs: `.doom.d`, `.emacs.d`, `.spacemacs`, `.emacs-profiles.el`
   (doom + spacemacs + bespoke config + chemacs). Emacs is no longer used, so
   nothing was migrated. Last-good state is tagged `before-emacs-retirement`.

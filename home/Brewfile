@@ -50,7 +50,6 @@ brew "knqyf263/pet/pet"
 brew "jakehilborn/jakehilborn/displayplacer"
 
 # --- casks (GUI) ------------------------------------------------------------
-cask "flycut"                   # clipboard history
 cask "qlstephen"                # QuickLook for extensionless files
 cask "visual-studio-code"       # editor (User config managed by chezmoi; see below)
 
