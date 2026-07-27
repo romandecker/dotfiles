@@ -81,9 +81,6 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=$HOME/.zsh_history
 
-export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
-
 zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 
 # --- zgen plugin manager (installed via .chezmoiexternal.toml -> ~/.zgen) ---
@@ -93,7 +90,6 @@ if [[ -f "${HOME}/.zgen/zgen.zsh" ]]; then
 
     if ! zgen saved ; then
         zgen load buonomo/yarn-completion
-        zgen load lukechilds/zsh-nvm
 
         zgen oh-my-zsh
         zgen oh-my-zsh plugins/gitfast
@@ -120,42 +116,34 @@ for f in ~/.zsh-lib/*.sh; do
     source $f
 done
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+# --- fnm: node version manager (replaced nvm/zsh-nvm) -----------------------
+# --use-on-cd switches node version automatically per directory; recursive
+# strategy walks up to parent dirs for .nvmrc/.node-version, matching the old
+# zsh-nvm behavior. --use-on-cd only wires the chpwd hook for *future* cd's,
+# so a fnm use is also needed here to resolve the shell's starting directory
+# (e.g. a new tab opened straight into a project dir). Runs before
+# .zshrc.local below since that file expects node/pnpm/etc. on PATH already
+# (e.g. `pnpm completion`).
+export FNM_VERSION_FILE_STRATEGY=recursive
+if command -v fnm >/dev/null 2>&1; then
+    eval "$(fnm env --use-on-cd)"
+    fnm use --install-if-missing --silent-if-unchanged >/dev/null 2>&1
+fi
 
-# nvm — managed by the zgen plugin lukechilds/zsh-nvm (lazy loaded, see above),
-# plus the node() wrapper in ~/.zsh-lib/node.sh. We deliberately do NOT source
-# nvm.sh directly here: doing so runs nvm_auto on every startup (~1.5s) and
-# defeats the lazy load. NVM_DIR is exported for the plugin/wrapper to find nvm.
-export NVM_DIR="$HOME/.nvm"
-
-# --- Claude Code: route node/npm/etc. through fnm, per-project .nvmrc ---
+# --- Claude Code: route node/npm/etc. through fnm explicitly -----------------
 # Claude Code's Bash tool sources a frozen shell-function snapshot on every
-# single command (no state persists between commands), so the zsh-nvm lazy
-# stubs above break there: they call _zsh_nvm_load, which isn't captured in
-# the snapshot, and even a working nvm lazy-load wouldn't switch per project
-# directory anyway. fnm resolves + runs in one fast, self-contained call, so
-# it's used here instead — but only when $CLAUDECODE is set. Interactive
-# shells are untouched and keep using nvm/zsh-nvm as before.
+# single command (no state persists between commands), so the --use-on-cd
+# hook above never fires there — PATH is never pre-switched per directory.
+# fnm exec resolves + runs in one fast, self-contained call instead.
 if [[ -n "$CLAUDECODE" ]] && command -v fnm >/dev/null 2>&1; then
     _claude_fnm_dispatch() {
         local real_cmd="$1"; shift
-        local dir="$PWD" nvmrc=""
-        while true; do
-            if [[ -f "$dir/.nvmrc" ]]; then
-                nvmrc="$dir/.nvmrc"
-                break
-            fi
-            [[ "$dir" == "/" ]] && break
-            dir="${dir:h}"
-        done
-        if [[ -z "$nvmrc" ]]; then
-            command "$real_cmd" "$@"
-            return
-        fi
-        fnm exec --using="$nvmrc" -- "$real_cmd" "$@"
+        fnm exec -- "$real_cmd" "$@"
     }
     for _claude_fnm_cmd in node npm npx pnpm pnpx yarn yarnpkg corepack; do
         eval "$_claude_fnm_cmd() { _claude_fnm_dispatch $_claude_fnm_cmd \"\$@\"; }"
     done
     unset _claude_fnm_cmd
 fi
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

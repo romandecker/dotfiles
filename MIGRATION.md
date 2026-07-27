@@ -82,8 +82,14 @@ left, the judgment calls made along the way, and what was intentionally dropped.
 - Linux-desktop config: `.i3config`, `.i3blocks.conf`, `xkb-keyboard-layouts/`.
 - Server flavor: `web-install-server.sh`, `server.vimrc`.
 - `web-install.sh` (replaced by the chezmoi bootstrap one-liner).
-- `yvm` (abandoned). **nvm is unchanged** — still the `zsh-nvm` zgen plugin +
-  `~/.nvm`, *not* brew nvm (brew nvm would double-init and fight the plugin).
+- `yvm` (abandoned). **nvm → fnm**: node version management moved off the
+  `zsh-nvm` zgen plugin + `~/.nvm` onto brew's `fnm`. Driver was Claude Code:
+  its Bash tool sources a frozen shell-function snapshot per command, which
+  broke zsh-nvm's lazy-load stubs, so fnm was added Claude-Code-only first
+  (commit `4a474fb`) and then made the sole interactive-shell manager too,
+  since running two node version managers side by side wasn't worth it.
+  `~/.nvm` is left on disk as a fallback for now; delete manually once fnm
+  is trusted.
 - Vendored `rupa/z` copy: retired outright. Directory-jumping already comes from
   the `agkozak/zsh-z` zgen plugin, so there's no brew `z` replacement.
 - GNU `readlink` shim: the old `ln -fs $(which greadlink) /usr/local/bin/readlink`
@@ -114,7 +120,7 @@ left, the judgment calls made along the way, and what was intentionally dropped.
 ## ⚠️ Judgment calls to review before you `chezmoi apply`
 - **zsh decoupling**: `.zshrc` was rewritten to source from `$HOME` locations and
   brew paths instead of `$DOTFILES_DIR`/submodules. `pure`,
-  `zsh-syntax-highlighting`, `nvm`, `tfenv` now come from brew. Verify the prompt
+  `zsh-syntax-highlighting`, `fnm`, `tfenv` now come from brew. Verify the prompt
   and completions still load the way you like.
 - **`bin/` scripts** are copied executables (symlink mode can't symlink
   executables), so edits need `chezmoi apply`. Move a script back to live-symlink
