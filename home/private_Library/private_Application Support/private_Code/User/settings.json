@@ -186,9 +186,15 @@
     { "before": ["w"], "after": ["<leader>", "w"] },
     { "before": ["e"], "after": ["<leader>", "e"] },
     { "before": ["b"], "after": ["<leader>", "b"] },
+    // kill-ring (romandecker.vscode-killring): p/P stay native so vim keeps
+    // linewise/charwise; [p / ]p cycle through the ring after a paste.
+    {
+      "before": ["[", "p"],
+      "commands": [{ "command": "killring.pastePop" }],
+    },
     {
       "before": ["]", "p"],
-      "after": ["<A-y>"],
+      "commands": [{ "command": "killring.pastePopNext" }],
     },
   ],
   "explorer.confirmDelete": false,
@@ -310,4 +316,12 @@
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:claude-sonnet-4.5",
   "claudeCode.preferredLocation": "panel",
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml",
+  ],
 }

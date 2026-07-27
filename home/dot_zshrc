@@ -127,3 +127,35 @@ done
 # nvm.sh directly here: doing so runs nvm_auto on every startup (~1.5s) and
 # defeats the lazy load. NVM_DIR is exported for the plugin/wrapper to find nvm.
 export NVM_DIR="$HOME/.nvm"
+
+# --- Claude Code: route node/npm/etc. through fnm, per-project .nvmrc ---
+# Claude Code's Bash tool sources a frozen shell-function snapshot on every
+# single command (no state persists between commands), so the zsh-nvm lazy
+# stubs above break there: they call _zsh_nvm_load, which isn't captured in
+# the snapshot, and even a working nvm lazy-load wouldn't switch per project
+# directory anyway. fnm resolves + runs in one fast, self-contained call, so
+# it's used here instead — but only when $CLAUDECODE is set. Interactive
+# shells are untouched and keep using nvm/zsh-nvm as before.
+if [[ -n "$CLAUDECODE" ]] && command -v fnm >/dev/null 2>&1; then
+    _claude_fnm_dispatch() {
+        local real_cmd="$1"; shift
+        local dir="$PWD" nvmrc=""
+        while true; do
+            if [[ -f "$dir/.nvmrc" ]]; then
+                nvmrc="$dir/.nvmrc"
+                break
+            fi
+            [[ "$dir" == "/" ]] && break
+            dir="${dir:h}"
+        done
+        if [[ -z "$nvmrc" ]]; then
+            command "$real_cmd" "$@"
+            return
+        fi
+        fnm exec --using="$nvmrc" -- "$real_cmd" "$@"
+    }
+    for _claude_fnm_cmd in node npm npx pnpm pnpx yarn yarnpkg corepack; do
+        eval "$_claude_fnm_cmd() { _claude_fnm_dispatch $_claude_fnm_cmd \"\$@\"; }"
+    done
+    unset _claude_fnm_cmd
+fi
