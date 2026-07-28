@@ -10,6 +10,15 @@ set -g escape-time 0
 
 setw -g mode-keys vi
 
+# Subtly dim inactive panes so the active one is identifiable at a glance
+# (bg-only, one step darker than Alabaster's #f7f7f7 background).
+# window-active-style must be pinned explicitly: the "default" keyword
+# doesn't reliably resolve back to the real background under
+# default-terminal=screen-256color, so it was falling through to
+# window-style and dimming every pane.
+set -g window-style 'bg=#dedede'
+set -g window-active-style 'bg=#f7f7f7'
+
 set-option -g default-shell /bin/zsh
 
 unbind-key C-b
