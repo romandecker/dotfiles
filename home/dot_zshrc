@@ -135,13 +135,12 @@ fi
 # single command (no state persists between commands), so the --use-on-cd
 # hook above never fires there — PATH is never pre-switched per directory.
 # fnm exec resolves + runs in one fast, self-contained call instead.
+# NB: the snapshotter silently drops any single-underscore-prefixed function
+# (it filters out the zsh completion library's hundreds of `_foo` functions),
+# so these wrappers must not depend on a separately named `_`-prefixed helper.
 if [[ -n "$CLAUDECODE" ]] && command -v fnm >/dev/null 2>&1; then
-    _claude_fnm_dispatch() {
-        local real_cmd="$1"; shift
-        fnm exec -- "$real_cmd" "$@"
-    }
     for _claude_fnm_cmd in node npm npx pnpm pnpx yarn yarnpkg corepack; do
-        eval "$_claude_fnm_cmd() { _claude_fnm_dispatch $_claude_fnm_cmd \"\$@\"; }"
+        eval "$_claude_fnm_cmd() { fnm exec -- $_claude_fnm_cmd \"\$@\"; }"
     done
     unset _claude_fnm_cmd
 fi
