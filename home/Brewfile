@@ -18,6 +18,7 @@ brew "git-delta"            # better git diffs (delta)
 brew "git-extras"           # git-summary et al
 brew "gh"                   # GitHub CLI
 brew "tmux"
+brew "herdr"
 brew "reattach-to-user-namespace" # tmux + macOS clipboard
 brew "neovim"
 brew "jq"
