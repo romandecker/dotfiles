@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+
+# Baseline Claude Code settings. Anything not listed here (e.g. permissions.allow)
+# is left as-is on the local machine and never overwritten by chezmoi apply.
+baseline=$(cat <<'JSON'
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-wrapper.sh"
+  },
+  "theme": "auto",
+  "effortLevel": "medium",
+  "editorMode": "vim"
+}
+JSON
+)
+
+current=$(cat)
+if [ -z "$current" ] || ! echo "$current" | jq -e . >/dev/null 2>&1; then
+  current='{}'
+fi
+
+echo "$current" | jq --argjson baseline "$baseline" '. * $baseline'
