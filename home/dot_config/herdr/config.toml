@@ -4,6 +4,7 @@ agent_panel_sort = "priority"
 [keys]
 prefix = "ctrl+space"
 
+detach = ["prefix+q", "prefix+d"]
 rename_tab = "prefix+r"
 resize_mode = "prefix+ctrl+r"
 settings = "prefix+ctrl+s"
