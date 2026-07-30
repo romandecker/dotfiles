@@ -1,3 +1,13 @@
+onboarding = false
+
+[theme]
+# catppuccin's default border/accent contrast was too low against the
+# light Alabaster iTerm profile; auto-switch to the light variant there
+# and keep dark catppuccin for dark terminal profiles.
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"
+
 [ui]
 agent_panel_sort = "priority"
 
