@@ -10,6 +10,7 @@
 # --- taps -------------------------------------------------------------------
 tap "knqyf263/pet"          # pet snippet manager
 tap "jakehilborn/jakehilborn" # displayplacer
+tap "atlassian/acli"        # Atlassian CLI
 
 # --- core CLI ---------------------------------------------------------------
 brew "curl"
@@ -49,6 +50,7 @@ brew "python@3.12"
 # --- tapped tools -----------------------------------------------------------
 brew "knqyf263/pet/pet"
 brew "jakehilborn/jakehilborn/displayplacer"
+brew "atlassian/acli/acli"  # Atlassian CLI (Jira, Confluence, etc.)
 
 # --- casks (GUI) ------------------------------------------------------------
 cask "qlstephen"                # QuickLook for extensionless files
