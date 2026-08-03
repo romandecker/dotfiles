@@ -16,6 +16,10 @@ prefix = "ctrl+space"
 
 detach = ["prefix+q", "prefix+d"]
 rename_tab = "prefix+r"
+
+new_tab = "prefix+c"
+next_tab = "prefix+n"
+previous_tab = "prefix+p"
 resize_mode = "prefix+ctrl+r"
 settings = "prefix+ctrl+s"
 goto = ["prefix+g", "prefix+s"]
