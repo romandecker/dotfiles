@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
-# iTerm2 setup (macOS only). Two jobs:
+# iTerm2 setup (macOS only). Three jobs:
 #   1. Make our Dynamic Profile the boot default (sets "Default Bookmark Guid" to
 #      the profile's own GUID, read straight out of the JSON — single source).
 #   2. Merge every home/iterm-color-themes/*.itermcolors into iTerm's
 #      "Custom Color Presets" so they're selectable in Preferences -> Colors.
+#   3. Enable "Ctrl-click reported to apps, does not open menu" (Preferences ->
+#      General -> Pointer), so Ctrl+click reaches apps that support xterm mouse
+#      reporting instead of iTerm intercepting it as a right-click.
 #
 # The profile itself is a Dynamic Profile JSON symlinked into
 # ~/Library/Application Support/iTerm2/DynamicProfiles/ (chezmoi applies it; iTerm
@@ -41,6 +44,9 @@ except FileNotFoundError:
 # 1. boot default -> our Dynamic Profile (GUID read from the profile itself)
 guid = json.load(open(profile_json))["Profiles"][0]["Guid"]
 d["Default Bookmark Guid"] = guid
+
+# 1b. report Ctrl-click to apps instead of opening iTerm's context menu
+d["PassOnControlClick"] = True
 
 # 2. merge color presets (name = filename stem)
 presets = d.setdefault("Custom Color Presets", {})
