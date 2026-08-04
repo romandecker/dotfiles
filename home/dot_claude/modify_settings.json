@@ -11,7 +11,11 @@ baseline=$(cat <<'JSON'
   },
   "theme": "auto",
   "effortLevel": "medium",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "attributions": {
+    "commit": "",
+    "pr": ""
+  }
 }
 JSON
 )
