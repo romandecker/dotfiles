@@ -125,6 +125,13 @@ done
 # .zshrc.local below since that file expects node/pnpm/etc. on PATH already
 # (e.g. `pnpm completion`).
 export FNM_VERSION_FILE_STRATEGY=recursive
+# Skip corepack's first-use download confirmation. .zshrc.local sources pnpm
+# completions on every shell startup, and tools like herdr open new panes
+# with cwd already set to a project dir, so that completion call can resolve
+# a not-yet-cached pinned package-manager version during early shell init,
+# before the shell has full interactive control of the pty. The prompt then
+# can't be answered or Ctrl+C'd, hanging the pane open forever.
+export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 if command -v fnm >/dev/null 2>&1; then
     eval "$(fnm env --use-on-cd)"
     fnm use --install-if-missing --silent-if-unchanged >/dev/null 2>&1
