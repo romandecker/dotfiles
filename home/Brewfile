@@ -41,8 +41,12 @@ brew "pure"                     # pure-prompt
 brew "zsh-syntax-highlighting"  # was submodules/zsh-syntax-highlighting
 brew "tfenv"                    # was submodules/tfenv
 brew "fnm"                      # node version manager — replaced nvm/zsh-nvm
-# NOTE: directory-jumping (`z`) comes from the zgen plugin agkozak/zsh-z, so the
-# vendored rupa/z copy is simply retired, not replaced by a brew formula.
+
+
+# --- AI tooling -------------------------------------------------------------
+cask "claude-code"         # stable channel; run `claude update` to upgrade
+brew "rtk"                  # patches Claude Code config via `rtk init`, see below
+
 
 # --- languages --------------------------------------------------------------
 brew "python@3.12"
@@ -59,6 +63,8 @@ cask "visual-studio-code"       # editor (User config managed by chezmoi; see be
 # --- fonts (were submodules/powerline-fonts + manual zip downloads) ---------
 cask "font-fira-code"
 cask "font-agave-nerd-font"
+
+
 
 # --- VSCode extensions ------------------------------------------------------
 # `brew bundle` installs these via `code --install-extension`. Regenerate the
