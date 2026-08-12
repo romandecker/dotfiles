@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#
+# git-prune-worktrees: interactively delete worktrees whose branch's
+# upstream has been deleted on the remote (shows as "[gone]" in git branch -vv)
+#
+set -euo pipefail
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Error: not a git repository" >&2
+  exit 1
+fi
+
+git fetch --all --prune --quiet
+
+worktree_lines=$(
+  git worktree list --porcelain | awk '
+    /^worktree / { path=$2 }
+    /^branch /   { sub("refs/heads/", "", $2); print path "\t" $2; path="" }
+  '
+)
+
+eligible=()
+while IFS=$'\t' read -r path branch; do
+  [ -z "$path" ] && continue
+
+  upstream=$(git for-each-ref --format='%(upstream)' "refs/heads/$branch")
+  [ -z "$upstream" ] && continue
+
+  track=$(git for-each-ref --format='%(upstream:track)' "refs/heads/$branch")
+  [ "$track" = "[gone]" ] || continue
+
+  dirty=""
+  if [ -n "$(git -C "$path" status --porcelain)" ]; then
+    dirty="DIRTY"
+  fi
+
+  eligible+=("$path"$'\t'"$branch"$'\t'"$dirty")
+done <<< "$worktree_lines"
+
+if [ "${#eligible[@]}" -eq 0 ]; then
+  echo "No eligible worktrees to prune."
+  exit 0
+fi
+
+selected=$(printf '%s\n' "${eligible[@]}" | fzf --multi \
+  --delimiter=$'\t' \
+  --header='Tab to toggle, Enter to delete selected worktrees (DIRTY = uncommitted changes, will be force-removed)')
+
+if [ -z "$selected" ]; then
+  exit 0
+fi
+
+while IFS=$'\t' read -r path branch dirty; do
+  [ -z "$path" ] && continue
+  if [ "$dirty" = "DIRTY" ]; then
+    echo "Removing $path (branch $branch) [forced: uncommitted changes]"
+    git worktree remove --force "$path"
+  else
+    echo "Removing $path (branch $branch)"
+    git worktree remove "$path"
+  fi
+done <<< "$selected"
