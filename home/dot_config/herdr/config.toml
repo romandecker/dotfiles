@@ -27,8 +27,8 @@ goto = ["prefix+g", "prefix+s"]
 split_vertical = ["prefix+v", "prefix+|"]
 
 focus_pane_left = ["prefix+h", "ctrl+h"]
-focus_pane_down = ["prefix+j", "ctrl+j"]
-focus_pane_up = ["prefix+k", "ctrl+k"]
+focus_pane_down = ["ctrl+j"]
+focus_pane_up = ["ctrl+k"]
 focus_pane_right = ["prefix+l", "ctrl+l"]
 
 next_workspace = "prefix+j"
