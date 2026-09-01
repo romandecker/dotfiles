@@ -91,7 +91,7 @@ project() {
         if [ "$(herdr status server --json 2>/dev/null | jq -r .running)" = "true" ]; then
             _herdr_switch_or_create "$name" "$root"
         fi
-        exec herdr
+        herdr
     fi
 }
 
