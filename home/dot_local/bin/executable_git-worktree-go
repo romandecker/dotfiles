@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# git-worktree-go: jump to a branch in its own herdr worktree workspace,
+# creating the worktree (and, if needed, the branch) on the way.
+#
+# - branch already has a worktree      -> just focus it
+# - branch exists locally              -> new worktree off the existing branch
+# - branch exists on origin, not local -> new worktree tracking origin/<branch>
+# - branch exists nowhere              -> new branch off origin/<default>,
+#                                          left unpushed with push.autoSetupRemote
+#
+set -euo pipefail
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Error: not a git repository" >&2
+  exit 1
+fi
+
+branch="${1:-}"
+if [ -z "$branch" ]; then
+  echo "Usage: git worktree-go <branch>" >&2
+  exit 1
+fi
+
+repo_root=$(git rev-parse --show-toplevel)
+simplified="${branch#*/}"
+
+worktree_list=$(herdr worktree list --cwd "$repo_root")
+
+workspace_id="${HERDR_WORKSPACE_ID:-}"
+if [ -z "$workspace_id" ]; then
+  workspace_id=$(printf '%s' "$worktree_list" | jq -r '.result.source.source_workspace_id')
+fi
+if [ -z "$workspace_id" ] || [ "$workspace_id" = "null" ]; then
+  echo "Error: no herdr workspace found for $repo_root, open it in herdr first" >&2
+  exit 1
+fi
+
+existing_path=$(printf '%s' "$worktree_list" | jq -r --arg b "$branch" '.result.worktrees[] | select(.branch == $b) | .path' | head -n1)
+
+if [ -n "$existing_path" ]; then
+  echo "worktree for '$branch' already exists, focusing it"
+  herdr worktree open --workspace "$workspace_id" --path "$existing_path" --focus >/dev/null
+  exit 0
+fi
+
+if git show-ref --verify --quiet "refs/heads/$branch"; then
+  echo "local branch '$branch' exists, checking it out into a new worktree"
+  result=$(herdr worktree create --workspace "$workspace_id" --branch "$branch" --label "$simplified" --focus)
+else
+  git fetch origin --quiet
+
+  if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+    echo "remote branch 'origin/$branch' found, tracking it in a new worktree"
+    result=$(herdr worktree create --workspace "$workspace_id" --branch "$branch" --base "origin/$branch" --label "$simplified" --focus)
+  else
+    default_branch=$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's#^origin/##')
+    echo "no local or remote branch '$branch', creating a new branch from origin/$default_branch"
+    result=$(herdr worktree create --workspace "$workspace_id" --branch "$branch" --base "origin/$default_branch" --label "$simplified" --focus)
+
+    new_path=$(printf '%s' "$result" | jq -r '.result.worktree.path')
+    git -C "$new_path" config push.autoSetupRemote true
+  fi
+fi
+
+printf '%s\n' "$result" | jq -r '.result.worktree.path'

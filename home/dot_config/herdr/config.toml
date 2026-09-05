@@ -33,3 +33,13 @@ focus_pane_right = ["prefix+l", "ctrl+l"]
 
 next_workspace = "prefix+j"
 previous_workspace = "prefix+k"
+
+# Prompt for a branch name and jump to it in its own worktree workspace,
+# creating the branch/worktree if it doesn't exist yet (git-worktree-go).
+# Overrides the default workspace_picker binding (prefix+w).
+[[keys.command]]
+key = "prefix+w"
+type = "popup"
+command = "read -p 'branch: ' branch && git worktree-go \"$branch\""
+width = "60%"
+height = "30%"
