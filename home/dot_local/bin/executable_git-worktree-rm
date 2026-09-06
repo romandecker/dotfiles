@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# git-worktree-rm: remove a worktree, closing its herdr workspace too if
+# one is open for it. Can be run from inside the worktree being removed,
+# from the main checkout, or from any other worktree of the same repo.
+#
+# Only removes the worktree checkout. The local branch is kept, same as
+# git-prune-worktrees.
+#
+set -euo pipefail
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Error: not a git repository" >&2
+  exit 1
+fi
+
+branch="${1:-}"
+if [ -z "$branch" ]; then
+  branch=$(git rev-parse --abbrev-ref HEAD)
+fi
+
+worktree_lines=$(
+  git worktree list --porcelain | awk '
+    /^worktree / { path=$2 }
+    /^branch /   { sub("refs/heads/", "", $2); print path "\t" $2; path="" }
+  '
+)
+
+main_root=""
+path=""
+while IFS=$'\t' read -r p b; do
+  [ -z "$p" ] && continue
+  if [ -z "$main_root" ]; then
+    main_root="$p"
+  fi
+  if [ "$b" = "$branch" ]; then
+    path="$p"
+  fi
+done <<< "$worktree_lines"
+
+if [ -z "$path" ]; then
+  echo "Error: no worktree found for branch '$branch'" >&2
+  exit 1
+fi
+
+if [ "$path" = "$main_root" ]; then
+  echo "Error: '$branch' is checked out in the main checkout ($main_root), not a linked worktree" >&2
+  exit 1
+fi
+
+force=""
+if [ -n "$(git -C "$path" status --porcelain)" ]; then
+  force="--force"
+fi
+
+workspace_id=""
+if [ "${HERDR_ENV:-}" = "1" ]; then
+  workspace_id=$(herdr worktree list --cwd "$main_root" | jq -r --arg p "$path" '.result.worktrees[] | select(.path == $p) | .open_workspace_id')
+fi
+
+if [ -n "$workspace_id" ] && [ "$workspace_id" != "null" ]; then
+  echo "closing herdr workspace for '$branch' and removing its worktree"
+  herdr worktree remove --workspace "$workspace_id" ${force:+--force} >/dev/null
+else
+  echo "removing worktree for '$branch' ($path)"
+  git worktree remove $force "$path"
+fi
