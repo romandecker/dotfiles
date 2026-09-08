@@ -40,6 +40,19 @@ previous_workspace = "prefix+k"
 [[keys.command]]
 key = "prefix+w"
 type = "popup"
+description = "Go to worktree"
 command = "read -p 'branch: ' branch && git worktree-go \"$branch\""
+width = "60%"
+height = "30%"
+
+# Prompt for a project name or git URL and open/create it as a herdr
+# workspace via new-project. Pauses on failure since the popup closes
+# the instant the command exits and would otherwise hide clone errors.
+# Overrides the default rename_pane binding (prefix+shift+p).
+[[keys.command]]
+key = "prefix+shift+p"
+type = "popup"
+description = "New project"
+command = "read -p 'project (name or git url): ' input && { [ -n \"$input\" ] && new-project \"$input\" || read -p 'failed, press enter to close'; }"
 width = "60%"
 height = "30%"
