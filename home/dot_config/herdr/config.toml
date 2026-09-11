@@ -22,7 +22,7 @@ next_tab = "prefix+n"
 previous_tab = "prefix+p"
 resize_mode = "prefix+ctrl+r"
 settings = "prefix+ctrl+s"
-goto = ["prefix+g", "prefix+s"]
+goto = ["prefix+g", "prefix+s", "prefix+/"]
 
 split_vertical = ["prefix+v", "prefix+|"]
 
@@ -40,8 +40,7 @@ previous_workspace = "prefix+k"
 [[keys.command]]
 key = "prefix+w"
 type = "popup"
-description = "Go to worktree"
-command = "read -p 'branch: ' branch && git worktree-go \"$branch\""
+command = "read -p 'go to worktree, branch name: ' branch && git worktree-go \"$branch\""
 width = "60%"
 height = "30%"
 
@@ -52,7 +51,6 @@ height = "30%"
 [[keys.command]]
 key = "prefix+shift+p"
 type = "popup"
-description = "New project"
-command = "read -p 'project (name or git url): ' input && { [ -n \"$input\" ] && new-project \"$input\" || read -p 'failed, press enter to close'; }"
+command = "read -p 'open/create project, name or git url: ' input && { [ -n \"$input\" ] && new-project \"$input\" || read -p 'failed, press enter to close'; }"
 width = "60%"
 height = "30%"
