@@ -89,6 +89,8 @@ Work the **frontier**: any ticket whose blockers are all done. For a purely line
 
 Do NOT close or modify any parent issue.
 
+After creating each issue, call `getJiraIssue` and confirm `labels` contains `ai-generated` and `component` contains `frontend-platform`. If either is missing, fix it immediately via `editJiraIssue` before moving to the next ticket.
+
 <issue-template>
 
 **Summary:** <Ticket title>
