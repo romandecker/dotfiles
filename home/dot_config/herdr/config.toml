@@ -55,6 +55,13 @@ command = "read -p 'open/create project, name or git url: ' input && { [ -n \"$i
 width = "60%"
 height = "30%"
 
+# Toggle to the most recently used workspace (tmux-style A<->B flip), via
+# the akpw.last-workspace plugin (run_onchange_after_47-herdr-plugins.sh).
+[[keys.command]]
+key = "prefix+tab"
+type = "shell"
+command = "herdr plugin action invoke toggle --plugin akpw.last-workspace"
+
 # Move the focused workspace up/down within its repo group in the
 # sidebar (herdr-move-worktree). Drag-and-drop only reorders top-level
 # repo groups, not worktrees inside one, so this fills the gap.
