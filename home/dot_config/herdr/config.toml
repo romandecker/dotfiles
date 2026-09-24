@@ -54,3 +54,16 @@ type = "popup"
 command = "read -p 'open/create project, name or git url: ' input && { [ -n \"$input\" ] && new-project \"$input\" || read -p 'failed, press enter to close'; }"
 width = "60%"
 height = "30%"
+
+# Move the focused workspace up/down within its repo group in the
+# sidebar (herdr-move-worktree). Drag-and-drop only reorders top-level
+# repo groups, not worktrees inside one, so this fills the gap.
+[[keys.command]]
+key = "prefix+shift+k"
+type = "shell"
+command = "herdr-move-worktree up"
+
+[[keys.command]]
+key = "prefix+shift+j"
+type = "shell"
+command = "herdr-move-worktree down"

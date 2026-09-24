@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#
+# herdr-move-worktree: move the currently focused herdr workspace up or
+# down within its repo group (the base checkout plus all its worktrees),
+# reordering the sidebar. No-op if the focused workspace isn't git-backed
+# or is already at that end of the group.
+#
+set -euo pipefail
+
+direction="${1:-}"
+if [[ "$direction" != "up" && "$direction" != "down" ]]; then
+  echo "Usage: herdr-move-worktree up|down" >&2
+  exit 1
+fi
+
+snapshot=$(herdr api snapshot)
+
+focused_id=$(printf '%s' "$snapshot" | jq -r '.result.snapshot.focused_workspace_id // empty')
+[ -n "$focused_id" ] || exit 0
+
+repo_key=$(printf '%s' "$snapshot" | jq -r --arg id "$focused_id" \
+  '.result.snapshot.workspaces[] | select(.workspace_id == $id) | .worktree.repo_key // empty')
+[ -n "$repo_key" ] || exit 0
+
+new_order=$(printf '%s' "$snapshot" | jq -c --arg rk "$repo_key" --arg id "$focused_id" --arg dir "$direction" '
+  [.result.snapshot.workspaces[] | select(.worktree.repo_key == $rk) | .workspace_id] as $ids
+  | ($ids | index($id)) as $i
+  | ($i + (if $dir == "up" then -1 else 1 end)) as $j
+  | if $j < 0 or $j >= ($ids | length) then $ids
+    else ($ids[$i]) as $a | ($ids[$j]) as $b
+       | $ids | .[$i] = $b | .[$j] = $a
+    end
+')
+
+python3 - "$new_order" <<'PY'
+import json
+import socket
+import sys
+
+workspace_ids = json.loads(sys.argv[1])
+request = {
+    "id": "herdr-move-worktree",
+    "method": "workspace.move_block",
+    "params": {"workspace_ids": workspace_ids},
+}
+
+sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+sock.connect(f"{__import__('os').path.expanduser('~')}/.config/herdr/herdr.sock")
+sock.sendall((json.dumps(request) + "\n").encode())
+sock.settimeout(2)
+sock.recv(65536)
+sock.close()
+PY
