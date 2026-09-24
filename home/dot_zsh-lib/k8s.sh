@@ -5,15 +5,10 @@ kp() {
 
 kc() {
 	local contexts
-	local err
-	err=$(mktemp)
-	contexts=$(kubectl config get-contexts --no-headers 2>"$err")
-	if grep -q "Please visit this URL" "$err"; then
-		cat "$err"
-		rm -f "$err"
+	contexts=$(kubectl config get-contexts --no-headers 2>/dev/tty)
+	if [ $? -ne 0 ] || [ -z "$contexts" ]; then
 		return 1
 	fi
-	rm -f "$err"
 	local context=$(echo "$contexts" | sed 's/^[ *]*//g' | fzf | awk '{print $1;}')
 	print -z "kubectl config use-context $context && kubectl cluster-info"
 }
