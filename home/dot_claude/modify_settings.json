@@ -11,7 +11,19 @@ baseline=$(cat <<'JSON'
   },
   "theme": "auto",
   "effortLevel": "medium",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/task-observer-session-start.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
 JSON
 )
