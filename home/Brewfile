@@ -11,6 +11,7 @@
 tap "knqyf263/pet"          # pet snippet manager
 tap "jakehilborn/jakehilborn" # displayplacer
 tap "atlassian/acli"        # Atlassian CLI
+tap "robscott/tap"          # kube-capacity
 
 # --- core CLI ---------------------------------------------------------------
 brew "curl"
@@ -55,6 +56,7 @@ brew "python@3.12"
 brew "knqyf263/pet/pet"
 brew "jakehilborn/jakehilborn/displayplacer"
 brew "atlassian/acli/acli"  # Atlassian CLI (Jira, Confluence, etc.)
+brew "robscott/tap/kube-capacity" # kubectl resource capacity view
 
 # --- casks (GUI) ------------------------------------------------------------
 cask "qlstephen"                # QuickLook for extensionless files
