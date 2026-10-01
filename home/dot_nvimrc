@@ -32,6 +32,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'ibhagwan/fzf-lua'
 
 call plug#end()
 
@@ -39,6 +40,11 @@ call plug#end()
 let mapleader = " "
 
 nnoremap <leader>fs :w<CR>
+
+" Fuzzy finder (fzf-lua, uses fzf + rg from PATH)
+nnoremap <silent> <C-p> <cmd>FzfLua files<CR>
+nnoremap <silent> <leader>b <cmd>FzfLua buffers<CR>
+nnoremap <silent> <leader>/ <cmd>FzfLua live_grep<CR>
 nnoremap <silent> <esc> :noh<CR><esc>
 
 " Redirect all delete-operations to black-hole
