@@ -74,3 +74,10 @@ command = "herdr-move-worktree up"
 key = "prefix+shift+j"
 type = "shell"
 command = "herdr-move-worktree down"
+
+# Open VS Code at the root of the focused workspace's worktree. If a window
+# for that folder already exists, code raises it instead of opening a new one.
+[[keys.command]]
+key = "prefix+o"
+type = "shell"
+command = "code \"$(herdr workspace list | jq -r '.result.workspaces[] | select(.focused) | .worktree.checkout_path // empty')\""

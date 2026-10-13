@@ -3,11 +3,16 @@
 # git-worktree-go: jump to a branch in its own herdr worktree workspace,
 # creating the worktree (and, if needed, the branch) on the way.
 #
-# - branch already has a worktree      -> just focus it
+# - branch already has a worktree      -> focus it, or open it if it is closed
 # - branch exists locally              -> new worktree off the existing branch
 # - branch exists on origin, not local -> new worktree tracking origin/<branch>
 # - branch exists nowhere              -> new branch off origin/<default>,
 #                                          left unpushed with push.autoSetupRemote
+#
+# Whenever it opens a workspace (fresh or previously closed), it splits it into
+# two stacked panes and runs claude in the top one. For a fresh worktree it also
+# installs dependencies (pnpm, yarn, bun or npm,
+# picked by lockfile) in a background herdr tab, and warms up VS Code.
 #
 set -euo pipefail
 
@@ -36,11 +41,29 @@ if [ -z "$workspace_id" ] || [ "$workspace_id" = "null" ]; then
   exit 1
 fi
 
-existing_path=$(printf '%s' "$worktree_list" | jq -r --arg b "$branch" '.result.worktrees[] | select(.branch == $b) | .path' | head -n1)
+# Two stacked panes in the workspace of the worktree at $1, claude in the top one.
+setup_panes() {
+  local wt_path="$1" ws top_pane
+  ws=$(herdr worktree list --cwd "$repo_root" | jq -r --arg p "$wt_path" '.result.worktrees[] | select(.path == $p) | .open_workspace_id // empty' | head -n1)
+  top_pane=$(herdr pane list --workspace "${ws:-$workspace_id}" | jq -r '.result.panes[0].pane_id // empty')
+  if [ -n "$top_pane" ]; then
+    herdr pane split "$top_pane" --direction down --cwd "$wt_path" --no-focus >/dev/null
+    herdr pane run "$top_pane" "claude" >/dev/null
+  fi
+}
 
-if [ -n "$existing_path" ]; then
-  echo "worktree for '$branch' already exists, focusing it"
+existing=$(printf '%s' "$worktree_list" | jq -r --arg b "$branch" '.result.worktrees[] | select(.branch == $b) | [.path, (.open_workspace_id // "")] | @tsv' | head -n1)
+
+if [ -n "$existing" ]; then
+  existing_path=${existing%%$'\t'*}
+  existing_ws=${existing#*$'\t'}
   herdr worktree open --workspace "$workspace_id" --path "$existing_path" --focus >/dev/null
+  if [ -n "$existing_ws" ]; then
+    echo "worktree for '$branch' already open, focusing it"
+  else
+    echo "worktree for '$branch' exists but was not open, opening it"
+    setup_panes "$existing_path"
+  fi
   exit 0
 fi
 
@@ -63,4 +86,32 @@ else
   fi
 fi
 
-printf '%s\n' "$result" | jq -r '.result.worktree.path'
+path=$(printf '%s' "$result" | jq -r '.result.worktree.path')
+
+# Fresh worktree: two stacked panes, claude in the top one.
+setup_panes "$path"
+new_ws=$(herdr worktree list --cwd "$repo_root" | jq -r --arg p "$path" '.result.worktrees[] | select(.path == $p) | .open_workspace_id // empty' | head -n1)
+
+# Fresh worktree: install dependencies.
+install_cmd=""
+if [ -f "$path/pnpm-lock.yaml" ]; then install_cmd="pnpm install"
+elif [ -f "$path/yarn.lock" ]; then install_cmd="yarn install"
+elif [ -f "$path/bun.lock" ] || [ -f "$path/bun.lockb" ]; then install_cmd="bun install"
+elif [ -f "$path/package-lock.json" ]; then install_cmd="npm install"
+fi
+if [ -n "$install_cmd" ]; then
+  # Run it in a background tab of the new workspace, so progress is visible in
+  # herdr. The tab closes on success and stays open on failure.
+  tab=$(herdr tab create --workspace "${new_ws:-$workspace_id}" --cwd "$path" --label "install" --no-focus)
+  tab_id=$(printf '%s' "$tab" | jq -r '.result.tab.tab_id')
+  pane_id=$(printf '%s' "$tab" | jq -r '.result.root_pane.pane_id')
+  echo "running '$install_cmd' in background tab $tab_id"
+  herdr pane run "$pane_id" "$install_cmd && herdr notification show 'deps installed' --body '$simplified' --sound done && herdr tab close $tab_id || herdr notification show 'install failed' --body '$simplified' --sound request" >/dev/null
+fi
+
+# Warm up VS Code without stealing focus (-g) and keep it hidden (-j).
+if command -v code >/dev/null 2>&1; then
+  open -g -j -a "Visual Studio Code" "$path" >/dev/null 2>&1 || true
+fi
+
+printf '%s\n' "$path"
