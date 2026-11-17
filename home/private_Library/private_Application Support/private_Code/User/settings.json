@@ -324,4 +324,7 @@
     "**/.forgejo/workflows/*.yml",
     "**/.forgejo/workflows/*.yaml",
   ],
+  "git.openDiffOnClick": false,
+  "claudeCode.hideOnboarding": true,
+  "vitest.nodeExecutable": "/Users/romande/.local/bin/node-nvmrc",
 }

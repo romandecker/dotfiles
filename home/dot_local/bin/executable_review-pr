@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+#
+# review-pr: open a pull request's branch in its own herdr worktree workspace
+# and start claude there with "/code-review <url>".
+#
+# Supported URLs:
+#   Bitbucket Server: https://<host>/projects/<KEY>/repos/<slug>/pull-requests/<id>[...]
+#   GitHub:           https://github.com/<owner>/<repo>/pull/<n>[...]
+#
+# Run it from a checkout (or worktree) of the PR's repository. It never clones.
+# Fork PRs are not supported.
+#
+set -euo pipefail
+
+die() {
+  echo "Error: $*" >&2
+  exit 1
+}
+
+url="${1:-}"
+[ -n "$url" ] || die "usage: review-pr <pr-url>"
+
+# Strip scheme, query and fragment for parsing. The prompt keeps the URL as is.
+bare="${url#*://}"
+bare="${bare%%[?#]*}"
+
+if [[ "$bare" =~ ^([^/]+)/projects/([^/]+)/repos/([^/]+)/pull-requests/([0-9]+)(/.*)?$ ]]; then
+  kind=bitbucket
+  host="${BASH_REMATCH[1]}"
+  owner="${BASH_REMATCH[2]}"
+  repo="${BASH_REMATCH[3]}"
+  pr_id="${BASH_REMATCH[4]}"
+elif [[ "$bare" =~ ^(www\.)?github\.com/([^/]+)/([^/]+)/pull/([0-9]+)(/.*)?$ ]]; then
+  kind=github
+  host=github.com
+  owner="${BASH_REMATCH[2]}"
+  repo="${BASH_REMATCH[3]}"
+  pr_id="${BASH_REMATCH[4]}"
+else
+  die "unsupported URL: $url"
+fi
+
+# Normalize a git remote URL to "host/owner/repo" in lowercase. Handles
+# scp-style (git@host:o/r.git), ssh:// with port, https:// and the Bitbucket
+# Server "/scm/" HTTP clone path.
+normalize_remote() {
+  local u="$1"
+  u="${u%.git}"
+  u="${u%/}"
+  if [[ "$u" == *://* ]]; then
+    u="${u#*://}"
+    u="${u#*@}"
+    local h="${u%%/*}" p="${u#*/}"
+    h="${h%%:*}"
+    p="${p#scm/}"
+    u="$h/$p"
+  else
+    # scp-style: [user@]host:path
+    u="${u#*@}"
+    u="${u%%:*}/${u#*:}"
+  fi
+  printf '%s' "$u" | tr '[:upper:]' '[:lower:]'
+}
+
+git rev-parse --git-dir >/dev/null 2>&1 || die "not in a git repository, cd into a checkout of $owner/$repo first"
+
+origin_url=$(git remote get-url origin 2>/dev/null) || die "current repository has no 'origin' remote"
+want=$(printf '%s/%s/%s' "$host" "$owner" "$repo" | tr '[:upper:]' '[:lower:]')
+have=$(normalize_remote "$origin_url")
+[ "$want" = "$have" ] || die "PR is for $want, but current repository is $have ($origin_url)"
+
+# Resolve the PR source branch.
+if [ "$kind" = bitbucket ]; then
+  sha=$(git ls-remote origin "refs/pull-requests/$pr_id/from" | cut -f1)
+  [ -n "$sha" ] || die "no refs/pull-requests/$pr_id/from on origin, does PR $pr_id exist?"
+  default_branch=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##' || true)
+  candidates=$(git ls-remote --heads origin | awk -v s="$sha" -v d="${default_branch:-}" '$1 == s { sub("^refs/heads/", "", $2); if ($2 != d) print $2 }')
+  [ -n "$candidates" ] || die "no branch on origin points at $sha (fork PR, or branch moved since), check out manually"
+  branch=$(printf '%s\n' "$candidates" | head -n1)
+  if [ "$(printf '%s\n' "$candidates" | wc -l)" -gt 1 ]; then
+    echo "warning: several branches point at $sha ($(printf '%s' "$candidates" | tr '\n' ' ')), using '$branch'" >&2
+  fi
+else
+  command -v gh >/dev/null 2>&1 || die "gh CLI is required for GitHub PRs"
+  info=$(gh pr view "$url" --json headRefName,isCrossRepository) || die "gh could not read $url"
+  [ "$(printf '%s' "$info" | jq -r .isCrossRepository)" = "false" ] || die "PR comes from a fork, not supported"
+  branch=$(printf '%s' "$info" | jq -r .headRefName)
+fi
+
+echo "PR $pr_id -> branch '$branch'"
+
+# Bring the local branch or its worktree up to date with origin, but only by
+# fast-forward. Dirty trees and diverged branches are left alone with a warning.
+git fetch origin "$branch" --quiet 2>/dev/null || die "branch '$branch' is not on origin anymore (PR merged or declined?)"
+remote_ref="refs/remotes/origin/$branch"
+
+wt_path=$(git worktree list --porcelain | awk -v b="refs/heads/$branch" '/^worktree /{p=substr($0, 10)} $0 == "branch " b {print p; exit}')
+
+if git show-ref --verify --quiet "refs/heads/$branch"; then
+  if git merge-base --is-ancestor "$remote_ref" "refs/heads/$branch"; then
+    : # up to date or ahead
+  elif git merge-base --is-ancestor "refs/heads/$branch" "$remote_ref"; then
+    if [ -z "$wt_path" ]; then
+      git branch -f "$branch" "$remote_ref" >/dev/null
+      echo "fast-forwarded '$branch' to origin"
+    elif [ -z "$(git -C "$wt_path" status --porcelain)" ]; then
+      git -C "$wt_path" merge --ff-only --quiet "$remote_ref"
+      echo "fast-forwarded worktree $wt_path to origin"
+    else
+      echo "warning: worktree $wt_path has local changes and is behind origin/$branch, reviewing local state" >&2
+    fi
+  else
+    echo "warning: local '$branch' diverged from origin/$branch (force-push?), reviewing local state" >&2
+  fi
+fi
+
+# Inside a herdr pane this points at the focused workspace, which may be a
+# worktree. Unset it so git-worktree-go uses the source repo's workspace.
+unset HERDR_WORKSPACE_ID
+
+exec git worktree-go --prompt "/code-review $url" "$branch"

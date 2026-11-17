@@ -18,6 +18,16 @@ Work from whatever is already in the conversation context. If the user passes a 
 
 If the source references an existing Jira issue (an epic, a parent story), note its key: new tickets will set it as their `Parent`.
 
+Keep every URL the source mentions (docs, RFCs, Confluence pages, PRs, tickets). The descriptions must link to them.
+
+## Linking rules
+
+Use real links wherever possible. These rules apply to every description and to the final report.
+
+- Outside documentation: use a Markdown link with a clear label, for example `[Next.js caching](https://nextjs.org/docs/app/building-your-application/caching)`. Never write "see the docs" without a link.
+- Other tickets: use the full Jira URL, `https://zooplus.atlassian.net/browse/FP-123`. Hyperlink the key in the description, for example `[FP-123](https://zooplus.atlassian.net/browse/FP-123)`.
+- Do not invent URLs. Link only to pages you fetched, searched, or received from the user. If you are unsure of a URL, look it up or leave the link out.
+
 ### 2. Explore the codebase (optional)
 
 If you have not already explored the codebase, do so to understand the current state of the code. Ticket titles and descriptions should use the project's domain glossary vocabulary, and respect ADRs in the area you're touching.
@@ -52,12 +62,23 @@ Default every ticket to **Task**. Ask the user instead of guessing when a ticket
 
 Don't set any status. Leave the ticket on Jira's default workflow status (e.g. "To Do") for the type.
 
-### 5. Quiz the user
+### 5. Find a matching epic per ticket
+
+If step 1 gave a parent, use it for every ticket it fits. For each remaining ticket, search for a matching epic:
+
+1. Search open epics in FP via the Atlassian MCP, for example JQL `project = FP AND issuetype = Epic AND statusCategory != Done ORDER BY updated DESC`.
+2. Compare each epic's summary and description with the ticket's goal. Use keywords from the ticket and the domain glossary for extra searches when the first list shows no clear match.
+3. Propose the best match with a one-line reason and the epic's link. If no epic fits, say so. Do not force a weak match.
+
+Tickets of one effort usually share one epic. Different tickets can still map to different epics.
+
+### 6. Quiz the user
 
 Present the proposed breakdown as a numbered list. For each ticket, show:
 
 - **Title**: short descriptive name
 - **Type**: the Jira issue type chosen for it
+- **Epic**: the proposed parent epic as a link, or "none found"
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
 
@@ -66,11 +87,14 @@ Ask the user:
 - Does the granularity feel right? (too coarse / too fine)
 - Are the blocking edges correct? Does each ticket only depend on tickets that genuinely gate it?
 - Are the issue types right?
+- Are the proposed epics right?
 - Should any tickets be merged or split further?
+- Should I assign the tickets to you now? (all, some, or none)
+- Should I move the tickets into the current sprint? (all, some, or none)
 
-Iterate until the user approves the breakdown.
+Iterate until the user approves the breakdown and answers the assignment and sprint questions.
 
-### 6. Publish the tickets to Jira
+### 7. Publish the tickets to Jira
 
 Publish the approved tickets to the **FP** project, one Jira issue per ticket, in dependency order (blockers first) so each ticket's blocking edges can reference real issue keys.
 
@@ -79,9 +103,11 @@ For each ticket, via the Atlassian MCP:
 1. Create the issue in project `FP` with the chosen issue type, using the <issue-template> below for the summary and description.
 2. Set the `component` field to `frontend-platform`. Every ticket this skill creates must carry this component, never skip it.
 3. Apply the label `ai-generated`. Every ticket this skill creates must carry this label, never skip it.
-4. If a parent issue key is known (from step 1, or because this ticket is a migrate-batch/contract ticket blocked by a shared expand ticket's parent), set Jira's native `Parent` field to it. Omit it otherwise.
-5. For each ticket this one is blocked by, add a native Jira issue link of type **Blocks**, created from this (the blocked) ticket as "is blocked by" the blocker. The blocker ticket must already exist, since this is why publishing proceeds in dependency order.
-6. For any other ticket mentioned in this ticket's description that isn't already covered by a Blocks link, reference it by its Jira key or URL so Jira renders it as a proper issue link, and add a native issue link to it. Use the link type that best matches the relationship; default to **Relates to** when nothing more specific fits.
+4. Set Jira's native `Parent` field to the epic or parent chosen in steps 1 and 5 (and approved in step 6). Omit it only when none was found.
+5. If the user asked for assignment in step 6, assign the ticket to the user (look up their account ID with the Atlassian MCP, for example via `atlassianUserInfo`). Otherwise leave it unassigned.
+6. If the user asked for sprint placement in step 6, find the active sprint of the board that serves FP and add the ticket to it. Use the sprint field the MCP exposes. If the MCP cannot set the sprint, say so in the report and give the sprint name, so the user can move the tickets by hand.
+7. For each ticket this one is blocked by, add a native Jira issue link of type **Blocks**, created from this (the blocked) ticket as "is blocked by" the blocker. The blocker ticket must already exist, since this is why publishing proceeds in dependency order.
+8. For any other ticket mentioned in this ticket's description that isn't already covered by a Blocks link, hyperlink it (see Linking rules) and add a native issue link to it. Use the link type that best matches the relationship; default to **Relates to** when nothing more specific fits.
 
 Do not apply any labels beyond `ai-generated`. Do not use text-based "Blocked by" sections in the description: the native issue link is the only source of truth for blocking edges.
 
@@ -97,9 +123,7 @@ After creating each issue, call `getJiraIssue` and confirm `labels` contains `ai
 
 **Description:**
 
-## Parent
-
-A reference to the parent issue, if the source was an existing issue or epic. Otherwise omit this section: the native `Parent` field already carries this.
+<One-line motivation: the current state and why it must change. No heading. This is the very first line.>
 
 ## What to build
 
@@ -110,10 +134,20 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 - Criterion 1
 - Criterion 2
 
+## References
+
+Optional. Links to outside documentation and related tickets, as Markdown links. Omit when there are none.
+
 </issue-template>
+
+Rules for the motivation line:
+
+- It is one sentence. It states the current state and the reason to change it.
+- It comes before any heading.
+- Do not name the parent or epic in the description. The `Parent` field and the issue links already show it.
 
 Avoid specific file paths or code snippets in the description: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
 
-### 7. Report back
+### 8. Report back
 
-Once published, give the user the list of created issues with their Jira keys and a link to each, in the same dependency order they were created.
+Once published, give the user the list of created issues in the same dependency order they were created. For each, show the Jira key as a link (`[FP-123](https://zooplus.atlassian.net/browse/FP-123)`), the title, the epic link, the assignee, and the sprint. Flag any ticket where assignment or sprint placement failed.

@@ -55,6 +55,16 @@ command = "read -p 'open/create project, name or git url: ' input && { [ -n \"$i
 width = "60%"
 height = "30%"
 
+# Prompt for a pull request URL (Bitbucket Server or GitHub) and open its
+# branch in a worktree workspace with claude running "/code-review <url>"
+# (review-pr). Must be pressed from a checkout of the PR's repository.
+[[keys.command]]
+key = "prefix+shift+r"
+type = "popup"
+command = "read -p 'review PR, url: ' url && { [ -n \"$url\" ] && review-pr \"$url\" || read -p 'failed, press enter to close'; }"
+width = "60%"
+height = "30%"
+
 # Toggle to the most recently used workspace (tmux-style A<->B flip), via
 # the akpw.last-workspace plugin (run_onchange_after_47-herdr-plugins.sh).
 [[keys.command]]

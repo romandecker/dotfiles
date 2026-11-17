@@ -10,8 +10,9 @@
 #                                          left unpushed with push.autoSetupRemote
 #
 # Whenever it opens a workspace (fresh or previously closed), it splits it into
-# two stacked panes and runs claude in the top one. For a fresh worktree it also
-# installs dependencies (pnpm, yarn, bun or npm,
+# two stacked panes and runs claude in the top one. With --prompt, claude starts
+# with that text as its first message (only when the workspace is newly opened).
+# For a fresh worktree it also installs dependencies (pnpm, yarn, bun or npm,
 # picked by lockfile) in a background herdr tab, and warms up VS Code.
 #
 set -euo pipefail
@@ -21,10 +22,24 @@ if ! git rev-parse --git-dir >/dev/null 2>&1; then
   exit 1
 fi
 
+prompt=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --prompt) prompt="${2:-}"; shift 2 ;;
+    --prompt=*) prompt="${1#--prompt=}"; shift ;;
+    *) break ;;
+  esac
+done
+
 branch="${1:-}"
 if [ -z "$branch" ]; then
-  echo "Usage: git worktree-go <branch>" >&2
+  echo "Usage: git worktree-go [--prompt <text>] <branch>" >&2
   exit 1
+fi
+
+claude_cmd="claude"
+if [ -n "$prompt" ]; then
+  claude_cmd="claude $(printf '%q' "$prompt")"
 fi
 
 repo_root=$(git rev-parse --show-toplevel)
@@ -48,7 +63,7 @@ setup_panes() {
   top_pane=$(herdr pane list --workspace "${ws:-$workspace_id}" | jq -r '.result.panes[0].pane_id // empty')
   if [ -n "$top_pane" ]; then
     herdr pane split "$top_pane" --direction down --cwd "$wt_path" --no-focus >/dev/null
-    herdr pane run "$top_pane" "claude" >/dev/null
+    herdr pane run "$top_pane" "$claude_cmd" >/dev/null
   fi
 }
 
@@ -60,6 +75,9 @@ if [ -n "$existing" ]; then
   herdr worktree open --workspace "$workspace_id" --path "$existing_path" --focus >/dev/null
   if [ -n "$existing_ws" ]; then
     echo "worktree for '$branch' already open, focusing it"
+    if [ -n "$prompt" ]; then
+      echo "run this in its claude pane manually: $prompt"
+    fi
   else
     echo "worktree for '$branch' exists but was not open, opening it"
     setup_panes "$existing_path"

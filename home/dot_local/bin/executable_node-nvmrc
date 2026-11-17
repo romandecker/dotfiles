@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# Run node at the version in .nvmrc of the current folder.
+# Fall back to the default node when there is no .nvmrc.
+if [ -f .nvmrc ]; then
+  exec fnm exec node "$@"
+fi
+exec node "$@"
