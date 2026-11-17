@@ -593,6 +593,18 @@
       "Tags": [],
       "Terminal Type": "xterm-256color",
       "Transparency": 0.0,
+      "Triggers": [
+        {
+          "action": "iTermHyperlinkTrigger",
+          "contentregex": "",
+          "disabled": 0,
+          "matchType": 0,
+          "name": "Automatic JIRA Ticket Links",
+          "parameter": "https://zooplus.atlassian.net/browse/\\1",
+          "partial": true,
+          "regex": "\\b([A-Z][A-Z0-9]+-\\d+)\\b"
+        }
+      ],
       "Unlimited Scrollback": false,
       "Use Bold Font": true,
       "Use Bright Bold": true,
