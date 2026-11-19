@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+#
+# pr-context: print facts about the current checkout as one JSON object.
+# Used by the address-review-comments skill to find the PR host and to check
+# the starting state. It makes no network calls except "git ls-remote" when
+# --remote is passed.
+#
+# Usage: pr-context
+#
+# Output fields:
+#   kind      bitbucket-server | github | gitlab | unknown
+#   host      git host name, e.g. github.com
+#   project   Bitbucket project key, or GitHub owner, or GitLab namespace
+#   repo      repository slug
+#   branch    current branch, empty on detached HEAD
+#   upstream  upstream ref, empty if none
+#   ahead     commits ahead of upstream, null if no upstream
+#   behind    commits behind upstream, null if no upstream
+#   dirty     true if the working tree has uncommitted changes
+#   ticket    first "ABC-123" style key in the branch name, empty if none
+#   origin    raw origin URL
+#
+set -euo pipefail
+
+die() {
+  echo "pr-context: $*" >&2
+  exit 1
+}
+
+command -v jq >/dev/null 2>&1 || die "jq is required"
+git rev-parse --git-dir >/dev/null 2>&1 || die "not in a git repository"
+
+origin=$(git remote get-url origin 2>/dev/null) || die "no 'origin' remote"
+
+# Split a remote URL into host and path. Handles scp-style, ssh:// with port,
+# https:// and the Bitbucket Server "/scm/" HTTP clone path.
+u="${origin%.git}"
+u="${u%/}"
+if [[ "$u" == *://* ]]; then
+  u="${u#*://}"
+  u="${u#*@}"
+  host="${u%%/*}"
+  path="${u#*/}"
+  host="${host%%:*}"
+  scheme_is_http=0
+  [[ "$origin" == http* ]] && scheme_is_http=1
+else
+  u="${u#*@}"
+  host="${u%%:*}"
+  path="${u#*:}"
+  scheme_is_http=0
+fi
+path="${path#scm/}"
+path="${path#/}"
+
+project="${path%%/*}"
+repo="${path#*/}"
+repo="${repo%%/*}"
+# GitLab allows nested groups: keep everything but the last segment.
+if [[ "$path" == */*/* ]]; then
+  project="${path%/*}"
+  repo="${path##*/}"
+fi
+
+# Classify the host. Bitbucket Server SSH clones use "ssh://git@host:7999/KEY/repo".
+kind=unknown
+case "$host" in
+  github.com | *.github.com) kind=github ;;
+  gitlab.com | gitlab.*) kind=gitlab ;;
+  bitbucket.org) kind=bitbucket-cloud ;;
+  bitbucket.* | *.bitbucket.*) kind=bitbucket-server ;;
+esac
+if [ "$kind" = unknown ] && [[ "$origin" == */scm/* || "$origin" == ssh://*:7999/* ]]; then
+  kind=bitbucket-server
+fi
+
+branch=$(git symbolic-ref --short -q HEAD || true)
+upstream=""
+ahead=null
+behind=null
+if [ -n "$branch" ]; then
+  upstream=$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null || true)
+  if [ -n "$upstream" ]; then
+    counts=$(git rev-list --left-right --count "HEAD...$upstream")
+    ahead=${counts%%[[:space:]]*}
+    behind=${counts##*[[:space:]]}
+  fi
+fi
+
+dirty=false
+[ -z "$(git status --porcelain)" ] || dirty=true
+
+ticket=""
+if [[ "$branch" =~ ([A-Za-z][A-Za-z0-9]+-[0-9]+) ]]; then
+  ticket="${BASH_REMATCH[1]}"
+fi
+
+jq -n \
+  --arg kind "$kind" --arg host "$host" --arg project "$project" --arg repo "$repo" \
+  --arg branch "$branch" --arg upstream "$upstream" --arg ticket "$ticket" \
+  --arg origin "$origin" --argjson ahead "$ahead" --argjson behind "$behind" \
+  --argjson dirty "$dirty" \
+  '{kind:$kind, host:$host, project:$project, repo:$repo, branch:$branch,
+    upstream:$upstream, ahead:$ahead, behind:$behind, dirty:$dirty,
+    ticket:$ticket, origin:$origin}'

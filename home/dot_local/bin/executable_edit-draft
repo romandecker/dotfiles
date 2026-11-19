@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+#
+# edit-draft: let the user edit a text draft in $VISUAL/$EDITOR, then print it.
+# Works like "git commit" for callers that have no TTY, such as the Claude Code
+# Bash tool. The editor opens in a split pane next to the caller. The script
+# blocks until the editor exits.
+#
+# Usage: edit-draft [--append-commit] <file>
+#
+#   --append-commit  Append "<short sha> <subject>" of HEAD to the draft before
+#                    editing, so the user sees the final text.
+#
+# On success the final content goes to stdout and the exit code is 0.
+# The file is edited in place.
+#
+# Exit codes:
+#   0  content printed
+#   2  usage error
+#   3  aborted: editor exited nonzero (e.g. :cq) or the file is empty
+#   4  no way to open an editor (no herdr, tmux, iTerm2 or TTY)
+#   5  timeout (EDIT_DRAFT_TIMEOUT seconds, default 1800)
+#
+# Opener order: herdr pane, tmux popup, iTerm2 window, current TTY.
+#
+set -euo pipefail
+
+die() {
+  echo "edit-draft: $*" >&2
+  exit "${2:-2}"
+}
+
+append_commit=0
+if [ "${1:-}" = "--append-commit" ]; then
+  append_commit=1
+  shift
+fi
+file="${1:-}"
+[ -n "$file" ] || die "usage: edit-draft [--append-commit] <file>"
+[ -e "$file" ] || : >"$file"
+file=$(cd "$(dirname "$file")" && pwd)/$(basename "$file")
+
+if [ "$append_commit" = 1 ]; then
+  line=$(git log -1 --format='%h %s') || die "cannot read HEAD" 2
+  printf '\n%s\n' "$line" >>"$file"
+fi
+
+editor="${VISUAL:-${EDITOR:-vi}}"
+timeout="${EDIT_DRAFT_TIMEOUT:-1800}"
+status_file="$file.status"
+rm -f "$status_file"
+
+# The command run inside the new pane or window. It records the editor exit
+# code, which tells the caller that the editor closed.
+inner="$editor $(printf '%q' "$file"); echo \$? > $(printf '%q' "$status_file")"
+
+cleanup() { rm -f "$status_file"; }
+trap cleanup EXIT
+
+wait_for_status() {
+  local start=$SECONDS
+  while [ ! -e "$status_file" ]; do
+    sleep 0.3
+    [ $((SECONDS - start)) -lt "$timeout" ] || return 1
+  done
+}
+
+editor_status=""
+
+if [ -n "${HERDR_PANE_ID:-}" ] && command -v herdr >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+  new_pane=$(herdr pane split "$HERDR_PANE_ID" --direction right --cwd "$PWD" | jq -r '.result.pane.pane_id')
+  [ -n "$new_pane" ] && [ "$new_pane" != null ] || die "herdr pane split failed" 4
+  herdr pane focus --pane "$HERDR_PANE_ID" --direction right >/dev/null 2>&1 || true
+  herdr pane run "$new_pane" "$inner" >/dev/null
+  if ! wait_for_status; then
+    herdr pane close "$new_pane" >/dev/null 2>&1 || true
+    die "timeout after ${timeout}s" 5
+  fi
+  herdr pane close "$new_pane" >/dev/null 2>&1 || true
+elif [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
+  tmux display-popup -E -w 85% -h 85% "$inner" || true
+  wait_for_status || die "editor produced no status" 3
+elif [ "${TERM_PROGRAM:-}" = "iTerm.app" ] && command -v osascript >/dev/null 2>&1; then
+  esc=${inner//\\/\\\\}
+  esc=${esc//\"/\\\"}
+  win_id=$(osascript <<EOF
+tell application "iTerm"
+  set w to (create window with default profile command "/bin/sh -c \"$esc\"")
+  return id of w
+end tell
+EOF
+  )
+  if ! wait_for_status; then
+    osascript -e "tell application \"iTerm\" to close (window id $win_id)" >/dev/null 2>&1 || true
+    die "timeout after ${timeout}s" 5
+  fi
+  osascript -e "tell application \"iTerm\" to close (window id $win_id)" >/dev/null 2>&1 || true
+elif [ -t 0 ] && [ -t 1 ]; then
+  sh -c "$inner" || true
+else
+  die "no herdr, tmux, iTerm2 or TTY available to open $editor" 4
+fi
+
+editor_status=$(cat "$status_file" 2>/dev/null || echo 1)
+[ "$editor_status" = 0 ] || die "editor exited with status $editor_status, aborted" 3
+
+# An empty or whitespace-only file counts as an abort.
+if ! grep -q '[^[:space:]]' "$file"; then
+  die "draft is empty, aborted" 3
+fi
+
+cat "$file"
