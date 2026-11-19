@@ -62,6 +62,7 @@ case "${1:-}" in
     [ -n "$base" ] || fail "missing base branch"
     base="${base#origin/}"
     in_progress && fail "a merge or rebase is already in progress"
+    git fetch --quiet origin || fail "git fetch origin failed"
     echo "$mode" >"$state_file"
     if [ "$mode" = merge ]; then
       out=$(git merge --no-edit "origin/$base" 2>&1) || report_failure "$out"

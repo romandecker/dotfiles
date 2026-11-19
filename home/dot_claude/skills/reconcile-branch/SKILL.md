@@ -21,6 +21,7 @@ Both scripts are on `PATH`. They do the mechanical work. Do not repeat their wor
 
 ## Rules
 
+- Always use the latest base from the remote. The scripts run `git fetch origin` first and use `origin/<base>`. Never use the local base branch.
 - Use the scripts for fetch, base detection, strategy, merge, rebase, and push.
 - Never push a guess. If you are not sure about a conflict, stop and ask the user.
 - Never use `git add -A` or `git add .`. Stage only the conflicted files you resolved.
