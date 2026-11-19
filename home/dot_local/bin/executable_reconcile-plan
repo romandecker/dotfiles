@@ -1,0 +1,159 @@
+#!/usr/bin/env bash
+#
+# reconcile-plan: decide how to bring the current branch up to date with its
+# base branch. Prints one JSON object. Changes nothing except "git fetch".
+# Used by the reconcile-branch skill.
+#
+# Usage: reconcile-plan [--base <branch>]
+#
+# Output fields:
+#   status          ready | needs-pr-lookup | ask-base | up-to-date | blocked
+#   reason          short text that explains the status
+#   kind            host kind from pr-context
+#   branch          current branch
+#   base            base branch name, empty if unknown
+#   base_source     arg | pr | default-branch | none
+#   default_branch  default branch of the remote, empty if unknown
+#   strategy        merge | rebase | ask, empty unless status is ready
+#   commits         commits in origin/<base>..HEAD
+#   merges          merge commits in origin/<base>..HEAD
+#
+# Status meaning:
+#   ready            run the strategy. "ask" means the user must choose.
+#   needs-pr-lookup  find the PR target with the host tools, then run again
+#                    with --base. If no PR exists, use default_branch.
+#   ask-base         the base is unclear. Ask the user, then run with --base.
+#   up-to-date       the branch has the base tip already. Stop.
+#   blocked          see reason. Tell the user.
+#
+set -euo pipefail
+
+die() {
+  echo "reconcile-plan: $*" >&2
+  exit 1
+}
+
+command -v jq >/dev/null 2>&1 || die "jq is required"
+git rev-parse --git-dir >/dev/null 2>&1 || die "not in a git repository"
+
+base_arg=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --base)
+      [ $# -ge 2 ] || die "--base needs a value"
+      base_arg="$2"
+      shift 2
+      ;;
+    *) die "unknown argument: $1" ;;
+  esac
+done
+
+git_dir=$(git rev-parse --git-dir)
+branch=$(git symbolic-ref --short -q HEAD || true)
+kind=unknown
+if command -v pr-context >/dev/null 2>&1; then
+  kind=$(pr-context | jq -r .kind)
+fi
+
+base=""
+base_source=none
+default_branch=""
+status=""
+reason=""
+strategy=""
+commits=0
+merges=0
+
+emit() {
+  jq -n \
+    --arg status "$status" --arg reason "$reason" --arg kind "$kind" \
+    --arg branch "$branch" --arg base "$base" --arg base_source "$base_source" \
+    --arg default_branch "$default_branch" --arg strategy "$strategy" \
+    --argjson commits "$commits" --argjson merges "$merges" \
+    '{status:$status, reason:$reason, kind:$kind, branch:$branch, base:$base,
+      base_source:$base_source, default_branch:$default_branch,
+      strategy:$strategy, commits:$commits, merges:$merges}'
+  exit 0
+}
+
+block() {
+  status=blocked
+  reason="$1"
+  emit
+}
+
+[ -n "$branch" ] || block "detached HEAD"
+if [ -d "$git_dir/rebase-merge" ] || [ -d "$git_dir/rebase-apply" ] || [ -f "$git_dir/MERGE_HEAD" ]; then
+  block "a merge or rebase is already in progress"
+fi
+[ -z "$(git status --porcelain)" ] || block "working tree has uncommitted changes"
+
+git fetch --quiet origin || block "git fetch origin failed"
+
+# Default branch of the remote.
+default_branch=$(git symbolic-ref --short -q refs/remotes/origin/HEAD 2>/dev/null || true)
+default_branch="${default_branch#origin/}"
+if [ -z "$default_branch" ]; then
+  default_branch=$(git ls-remote --symref origin HEAD 2>/dev/null |
+    awk '/^ref:/ { sub("refs/heads/", "", $2); print $2; exit }' || true)
+fi
+
+# Base branch: argument, then PR target, then default branch.
+if [ -n "$base_arg" ]; then
+  base="${base_arg#origin/}"
+  base_source=arg
+elif [ "$kind" = github ] && command -v gh >/dev/null 2>&1 &&
+  pr_base=$(gh pr view --json baseRefName --jq .baseRefName 2>/dev/null) && [ -n "$pr_base" ]; then
+  base="$pr_base"
+  base_source=pr
+elif [ "$kind" = bitbucket-server ] || [ "$kind" = gitlab ] || [ "$kind" = bitbucket-cloud ]; then
+  base="$default_branch"
+  status=needs-pr-lookup
+  reason="look up the PR target with the host tools"
+  emit
+elif [ -n "$default_branch" ]; then
+  base="$default_branch"
+  base_source=default-branch
+else
+  status=ask-base
+  reason="no PR and no default branch found"
+  emit
+fi
+
+if ! git rev-parse --verify --quiet "refs/remotes/origin/$base" >/dev/null; then
+  status=ask-base
+  reason="origin/$base does not exist"
+  base=""
+  base_source=none
+  emit
+fi
+
+[ "$branch" != "$base" ] || block "current branch is the base branch"
+
+upstream=$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null || true)
+if [ -n "$upstream" ]; then
+  behind=$(git rev-list --count "HEAD..$upstream")
+  [ "$behind" -eq 0 ] || block "branch is behind $upstream by $behind commits"
+fi
+
+if git merge-base --is-ancestor "origin/$base" HEAD; then
+  status=up-to-date
+  reason="branch has the tip of origin/$base"
+  emit
+fi
+
+commits=$(git rev-list --count "origin/$base..HEAD")
+merges=$(git rev-list --count --merges "origin/$base..HEAD")
+
+if [ "$merges" -gt 0 ]; then
+  strategy=merge
+  reason="branch has $merges merge commit(s)"
+elif [ "$commits" -gt 5 ]; then
+  strategy=ask
+  reason="branch has $commits commits, more than 5"
+else
+  strategy=rebase
+  reason="branch has $commits commit(s) and no merge commit"
+fi
+status=ready
+emit

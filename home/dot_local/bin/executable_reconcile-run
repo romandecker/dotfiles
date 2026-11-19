@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+#
+# reconcile-run: bring the current branch up to date with its base, then push.
+# Used by the reconcile-branch skill after reconcile-plan.
+#
+# Usage:
+#   reconcile-run merge <base>
+#   reconcile-run rebase <base>
+#   reconcile-run --continue
+#   reconcile-run --push
+#
+# Output: one JSON object.
+#   {"status":"ok"}                          step finished
+#   {"status":"conflict","files":[...]}      resolve the files, "git add" them,
+#                                            then run --continue
+#   {"status":"pushed","mode":"..."}         --push finished
+#   {"status":"error","message":"..."}       something else failed
+#
+# Exit code: 0 for ok and pushed, 2 for conflict, 1 for error.
+#
+# The script remembers the last action in the git dir. --push uses it to
+# choose "--force-with-lease" after a rebase and a plain push after a merge.
+#
+set -uo pipefail
+
+command -v jq >/dev/null 2>&1 || {
+  echo "reconcile-run: jq is required" >&2
+  exit 1
+}
+git rev-parse --git-dir >/dev/null 2>&1 || {
+  echo "reconcile-run: not in a git repository" >&2
+  exit 1
+}
+
+git_dir=$(git rev-parse --git-dir)
+state_file="$git_dir/reconcile-last"
+
+fail() {
+  jq -n --arg m "$1" '{status:"error", message:$m}'
+  exit 1
+}
+
+in_progress() {
+  [ -d "$git_dir/rebase-merge" ] || [ -d "$git_dir/rebase-apply" ] || [ -f "$git_dir/MERGE_HEAD" ]
+}
+
+# After a failed git step: report conflict if files are unmerged, else error.
+report_failure() {
+  local files
+  files=$(git diff --name-only --diff-filter=U)
+  if [ -n "$files" ]; then
+    printf '%s\n' "$files" | jq -R . | jq -s '{status:"conflict", files:.}'
+    exit 2
+  fi
+  fail "$1"
+}
+
+case "${1:-}" in
+  merge | rebase)
+    mode="$1"
+    base="${2:-}"
+    [ -n "$base" ] || fail "missing base branch"
+    base="${base#origin/}"
+    in_progress && fail "a merge or rebase is already in progress"
+    echo "$mode" >"$state_file"
+    if [ "$mode" = merge ]; then
+      out=$(git merge --no-edit "origin/$base" 2>&1) || report_failure "$out"
+    else
+      out=$(git rebase "origin/$base" 2>&1) || report_failure "$out"
+    fi
+    jq -n '{status:"ok"}'
+    ;;
+  --continue)
+    if [ -d "$git_dir/rebase-merge" ] || [ -d "$git_dir/rebase-apply" ]; then
+      out=$(GIT_EDITOR=true git rebase --continue 2>&1) || report_failure "$out"
+    elif [ -f "$git_dir/MERGE_HEAD" ]; then
+      out=$(git commit --no-edit 2>&1) || report_failure "$out"
+    else
+      fail "nothing to continue"
+    fi
+    jq -n '{status:"ok"}'
+    ;;
+  --push)
+    in_progress && fail "a merge or rebase is still in progress"
+    [ -f "$state_file" ] || fail "no reconcile step recorded, nothing to push"
+    mode=$(cat "$state_file")
+    branch=$(git symbolic-ref --short -q HEAD) || fail "detached HEAD"
+    args=(push)
+    if [ "$mode" = rebase ]; then
+      args+=(--force-with-lease)
+    fi
+    if ! git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1; then
+      args+=(-u origin "$branch")
+    fi
+    out=$(git "${args[@]}" 2>&1) || fail "$out"
+    rm -f "$state_file"
+    jq -n --arg mode "$mode" '{status:"pushed", mode:$mode}'
+    ;;
+  *)
+    fail "usage: reconcile-run merge|rebase <base> | --continue | --push"
+    ;;
+esac
